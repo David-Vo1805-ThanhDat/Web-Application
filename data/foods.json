@@ -1,0 +1,1220 @@
+[
+  {
+    "id": "pho-bo-ha-noi",
+    "name": "Phở Bò Hà Nội",
+    "englishName": "Hanoi Beef Noodle Soup",
+    "description": "Món ăn quốc hồn quốc túy của Việt Nam với nước dùng ninh từ xương bò trong hơn 10 tiếng, thơm nồng hoa hồi, quế, thảo quả, bánh phở mềm mượt và thịt bò tái lăn ngọt đậm đà.",
+    "category": "mon-nuoc",
+    "mealType": ["sang", "trua", "toi"],
+    "price": 55000,
+    "priceRange": "30k - 60k",
+    "taste": ["thanh-dam", "dam-da"],
+    "dietary": ["normal"],
+    "region": "Bắc",
+    "cookTimeMinutes": 45,
+    "calories": 480,
+    "rating": 4.9,
+    "reviewCount": 128,
+    "image": "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Phổ biến", "Đặc sản", "Ấm bụng", "Bữa sáng"],
+    "popular": true,
+    "nutrition": { "protein": 32, "carbs": 65, "fat": 12 },
+    "ingredients": [
+      { "name": "Bánh phở tươi", "amount": "200g" },
+      { "name": "Thịt bò thăn / bắp", "amount": "150g" },
+      { "name": "Xương ống bò", "amount": "500g" },
+      { "name": "Hành tây, hành tím nướng", "amount": "2 củ" },
+      { "name": "Hoa hồi, quế, thảo quả, gừng", "amount": "1 gói gia vị phở" },
+      { "name": "Hành lá, rau mùi, chanh, ớt tươi", "amount": "Vừa đủ" }
+    ],
+    "instructions": [
+      "Xương bò rửa sạch, chần nước sôi rồi ninh nhỏ lửa từ 8-10 tiếng cùng gừng và hành nướng thơm.",
+      "Cho túi lọc chứa hồi, quế, thảo quả vào nồi nước dùng ở 2 tiếng cuối, nêm nước mắm ngon và muối vừa ăn.",
+      "Chần bánh phở qua nước sôi, xếp vào bát tô lớn.",
+      "Thái mỏng thịt bò, xếp lên trên bánh phở cùng hành hoa chẻ và ngò rí.",
+      "Chan nước dùng sôi sùng sục ngập bát, vắt chanh, thêm chút ớt tươi và thưởng thức ngay khi còn nóng hổi."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Phở Gia Truyền Bát Đàn", "address": "49 Bát Đàn, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "60.000đ - 85.000đ" },
+      { "name": "Phở Thìn Lò Đúc", "address": "13 Lò Đúc, Hai Bà Trưng", "city": "Hà Nội", "priceEstimate": "70.000đ - 90.000đ" },
+      { "name": "Phở Hòa Pasteur", "address": "260C Pasteur, Phường 8, Quận 3", "city": "TP.HCM", "priceEstimate": "75.000đ - 100.000đ" }
+    ]
+  },
+  {
+    "id": "bun-bo-hue",
+    "name": "Bún Bò Huế",
+    "englishName": "Hue Spicy Beef Noodle",
+    "description": "Tô bún bò đậm đà cay nồng mùi sả ớt, màu điều óng ánh, giò heo béo ngậy, chả cua thơm lừng và huyết mềm, ăn kèm hoa chuối bào chuẩn vị cố đô.",
+    "category": "mon-nuoc",
+    "mealType": ["sang", "trua", "toi"],
+    "price": 60000,
+    "priceRange": "30k - 60k",
+    "taste": ["cay", "chua-cay", "dam-da"],
+    "dietary": ["normal"],
+    "region": "Trung",
+    "cookTimeMinutes": 50,
+    "calories": 560,
+    "rating": 4.9,
+    "reviewCount": 114,
+    "image": "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Cay nồng", "Đặc sản Huế", "Hương vị đậm đà"],
+    "popular": true,
+    "nutrition": { "protein": 38, "carbs": 58, "fat": 18 },
+    "ingredients": [
+      { "name": "Bún sợi to", "amount": "250g" },
+      { "name": "Bắp bò, nạm bò", "amount": "200g" },
+      { "name": "Giò heo / móng giò", "amount": "1 khoanh" },
+      { "name": "Chả cua, huyết heo", "amount": "100g" },
+      { "name": "Sả cây, mắm ruốc Huế, dầu màu điều", "amount": "Vừa đủ" },
+      { "name": "Rau sống: hoa chuối bào, rau muống chẻ, giá", "amount": "1 đĩa" }
+    ],
+    "instructions": [
+      "Hầm xương ống và giò heo, cho sả đập dập vào cùng để khử mùi và tạo vị ngọt thơm.",
+      "Khuấy mắm ruốc Huế với nước lạnh, gạn lấy phần nước trong rồi trút vào nồi hầm.",
+      "Phi thơm sả băm, ớt bột và dầu màu điều, đổ vào nồi nước lèo để tạo màu đỏ quyến rũ.",
+      "Chần bún sợi to, xếp thịt bò thái mỏng, chả cua, khoanh giò heo và huyết vào tô.",
+      "Chan nước lèo cay sôi ùng ục, vắt chanh, thêm chút sa tế ớt hiểm ăn cùng rau thơm."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bún Bò Huế Đông Ba", "address": "110A Nguyễn Du, P. Bến Thành, Quận 1", "city": "TP.HCM", "priceEstimate": "65.000đ - 90.000đ" },
+      { "name": "Bún Bò Bà Tuyết", "address": "47 Nguyễn Công Trứ", "city": "Huế", "priceEstimate": "35.000đ - 55.000đ" },
+      { "name": "Bún Bò O Xuân", "address": "448 Lạc Long Quân, Tây Hồ", "city": "Hà Nội", "priceEstimate": "50.000đ - 70.000đ" }
+    ]
+  },
+  {
+    "id": "com-tam-suon-bi-cha",
+    "name": "Cơm Tấm Sườn Bì Chả",
+    "englishName": "Saigon Broken Rice with Pork Chops",
+    "description": "Biểu tượng ẩm thực đường phố Sài Gòn: hạt cơm tấm dẻo thơm, miếng sườn nướng mật ong óng vàng thơm lừng khói than củi, chả trứng béo bùi, bì dai giòn cùng mỡ hành béo ngậy và nước mắm kẹo chua ngọt.",
+    "category": "com",
+    "mealType": ["sang", "trua", "toi"],
+    "price": 50000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "ngot"],
+    "dietary": ["normal"],
+    "region": "Nam",
+    "cookTimeMinutes": 35,
+    "calories": 680,
+    "rating": 4.9,
+    "reviewCount": 160,
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Đặc sản Sài Gòn", "No lâu", "Món ăn trưa"],
+    "popular": true,
+    "nutrition": { "protein": 42, "carbs": 78, "fat": 24 },
+    "ingredients": [
+      { "name": "Gạo tấm thơm", "amount": "150g" },
+      { "name": "Sườn cốt lết heo", "amount": "1 miếng lớn (200g)" },
+      { "name": "Bì heo trộn thính", "amount": "50g" },
+      { "name": "Chả trứng hấp thịt băm", "amount": "1 miếng" },
+      { "name": "Mỡ hành, tóp mỡ giòn", "amount": "2 muỗng canh" },
+      { "name": "Đồ chua (cà rốt, củ cải) & dưa leo", "amount": "1 phần" },
+      { "name": "Nước mắm tỏi ớt chua ngọt kẹo", "amount": "1 chén nhỏ" }
+    ],
+    "instructions": [
+      "Ướp sườn cốt lết với tỏi, hành tím, dầu hào, mật ong, tiêu và nước mắm trong ít nhất 2 tiếng.",
+      "Nướng sườn trên bếp than hoa đỏ rực cho tới khi cháy cạnh màu cánh gián và mỡ tươm ra thơm nức.",
+      "Nấu cơm tấm chín tới, xới ra đĩa dẹt nóng hổi.",
+      "Đặt sườn nướng, chả trứng, bì thính, trứng ốp la lên đĩa, rưới đều mỡ hành bóng bẩy.",
+      "Rưới nước mắm tỏi ớt kẹo sền sệt lên cơm, ăn kèm dưa leo giòn và đồ chua thanh mát."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Cơm Tấm Ba Ghiền", "address": "84 Đặng Văn Ngữ, Phú Nhuận", "city": "TP.HCM", "priceEstimate": "75.000đ - 110.000đ" },
+      { "name": "Cơm Tấm Phúc Lộc Thọ", "address": "Hệ thống toàn quốc", "city": "TP.HCM / Hà Nội", "priceEstimate": "45.000đ - 65.000đ" }
+    ]
+  },
+  {
+    "id": "banh-mi-thit-nuong",
+    "name": "Bánh Mì Thịt Nướng Giòn Rụm",
+    "englishName": "Crispy Vietnamese Pork Banh Mi",
+    "description": "Ổ bánh mì giòn tan nóng rẫy kẹp đẫm thịt nướng thơm lừng sả tiêu, pate gan béo ngậy, bơ trứng vàng ươm, dưa leo, ngò rí và đồ chua rưới sốt ớt cay ngọt gây nghiện.",
+    "category": "an-vat",
+    "mealType": ["sang", "trua", "an-vat"],
+    "price": 30000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "beo-ngay", "chua-cay"],
+    "dietary": ["normal"],
+    "region": "Nam",
+    "cookTimeMinutes": 15,
+    "calories": 420,
+    "rating": 4.8,
+    "reviewCount": 95,
+    "image": "https://images.unsplash.com/photo-1626804475297-41608ea09aeb?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Ăn nhanh", "Bữa sáng", "Tiện lợi", "Đường phố"],
+    "popular": true,
+    "nutrition": { "protein": 24, "carbs": 52, "fat": 15 },
+    "ingredients": [
+      { "name": "Bánh mì giòn nóng", "amount": "1 ổ" },
+      { "name": "Thịt heo nướng sả mè", "amount": "100g" },
+      { "name": "Pate gan thơm bùi", "amount": "30g" },
+      { "name": "Bơ trứng gà tươi", "amount": "20g" },
+      { "name": "Đồ chua, dưa chuột, ngò rí", "amount": "Vừa đủ" },
+      { "name": "Nước sốt tương ớt chua ngọt", "amount": "2 thìa" }
+    ],
+    "instructions": [
+      "Nướng lại ổ bánh mì trên lò hoặc than cho lớp vỏ vàng giòn rụm phát ra tiếng tanh tách.",
+      "Rạch bụng bánh mì, phết lớp pate gan béo ngậy và sốt bơ trứng vàng óng đều hai bên mặt trong.",
+      "Gắp thịt nướng nóng hổi cho vào ruột bánh mì.",
+      "Thêm dưa leo xắt mỏng, đồ chua cà rốt củ cải và vài cọng ngò tươi ngát.",
+      "Rưới nước sốt đậm đà, thêm vài lát ớt hiểm cay nồng rồi kẹp chặt lại thưởng thức."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bánh Mì Huỳnh Hoa", "address": "26 Lê Thị Riêng, P. Bến Thành, Quận 1", "city": "TP.HCM", "priceEstimate": "65.000đ - 85.000đ" },
+      { "name": "Bánh Mì Phượng Hội An", "address": "2B Phan Chu Trinh", "city": "Hội An", "priceEstimate": "35.000đ - 50.000đ" },
+      { "name": "Bánh Mì Dân Tổ", "address": "32 Trần Nhật Duật, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "25.000đ - 40.000đ" }
+    ]
+  },
+  {
+    "id": "bun-cha-ha-noi",
+    "name": "Bún Chả Hà Nội",
+    "englishName": "Hanoi Grilled Pork with Vermicelli",
+    "description": "Món ăn từng chinh phục cựu Tổng thống Obama: chả viên và chả miếng nướng vàng ươm trên than hoa, ngập trong bát nước chấm đu đủ cà rốt ấm nóng chua ngọt thanh tao, ăn cùng đĩa bún sợi nhỏ và rổ rau ghém xanh mướt.",
+    "category": "mon-nuoc",
+    "mealType": ["trua", "toi"],
+    "price": 50000,
+    "priceRange": "30k - 60k",
+    "taste": ["chua-cay", "dam-da", "ngot"],
+    "dietary": ["normal"],
+    "region": "Bắc",
+    "cookTimeMinutes": 40,
+    "calories": 590,
+    "rating": 4.9,
+    "reviewCount": 142,
+    "image": "https://images.unsplash.com/photo-1559847844-5315695dadae?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Đặc sản Hà Nội", "Thơm mùi than hoa", "Bữa trưa lý tưởng"],
+    "popular": true,
+    "nutrition": { "protein": 34, "carbs": 62, "fat": 21 },
+    "ingredients": [
+      { "name": "Bún tươi sợi nhỏ", "amount": "200g" },
+      { "name": "Thịt ba chỉ thái mỏng", "amount": "150g" },
+      { "name": "Thịt nạc vai băm viên", "amount": "150g" },
+      { "name": "Đu đủ xanh, cà rốt tỉa hoa", "amount": "1/2 bát con" },
+      { "name": "Nước mắm, đường, giấm gạo, tỏi ớt băm", "amount": "Pha nước chấm" },
+      { "name": "Rau kinh giới, tía tô, xà lách, húng quế", "amount": "1 rổ" }
+    ],
+    "instructions": [
+      "Thịt ba chỉ và thịt băm ướp hành tím băm, nước hàng đường thắng, hạt nêm, tiêu và nước mắm cốt.",
+      "Kẹp vỉ tre hoặc vỉ sắt nướng chả trên than củi hồng rực cho thịt xèo xèo tươm mỡ và thơm lừng.",
+      "Pha nước mắm chua ngọt ấm nóng theo tỉ lệ vàng 1 mắm - 1 đường - 1 giấm - 5 nước ấm.",
+      "Thả dưa góp đu đủ và chả nướng nóng vào bát nước chấm sóng sánh.",
+      "Gắp một đũa bún nhúng vào bát chả, ăn kèm rau kinh giới thơm ngát."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bún Chả Hương Liên (Obama)", "address": "24 Lê Văn Hưu, Hai Bà Trưng", "city": "Hà Nội", "priceEstimate": "50.000đ - 70.000đ" },
+      { "name": "Bún Chả Đắc Kim", "address": "1 Hàng Mành, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "60.000đ - 90.000đ" }
+    ]
+  },
+  {
+    "id": "banh-xeo-mien-tay",
+    "name": "Bánh Xèo Miền Tây Giòn Rụm",
+    "englishName": "Crispy Vietnamese Sizzling Pancake",
+    "description": "Chiếc bánh xèo vàng ươm nghệ tây to tròn như chiếc nón, nhân đầy tôm tươi, thịt ba rọi, giá đỗ và củ sắn giòn ngọt, cuốn cùng lá cải bẹ xanh cay nồng và chấm nước mắm tỏi ớt đậm vị phù sa.",
+    "category": "cuon-tron",
+    "mealType": ["trua", "toi", "an-vat"],
+    "price": 45000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "beo-ngay"],
+    "dietary": ["normal"],
+    "region": "Nam",
+    "cookTimeMinutes": 30,
+    "calories": 520,
+    "rating": 4.7,
+    "reviewCount": 88,
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Giòn rụm", "Rau rừng", "Ẩm thực miền Tây"],
+    "nutrition": { "protein": 22, "carbs": 58, "fat": 23 },
+    "ingredients": [
+      { "name": "Bột bánh xèo pha nước cốt dừa và nghệ", "amount": "250g" },
+      { "name": "Tôm sông tươi", "amount": "150g" },
+      { "name": "Thịt ba chỉ heo", "amount": "150g" },
+      { "name": "Giá đỗ, đậu xanh hấp, hành lá", "amount": "100g" },
+      { "name": "Rau cải xanh, xà lách, rau diếp cá, lá cóc", "amount": "1 rổ lớn" },
+      { "name": "Nước mắm chua ngọt củ cải đỏ", "amount": "1 chén" }
+    ],
+    "instructions": [
+      "Khuấy đều bột bánh xèo với nước cốt dừa, bột nghệ và hành hoa cắt nhỏ.",
+      "Bắc chảo gang lớn lên lửa lớn, tráng dầu, xào sơ tôm và thịt ba chỉ cho săn.",
+      "Múc một vá bột rưới đều quanh chảo phát ra tiếng 'xèooo' vui tai, đậy vung cho chín rìa.",
+      "Mở vung, rải giá đỗ và đậu xanh, xịt thêm tí dầu quanh vành để bánh giòn rụm.",
+      "Gấp đôi bánh lại, xúc ra đĩa, cuốn với rau rừng chấm ngập nước mắm tỏi ớt."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bánh Xèo Ăn Là Ghiền", "address": "74 Sương Nguyệt Ánh, P. Bến Thành, Quận 1", "city": "TP.HCM", "priceEstimate": "60.000đ - 100.000đ" },
+      { "name": "Bánh Xèo Mười Xiềm", "address": "204 Nguyễn Trãi, Quận 1", "city": "TP.HCM", "priceEstimate": "50.000đ - 90.000đ" }
+    ]
+  },
+  {
+    "id": "bun-dau-mam-tom",
+    "name": "Bún Đậu Mắm Tôm Thập Cẩm",
+    "englishName": "Tofu Vermicelli with Shrimp Paste",
+    "description": "Mẹt bún đậu đầy đặn với đậu hũ lướt ván giòn vỏ mềm ruột bốc khói, chả cốm dẻo thơm, dồi sụn nướng, thịt bắp giò luộc và nem rán giòn tan, chấm cùng bát mắm tôm Thanh Hóa đánh bông sủi bọt với quất và ớt tươi cay nồng.",
+    "category": "cuon-tron",
+    "mealType": ["trua", "toi"],
+    "price": 55000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "chua-cay", "man"],
+    "dietary": ["normal"],
+    "region": "Bắc",
+    "cookTimeMinutes": 25,
+    "calories": 610,
+    "rating": 4.8,
+    "reviewCount": 133,
+    "image": "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Mẹt thập cẩm", "Gây nghiện", "Hội bạn thân"],
+    "popular": true,
+    "nutrition": { "protein": 36, "carbs": 55, "fat": 27 },
+    "ingredients": [
+      { "name": "Đậu hũ non mơ rán vàng", "amount": "3 bìa" },
+      { "name": "Bún lá vắt miếng nhỏ", "amount": "250g" },
+      { "name": "Chả cốm Hà Nội chiên phồng", "amount": "100g" },
+      { "name": "Thịt chân giò luộc thái mỏng", "amount": "150g" },
+      { "name": "Dồi sụn nướng / nem chua rán", "amount": "1 phần" },
+      { "name": "Mắm tôm loại ngon, quất tươi, ớt hiểm, đường", "amount": "1 chén" },
+      { "name": "Rau kinh giới, tía tô, dưa leo", "amount": "Vừa đủ" }
+    ],
+    "instructions": [
+      "Đậu hũ cắt miếng vừa ăn, chiên ngập dầu sôi cho đến khi lớp vỏ ngoài vàng ruộm giòn tan.",
+      "Chiên nóng chả cốm cho phồng xốp, luộc chín thịt bắp giò rồi thái lát mỏng tang.",
+      "Xếp bún lá, đậu rán, chả cốm, dồi sụn và rau thơm lên một chiếc mẹt lót lá chuối xanh ngát.",
+      "Múc mắm tôm ra bát, thêm chút rượu trắng, đường, vắt nước quất rồi dùng đũa đánh thật nhanh tay cho mắm sủi bọt trắng bồng bềnh.",
+      "Rưới thìa mỡ sôi vào bát mắm tôm, thêm ớt thái lát rồi chấm ngập miếng đậu giòn rụm."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bún Đậu Ngõ Trạm", "address": "1B Ngõ Trạm, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "45.000đ - 70.000đ" },
+      { "name": "Bún Đậu Cô Khàn", "address": "102/26 Cống Quỳnh, P. Phạm Ngũ Lão, Quận 1", "city": "TP.HCM", "priceEstimate": "60.000đ - 90.000đ" }
+    ]
+  },
+  {
+    "id": "goi-cuon-tom-thit",
+    "name": "Gỏi Cuốn Tôm Thịt Tươi Mát",
+    "englishName": "Fresh Spring Rolls with Peanut Sauce",
+    "description": "Món ăn thanh đạm lọt top món ngon nhất thế giới: tôm thẻ đỏ au mọng nước, thịt ba rọi ngọt mềm, bún tươi và hẹ cuộn trong bánh tráng trong veo dẻo dai, chấm nước tương bơ đậu phộng béo bùi rắc hành phi.",
+    "category": "cuon-tron",
+    "mealType": ["trua", "an-vat"],
+    "price": 35000,
+    "priceRange": "30k - 60k",
+    "taste": ["thanh-dam", "beo-ngay"],
+    "dietary": ["eat-clean", "low-carb"],
+    "region": "Nam",
+    "cookTimeMinutes": 20,
+    "calories": 280,
+    "rating": 4.8,
+    "reviewCount": 76,
+    "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Healthy", "Eat clean", "Thanh mát", "Ít calo"],
+    "nutrition": { "protein": 21, "carbs": 38, "fat": 6 },
+    "ingredients": [
+      { "name": "Tôm sú hoặc tôm thẻ luộc lột vỏ", "amount": "200g" },
+      { "name": "Thịt ba chỉ heo luộc thái mỏng", "amount": "150g" },
+      { "name": "Bánh tráng dẻo", "amount": "1 xấp" },
+      { "name": "Bún tươi, hẹ lá, xà lách, rau thơm", "amount": "1 đĩa" },
+      { "name": "Tương đen nấu bơ đậu phộng bùi béo", "amount": "1 chén" }
+    ],
+    "instructions": [
+      "Thoa nhẹ nước lên bánh tráng dẻo cho vừa mềm dai.",
+      "Xếp xà lách, rau thơm, bún tươi và thịt ba chỉ luộc lên 1/3 bánh tráng.",
+      "Gấp hai bên mép bánh lại, cuộn một vòng chặt tay.",
+      "Xếp 2-3 con tôm đỏ chẻ đôi úp mặt lưng đỏ ra ngoài kèm nhánh hẹ xanh thò ra một đầu.",
+      "Tiếp tục cuộn chặt tay cho chiếc cuốn tròn đều đẹp mắt, chấm nước sốt tương đậu phộng béo ngậy."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Gỏi Cuốn Tôm Nhảy", "address": "422 Châu Văn Liêm, Quận 5", "city": "TP.HCM", "priceEstimate": "30.000đ - 50.000đ" },
+      { "name": "Quán Bếp Mẹ Ỉn", "address": "136 Lê Thánh Tôn, Quận 1", "city": "TP.HCM", "priceEstimate": "50.000đ - 80.000đ" }
+    ]
+  },
+  {
+    "id": "hu-tieu-nam-vang",
+    "name": "Hủ Tiếu Nam Vang Thập Cẩm",
+    "englishName": "Nam Vang Pork and Seafood Noodle",
+    "description": "Tô hủ tiếu khô hoặc nước đậm đà đặc sắc: sợi hủ tiếu dai mướt trộn sốt tương đậm vị, ngập tràn tôm sú, thịt nạc băm, tim cật, gan heo và trứng cút, rắc tỏi phi vàng rộm và cần tây thơm lừng.",
+    "category": "mon-nuoc",
+    "mealType": ["sang", "trua", "toi"],
+    "price": 55000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "ngot"],
+    "dietary": ["normal"],
+    "region": "Nam",
+    "cookTimeMinutes": 35,
+    "calories": 510,
+    "rating": 4.7,
+    "reviewCount": 92,
+    "image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Hủ tiếu khô", "Đặc sản phương Nam", "Đậm đà"],
+    "nutrition": { "protein": 35, "carbs": 60, "fat": 14 },
+    "ingredients": [
+      { "name": "Hủ tiếu dai Sa Đéc", "amount": "200g" },
+      { "name": "Thịt heo băm nhuyễn xào thơm", "amount": "100g" },
+      { "name": "Tôm tươi bóc vỏ, trứng cút luộc", "amount": "4 con & 2 quả" },
+      { "name": "Tim heo, gan heo chần ngọt mềm", "amount": "80g" },
+      { "name": "Tỏi phi giòn rụm, cần tàu, hẹ, giá đỗ", "amount": "Vừa đủ" },
+      { "name": "Nước lèo hầm xương ống và mực nướng ngọt thanh", "amount": "1 tô" }
+    ],
+    "instructions": [
+      "Trụng sợi hủ tiếu dai qua nước sôi, xóc ráo rồi trộn với mỡ tỏi phi thơm lừng cho sợi không dính.",
+      "Rưới thìa sốt tương hủ tiếu đặc chế vào tô trộn đều bóng bẩy.",
+      "Xếp tôm, thịt băm, gan heo, trứng cút, cần tây và hẹ lên trên mặt.",
+      "Rắc ngập tỏi phi vàng giòn và tiêu sọ thơm ngát.",
+      "Kèm một chén nước lèo ngọt lịm từ tôm khô và mực nướng sôi sùng sục bên cạnh để húp cùng."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Hủ Tiếu Nam Vang Nhân Quán", "address": "122 Nguyễn Trãi, Quận 1", "city": "TP.HCM", "priceEstimate": "60.000đ - 90.000đ" },
+      { "name": "Hủ Tiếu Nam Vang Đạt Thành", "address": "232 Nguyễn Thị Nhỏ, Quận 11", "city": "TP.HCM", "priceEstimate": "50.000đ - 75.000đ" }
+    ]
+  },
+  {
+    "id": "mi-quang-ga-ta",
+    "name": "Mì Quảng Gà Ta Đậm Đà",
+    "englishName": "Quang Style Chicken Turmeric Noodles",
+    "description": "Sợi mì Quảng vàng óng màu nghệ bản to dẻo dai, thịt gà ta xào săn ngấm gia vị củ nén cay thơm đặc trưng xứ Quảng, chan nước nhưn xâm xấp sánh đậm, rắc đậu phộng rang giòn rụm và bánh tráng mè nướng giòn tan.",
+    "category": "mon-nuoc",
+    "mealType": ["sang", "trua", "toi"],
+    "price": 45000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "cay"],
+    "dietary": ["normal"],
+    "region": "Trung",
+    "cookTimeMinutes": 35,
+    "calories": 490,
+    "rating": 4.8,
+    "reviewCount": 81,
+    "image": "https://images.unsplash.com/photo-1612927601601-6638404737ce?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Đặc sản Quảng Nam", "Bánh tráng nướng", "Thơm củ nén"],
+    "nutrition": { "protein": 31, "carbs": 56, "fat": 15 },
+    "ingredients": [
+      { "name": "Sợi mì Quảng vàng nghệ", "amount": "200g" },
+      { "name": "Thịt gà ta thả vườn chặt miếng", "amount": "200g" },
+      { "name": "Củ nén đập dập, ớt bột mịn", "amount": "2 thìa" },
+      { "name": "Bánh tráng nướng mè giòn", "amount": "1/2 cái" },
+      { "name": "Đậu phộng rang thơm đập dập", "amount": "2 thìa canh" },
+      { "name": "Rau búp chuối, cải non, húng lủi", "amount": "1 đĩa" }
+    ],
+    "instructions": [
+      "Ướp gà ta với củ nén, dầu màu điều, hạt tiêu, nước mắm ngon trong 30 phút.",
+      "Phi thơm củ nén với dầu phụng, trút gà vào xào săn rồi châm nước ninh thành nồi nước nhưn đậm đặc.",
+      "Trụng sợi mì Quảng xếp vào tô, gắp thịt gà xếp lên trên.",
+      "Chan nước nhưn xâm xấp vừa đủ thấm sợi mì (không chan ngập như phở).",
+      "Rắc đậu phộng rang, hành hoa chẻ, bẻ bánh tráng mè giòn rụm thả vào và vắt chanh thưởng thức."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Mì Quảng Bà Vị", "address": "166 Lê Đình Dương, Hải Châu", "city": "Đà Nẵng", "priceEstimate": "40.000đ - 65.000đ" },
+      { "name": "Mì Quảng Sâm", "address": "8 Ca Văn Thỉnh, Tân Bình", "city": "TP.HCM", "priceEstimate": "45.000đ - 60.000đ" }
+    ]
+  },
+  {
+    "id": "com-nieu-kho-quet",
+    "name": "Cơm Niêu Cháy Giòn Kho Quẹt",
+    "englishName": "Claypot Crispy Rice with Caramelized Fish Sauce",
+    "description": "Thố cơm niêu đất nung với lớp cháy vàng ruộm giòn tan rôm rốp, chấm cùng thố kho quẹt tôm khô thịt ba chỉ tóp mỡ sền sệt béo mặn cay the, ăn kèm đĩa rau củ luộc xanh mướt ngọt lịm.",
+    "category": "com",
+    "mealType": ["trua", "toi"],
+    "price": 85000,
+    "priceRange": "60k - 150k",
+    "taste": ["dam-da", "man", "cay"],
+    "dietary": ["normal"],
+    "region": "Nam",
+    "cookTimeMinutes": 40,
+    "calories": 620,
+    "rating": 4.9,
+    "reviewCount": 118,
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Cơm cháy giòn", "Kho quẹt dân dã", "Cơm gia đình"],
+    "popular": true,
+    "nutrition": { "protein": 28, "carbs": 82, "fat": 20 },
+    "ingredients": [
+      { "name": "Gạo thơm Tám Xoan nấu niêu đất", "amount": "200g" },
+      { "name": "Tôm khô loại 1 ngâm mềm", "amount": "50g" },
+      { "name": "Thịt ba chỉ cắt hạt lựu rán tóp mỡ giòn", "amount": "100g" },
+      { "name": "Nước mắm nhỉ, đường thốt nốt, tiêu xanh", "amount": "Kho quẹt" },
+      { "name": "Rau luộc: đậu bắp, bầu luộc, cà rốt, bông cải", "amount": "1 đĩa to" }
+    ],
+    "instructions": [
+      "Nấu cơm trong nồi niêu đất trên than hồng cho tới khi đáy niêu tạo lớp cháy vàng ươm giòn rụm.",
+      "Rán tóp mỡ heo vàng giòn, gạn bớt mỡ rồi trút tôm khô vào đảo săn.",
+      "Cho nước mắm và đường thốt nốt nấu lửa nhỏ đến khi hỗn hợp sánh kẹo lại màu hổ phách.",
+      "Thêm tiêu xanh nguyên chùm và ớt hiểm cắt lát tạo mùi thơm nồng nặc.",
+      "Bẻ miếng cơm cháy giòn rụm quẹt ngập nước kho mặn ngọt, ăn kèm rau củ luộc tươi mát."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Cơm Niêu Sài Gòn", "address": "27 Tú Xương, P. 7, Quận 3", "city": "TP.HCM", "priceEstimate": "120.000đ - 250.000đ" },
+      { "name": "Cơm Niêu Thiên Lý", "address": "Hệ thống chi nhánh TP.HCM", "city": "TP.HCM", "priceEstimate": "70.000đ - 130.000đ" }
+    ]
+  },
+  {
+    "id": "banh-cuon-nong",
+    "name": "Bánh Cuốn Nóng Tráng Tay",
+    "englishName": "Steamed Rice Rolls with Pork and Mushrooms",
+    "description": "Từng lá bánh tráng mỏng tang trắng muốt cuộn nhân thịt nạc băm xào mộc nhĩ giòn sần sật, rắc ngập hành phi tự phi vàng rộm thơm nức, ăn cùng chả quế thơm lừng và bát nước mắm cà cuống ấm áp.",
+    "category": "mon-nuoc",
+    "mealType": ["sang", "toi"],
+    "price": 35000,
+    "priceRange": "30k - 60k",
+    "taste": ["thanh-dam", "dam-da"],
+    "dietary": ["normal"],
+    "region": "Bắc",
+    "cookTimeMinutes": 20,
+    "calories": 390,
+    "rating": 4.8,
+    "reviewCount": 65,
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Ăn sáng nhẹ nhàng", "Hành phi thơm nức", "Thanh đạm"],
+    "nutrition": { "protein": 19, "carbs": 54, "fat": 11 },
+    "ingredients": [
+      { "name": "Bột gạo tẻ pha bột năng tráng mỏng", "amount": "200g" },
+      { "name": "Thịt nạc vai băm xào mộc nhĩ nấm hương", "amount": "150g" },
+      { "name": "Chả lụa hoặc chả quế nướng thơm", "amount": "100g" },
+      { "name": "Hành tím phi giòn rụm béo ngậy", "amount": "3 thìa canh" },
+      { "name": "Nước mắm chấm pha ấm, giấm tỏi ớt, rau mùi", "amount": "1 bát" }
+    ],
+    "instructions": [
+      "Căng vải lên nồi hơi nước sôi sùng sục, múc một muôi bột tráng tròn mỏng tang, đậy vung 30 giây.",
+      "Dùng thanh tre vớt lá bánh chín mượt ra mâm thoa nhẹ dầu ăn.",
+      "Cho nhân thịt xào mộc nhĩ vào giữa rồi cuộn tròn khéo léo.",
+      "Cắt bánh làm đôi xếp ra đĩa, rắc đầy ắp hành phi vàng ươm lên mặt.",
+      "Thêm vài lát chả quế thơm ngậy, chấm nước mắm pha ấm ngọt thanh ăn kèm rau thơm."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bánh Cuốn Bà Hoành", "address": "66 Tô Hiến Thành, Hai Bà Trưng", "city": "Hà Nội", "priceEstimate": "40.000đ - 65.000đ" },
+      { "name": "Bánh Cuốn Tây Hồ", "address": "127 Đinh Tiên Hoàng, Đa Kao, Quận 1", "city": "TP.HCM", "priceEstimate": "45.000đ - 70.000đ" }
+    ]
+  },
+  {
+    "id": "bun-rieu-cua-dong",
+    "name": "Bún Riêu Cua Đồng Chả Ốc",
+    "englishName": "Crab Paste Vermicelli Noodle Soup",
+    "description": "Tô bún riêu cua đỏ rực màu cà chua xào dầu điều, tảng riêu cua đồng xốp mềm béo ngậy, đậu hũ chiên vàng phồng, ốc nhồi giòn sần sật, huyết heo mướt và nước dùng chua thanh vị giấm bỗng nếp thơm nức.",
+    "category": "mon-nuoc",
+    "mealType": ["sang", "trua", "toi"],
+    "price": 45000,
+    "priceRange": "30k - 60k",
+    "taste": ["chua", "chua-cay", "dam-da"],
+    "dietary": ["normal"],
+    "region": "Bắc",
+    "cookTimeMinutes": 40,
+    "calories": 460,
+    "rating": 4.8,
+    "reviewCount": 102,
+    "image": "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Chua thanh giấm bỗng", "Cua đồng tươi", "Món nước giải nhiệt"],
+    "nutrition": { "protein": 27, "carbs": 55, "fat": 13 },
+    "ingredients": [
+      { "name": "Cua đồng giã nhuyễn lọc lấy nước", "amount": "300g" },
+      { "name": "Bún tươi sợi vừa", "amount": "200g" },
+      { "name": "Cà chua chín bổ múi cau, giấm bỗng nếp", "amount": "3 quả" },
+      { "name": "Đậu hũ cắt vuông chiên vàng", "amount": "2 bìa" },
+      { "name": "Ốc bươu / ốc nhồi luộc giòn", "amount": "100g" },
+      { "name": "Rau muống chẻ, hoa chuối, kinh giới", "amount": "1 rổ" }
+    ],
+    "instructions": [
+      "Đun nước cua đồng trên lửa nhỏ lăn tăn cùng chút muối cho thịt cua đông lại thành từng tảng riêu nổi lên trên.",
+      "Vớt tảng riêu cua ra bát riêng để không bị nát vỡ.",
+      "Xào cà chua với chút dầu điều rồi trút vào nồi nước cua, nêm giấm bỗng thơm lừng và mắm tôm ngon.",
+      "Thả đậu hũ chiên phồng ngấm nước lèo chua thanh đỏ au hấp dẫn.",
+      "Trụng bún xếp vào tô, múc riêu cua, ốc giòn, đậu hũ chan ngập nước dùng sôi sùng sục ăn kèm rau sống."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bún Riêu Cua Hàng Bạc", "address": "11 Hàng Bạc, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "40.000đ - 60.000đ" },
+      { "name": "Bún Riêu Gánh Chợ Bến Thành", "address": "4 Phan Bội Châu, Quận 1", "city": "TP.HCM", "priceEstimate": "55.000đ - 80.000đ" }
+    ]
+  },
+  {
+    "id": "bo-ne-hoa-qua-banh-mi",
+    "name": "Bò Né Hoa Quả Xèo Xèo",
+    "englishName": "Sizzling Beef Steak on Cast Iron",
+    "description": "Chảo gang hình chú bò đỏ rực reo xèo xèo sôi sục trên bàn: từng dải thăn bò mềm ngọt thấm đẫm sốt bơ tiêu đen cay nồng, trứng ốp la lòng đào béo ngậy, xíu mại, pate rán thơm nức kẹp bánh mì giòn tan.",
+    "category": "an-vat",
+    "mealType": ["sang", "trua", "toi"],
+    "price": 65000,
+    "priceRange": "60k - 150k",
+    "taste": ["dam-da", "beo-ngay", "cay"],
+    "dietary": ["normal"],
+    "region": "Nam",
+    "cookTimeMinutes": 20,
+    "calories": 710,
+    "rating": 4.8,
+    "reviewCount": 89,
+    "image": "https://images.unsplash.com/photo-1558030006-450675393462?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Ăn no nê", "Chảo gang xèo xèo", "Nhiều đạm"],
+    "nutrition": { "protein": 45, "carbs": 50, "fat": 32 },
+    "ingredients": [
+      { "name": "Thịt bò thăn mềm ướp sốt tiêu đen", "amount": "180g" },
+      { "name": "Trứng gà tươi", "amount": "1 quả" },
+      { "name": "Pate gan thơm ngậy", "amount": "40g" },
+      { "name": "Xúc xích hoặc xíu mại", "amount": "1 cây" },
+      { "name": "Bơ lạt, hành tây xắt lát, ngò rí", "amount": "Vừa đủ" },
+      { "name": "Bánh mì giòn nóng rẫy", "amount": "1 ổ" }
+    ],
+    "instructions": [
+      "Đốt nóng chảo gang trên bếp thật rực lửa cho bơ chảy xèo xèo thơm ngát.",
+      "Thả lát thăn bò ướp đậm sốt tiêu đen vào đảo nhanh chín tới để giữ độ mềm mọng nước.",
+      "Đập trứng gà làm ốp la lòng đào, thêm pate và xúc xích xông khói.",
+      "Rắc hành tây, tiêu đen đập dập và ngò rí tươi.",
+      "Bưng chảo ra bàn còn reo xèo xèo, xé ổ bánh mì giòn chấm quết lòng đỏ trứng béo ngậy."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bò Né Lệ Hồng", "address": "489 Hàn Hải Nguyên, Quận 11", "city": "TP.HCM", "priceEstimate": "65.000đ - 110.000đ" },
+      { "name": "Bò Né 3 Ngon", "address": "Hệ thống khắp các quận", "city": "TP.HCM / Đà Nẵng", "priceEstimate": "45.000đ - 70.000đ" }
+    ]
+  },
+  {
+    "id": "lau-thai-chua-cay",
+    "name": "Lẩu Thái Chua Cay Hải Sản",
+    "englishName": "Spicy Thai Tom Yum Hotpot",
+    "description": "Nồi lẩu chua cay bốc khói ngùn ngụt thơm lừng sả, riềng, lá chanh Thái kaffir, ngập tràn tôm sú nhảy tanh tách, mực ống giòn sần sật, nghêu tươi, nấm kim châm và rau muống nhúng nước lẩu Tom Yum đậm đà đánh thức mọi giác quan.",
+    "category": "lau-nuong",
+    "mealType": ["trua", "toi"],
+    "price": 220000,
+    "priceRange": "> 150k",
+    "taste": ["chua-cay", "cay", "dam-da"],
+    "dietary": ["normal"],
+    "region": "Quốc tế",
+    "cookTimeMinutes": 45,
+    "calories": 750,
+    "rating": 4.9,
+    "reviewCount": 175,
+    "image": "https://images.unsplash.com/photo-1547928576-a4a33237cbc3?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Tụ tập bạn bè", "Món lẩu ấm cúng", "Chua cay sảng khoái"],
+    "popular": true,
+    "nutrition": { "protein": 52, "carbs": 65, "fat": 22 },
+    "ingredients": [
+      { "name": "Tôm sú tươi, mực ống tươi", "amount": "300g" },
+      { "name": "Nghêu trắng sống", "amount": "300g" },
+      { "name": "Bò ba chỉ Mỹ cuộn", "amount": "200g" },
+      { "name": "Gia vị sốt Tom Yum, riềng, sả, lá chanh Thái", "amount": "1 gói" },
+      { "name": "Nước cốt dừa hoặc sữa béo", "amount": "100ml" },
+      { "name": "Nấm kim châm, nấm đùi gà, bắp ngọt, rau muống, mì tôm", "amount": "1 khay lớn" }
+    ],
+    "instructions": [
+      "Phi thơm sả đập dập, riềng và ớt hiểm với dầu màu điều, đổ nước dùng hầm xương vào đun sôi.",
+      "Cho gói sốt lẩu Thái, lá chanh vò nhẹ và nước cốt dừa tạo độ chua cay thơm béo hài hòa.",
+      "Bày các khay hải sản tôm, mực, nghêu, bò ba chỉ và các loại nấm tươi quanh bếp lẩu.",
+      "Khi nước lẩu sôi sùng sục, nhúng hải sản tươi vào vừa chín tới để giữ độ giòn ngọt tự nhiên.",
+      "Húp muỗng nước lẩu cay xé lưỡi ấm sực cả người giữa những ngày mưa se lạnh."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Lẩu Thái MK Restaurants", "address": "TTTM Vincom Đồng Khởi", "city": "TP.HCM", "priceEstimate": "250.000đ - 400.000đ" },
+      { "name": "Lẩu Thái Chua Cay Đường Phố", "address": "Khu ẩm thực Vĩnh Khánh, Quận 4", "city": "TP.HCM", "priceEstimate": "150.000đ - 220.000đ" }
+    ]
+  },
+  {
+    "id": "salad-uc-ga-eat-clean",
+    "name": "Salad Ức Gà Sốt Mè Rang Healthy",
+    "englishName": "Healthy Chicken Breast Salad",
+    "description": "Lựa chọn vàng cho người tập gym và ăn kiêng: ức gà áp chảo xé sợi mềm ngọt không khô bã, trứng gà lòng đào béo ngậy, bơ sáp tươi dẻo, xà lách Romaine giòn ngọt và cà chua bi rưới đẫm sốt mè rang bùi thơm quyến rũ.",
+    "category": "chay",
+    "mealType": ["trua", "toi"],
+    "price": 50000,
+    "priceRange": "30k - 60k",
+    "taste": ["thanh-dam", "beo-ngay"],
+    "dietary": ["eat-clean", "low-carb"],
+    "region": "Quốc tế",
+    "cookTimeMinutes": 15,
+    "calories": 340,
+    "rating": 4.7,
+    "reviewCount": 73,
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Eat clean", "Giảm cân", "Tăng cơ", "Healthy"],
+    "nutrition": { "protein": 40, "carbs": 12, "fat": 9 },
+    "ingredients": [
+      { "name": "Ức gà phi lê ướp tiêu đen áp chảo", "amount": "200g" },
+      { "name": "Trứng gà luộc lòng đào", "amount": "1 quả" },
+      { "name": "Trái bơ sáp cắt lát dẻo", "amount": "1/2 quả" },
+      { "name": "Xà lách Romaine, cà chua bi, dưa leo", "amount": "1 tô lớn" },
+      { "name": "Hạt chia, hạnh nhân lát rang giòn", "amount": "2 thìa" },
+      { "name": "Sốt mè rang Kewpie Nhật Bản", "amount": "3 thìa" }
+    ],
+    "instructions": [
+      "Ức gà ướp chút muối hồng, tiêu xay và dầu olive rồi áp chảo vàng 2 mặt cho thịt mọng nước xé thớ mềm.",
+      "Luộc trứng gà 6 phút canh chuẩn lòng đào dẻo quánh béo ngậy.",
+      "Rửa sạch xà lách tươi giòn, để thật ráo nước và cắt miếng vừa ăn xếp vào tô lớn.",
+      "Bày ức gà xé, bơ sáp thái lát, trứng cắt đôi và cà chua bi rực rỡ sắc màu.",
+      "Rắc hạt hạnh nhân giòn rụm, rưới sốt mè rang bùi thơm và trộn đều thưởng thức nhẹ bụng."
+    ],
+    "suggestedRestaurants": [
+      { "name": "SaladStop! Vietnam", "address": "Mplaza Saigon, Lê Duẩn, Quận 1", "city": "TP.HCM", "priceEstimate": "90.000đ - 160.000đ" },
+      { "name": "Healthy Bowl & Salad", "address": "Phố Trúc Bạch, Ba Đình", "city": "Hà Nội", "priceEstimate": "55.000đ - 85.000đ" }
+    ]
+  },
+  {
+    "id": "lau-nam-chay-thanh-tinh",
+    "name": "Lẩu Nấm Chay Thanh Tịnh",
+    "englishName": "Vegetarian Mushroom Hotpot",
+    "description": "Nước lẩu hầm từ củ cải, bắp ngọt, lê và táo đỏ cho vị ngọt thanh khiết thuần khiết của thiên nhiên, ăn cùng hơn 8 loại nấm quý: nấm đông cô tươi, nấm linh chi trắng, nấm đùi gà, nấm bào ngư cùng đậu hũ non và tàu hũ ky chiên giòn.",
+    "category": "chay",
+    "mealType": ["trua", "toi"],
+    "price": 160000,
+    "priceRange": "> 150k",
+    "taste": ["thanh-dam", "ngot"],
+    "dietary": ["vegetarian", "eat-clean"],
+    "region": "Nam",
+    "cookTimeMinutes": 35,
+    "calories": 380,
+    "rating": 4.9,
+    "reviewCount": 68,
+    "image": "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Ăn chay thanh tịnh", "Nấm quý tươi", "Tốt cho sức khỏe"],
+    "nutrition": { "protein": 22, "carbs": 48, "fat": 7 },
+    "ingredients": [
+      { "name": "Các loại nấm: linh chi, đông cô, đùi gà, kim châm", "amount": "400g" },
+      { "name": "Đậu hũ non mềm mịn", "amount": "1 hộp" },
+      { "name": "Váng đậu (tàu hũ ky) chiên phồng giòn", "amount": "50g" },
+      { "name": "Nước dùng hầm từ táo đỏ, kỷ tử, củ sen, bắp ngọt", "amount": "1 nồi" },
+      { "name": "Mì chay rau củ / bún tươi", "amount": "2 vắt" },
+      { "name": "Rau cải thìa, cải thảo, tần ô", "amount": "1 rổ" }
+    ],
+    "instructions": [
+      "Hầm củ sen, bắp ngọt, củ cải trắng và kỷ tử trong 45 phút lấy nước cốt ngọt tự nhiên.",
+      "Sơ chế sạch các loại nấm tươi ngâm nước muối loãng, cắt miếng vừa ăn.",
+      "Bày các khay nấm thơm ngát cùng đậu hũ non và tàu hũ ky giòn rụm quanh bàn lẩu.",
+      "Nấu sôi nước dùng nấm, thả nấm vào nấu chín mềm ngọt đậm đà vị ngọt thanh tự nhiên.",
+      "Chấm nấm với tương bần hoặc muối tiêu chanh ớt thưởng thức bữa ăn thanh lọc tâm hồn."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Nhà Hàng Chay Mandala", "address": "110 Sương Nguyệt Ánh, Quận 1", "city": "TP.HCM", "priceEstimate": "120.000đ - 220.000đ" },
+      { "name": "Chay Ưu Đàm (Uu Dam Chay)", "address": "34 Hàng Bài, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "180.000đ - 350.000đ" }
+    ]
+  },
+  {
+    "id": "banh-trang-nuong-da-lat",
+    "name": "Bánh Tráng Nướng Đà Lạt (Pizza Việt)",
+    "englishName": "Dalat Grilled Rice Paper (Vietnamese Pizza)",
+    "description": "Chiếc bánh tráng mỏng nướng trên than hồng thơm nức mũi: quết đều bơ béo, trứng cút lòng đỏ vàng óng, hành hoa, xúc xích, ruốc tôm mằn mặn và tương ớt sa tế cay nồng giòn tan trong miệng giữa tiết trời se lạnh.",
+    "category": "an-vat",
+    "mealType": ["an-vat", "toi"],
+    "price": 20000,
+    "priceRange": "< 30k",
+    "taste": ["dam-da", "cay", "beo-ngay"],
+    "dietary": ["normal"],
+    "region": "Trung",
+    "cookTimeMinutes": 10,
+    "calories": 290,
+    "rating": 4.8,
+    "reviewCount": 115,
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Ăn vặt đường phố", "Giá hạt dẻ", "Đặc sản Đà Lạt"],
+    "popular": true,
+    "nutrition": { "protein": 11, "carbs": 32, "fat": 12 },
+    "ingredients": [
+      { "name": "Bánh tráng mè mỏng", "amount": "1 cái" },
+      { "name": "Trứng cút tươi", "amount": "2 quả" },
+      { "name": "Hành lá xắt nhỏ, bơ thực vật", "amount": "1 thìa" },
+      { "name": "Tép sấy đỏ, chà bông heo", "amount": "2 thìa" },
+      { "name": "Xúc xích thái mỏng, phô mai con bò cười", "amount": "1 miếng" },
+      { "name": "Sốt Mayonnaise béo ngậy và tương ớt cay", "amount": "Rưới đều" }
+    ],
+    "instructions": [
+      "Đặt bánh tráng lên vỉ nướng trên bếp than hoa hồng rực vừa phải.",
+      "Quết bơ thơm, đập 2 quả trứng cút và hành hoa dùng thìa quết nhanh tay cho đều khắp mặt bánh.",
+      "Rải đều xúc xích, tép sấy, phô mai dẻo và khô bò xé.",
+      "Xoay đều chiếc bánh tráng cho đến khi đáy bánh vàng giòn không bị cháy sém.",
+      "Rưới sốt mayonnaise và tương ớt sa tế, gấp đôi chiếc bánh lại giòn rụm và thưởng thức ngay khi nóng bỏng tay."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bánh Tráng Nướng Dì Đinh", "address": "26 Hoàng Diệu", "city": "Đà Lạt", "priceEstimate": "15.000đ - 30.000đ" },
+      { "name": "Khu Ẩm Thực Hồ Con Rùa", "address": "Vòng xoay Công trường Quốc Tế, Quận 3", "city": "TP.HCM", "priceEstimate": "20.000đ - 35.000đ" }
+    ]
+  },
+  {
+    "id": "che-buoi-an-giang",
+    "name": "Chè Bưởi An Giang Béo Ngậy",
+    "englishName": "An Giang Pomelo Sweet Soup",
+    "description": "Món tráng miệng ngọt ngào trứ danh miền Tây: từng viên cùi bưởi trong veo giòn sần sật không chút đắng chát, hòa quyện đậu xanh bùi bở nấu sánh cùng đường thốt nốt thơm lừng và rưới đẫm nước cốt dừa béo ngậy.",
+    "category": "trang-mieng",
+    "mealType": ["an-vat"],
+    "price": 25000,
+    "priceRange": "< 30k",
+    "taste": ["ngot", "beo-ngay"],
+    "dietary": ["vegetarian"],
+    "region": "Nam",
+    "cookTimeMinutes": 30,
+    "calories": 320,
+    "rating": 4.9,
+    "reviewCount": 84,
+    "image": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Tráng miệng", "Ngọt ngào", "Cốt dừa béo", "Đập tan nóng bức"],
+    "nutrition": { "protein": 6, "carbs": 58, "fat": 9 },
+    "ingredients": [
+      { "name": "Cùi bưởi da xanh sơ chế giòn sần sật", "amount": "150g" },
+      { "name": "Đậu xanh đãi vỏ hấp chín tơi bở", "amount": "100g" },
+      { "name": "Bột năng tạo độ sánh gương", "amount": "50g" },
+      { "name": "Đường phèn hoặc đường thốt nốt thơm", "amount": "100g" },
+      { "name": "Nước cốt dừa đậm đặc nấu béo", "amount": "1 chén" },
+      { "name": "Đá bào mát lạnh", "amount": "1 ly" }
+    ],
+    "instructions": [
+      "Cùi bưởi thái hạt lựu bóp muối nhiều lần xả thật sạch hết đắng, luộc lăn qua bột năng cho giòn dai trong suốt.",
+      "Nấu nước sôi với đường phèn, từ từ rót bột năng khuấy đều cho nước chè sánh bóng như gương.",
+      "Trút đậu xanh đã hấp chín tơi và cùi bưởi giòn vào đảo nhẹ tay cho hòa quyện.",
+      "Múc chè ra ly hoặc chén thủy tinh còn ấm hoặc để nguội.",
+      "Rưới nước cốt dừa béo ngậy lên trên, thêm đá bào mát lạnh khuấy đều thưởng thức ngọt thanh sảng khoái."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Chè Bưởi Tự Nhiên", "address": "Quán Cô Ba Chè Miền Tây, Quận 10", "city": "TP.HCM", "priceEstimate": "20.000đ - 35.000đ" },
+      { "name": "Chè 4 Mùa Hàng Cân", "address": "4 Hàng Cân, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "25.000đ - 40.000đ" }
+    ]
+  },
+  {
+    "id": "tra-sua-tran-chau-duong-den",
+    "name": "Trà Sữa Trân Châu Đường Đen",
+    "englishName": "Brown Sugar Boba Milk Tea",
+    "description": "Cơn sốt đồ uống giới trẻ: trân châu đen nấu dẻo quánh ngập đường đen Đài Loan thơm nức mũi kẻ vân hổ quanh thành ly, hòa cùng sữa tươi thanh trùng ngọt ngậy béo bùi mát lạnh sảng khoái.",
+    "category": "trang-mieng",
+    "mealType": ["an-vat"],
+    "price": 35000,
+    "priceRange": "30k - 60k",
+    "taste": ["ngot", "beo-ngay"],
+    "dietary": ["vegetarian"],
+    "region": "Quốc tế",
+    "cookTimeMinutes": 10,
+    "calories": 420,
+    "rating": 4.9,
+    "reviewCount": 210,
+    "image": "https://images.unsplash.com/photo-1558857563-b37cf05f8849?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Thức uống quốc dân", "Giải nhiệt", "Trân châu dẻo quánh"],
+    "popular": true,
+    "nutrition": { "protein": 7, "carbs": 68, "fat": 12 },
+    "ingredients": [
+      { "name": "Trân châu đen bột sắn dẻo quánh", "amount": "80g" },
+      { "name": "Đường đen Đài Loan cô đặc", "amount": "50g" },
+      { "name": "Sữa tươi thanh trùng không đường", "amount": "200ml" },
+      { "name": "Kem sữa béo mặn phô mai (Cheese foam)", "amount": "2 thìa" },
+      { "name": "Đá viên mát lạnh", "amount": "1 ly" }
+    ],
+    "instructions": [
+      "Luộc chín trân châu bột sắn cho dẻo dai rồi ủ ấm trong siro đường đen cô đặc sánh mịn.",
+      "Múc một vá trân châu đường đen nóng hổi cho vào đáy ly, đảo nghiêng ly để đường đen bám tạo thành vệt vân hổ đẹp mắt.",
+      "Thêm đá viên đầy 2/3 ly.",
+      "Rót sữa tươi thanh trùng mát rượi vào ly tạo sự đối lập nhiệt độ thú vị.",
+      "Lớp trên cùng phủ kem cheese béo mặn nhẹ, cắm ống hút to hút một ngụm trân châu ấm dẻo lẫn sữa tươi béo thơm."
+    ],
+    "suggestedRestaurants": [
+      { "name": "The Alley Vietnam", "address": "68 Nguyễn Huệ, Quận 1", "city": "TP.HCM", "priceEstimate": "60.000đ - 85.000đ" },
+      { "name": "Tiger Sugar", "address": "Phố đi bộ Hồ Gươm", "city": "Hà Nội", "priceEstimate": "45.000đ - 65.000đ" }
+    ]
+  },
+  {
+    "id": "com-chien-duong-chau",
+    "name": "Cơm Chiên Dương Châu Hoàng Kim",
+    "englishName": "Yangzhou Fried Rice",
+    "description": "Từng hạt cơm tơi xốp bọc đều lớp trứng gà vàng óng như hạt ngọc, hòa cùng tôm tươi ngọt thịt, lạp xưởng Mai Quế Lộ béo ngọt thơm nồng, chả lụa xắt hạt lựu, đậu Hà Lan và cà rốt xào lửa lớn thơm lừng mùi khói chảo wok.",
+    "category": "com",
+    "mealType": ["trua", "toi"],
+    "price": 45000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "beo-ngay"],
+    "dietary": ["normal"],
+    "region": "Quốc tế",
+    "cookTimeMinutes": 20,
+    "calories": 580,
+    "rating": 4.7,
+    "reviewCount": 98,
+    "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Chắc bụng", "Hạt cơm tơi xốp", "Bữa trưa no nê"],
+    "nutrition": { "protein": 26, "carbs": 76, "fat": 18 },
+    "ingredients": [
+      { "name": "Cơm nguội để ráo hạt", "amount": "2 chén đầy" },
+      { "name": "Lạp xưởng tẩm rượu Mai Quế Lộ", "amount": "1 cây cắt hạt lựu" },
+      { "name": "Tôm tươi lột vỏ cắt nhỏ", "amount": "80g" },
+      { "name": "Trứng gà tươi", "amount": "2 quả" },
+      { "name": "Đậu Hà Lan, bắp ngọt, cà rốt", "amount": "1/2 chén" },
+      { "name": "Hành lá, tỏi băm, nước tương, dầu mè", "amount": "Gia vị" }
+    ],
+    "instructions": [
+      "Trộn lòng đỏ trứng gà vào tô cơm nguội cho từng hạt cơm áo một màu vàng tươi óng ả.",
+      "Xào chín lạp xưởng và tôm tươi trút ra đĩa riêng.",
+      "Đun chảo lòng sâu thật nóng, phi tỏi thơm rồi trút cơm vào đảo liên tục trên lửa lớn cho hạt cơm săn nảy đều.",
+      "Trút lạp xưởng, tôm, đậu Hà Lan và cà rốt vào đảo chung dậy mùi khói chảo đặc trưng.",
+      "Nêm chút nước tương và rắc ngập hành hoa thái nhuyễn rưới vài giọt dầu mè thơm ngát ra đĩa."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Quán Cơm Chiên Đại Dương", "address": "120 Nguyễn Tri Phương, Quận 5", "city": "TP.HCM", "priceEstimate": "45.000đ - 70.000đ" },
+      { "name": "Nhà Hàng Mỹ Hạnh", "address": "Trần Phú, Ba Đình", "city": "Hà Nội", "priceEstimate": "60.000đ - 110.000đ" }
+    ]
+  },
+  {
+    "id": "canh-chua-ca-loc",
+    "name": "Canh Chua Cá Lóc Nam Bộ",
+    "englishName": "Mekong Sour Fish Soup",
+    "description": "Nồi canh chua đậm đà tình quê hương sông nước: khứa cá lóc đồng béo ngậy thịt trắng phau, nước canh chua thanh vị me chín dốt dốt, thơm ngọt ngào từ dứa chín, đậu bắp giòn, bạc hà (dọc mùng) xốp mọng và ngò gai ngổ điếc thơm ngát.",
+    "category": "mon-nuoc",
+    "mealType": ["trua", "toi"],
+    "price": 75000,
+    "priceRange": "60k - 150k",
+    "taste": ["chua", "chua-cay", "ngot"],
+    "dietary": ["normal"],
+    "region": "Nam",
+    "cookTimeMinutes": 30,
+    "calories": 360,
+    "rating": 4.8,
+    "reviewCount": 79,
+    "image": "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Món cơm gia đình", "Chua ngọt Nam Bộ", "Giải nhiệt mùa hè"],
+    "nutrition": { "protein": 34, "carbs": 32, "fat": 10 },
+    "ingredients": [
+      { "name": "Cá lóc đồng làm sạch cắt khứa", "amount": "400g" },
+      { "name": "Me chín vắt lấy nước cốt", "amount": "50g" },
+      { "name": "Bạc hà (dọc mùng), đậu bắp, cà chua, thơm (dứa)", "amount": "1 đĩa" },
+      { "name": "Giá đỗ tươi", "amount": "100g" },
+      { "name": "Rau ngò ôm (rau ngổ), ngò gai, tỏi phi thơm", "amount": "Vừa đủ" },
+      { "name": "Nước mắm cá cơm ngon, ớt sừng", "amount": "1 chén chấm" }
+    ],
+    "instructions": [
+      "Nấu sôi nồi nước, dầm me chín lọc lấy nước cốt chua thanh đổ vào nồi.",
+      "Thả từng khứa cá lóc vào luộc chín vừa tới, vớt bọt liên tục để nước canh trong veo.",
+      "Cho dứa thái lát, cà chua và đậu bắp vào đun sôi thêm 2 phút.",
+      "Thả bạc hà và giá đỗ vào tắt bếp ngay để rau giữ được độ giòn sần sật đặc trưng.",
+      "Múc canh ra tô lớn, rắc rau ngò ôm ngò gai thơm lừng cùng một muỗng tỏi phi vàng rộm, chấm cá với nước mắm ớt cay."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Cơm Quê Mười Khó", "address": "27 Trần Quốc Thảo, Quận 3", "city": "TP.HCM", "priceEstimate": "80.000đ - 160.000đ" },
+      { "name": "Quán Bụi - Vietnamese Bistro", "address": "19 Ngô Văn Năm, Quận 1", "city": "TP.HCM", "priceEstimate": "120.000đ - 250.000đ" }
+    ]
+  },
+  {
+    "id": "chao-suon-sun-ha-noi",
+    "name": "Cháo Sườn Sụn Ngô Giòn",
+    "englishName": "Hanoi Pork Cartilage Congee",
+    "description": "Bát cháo sườn sánh mịn như nhung nấu từ bột gạo xay nhuyễn ngọt lịm từ nước hầm xương ống, từng miếng sườn sụn ninh mềm giòn sần sật, ruốc thịt heo tơi xốp, quẩy nóng giòn tan và rắc tiêu ớt thơm nức mũi sưởi ấm những ngày đông giá rét.",
+    "category": "mon-nuoc",
+    "mealType": ["sang", "toi", "an-vat"],
+    "price": 35000,
+    "priceRange": "30k - 60k",
+    "taste": ["thanh-dam", "dam-da"],
+    "dietary": ["normal"],
+    "region": "Bắc",
+    "cookTimeMinutes": 35,
+    "calories": 390,
+    "rating": 4.8,
+    "reviewCount": 105,
+    "image": "https://images.unsplash.com/photo-1548946526-f69e2424cf45?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Cháo mịn như kem", "Sườn sụn giòn sần sật", "Quẩy giòn rụm"],
+    "nutrition": { "protein": 25, "carbs": 52, "fat": 10 },
+    "ingredients": [
+      { "name": "Bột gạo tẻ xay mịn ninh cháo", "amount": "150g" },
+      { "name": "Sườn sụn non heo thái mỏng ninh mềm", "amount": "200g" },
+      { "name": "Quẩy giòn nóng", "amount": "2 đôi cắt khúc" },
+      { "name": "Ruốc thịt heo thơm bùi", "amount": "30g" },
+      { "name": "Hạt tiêu đen xay nồng, ớt bột mịn, hành hoa", "amount": "Vừa đủ" }
+    ],
+    "instructions": [
+      "Sườn sụn rửa sạch chần nước sôi, xào sơ với nước mắm rồi ninh nhừ cho sụn mềm giòn dễ nhai.",
+      "Khuấy bột gạo xay nhuyễn vào nước hầm xương sườn, đun nhỏ lửa khuấy đều tay cho cháo sánh mịn như kem sữa.",
+      "Nêm nếm gia vị vừa miệng, giữ cháo luôn sôi liu riu trên bếp than hồng.",
+      "Múc cháo nóng bỏng ra bát, múc sườn sụn lên trên.",
+      "Cắt quẩy giòn rải đều, rắc ruốc thịt xốp tơi, rắc tiêu đen thơm nồng và ớt bột đảo đều húp xì xụp."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Cháo Sườn Cô Là", "address": "2A Lý Quốc Sư, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "30.000đ - 50.000đ" },
+      { "name": "Cháo Sườn Chợ Bà Chiểu", "address": "Đường Phan Đăng Lưu, Bình Thạnh", "city": "TP.HCM", "priceEstimate": "35.000đ - 50.000đ" }
+    ]
+  },
+  {
+    "id": "com-ga-xoi-mo",
+    "name": "Cơm Gà Xối Mỡ Da Giòn",
+    "englishName": "Crispy Skin Fried Chicken Rice",
+    "description": "Chiếc đùi gà góc tư to tướng với lớp da chiên xối mỡ mỏng tanh vàng ruộm giòn tan rôm rốp, thịt bên trong mềm mọng nước thơm mùi gừng tỏi, ăn cùng cơm chiên hồng sốt cà chua và chén nước chấm xì dầu tỏi ớt gừng đậm đà.",
+    "category": "com",
+    "mealType": ["trua", "toi"],
+    "price": 50000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "beo-ngay"],
+    "dietary": ["normal"],
+    "region": "Nam",
+    "cookTimeMinutes": 25,
+    "calories": 720,
+    "rating": 4.8,
+    "reviewCount": 110,
+    "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Da giòn rôm rốp", "Cơm rang sốt cà chua", "Đùi gà to"],
+    "popular": true,
+    "nutrition": { "protein": 42, "carbs": 74, "fat": 28 },
+    "ingredients": [
+      { "name": "Đùi gà góc tư tươi ngon", "amount": "1 cái lớn (300g)" },
+      { "name": "Cơm đảo săn với sốt cà chua và mỡ gà", "amount": "1 đĩa" },
+      { "name": "Gừng, tỏi, hành tím, giấm gạo", "amount": "Ướp da giòn" },
+      { "name": "Dưa leo xắt lát, cà chua, xà lách", "amount": "Ăn kèm" },
+      { "name": "Nước tương pha tỏi ớt gừng băm nhuyễn", "amount": "1 chén" }
+    ],
+    "instructions": [
+      "Luộc sơ đùi gà với gừng tươi cho chín 80%, vớt ra xăm da và quét giấm pha mật ong phơi ráo.",
+      "Treo gà lên máy xối dầu sôi xối liên tục cho đến khi da phồng rộp giòn tan màu nâu cánh gián óng ả.",
+      "Đảo cơm nguội với mỡ gà và chút sốt cà chua cho hạt cơm tơi xốp đỏ hồng bắt mắt.",
+      "Chặt gà thành miếng vừa ăn xếp gọn gàng bên đĩa cơm nóng.",
+      "Kèm dưa chuột giòn mát và chén xì dầu tỏi ớt gừng cay nồng chấm ngập miếng thịt gà giòn tan."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Cơm Gà Xối Mỡ Su Su", "address": "1067 Hoàng Sa, Tân Bình", "city": "TP.HCM", "priceEstimate": "45.000đ - 65.000đ" },
+      { "name": "Cơm Gà Hải Nam", "address": "379 Nguyễn Tri Phương, Quận 10", "city": "TP.HCM", "priceEstimate": "60.000đ - 90.000đ" }
+    ]
+  },
+  {
+    "id": "vit-quay-bac-kinh",
+    "name": "Vịt Quay Da Giòn Móc Mật",
+    "englishName": "Crispy Roast Duck with Herbs",
+    "description": "Thịt vịt béo ngậy ướp lá móc mật thơm nồng của núi rừng, quay chín tới trên lu than hồng cho lớp da căng bóng màu mật ong giòn tanh tách, thịt bên trong mềm ngọt tươm nước, chấm nước sốt mận ngọt cay ăn cùng bánh bao chiên.",
+    "category": "com",
+    "mealType": ["trua", "toi"],
+    "price": 140000,
+    "priceRange": "60k - 150k",
+    "taste": ["dam-da", "beo-ngay", "ngot"],
+    "dietary": ["normal"],
+    "region": "Quốc tế",
+    "cookTimeMinutes": 45,
+    "calories": 680,
+    "rating": 4.9,
+    "reviewCount": 94,
+    "image": "https://images.unsplash.com/photo-1514944298352-f4722880183b?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Da giòn màu cánh gián", "Lá móc mật", "Sang xịn mịn"],
+    "nutrition": { "protein": 39, "carbs": 35, "fat": 36 },
+    "ingredients": [
+      { "name": "Vịt bầu béo tròn làm sạch", "amount": "1/2 con (700g)" },
+      { "name": "Lá móc mật tươi, quả móc mật khô", "amount": "1 nắm" },
+      { "name": "Ngũ vị hương, mạch nha, giấm đỏ, tỏi gừng", "amount": "Gia vị ướp" },
+      { "name": "Bánh bao chay chiên vàng", "amount": "4 cái" },
+      { "name": "Nước chấm tương đậu đen ngọt pha tỏi ớt", "amount": "1 chén" }
+    ],
+    "instructions": [
+      "Nhồi lá móc mật xắt nhỏ cùng tỏi gừng gia vị vào bụng vịt rồi khâu kín lại.",
+      "Dội nước sôi và quét lớp mạch nha pha giấm lên khắp da vịt rồi hong khô ráo.",
+      "Treo vịt vào lu than hoa nướng chín vàng đều ở nhiệt độ cao.",
+      "Chặt vịt thành miếng đều tăm tắp bày ra đĩa da giòn bóng bẩy.",
+      "Chấm cùng nước sốt ngọt sánh từ bụng vịt chảy ra ăn kèm bánh bao chiên giòn rụm."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Vịt Quay Phát Thành", "address": "157 Bùi Hữu Nghĩa, Quận 5", "city": "TP.HCM", "priceEstimate": "160.000đ - 350.000đ" },
+      { "name": "Vịt Quay Quảng Đông Jacky", "address": "77 Đặng Văn Ngữ, Đống Đa", "city": "Hà Nội", "priceEstimate": "120.000đ - 280.000đ" }
+    ]
+  },
+  {
+    "id": "ca-hoi-nuong-bo-toi",
+    "name": "Cá Hồi Áp Chảo Sốt Bơ Tỏi Chanh",
+    "englishName": "Pan-Seared Salmon with Garlic Butter Sauce",
+    "description": "Miếng phi lê cá hồi Na Uy tươi rói với lớp da áp chảo giòn tan màu vàng ruộm, thịt cá bên trong chín tới mềm mọng ngọt ngào thấm đẫm sốt bơ tỏi thơm nức và vị chanh vàng thanh thoát, ăn kèm măng tây xào giòn.",
+    "category": "com",
+    "mealType": ["trua", "toi"],
+    "price": 180000,
+    "priceRange": "> 150k",
+    "taste": ["thanh-dam", "beo-ngay", "chua"],
+    "dietary": ["eat-clean", "low-carb"],
+    "region": "Quốc tế",
+    "cookTimeMinutes": 20,
+    "calories": 480,
+    "rating": 4.9,
+    "reviewCount": 87,
+    "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Omega-3 dồi dào", "Món Âu sang trọng", "Eat clean cao cấp"],
+    "popular": true,
+    "nutrition": { "protein": 42, "carbs": 8, "fat": 24 },
+    "ingredients": [
+      { "name": "Phi lê cá hồi Na Uy tươi còn da", "amount": "220g" },
+      { "name": "Bơ lạt Anchor hảo hạng", "amount": "30g" },
+      { "name": "Tỏi băm nhuyễn, nước cốt chanh vàng", "amount": "2 thìa" },
+      { "name": "Măng tây xanh tươi ngon", "amount": "6 cọng" },
+      { "name": "Lá xạ hương (Thyme), muối hồng, tiêu đen", "amount": "Gia vị" }
+    ],
+    "instructions": [
+      "Thấm khô phi lê cá hồi, ướp chút muối hồng tiêu đen xay và dầu olive trong 10 phút.",
+      "Đặt chảo chống dính nóng, áp mặt da cá xuống trước ấn nhẹ cho da tiếp xúc chảo thật giòn rụm trong 4 phút.",
+      "Lật mặt thịt cá, thêm bơ lạt, tỏi đập dập và nhánh xạ hương vào chảo.",
+      "Nghiêng chảo dùng thìa rưới liên tục bơ tỏi nóng chảy lên mặt cá cho thịt chín tới mọng nước.",
+      "Vắt nước chanh vàng tạo sốt óng ánh, xào nhanh măng tây và dọn ra đĩa thưởng thức vị ngọt tinh tế."
+    ],
+    "suggestedRestaurants": [
+      { "name": "The Deck Saigon", "address": "38 Nguyễn Ư Dĩ, Thảo Điền, Quận 2", "city": "TP.HCM", "priceEstimate": "250.000đ - 500.000đ" },
+      { "name": "El Gaucho Steakhouse", "address": "Tràng Tiền, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "350.000đ - 700.000đ" }
+    ]
+  },
+  {
+    "id": "mi-cay-7-cap-do",
+    "name": "Mì Cay Hàn Quốc Hải Sản 7 Cấp Độ",
+    "englishName": "Spicy Korean Seafood Noodle",
+    "description": "Thố mì cay sôi ùng ục thách thức mọi tín đồ ăn cay: sợi mì ramen Hàn Quốc to tròn dai sần sật, nước dùng cay xé lưỡi từ ớt bột gochugaru và ớt hiểm, ngập tràn tôm sú, mực tươi, bò Mỹ cuộn nấm và xúc xích phô mai béo ngậy.",
+    "category": "mon-nuoc",
+    "mealType": ["trua", "toi"],
+    "price": 55000,
+    "priceRange": "30k - 60k",
+    "taste": ["cay", "chua-cay", "dam-da"],
+    "dietary": ["normal"],
+    "region": "Quốc tế",
+    "cookTimeMinutes": 15,
+    "calories": 540,
+    "rating": 4.6,
+    "reviewCount": 140,
+    "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Thách thức ăn cay", "Sôi ùng ục thố đất", "Hải sản tươi ngon"],
+    "nutrition": { "protein": 32, "carbs": 64, "fat": 15 },
+    "ingredients": [
+      { "name": "Mì ramen sợi to Hàn Quốc Koreno", "amount": "1 gói" },
+      { "name": "Tôm sú, mực ống tươi", "amount": "100g" },
+      { "name": "Ba chỉ bò Mỹ cuộn nấm kim châm", "amount": "80g" },
+      { "name": "Bột ớt Hàn Quốc & tương ớt Gochujang", "amount": "Tùy cấp độ cay 1-7" },
+      { "name": "Bắp cải tím, nấm kim châm, xúc xích", "amount": "1 phần" }
+    ],
+    "instructions": [
+      "Đun nóng thố đất trên bếp lửa lớn với nước dùng hầm xương ngọt thanh.",
+      "Hòa tương ớt Gochujang và ớt bột Hàn Quốc theo cấp độ cay bạn muốn chinh phục.",
+      "Thả tôm, mực, bò ba chỉ cuộn nấm kim châm và rau củ vào thố đất sôi sùng sục.",
+      "Cho vắt mì ramen vào nấu đúng 3 phút cho sợi mì vừa chín tới dai ngon.",
+      "Bưng nguyên thố đất sôi ùng ục khói bay nghi ngút ra bàn, vừa thổi vừa xì xụp toát mồ hôi sảng khoái."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Mì Cay Sasin", "address": "Hệ thống toàn quốc", "city": "TP.HCM / Hà Nội", "priceEstimate": "49.000đ - 79.000đ" },
+      { "name": "Mì Cay Seoul", "address": "Chi nhánh khắp các tỉnh thành", "city": "Toàn quốc", "priceEstimate": "45.000đ - 75.000đ" }
+    ]
+  },
+  {
+    "id": "xoi-man-thap-cam",
+    "name": "Xôi Mặn Thập Cẩm Chợ Lớn",
+    "englishName": "Savory Sticky Rice with Toppings",
+    "description": "Gói xôi lá chuối nóng hổi thơm nức: hạt nếp nương bóng bẩy dẻo quánh ngấm nước cốt dừa và mỡ gà, ngập tràn topping lạp xưởng Mai Quế Lộ, chà bông heo tơi xốp, gà xé cay, pate gan bùi béo, đậu phộng rang và mỡ hành béo ngậy.",
+    "category": "an-vat",
+    "mealType": ["sang", "toi", "an-vat"],
+    "price": 25000,
+    "priceRange": "< 30k",
+    "taste": ["dam-da", "beo-ngay", "man"],
+    "dietary": ["normal"],
+    "region": "Nam",
+    "cookTimeMinutes": 20,
+    "calories": 520,
+    "rating": 4.8,
+    "reviewCount": 92,
+    "image": "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Ăn sáng chắc bụng", "Gói lá chuối thơm", "Giá sinh viên"],
+    "popular": true,
+    "nutrition": { "protein": 22, "carbs": 70, "fat": 16 },
+    "ingredients": [
+      { "name": "Gạo nếp cái hoa vàng dẻo thơm", "amount": "200g" },
+      { "name": "Lạp xưởng tươi xắt hạt lựu chiên thơm", "amount": "1 cây" },
+      { "name": "Chà bông heo tơi xốp, gà xé xao", "amount": "50g" },
+      { "name": "Pate gan heo mịn thơm bùi", "amount": "30g" },
+      { "name": "Mỡ hành lá tươi, tép ruốc sấy, đậu phộng rang", "amount": "Rắc đều" },
+      { "name": "Nước sốt tương tỏi ớt đặc sánh", "amount": "1 thìa" }
+    ],
+    "instructions": [
+      "Đồ nếp trong chõ hấp hai lửa cho hạt xôi căng bóng dẻo quánh thơm nức mũi.",
+      "Xới xôi nóng hổi trải đều lên mảnh lá chuối xanh ngát.",
+      "Phết lớp pate gan bùi béo lên mặt xôi.",
+      "Gắp đầy ắp lạp xưởng, chà bông, gà xé tơi và ruốc tép phủ kín mặt nếp.",
+      "Rưới thìa mỡ hành bóng nhẫy, rắc đậu phộng giòn rụm và gói lá chuối lại thơm ngát cả góc phố."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Xôi Mặn Cô Lan", "address": "Chợ Tân Định, Quận 1", "city": "TP.HCM", "priceEstimate": "25.000đ - 45.000đ" },
+      { "name": "Xôi Yến", "address": "35B Nguyễn Hữu Huân, Hoàn Kiếm", "city": "Hà Nội", "priceEstimate": "40.000đ - 70.000đ" }
+    ]
+  },
+  {
+    "id": "ca-phe-sua-da-sai-gon",
+    "name": "Cà Phê Sữa Đá Sài Gòn",
+    "englishName": "Saigon Iced Coffee with Condensed Milk",
+    "description": "Biểu tượng nhịp sống phố thị: từng giọt cà phê Robusta đen nhánh nhỏ giọt qua chiếc phin nhôm truyền thống, hòa quyện sữa đặc béo ngậy ngọt ngào, rót vào ly đá đập mát lạnh đánh thức trọn vẹn sự tỉnh táo cho ngày mới.",
+    "category": "trang-mieng",
+    "mealType": ["sang", "an-vat"],
+    "price": 25000,
+    "priceRange": "< 30k",
+    "taste": ["ngot", "dam-da", "beo-ngay"],
+    "dietary": ["vegetarian"],
+    "region": "Nam",
+    "cookTimeMinutes": 5,
+    "calories": 180,
+    "rating": 5.0,
+    "reviewCount": 320,
+    "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Tỉnh táo", "Thức uống quốc hồn", "Buổi sáng sảng khoái"],
+    "popular": true,
+    "nutrition": { "protein": 4, "carbs": 28, "fat": 5 },
+    "ingredients": [
+      { "name": "Bột cà phê Robusta rang mộc đậm vị", "amount": "25g" },
+      { "name": "Sữa đặc có đường Ông Thọ", "amount": "40ml" },
+      { "name": "Nước sôi 95 độ C", "amount": "80ml" },
+      { "name": "Đá bi viên đập mát lạnh", "amount": "1 ly đầy" }
+    ],
+    "instructions": [
+      "Rót sữa đặc vào đáy ly thủy tinh trong suốt.",
+      "Cho bột cà phê vào phin nhôm, gài nắp nén vừa tay và châm chút nước sôi ủ nở trong 1 phút.",
+      "Châm tiếp nước sôi đầy phin, đậy nắp ngắm từng giọt cà phê đen nhánh rơi chậm rãi xuống lớp sữa đặc.",
+      "Dùng muỗng khuấy thật đều tay cho cà phê và sữa quyện thành màu nâu cánh gián óng ả.",
+      "Đổ ngập đá viên mát lạnh, khuấy lên tiếng lách cách sảng khoái và nhấp từng ngụm tỉnh người."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Cà Phê Vợt Ba Lù", "address": "Chợ Phùng Hưng, Quận 5", "city": "TP.HCM", "priceEstimate": "18.000đ - 25.000đ" },
+      { "name": "Cộng Cà Phê", "address": "Hệ thống toàn quốc", "city": "Toàn quốc", "priceEstimate": "35.000đ - 55.000đ" }
+    ]
+  },
+  {
+    "id": "banh-mi-chao-pate-trung",
+    "name": "Bánh Mì Chảo Thập Cẩm Xốt Cà",
+    "englishName": "Vietnamese Bread Combo Pan",
+    "description": "Chiếc chảo gang con con bốc khói nghi ngút: 2 quả trứng ốp la lòng đào vàng óng, pate chiên xém cạnh thơm lừng béo ngậy, xúc xích khía hoa, phô mai dẻo kéo sợi ngập trong sốt cà chua chua ngọt sánh mịn kẹp bánh mì giòn tan.",
+    "category": "an-vat",
+    "mealType": ["sang", "trua", "an-vat"],
+    "price": 40000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "chua-cay", "beo-ngay"],
+    "dietary": ["normal"],
+    "region": "Bắc",
+    "cookTimeMinutes": 15,
+    "calories": 590,
+    "rating": 4.8,
+    "reviewCount": 118,
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Ăn sáng no nê", "Sốt cà chua chấm bánh mì", "Lòng đào béo"],
+    "nutrition": { "protein": 28, "carbs": 58, "fat": 24 },
+    "ingredients": [
+      { "name": "Trứng gà tươi", "amount": "2 quả" },
+      { "name": "Pate gan heo nhà làm", "amount": "50g" },
+      { "name": "Xúc xích khía hoa chiên giòn", "amount": "1 cây" },
+      { "name": "Phô mai miếng dẻo", "amount": "1 lát" },
+      { "name": "Sốt cà chua nấu hành tây sánh mịn", "amount": "1 chén con" },
+      { "name": "Bánh mì nướng giòn rụm", "amount": "1 ổ" }
+    ],
+    "instructions": [
+      "Đun nóng chảo con với bơ thơm, cho pate và xúc xích vào chiên xém vàng hai mặt.",
+      "Đập 2 quả trứng gà vào chảo giữ nguyên lòng đào đẹp mắt.",
+      "Rưới sốt cà chua sánh mịn đun sôi xèo xèo quanh chảo.",
+      "Đặt lát phô mai lên trên cho chảy dẻo quyện đều vào sốt béo ngậy.",
+      "Rắc tiêu đen ngò rí, xé từng miếng bánh mì giòn quệt đẫm lòng đỏ trứng và nước sốt thơm lừng."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Bánh Mì Chảo Cột Điện Quán", "address": "71 Đặng Văn Ngữ, Đống Đa", "city": "Hà Nội", "priceEstimate": "35.000đ - 60.000đ" },
+      { "name": "Bánh Mì Chảo Hòa Mã", "address": "53 Cao Thắng, Quận 3", "city": "TP.HCM", "priceEstimate": "55.000đ - 80.000đ" }
+    ]
+  },
+  {
+    "id": "nem-nuong-nha-trang",
+    "name": "Nem Nướng Nha Trang Cuốn Bánh Tráng",
+    "englishName": "Nha Trang Grilled Pork Rolls",
+    "description": "Từng xiên nem nướng thơm nức mùi thịt heo quết dẻo nướng trên than hồng cháy cạnh, bánh tráng chiên giòn tan rôm rốp, xoài xanh chua giòn, dưa leo và rau thơm cuốn trong bánh tráng chấm nước sốt tương nếp gan tôm vàng ươm sánh mịn.",
+    "category": "cuon-tron",
+    "mealType": ["trua", "toi", "an-vat"],
+    "price": 55000,
+    "priceRange": "30k - 60k",
+    "taste": ["dam-da", "ngot", "chua-cay"],
+    "dietary": ["normal"],
+    "region": "Trung",
+    "cookTimeMinutes": 30,
+    "calories": 510,
+    "rating": 4.9,
+    "reviewCount": 130,
+    "image": "https://images.unsplash.com/photo-1529042410759-befb1204b468?w=800&auto=format&fit=crop&q=80",
+    "tags": ["Đặc sản Nha Trang", "Nước chấm thần thánh", "Cuốn rau thanh mát"],
+    "popular": true,
+    "nutrition": { "protein": 30, "carbs": 52, "fat": 19 },
+    "ingredients": [
+      { "name": "Thịt nạc heo quết nhuyễn nướng than", "amount": "250g" },
+      { "name": "Bánh tráng cuộn chiên giòn rụm", "amount": "6 thanh" },
+      { "name": "Bánh tráng dẻo Nha Trang", "amount": "1 xấp" },
+      { "name": "Xoài xanh bào sợi, dưa leo, cà rốt chua", "amount": "1 đĩa" },
+      { "name": "Rau xà lách, tía tô, diếp cá, húng quế", "amount": "1 rổ lớn" },
+      { "name": "Nước sốt thịt nếp tôm xay sánh mịn màu cam", "amount": "1 bát ấm" }
+    ],
+    "instructions": [
+      "Quết thịt heo với gia vị thật dai dẻo, xiên đũa tre nướng trên than hoa cho vàng ươm thơm lừng.",
+      "Nấu nước sốt thần thánh từ gạo nếp xay nhuyễn, gan heo, tôm tươi và dầu màu điều sánh mịn thơm bùi.",
+      "Cuộn bánh tráng mỏng chiên ngập dầu cho giòn tan rôm rốp.",
+      "Trải bánh tráng dẻo, đặt xà lách, rau thơm, thanh nem nướng, bánh tráng giòn và xoài chua.",
+      "Cuộn tròn chặt tay, chấm ngập vào bát nước sốt ấm nóng rắc chút ớt băm và đậu phộng rang."
+    ],
+    "suggestedRestaurants": [
+      { "name": "Nem Nướng Đặng Văn Quyên", "address": "16A Hàn Thuyên", "city": "Nha Trang", "priceEstimate": "45.000đ - 70.000đ" },
+      { "name": "Nem Nướng D’ran", "address": "14 Nguyễn Văn Đậu, Phú Nhuận", "city": "TP.HCM", "priceEstimate": "50.000đ - 80.000đ" }
+    ]
+  }
+]
