@@ -1,0 +1,12 @@
+/* components/footer.css — Chân trang. */
+
+/* ---------- 17. FOOTER ---------- */
+.site-footer { background: var(--deep); color: #C6CEE3; padding: 4rem 0 1.75rem; }
+.site-footer h4 { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.01em; }
+.site-footer a { color: #C6CEE3; }
+.site-footer a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.site-footer .bi-check2 { color: #4ADE80; }
+.footer-lede { max-width: 26rem; }
+.footer-muted { color: #97A1BD; }
+.footer-bottom { border-top: 1px solid rgba(255, 255, 255, .14); padding-top: 1.25rem; color: #97A1BD; }
+.footer-team-card { background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); border-radius: .8rem; padding: .9rem; }

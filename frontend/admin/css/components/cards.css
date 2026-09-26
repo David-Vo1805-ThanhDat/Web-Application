@@ -1,0 +1,43 @@
+/* components/cards.css — Thẻ nội dung, tiêu đề thẻ, thẻ chỉ số (KPI). */
+.card { background: #fff; border: 1px solid var(--ad-line); border-radius: var(--ad-radius-card); box-shadow: var(--ad-shadow); padding: 20px; }
+.card-flush { padding: 0; }
+.card-stack { display: flex; flex-direction: column; gap: 16px; }
+.card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.card-titles { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.card-title { font-size: 16px; font-weight: 700; color: var(--ad-text); }
+.card-sub { font-size: 13px; color: var(--ad-text-3); }
+.card-head-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--ad-orange-50); color: var(--ad-orange); display: grid; place-items: center; flex: none; }
+.card-head { display: flex; align-items: center; gap: 10px; }
+.card-warn { background: #fffbeb; border-color: #fde68a; }
+.card-notice { background: var(--ad-orange-50); border-color: #f6d8bb; }
+
+/* KPI */
+.kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.kpi { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+.kpi-top { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.kpi-icon { width: 34px; height: 34px; }
+.kpi-icon .ic { width: 18px; height: 18px; }
+.kpi-more { color: var(--ad-text-3); display: grid; place-items: center; }
+.kpi-more .ic { width: 16px; height: 16px; }
+.kpi-body { display: flex; flex-direction: column; gap: 2px; }
+.kpi-label { font-size: 13px; font-weight: 500; color: var(--ad-text-2); }
+.kpi-value { font-size: 26px; font-weight: 800; letter-spacing: -.26px; color: var(--ad-text); line-height: 1.15; }
+@media (max-width: 1400px) { .kpi-row { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) { .kpi-row { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
+/* KPI gọn (trang người dùng, đánh giá, quán ăn: icon + nhãn + số + chú thích) */
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.stat-card { display: flex; flex-direction: column; gap: 6px; padding: 16px; }
+.stat-card .tint { width: 34px; height: 34px; margin-bottom: 6px; }
+.stat-card .tint .ic { width: 18px; height: 18px; }
+.stat-card .stat-label { font-size: 13px; font-weight: 500; color: var(--ad-text-2); }
+.stat-card .stat-value { font-size: 26px; font-weight: 800; letter-spacing: -.26px; line-height: 1.1; }
+.stat-card .stat-note { font-size: 13px; color: var(--ad-text-3); }
+.stat-note.is-up { color: var(--ad-green-700); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+.stat-note.is-down { color: var(--ad-rose); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+@media (max-width: 1100px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .stat-row, .stat-row.cols-3 { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
+/* Thẻ chỉ số lẻ cuối hàng (3 thẻ trong lưới 2 cột) chiếm hết chiều ngang cho cân đối */
+@media (max-width: 700px) { .stat-row.cols-3 > .stat-card:last-child:nth-child(odd) { grid-column: 1 / -1; } }

@@ -1,0 +1,23 @@
+/* pages/settings.css — Trang Cài đặt hệ thống. */
+.settings-layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 20px; align-items: start; }
+.settings-main, .settings-side { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.card-head-icon .ic { width: 16px; height: 16px; }
+.admin-list { display: flex; flex-direction: column; gap: 14px; }
+.admin-row { display: flex; align-items: center; gap: 12px; }
+.admin-row .avatar { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 14px; flex: none; }
+.admin-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.admin-info b { font-size: 14px; font-weight: 600; }
+.admin-info small { font-size: 12px; color: var(--ad-text-3); }
+.btn-soft { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 8px 14px; border-radius: 999px; background: var(--ad-orange-50); color: var(--ad-orange-700); font-size: 13px; font-weight: 600; border: 0; cursor: pointer; }
+.btn-soft:hover { background: var(--ad-orange-100); }
+.btn-soft .ic { width: 14px; height: 14px; }
+.settings-side .btn { align-self: flex-start; }
+@media (max-width: 1100px) { .settings-layout { grid-template-columns: 1fr; } }
+
+/* Điện thoại: tên + email xuống dòng riêng, nhãn vai trò và nút thao tác nằm hàng dưới, không bị chen/cắt */
+@media (max-width: 600px) {
+  .admin-row { flex-wrap: wrap; row-gap: 8px; }
+  .admin-info { flex: 1 1 calc(100% - 50px); }
+  .admin-row .badge { margin-left: 50px; }
+  .admin-row .badge + .icon-action { margin-left: auto; }
+}

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<script>
+(function () {
+  try {
+    var u = JSON.parse(localStorage.getItem('hom_nay_an_gi_user') || 'null');
+    var page = location.pathname.split('/').pop() || 'dashboard.html';
+    if (!u) { location.replace('../user/dang-nhap.html?next=' + encodeURIComponent('../admin/' + page)); }
+    else if (u.role !== 'admin') { location.replace('../user/trang-chu.html'); }
+  } catch (e) { location.replace('../user/dang-nhap.html'); }
+})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Quản lý món ăn | Quản trị Hôm Nay Ăn Gì?</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="css/base/tokens.css" rel="stylesheet">
+<link href="css/base/base.css" rel="stylesheet">
+<link href="css/layout/shell.css" rel="stylesheet">
+<link href="css/layout/sidebar.css" rel="stylesheet">
+<link href="css/layout/topbar.css" rel="stylesheet">
+<link href="css/layout/page-header.css" rel="stylesheet">
+<link href="css/layout/mobile.css" rel="stylesheet">
+<link href="css/components/icon.css" rel="stylesheet">
+<link href="css/components/buttons.css" rel="stylesheet">
+<link href="css/components/cards.css" rel="stylesheet">
+<link href="css/components/badges.css" rel="stylesheet">
+<link href="css/components/forms.css" rel="stylesheet">
+<link href="css/components/toolbar.css" rel="stylesheet">
+<link href="css/components/table.css" rel="stylesheet">
+<link href="css/components/pagination.css" rel="stylesheet">
+<link href="css/components/tabs.css" rel="stylesheet">
+<link href="css/components/modal.css" rel="stylesheet">
+<link href="css/components/toast.css" rel="stylesheet">
+<link href="css/components/empty.css" rel="stylesheet">
+<link href="css/components/charts.css" rel="stylesheet">
+<link href="css/components/lists.css" rel="stylesheet">
+<link href="css/components/dropdown.css" rel="stylesheet">
+<link href="css/components/skeleton.css" rel="stylesheet">
+<link href="css/pages/foods.css" rel="stylesheet">
+</head>
+<body class="admin is-loading">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrowl" viewBox="0 0 14 14" fill="none"><g>
+<path d="M11.0833 7H2.91667M7 2.91667L2.91667 7L7 11.0833" stroke="currentColor" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-ban" viewBox="0 0 13 13" fill="none"><g>
+<path d="M6.5 11.375C9.19239 11.375 11.375 9.19239 11.375 6.5C11.375 3.80761 9.19239 1.625 6.5 1.625C3.80761 1.625 1.625 3.80761 1.625 6.5C1.625 9.19239 3.80761 11.375 6.5 11.375Z" stroke="currentColor" stroke-width="1.08333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.03333 3.03333L9.96667 9.96667" stroke="currentColor" stroke-width="1.08333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-bell" viewBox="0 0 16 16" fill="none"><g>
+<path d="M4 5.33333C4 4.27247 4.42143 3.25505 5.17157 2.50491C5.92172 1.75476 6.93913 1.33333 8 1.33333C9.06087 1.33333 10.0783 1.75476 10.8284 2.50491C11.5786 3.25505 12 4.27247 12 5.33333C12 10 14 11.3333 14 11.3333H2C2 11.3333 4 10 4 5.33333Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.66667 14H9.33333" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-bowl" viewBox="0 0 18 18" fill="none"><g>
+<path d="M2.25 8.25H15.75C15.75 10.0402 15.0388 11.7571 13.773 13.023C12.5071 14.2888 10.7902 15 9 15C7.20979 15 5.4929 14.2888 4.22703 13.023C2.96116 11.7571 2.25 10.0402 2.25 8.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 5.25C6 3.75 7.5 3.75 7.5 2.25M9.75 5.25C9.75 3.75 11.25 3.75 11.25 2.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-cal" viewBox="0 0 16 16" fill="none"><g>
+<path d="M12.6667 3.33333H3.33333C2.59695 3.33333 2 3.93029 2 4.66667V12.6667C2 13.403 2.59695 14 3.33333 14H12.6667C13.403 14 14 13.403 14 12.6667V4.66667C14 3.93029 13.403 3.33333 12.6667 3.33333Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2 6.66667H14M5.33333 2V4.66667M10.6667 2V4.66667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-calendar" viewBox="0 0 16 16" fill="none"><g>
+<path d="M12.6667 3.33333H3.33333C2.59695 3.33333 2 3.93029 2 4.66667V12.6667C2 13.403 2.59695 14 3.33333 14H12.6667C13.403 14 14 13.403 14 12.6667V4.66667C14 3.93029 13.403 3.33333 12.6667 3.33333Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2 6.66667H14M5.33333 2V4.66667M10.6667 2V4.66667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-chart" viewBox="0 0 18 18" fill="none"><g>
+<path d="M2.25 2.25V15.75H15.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.25 11.25L8.25 8.25L10.5 10.5L14.25 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-check" viewBox="0 0 12 12" fill="none"><g>
+<path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-chev" viewBox="0 0 16 16" fill="none"><g>
+<path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-chevl" viewBox="0 0 14 14" fill="none"><g>
+<path d="M8.75 3.5L5.25 7L8.75 10.5" stroke="currentColor" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-chevr" viewBox="0 0 14 14" fill="none"><g>
+<path d="M5.25 3.5L8.75 7L5.25 10.5" stroke="currentColor" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-clock" viewBox="0 0 18 18" fill="none"><g>
+<path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 5.25V9L11.25 11.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-dots" viewBox="0 0 16 16" fill="none"><g>
+<path d="M3.33333 8.66667C3.70152 8.66667 4 8.36819 4 8C4 7.63181 3.70152 7.33333 3.33333 7.33333C2.96514 7.33333 2.66667 7.63181 2.66667 8C2.66667 8.36819 2.96514 8.66667 3.33333 8.66667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8 8.66667C8.36819 8.66667 8.66667 8.36819 8.66667 8C8.66667 7.63181 8.36819 7.33333 8 7.33333C7.63181 7.33333 7.33333 7.63181 7.33333 8C7.33333 8.36819 7.63181 8.66667 8 8.66667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.6667 8.66667C13.0349 8.66667 13.3333 8.36819 13.3333 8C13.3333 7.63181 13.0349 7.33333 12.6667 7.33333C12.2985 7.33333 12 7.63181 12 8C12 8.36819 12.2985 8.66667 12.6667 8.66667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-down" viewBox="0 0 13 13" fill="none"><g>
+<path d="M3.79167 5.41667L6.5 8.125L9.20833 5.41667" stroke="currentColor" stroke-width="1.08333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-download" viewBox="0 0 16 16" fill="none"><g>
+<path d="M8 2V10M11.3333 6.66667L8 10L4.66667 6.66667M2.66667 14H13.3333" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-drag" viewBox="0 0 16 16" fill="none"><g>
+<path d="M6 4.66667C6.36819 4.66667 6.66667 4.36819 6.66667 4C6.66667 3.63181 6.36819 3.33333 6 3.33333C5.63181 3.33333 5.33333 3.63181 5.33333 4C5.33333 4.36819 5.63181 4.66667 6 4.66667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10 4.66667C10.3682 4.66667 10.6667 4.36819 10.6667 4C10.6667 3.63181 10.3682 3.33333 10 3.33333C9.63181 3.33333 9.33333 3.63181 9.33333 4C9.33333 4.36819 9.63181 4.66667 10 4.66667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 8.66667C6.36819 8.66667 6.66667 8.36819 6.66667 8C6.66667 7.63181 6.36819 7.33333 6 7.33333C5.63181 7.33333 5.33333 7.63181 5.33333 8C5.33333 8.36819 5.63181 8.66667 6 8.66667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10 8.66667C10.3682 8.66667 10.6667 8.36819 10.6667 8C10.6667 7.63181 10.3682 7.33333 10 7.33333C9.63181 7.33333 9.33333 7.63181 9.33333 8C9.33333 8.36819 9.63181 8.66667 10 8.66667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 12.6667C6.36819 12.6667 6.66667 12.3682 6.66667 12C6.66667 11.6318 6.36819 11.3333 6 11.3333C5.63181 11.3333 5.33333 11.6318 5.33333 12C5.33333 12.3682 5.63181 12.6667 6 12.6667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10 12.6667C10.3682 12.6667 10.6667 12.3682 10.6667 12C10.6667 11.6318 10.3682 11.3333 10 11.3333C9.63181 11.3333 9.33333 11.6318 9.33333 12C9.33333 12.3682 9.63181 12.6667 10 12.6667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-edit" viewBox="0 0 14 14" fill="none"><g>
+<path d="M2.33333 11.6667H4.66667L11.0833 5.25L8.75 2.91667L2.33333 9.33333V11.6667Z" stroke="currentColor" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-eye" viewBox="0 0 16 16" fill="none"><g>
+<path d="M1.33333 8C1.33333 8 4 3.33333 8 3.33333C12 3.33333 14.6667 8 14.6667 8C14.6667 8 12 12.6667 8 12.6667C4 12.6667 1.33333 8 1.33333 8Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-filter" viewBox="0 0 16 16" fill="none"><g>
+<path d="M2 3.33333H14L9.33333 8.66667V12.6667L6.66667 14V8.66667L2 3.33333Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-fire" viewBox="0 0 18 18" fill="none"><g>
+<path d="M9 16.5C10.3924 16.5 11.7277 15.9469 12.7123 14.9623C13.6969 13.9777 14.25 12.6424 14.25 11.25C14.25 7.5 10.5 6 10.5 2.25C8.25 3.75 7.5 6 7.5 7.5C6 6.75 6 5.25 6 5.25C4.5 6.75 3.75 9 3.75 11.25C3.75 12.6424 4.30312 13.9777 5.28769 14.9623C6.27226 15.9469 7.60761 16.5 9 16.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-gear" viewBox="0 0 18 18" fill="none"><g clip-path="url(#clip0_0_13)">
+<path d="M9 11.25C10.2426 11.25 11.25 10.2426 11.25 9C11.25 7.75736 10.2426 6.75 9 6.75C7.75736 6.75 6.75 7.75736 6.75 9C6.75 10.2426 7.75736 11.25 9 11.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 1.5V3.75M9 14.25V16.5M1.5 9H3.75M14.25 9H16.5M3.675 3.675L5.25 5.25M12.75 12.75L14.325 14.325M3.675 14.325L5.25 12.75M12.75 5.25L14.325 3.675" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath>
+<rect width="18" height="18" fill="currentColor"/>
+</clipPath>
+</defs></symbol><symbol id="i-globe" viewBox="0 0 16 16" fill="none"><g>
+<path d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2 8H14M8 2C10 4 10 12 8 14C6 12 6 4 8 2Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-grid" viewBox="0 0 18 18" fill="none"><g>
+<path d="M6.375 2.25H3.375C2.75368 2.25 2.25 2.75368 2.25 3.375V6.375C2.25 6.99632 2.75368 7.5 3.375 7.5H6.375C6.99632 7.5 7.5 6.99632 7.5 6.375V3.375C7.5 2.75368 6.99632 2.25 6.375 2.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.625 2.25H11.625C11.0037 2.25 10.5 2.75368 10.5 3.375V6.375C10.5 6.99632 11.0037 7.5 11.625 7.5H14.625C15.2463 7.5 15.75 6.99632 15.75 6.375V3.375C15.75 2.75368 15.2463 2.25 14.625 2.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.375 10.5H3.375C2.75368 10.5 2.25 11.0037 2.25 11.625V14.625C2.25 15.2463 2.75368 15.75 3.375 15.75H6.375C6.99632 15.75 7.5 15.2463 7.5 14.625V11.625C7.5 11.0037 6.99632 10.5 6.375 10.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.625 10.5H11.625C11.0037 10.5 10.5 11.0037 10.5 11.625V14.625C10.5 15.2463 11.0037 15.75 11.625 15.75H14.625C15.2463 15.75 15.75 15.2463 15.75 14.625V11.625C15.75 11.0037 15.2463 10.5 14.625 10.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-heart" viewBox="0 0 18 18" fill="none"><g>
+<path d="M9 15.75C9 15.75 3 12 3 7.5C2.97228 6.791 3.16871 6.09129 3.56139 5.50032C3.95407 4.90934 4.52302 4.45715 5.18738 4.20802C5.85175 3.95888 6.57773 3.92546 7.26218 4.11252C7.94662 4.29958 8.5547 4.69759 9 5.25C9.4453 4.69759 10.0534 4.29958 10.7378 4.11252C11.4223 3.92546 12.1483 3.95888 12.8126 4.20802C13.477 4.45715 14.0459 4.90934 14.4386 5.50032C14.8313 6.09129 15.0277 6.791 15 7.5C15 12 9 15.75 9 15.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-image" viewBox="0 0 28 28" fill="none"><g>
+<path d="M22.1667 4.66667H5.83333C4.54467 4.66667 3.5 5.71134 3.5 7V21C3.5 22.2887 4.54467 23.3333 5.83333 23.3333H22.1667C23.4553 23.3333 24.5 22.2887 24.5 21V7C24.5 5.71134 23.4553 4.66667 22.1667 4.66667Z" stroke="currentColor" stroke-width="2.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.5 14C11.7887 14 12.8333 12.9553 12.8333 11.6667C12.8333 10.378 11.7887 9.33333 10.5 9.33333C9.21134 9.33333 8.16667 10.378 8.16667 11.6667C8.16667 12.9553 9.21134 14 10.5 14Z" stroke="currentColor" stroke-width="2.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M24.5 18.6667L18.6667 12.8333L8.16667 23.3333" stroke="currentColor" stroke-width="2.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-inbox" viewBox="0 0 30 30" fill="none"><g>
+<path d="M3.75 15H10L12.5 18.75H17.5L20 15H26.25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.25 5H23.75L26.25 15V22.5C26.25 23.163 25.9866 23.7989 25.5178 24.2678C25.0489 24.7366 24.413 25 23.75 25H6.25C5.58696 25 4.95107 24.7366 4.48223 24.2678C4.01339 23.7989 3.75 23.163 3.75 22.5V15L6.25 5Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-leaf" viewBox="0 0 18 18" fill="none"><g>
+<path d="M3.75 15.75C3.75 9 8.25 4.5 15 4.5C15 11.25 10.5 15.75 3.75 15.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.75 15.75C6 13.5 8.25 11.25 10.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-lock" viewBox="0 0 18 18" fill="none"><g>
+<path d="M13.5 8.25H4.5C3.67157 8.25 3 8.92157 3 9.75V14.25C3 15.0784 3.67157 15.75 4.5 15.75H13.5C14.3284 15.75 15 15.0784 15 14.25V9.75C15 8.92157 14.3284 8.25 13.5 8.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 8.25V5.25C6 4.45435 6.31607 3.69129 6.87868 3.12868C7.44129 2.56607 8.20435 2.25 9 2.25C9.79565 2.25 10.5587 2.56607 11.1213 3.12868C11.6839 3.69129 12 4.45435 12 5.25V8.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-login" viewBox="0 0 17 17" fill="none"><g>
+<path d="M10.625 2.83333H13.4583V14.1667H10.625M7.08333 5.66667L9.91667 8.5L7.08333 11.3333M9.91667 8.5H2.125" stroke="currentColor" stroke-width="1.41667" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-logout" viewBox="0 0 16 16" fill="none"><g>
+<path d="M10 2.66667H12.6667V13.3333H10M6.66667 10.6667L4 8L6.66667 5.33333M4 8H10.6667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-mail" viewBox="0 0 18 18" fill="none"><g>
+<path d="M14.25 3.75H3.75C2.92157 3.75 2.25 4.42157 2.25 5.25V12.75C2.25 13.5784 2.92157 14.25 3.75 14.25H14.25C15.0784 14.25 15.75 13.5784 15.75 12.75V5.25C15.75 4.42157 15.0784 3.75 14.25 3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2.25 5.25L9 9.75L15.75 5.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-menu" viewBox="0 0 18 18" fill="none"><g>
+<path d="M3 4.5H15M3 9H15M3 13.5H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-more" viewBox="0 0 20 20" fill="none"><g>
+<path d="M4.16667 11.25C4.85702 11.25 5.41667 10.6904 5.41667 10C5.41667 9.30964 4.85702 8.75 4.16667 8.75C3.47631 8.75 2.91667 9.30964 2.91667 10C2.91667 10.6904 3.47631 11.25 4.16667 11.25Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10 11.25C10.6904 11.25 11.25 10.6904 11.25 10C11.25 9.30964 10.6904 8.75 10 8.75C9.30964 8.75 8.75 9.30964 8.75 10C8.75 10.6904 9.30964 11.25 10 11.25Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.8333 11.25C16.5237 11.25 17.0833 10.6904 17.0833 10C17.0833 9.30964 16.5237 8.75 15.8333 8.75C15.143 8.75 14.5833 9.30964 14.5833 10C14.5833 10.6904 15.143 11.25 15.8333 11.25Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-pin" viewBox="0 0 16 16" fill="none"><g>
+<path d="M8 14C8 14 12.6667 10 12.6667 6C12.6667 4.76232 12.175 3.57534 11.2998 2.70017C10.4247 1.825 9.23768 1.33333 8 1.33333C6.76232 1.33333 5.57534 1.825 4.70017 2.70017C3.825 3.57534 3.33333 4.76232 3.33333 6C3.33333 10 8 14 8 14Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8 7.66667C8.92047 7.66667 9.66667 6.92047 9.66667 6C9.66667 5.07953 8.92047 4.33333 8 4.33333C7.07953 4.33333 6.33333 5.07953 6.33333 6C6.33333 6.92047 7.07953 7.66667 8 7.66667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-plus" viewBox="0 0 16 16" fill="none"><g>
+<path d="M8 3.33333V12.6667M3.33333 8H12.6667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-pulse" viewBox="0 0 18 18" fill="none"><g>
+<path d="M2.25 9H5.25L6.75 5.25L9.75 12.75L11.25 9H15.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-reply" viewBox="0 0 13 13" fill="none"><g>
+<path d="M5.41667 9.75L2.16667 7.04167L5.41667 4.33333M2.16667 7.04167H7.58333C8.44529 7.04167 9.27194 7.38408 9.88143 7.99357C10.4909 8.60306 10.8333 9.42971 10.8333 10.2917" stroke="currentColor" stroke-width="1.08333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-save" viewBox="0 0 16 16" fill="none"><g>
+<path d="M3.33333 2.66667H10.6667L12.6667 4.66667V13.3333H3.33333V2.66667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.33333 2.66667V6.66667H10.6667V2.66667M5.33333 10H10.6667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-search" viewBox="0 0 16 16" fill="none"><g>
+<path d="M7.33333 12C9.91066 12 12 9.91066 12 7.33333C12 4.756 9.91066 2.66667 7.33333 2.66667C4.756 2.66667 2.66667 4.756 2.66667 7.33333C2.66667 9.91066 4.756 12 7.33333 12Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.3333 13.3333L10.6667 10.6667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-shield" viewBox="0 0 16 16" fill="none"><g>
+<path d="M8 2L13.3333 4V8C13.3333 11.3333 10.6667 13.3333 8 14C5.33333 13.3333 2.66667 11.3333 2.66667 8V4L8 2Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-star" viewBox="0 0 18 18" fill="none"><g>
+<path d="M9 1.5L11.25 6.75L16.5 6.975L12.375 10.5L13.875 15.75L9 12.75L4.125 15.75L5.625 10.5L1.5 6.975L6.75 6.75L9 1.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-store" viewBox="0 0 18 18" fill="none"><g>
+<path d="M2.25 6.75L3.75 3H14.25L15.75 6.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2.25 6.75H15.75V8.25C15.75 8.84674 15.5129 9.41903 15.091 9.84099C14.669 10.2629 14.0967 10.5 13.5 10.5C12.9033 10.5 12.331 10.2629 11.909 9.84099C11.4871 9.41903 11.25 8.84674 11.25 8.25C11.25 8.84674 11.0129 9.41903 10.591 9.84099C10.169 10.2629 9.59674 10.5 9 10.5C8.40326 10.5 7.83097 10.2629 7.40901 9.84099C6.98705 9.41903 6.75 8.84674 6.75 8.25C6.75 8.84674 6.51295 9.41903 6.09099 9.84099C5.66903 10.2629 5.09674 10.5 4.5 10.5C3.90326 10.5 3.33097 10.2629 2.90901 9.84099C2.48705 9.41903 2.25 8.84674 2.25 8.25V6.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.75 10.5V15.75H14.25V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-tag" viewBox="0 0 18 18" fill="none"><g>
+<path d="M2.25 2.25H8.25L15.75 9.75L9.75 15.75L2.25 8.25V2.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.625 6.75C6.24632 6.75 6.75 6.24632 6.75 5.625C6.75 5.00368 6.24632 4.5 5.625 4.5C5.00368 4.5 4.5 5.00368 4.5 5.625C4.5 6.24632 5.00368 6.75 5.625 6.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-trash" viewBox="0 0 14 14" fill="none"><g>
+<path d="M2.33333 4.08333H11.6667M5.25 4.08333V2.33333H8.75V4.08333M3.5 4.08333L4.08333 11.6667H9.91667L10.5 4.08333" stroke="currentColor" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-unlock" viewBox="0 0 14 14" fill="none"><g>
+<path d="M10.5 6.41667H3.5C2.85567 6.41667 2.33333 6.939 2.33333 7.58333V11.0833C2.33333 11.7277 2.85567 12.25 3.5 12.25H10.5C11.1443 12.25 11.6667 11.7277 11.6667 11.0833V7.58333C11.6667 6.939 11.1443 6.41667 10.5 6.41667Z" stroke="currentColor" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.66667 6.41667V4.08333C4.62915 3.54153 4.78181 3.00362 5.09832 2.56229C5.41484 2.12096 5.87539 1.80386 6.40061 1.66565C6.92582 1.52743 7.4828 1.57676 7.97556 1.80512C8.46831 2.03348 8.86597 2.42658 9.1 2.91667" stroke="currentColor" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-up" viewBox="0 0 13 13" fill="none"><g>
+<path d="M3.79167 7.58333L6.5 4.875L9.20833 7.58333" stroke="currentColor" stroke-width="1.08333" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-users" viewBox="0 0 18 18" fill="none"><g>
+<path d="M6.75 9C8.40685 9 9.75 7.65685 9.75 6C9.75 4.34315 8.40685 3 6.75 3C5.09315 3 3.75 4.34315 3.75 6C3.75 7.65685 5.09315 9 6.75 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.5 15.75C1.5 14.3576 2.05312 13.0223 3.03769 12.0377C4.02226 11.0531 5.35761 10.5 6.75 10.5C8.14239 10.5 9.47774 11.0531 10.4623 12.0377C11.4469 13.0223 12 14.3576 12 15.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 3C12.7956 3 13.5587 3.31607 14.1213 3.87868C14.6839 4.44129 15 5.20435 15 6C15 6.79565 14.6839 7.55871 14.1213 8.12132C13.5587 8.68393 12.7956 9 12 9M16.5 15.75C16.4965 14.7596 16.213 13.7905 15.6821 12.9544C15.1513 12.1183 14.3948 11.4494 13.5 11.025" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-warn" viewBox="0 0 26 26" fill="none"><g>
+<path d="M13 3.25L23.8333 22.75H2.16667L13 3.25Z" stroke="currentColor" stroke-width="2.16667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13 10.8333V15.1667M13 18.4167H13.0108" stroke="currentColor" stroke-width="2.16667" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-wheel" viewBox="0 0 18 18" fill="none"><g>
+<path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 2.25V15.75M2.25 9H15.75M4.2 4.2L13.8 13.8M13.8 4.2L4.2 13.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol><symbol id="i-x" viewBox="0 0 12 12" fill="none"><g>
+<path d="M3 3L9 9M9 3L3 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+</g></symbol></svg>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="Điều hướng quản trị">
+    <div class="sidebar-scroll">
+      <a class="brand" href="dashboard.html">
+        <span class="brand-mark"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+        <span class="brand-text"><b>Hôm Nay Ăn Gì?</b><small>Bảng quản trị</small></span>
+      </a>
+      <nav class="nav">
+<div class="nav-group-label">Tổng quan</div>
+<a class="nav-item" href="dashboard.html"><svg class="ic" aria-hidden="true"><use href="#i-grid"/></svg><span class="nav-label">Dashboard</span></a>
+<a class="nav-item" href="thong-ke.html"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg><span class="nav-label">Thống kê & báo cáo</span></a>
+<div class="nav-group-label">Nội dung</div>
+<a class="nav-item is-active" href="mon-an.html"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg><span class="nav-label">Món ăn</span><span class="nav-badge" data-count="foods" hidden></span></a>
+<a class="nav-item" href="danh-muc.html"><svg class="ic" aria-hidden="true"><use href="#i-tag"/></svg><span class="nav-label">Danh mục & thẻ</span></a>
+<a class="nav-item" href="quan-an.html"><svg class="ic" aria-hidden="true"><use href="#i-store"/></svg><span class="nav-label">Quán ăn gợi ý</span><span class="nav-badge" data-count="restaurants" hidden></span></a>
+<a class="nav-item" href="cong-thuc.html"><svg class="ic" aria-hidden="true"><use href="#i-pulse"/></svg><span class="nav-label">Chất lượng công thức</span><span class="nav-badge" data-count="recipesToReview" hidden></span></a>
+<div class="nav-group-label">Cộng đồng</div>
+<a class="nav-item" href="nguoi-dung.html"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><span class="nav-label">Người dùng</span></a>
+<a class="nav-item" href="danh-gia.html"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span class="nav-label">Góp ý liên hệ</span><span class="nav-badge" data-count="feedbackNew" hidden></span></a>
+<div class="nav-group-label">Hệ thống</div>
+<a class="nav-item" href="cai-dat.html"><svg class="ic" aria-hidden="true"><use href="#i-gear"/></svg><span class="nav-label">Cài đặt</span></a>
+<a class="nav-item" href="nhat-ky.html"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span class="nav-label">Nhật ký hoạt động</span></a>
+      </nav>
+    </div>
+    <div class="admin-profile">
+      <span class="avatar avatar-orange" data-admin-initials>QT</span>
+      <span class="admin-profile-text"><b data-admin-name>Quản trị viên</b><small>Super admin</small></span>
+      <button class="icon-plain" type="button" id="logoutBtn" aria-label="Đăng xuất"><svg class="ic" aria-hidden="true"><use href="#i-logout"/></svg></button>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" data-close-drawer></div>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="search-box" id="globalSearch">
+        <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
+        <input type="search" id="globalSearchInput" placeholder="Tìm món, người dùng, quán ăn…" autocomplete="off" aria-label="Tìm kiếm">
+        <kbd>Ctrl K</kbd>
+        <div class="search-results" id="globalSearchResults" hidden></div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-date" id="topbarDate">Thứ Năm, 24/09/2026</span>
+        <div class="dropdown" id="notifWrap">
+          <button class="icon-btn has-dot" type="button" id="notifBtn" aria-label="Thông báo"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></button>
+          <div class="dropdown-menu dropdown-menu-right" id="notifMenu" hidden></div>
+        </div>
+        <a class="icon-btn" href="../user/trang-chu.html" title="Xem web người dùng" aria-label="Xem web người dùng"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg></a>
+      </div>
+    </header>
+    <header class="mobile-topbar">
+      <button class="icon-btn icon-btn-soft" type="button" data-open-drawer aria-label="Mở menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <a class="mobile-brand" href="dashboard.html"><span class="brand-mark brand-mark-sm"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span><b>Bảng quản trị</b></a>
+      <button class="icon-btn icon-btn-soft has-dot" type="button" id="notifBtnMobile" aria-label="Thông báo"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></button>
+    </header>
+    <main class="content" id="content">
+      <div class="load-error" id="loadError" role="alert" hidden><span><b>Không tải được dữ liệu.</b> <span id="loadErrorMsg"></span></span><button class="btn btn-ghost" type="button" id="loadErrorRetry">Thử lại</button></div>
+
+      <div class="page-header">
+  <div class="page-header-text">
+    <p class="crumb">Nội dung / Món ăn</p>
+    <h1>Quản lý món ăn</h1>
+    <p class="subtitle"><span id="foodsSub">…</span></p>
+  </div>
+  <div class="page-actions"><button class="btn btn-ghost" type="button" id="exportBtn"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg>Xuất CSV</button>
+    <a class="btn btn-primary" href="mon-an-sua.html?new=1"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>Thêm món mới</a></div>
+</div>
+
+      <section class="card filter-card">
+        <div class="filter-row">
+          <label class="input-icon grow"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><input type="search" id="fQ" placeholder="Tìm theo tên món, ID…" aria-label="Tìm món ăn"></label>
+          <div class="select fixed-180"><select id="fCategory" aria-label="Danh mục"></select><svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></div>
+          <div class="select fixed-150"><select id="fMeal" aria-label="Bữa ăn"></select><svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></div>
+          <div class="select fixed-170"><select id="fRegion" aria-label="Vùng miền"></select><svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></div>
+          <div class="select fixed-170"><select id="fStatus" aria-label="Trạng thái">
+            <option value="all">Trạng thái: Tất cả</option><option value="visible">Đang hiển thị</option><option value="hidden">Đang ẩn</option><option value="pending">Chờ duyệt</option></select><svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></div>
+          <div class="dropdown"><button class="filter-btn" type="button" id="sortBtn" aria-label="Sắp xếp"><svg class="ic" aria-hidden="true"><use href="#i-filter"/></svg></button>
+            <div class="dropdown-menu dropdown-menu-right" id="sortMenu" hidden>
+              <div class="dropdown-head">Sắp xếp theo</div>
+              <button class="dropdown-item is-focus" type="button" data-sort="no">Mặc định (số thứ tự)</button>
+              <button class="dropdown-item" type="button" data-sort="name">Tên A → Z</button>
+              <button class="dropdown-item" type="button" data-sort="price">Giá tăng dần</button>
+              <button class="dropdown-item" type="button" data-sort="rating">Đánh giá cao nhất</button>
+            </div></div>
+        </div>
+      </section>
+
+      <div class="bulk-bar" id="bulkBar" hidden>
+        <div class="bulk-info"><input class="check" type="checkbox" id="bulkMaster" aria-label="Bỏ chọn tất cả"><span id="bulkText">Đã chọn 0 món</span></div>
+        <div class="bulk-actions">
+          <button class="btn btn-ghost" type="button" id="bulkHide"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg>Ẩn</button>
+          <button class="btn btn-danger" type="button" id="bulkDelete"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg>Xoá</button>
+        </div>
+      </div>
+
+      <section class="table-card" id="tableCard">
+        <div class="table-scroll" id="tableScroll">
+          <table class="data-table" id="foodsTable">
+            <thead><tr>
+              <th class="col-check"><input class="check" type="checkbox" data-check-all aria-label="Chọn tất cả"></th>
+              <th class="col-index">#</th><th>Món ăn</th><th>Danh mục</th><th class="num">Giá</th><th class="num">Calo</th><th>Đánh giá</th><th>Trạng thái</th><th class="col-actions">Thao tác</th>
+            </tr></thead>
+            <tbody id="foodsBody"><tr class="skel-row"><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td></tr><tr class="skel-row"><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td></tr><tr class="skel-row"><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td></tr><tr class="skel-row"><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td></tr><tr class="skel-row"><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td></tr><tr class="skel-row"><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td></tr><tr class="skel-row"><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td></tr><tr class="skel-row"><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td><td><span class="skel"></span></td></tr></tbody>
+          </table>
+        </div>
+        <div class="empty" id="foodsEmpty" hidden>
+          <span class="empty-icon"><svg class="ic" aria-hidden="true"><use href="#i-inbox"/></svg></span>
+          <h2 class="empty-title">Chưa có món ăn nào phù hợp</h2>
+          <p class="empty-desc">Không tìm thấy món ăn khớp với bộ lọc hiện tại. Hãy thử đổi danh mục hoặc xoá bớt điều kiện lọc.</p>
+          <button class="btn btn-primary" type="button" id="clearFilters"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg>Xoá tất cả bộ lọc</button>
+        </div>
+      </section>
+
+      <div class="table-foot"><span class="foot-info" id="footInfo"></span><div id="pager"></div></div>
+
+    </main>
+  </div>
+  <nav class="bottom-tabs" aria-label="Điều hướng nhanh"><a class="tab" href="dashboard.html"><svg class="ic" aria-hidden="true"><use href="#i-grid"/></svg><span>Dashboard</span></a><a class="tab is-active" href="mon-an.html"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg><span>Món ăn</span></a><a class="tab" href="thong-ke.html"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg><span>Thống kê</span></a><a class="tab" href="nguoi-dung.html"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><span>Người dùng</span></a><button class="tab" type="button" data-open-drawer><svg class="ic" aria-hidden="true"><use href="#i-more"/></svg><span>Thêm</span></button></nav>
+</div>
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+<script src="js/core/config.js"></script>
+<script src="js/core/dom.js"></script>
+<script src="js/core/format.js"></script>
+<script src="js/core/download.js"></script>
+<script src="js/core/audit-types.js"></script>
+<script src="js/core/api.js"></script>
+<script src="js/components/toast.js"></script>
+<script src="js/components/modal.js"></script>
+<script src="js/components/pagination.js"></script>
+<script src="js/components/table.js"></script>
+<script src="js/components/charts.js"></script>
+<script src="js/components/dropdown.js"></script>
+<script src="js/core/layout.js"></script>
+<script src="js/pages/mon-an.js"></script>
+</body>
+</html>

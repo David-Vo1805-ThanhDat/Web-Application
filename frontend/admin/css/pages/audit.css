@@ -1,0 +1,3 @@
+/* pages/audit.css — Trang Nhật ký hoạt động (dòng nhật ký dùng components/lists.css). */
+#logList { display: flex; flex-direction: column; }
+.log-group + .log-group { margin-top: 4px; }

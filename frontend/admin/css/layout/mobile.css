@@ -1,0 +1,39 @@
+/* layout/mobile.css — Giao diện di động: sidebar thành ngăn kéo, thanh trên + thanh tab dưới. */
+@media (max-width: 1100px) {
+  .topbar { padding: 12px 20px; }
+  .topbar-date { display: none; }
+  .content { padding: 20px 20px 40px; }
+}
+@media (max-width: 900px) {
+  .sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-100%); transition: transform .25s ease; }
+  .sidebar.is-open { transform: none; box-shadow: 0 0 40px rgba(0, 0, 0, .35); }
+  .sidebar-backdrop { display: block; position: fixed; inset: 0; background: rgba(31, 42, 68, .5); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 35; }
+  .sidebar-backdrop.is-open { opacity: 1; pointer-events: auto; }
+  .topbar { display: none; }
+  .mobile-topbar {
+    display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #fff;
+    border-bottom: 1px solid var(--ad-line); position: sticky; top: 0; z-index: 30;
+  }
+  .mobile-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ad-text); }
+  .icon-btn-soft { width: 38px; height: 38px; background: var(--ad-cream); border-color: transparent; }
+  .icon-btn-soft .ic { width: 18px; height: 18px; }
+  .content { padding: 16px 16px 100px; gap: 16px; }
+  .bottom-tabs {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: #fff; border-top: 1px solid var(--ad-line);
+    padding: 10px 8px calc(10px + env(safe-area-inset-bottom)); justify-content: space-between;
+  }
+  .bottom-tabs .tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 500; color: #b7becf; }
+  .bottom-tabs .tab .ic { width: 20px; height: 20px; }
+  .bottom-tabs .tab.is-active { color: var(--ad-orange); font-weight: 600; }
+  .page-header h1 { font-size: 22px; }
+}
+
+/* ---- Điện thoại nhỏ (≤600px): cụm nút hành động và ô lọc gọn gàng, dễ bấm ---- */
+@media (max-width: 600px) {
+  .page-actions { width: 100%; }
+  .page-actions .seg { width: 100%; }
+  .page-actions .seg button { flex: 1; }
+  .page-actions > .btn { flex: 1 1 auto; justify-content: center; }
+  .filter-row .select { flex: 1 1 calc(50% - 8px); min-width: 0; }
+  .filter-row .select select { text-overflow: ellipsis; }
+}

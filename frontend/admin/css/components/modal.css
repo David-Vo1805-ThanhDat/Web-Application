@@ -1,0 +1,22 @@
+/* components/modal.css — Hộp thoại xác nhận (xoá...) và hộp thoại biểu mẫu. */
+.modal-overlay { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: rgba(31, 42, 68, .55); animation: modalFade .15s ease; overflow-y: auto; }
+.modal { width: 340px; max-width: 100%; background: #fff; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 16px 20px rgba(20, 15, 5, .25); animation: modalPop .18s ease; }
+.modal-md { width: 480px; }
+.modal-lg { width: 640px; }
+.modal-icon { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: #fdecf0; color: var(--ad-rose); }
+.modal-icon .ic { width: 26px; height: 26px; }
+.modal-icon.is-orange { background: var(--ad-orange-50); color: var(--ad-orange); }
+.modal-text { display: flex; flex-direction: column; gap: 6px; }
+.modal-title { font-size: 17px; font-weight: 700; color: var(--ad-text); }
+.modal-desc { font-size: 13px; line-height: 19px; color: var(--ad-text-3); }
+.modal-actions { display: flex; gap: 10px; }
+.modal-actions .btn { flex: 1; }
+.modal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.modal-close { color: var(--ad-text-3); width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; }
+.modal-close:hover { background: var(--ad-orange-50); color: var(--ad-orange); }
+.modal-body { display: flex; flex-direction: column; gap: 14px; }
+.modal-md .modal-actions, .modal-lg .modal-actions { justify-content: flex-end; }
+.modal-md .modal-actions .btn, .modal-lg .modal-actions .btn { flex: 0 0 auto; }
+@keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalPop { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (max-width: 520px) { .modal, .modal-md, .modal-lg { width: 100%; } }

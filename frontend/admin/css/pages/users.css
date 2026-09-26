@@ -1,0 +1,10 @@
+/* pages/users.css — Trang Quản lý người dùng. */
+#usersTable .avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 14px; flex: none; }
+#usersTable .fav { display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
+#usersTable .fav .ic { width: 13px; height: 13px; color: var(--ad-rose); }
+#usersTable td { white-space: nowrap; }
+.profile-grid { display: flex; flex-direction: column; gap: 14px; }
+.profile-head { display: flex; align-items: center; gap: 14px; }
+.profile-head .avatar { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 20px; }
+.profile-head b { font-size: 16px; display: block; }
+.profile-head small { color: var(--ad-text-3); }

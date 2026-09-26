@@ -1,0 +1,28 @@
+/* components/skeleton.css — Trạng thái ĐANG TẢI (khung chờ nhấp nháy) và LỖI TẢI của các trang admin.
+   - <body class="is-loading"> có sẵn trong HTML; js/core/api.js gỡ lớp này khi lần tải đầu tiên xong (hoặc lỗi).
+   - Con số / dòng phụ được JS điền sau sẽ là ô xám nhấp nháy trong lúc đó.
+   - Bảng và danh sách có sẵn dòng khung chờ trong HTML, JS render dữ liệu thì tự thay thế. */
+@keyframes skel-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.skel, body.is-loading :is([data-kpi-value], [data-kpi-note], .stat-value, .stat-note, .card-sub[id], #foodsSub, #usersSub, #sub, #pageSub, #footInfo) {
+  background: linear-gradient(90deg, #f1e8dc 25%, #f9f2e8 45%, #f1e8dc 65%) 0 0 / 200% 100%;
+  animation: skel-shimmer 1.4s ease-in-out infinite; border-radius: 6px; color: transparent !important; user-select: none; pointer-events: none;
+}
+body.is-loading :is([data-kpi-value], [data-kpi-note], .stat-value, .stat-note) { display: inline-block; min-width: 72px; }
+body.is-loading :is(.card-sub[id], #foodsSub, #usersSub, #sub, #pageSub, #footInfo) { display: inline-block; min-width: 220px; }
+.skel-line { display: block; height: 12px; }
+.skel-circle { display: inline-block; width: 36px; height: 36px; border-radius: 50%; flex: none; }
+.skel-row td { padding: 16px 12px; }
+.skel-row .skel { display: block; height: 14px; }
+.skel-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+.skel-item .skel-line { flex: 1; }
+.skel-card { height: 96px; border-radius: 16px; margin-bottom: 12px; }
+.skel-block { display: block; height: 160px; border-radius: 12px; }
+@media (prefers-reduced-motion: reduce) { .skel, body.is-loading [data-kpi-value] { animation: none; } }
+
+/* Lỗi tải: banner đầu trang + ẩn các khung chờ để khỏi nhấp nháy mãi */
+.load-error { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 18px; border-radius: 14px; background: #fdecf0; border: 1px solid #f8c4d0; color: #9f1239; font-size: 14px; }
+.load-error[hidden] { display: none; }
+.load-error b { font-weight: 700; }
+.load-error .btn { margin-left: auto; }
+body.has-load-error :is(.skel-row, .skel-item, .skel-card, .skel-block) { display: none; }
+body.has-load-error :is([data-kpi-value], [data-kpi-note], .stat-value, .stat-note) { animation: none; background: none; }

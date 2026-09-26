@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<script>
+(function () {
+  try {
+    if (!localStorage.getItem('hom_nay_an_gi_user')) {
+      var back = location.pathname.split('/').pop() + location.search;
+      location.replace('dang-nhap.html?next=' + encodeURIComponent(back || 'trang-chu.html'));
+    }
+  } catch (e) {}
+})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tài Khoản Của Tôi | Hôm Nay Ăn Gì?</title>
+<meta name="description" content="Xem thông tin tài khoản, chỉnh tên hiển thị, hồ sơ sức khỏe và món yêu thích.">
+<meta name="theme-color" content="#FFF9F1">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link href="css/base/tokens.css" rel="stylesheet">
+<link href="css/base/base.css" rel="stylesheet">
+<link href="css/components/buttons.css" rel="stylesheet">
+<link href="css/components/navbar.css" rel="stylesheet">
+<link href="css/components/footer.css" rel="stylesheet">
+<link href="css/components/sections.css" rel="stylesheet">
+<link href="css/components/food-card.css" rel="stylesheet">
+<link href="css/components/chips.css" rel="stylesheet">
+<link href="css/components/wheel.css" rel="stylesheet">
+<link href="css/components/modal-result.css" rel="stylesheet">
+<link href="css/components/gift-box.css" rel="stylesheet">
+<link href="css/pages/home.css" rel="stylesheet">
+<link href="css/pages/goi-y.css" rel="stylesheet">
+<link href="css/pages/landing.css" rel="stylesheet">
+<link href="css/pages/auth.css" rel="stylesheet">
+<link href="css/pages/account.css" rel="stylesheet">
+<link href="css/pages/health.css" rel="stylesheet">
+<link href="css/base/responsive.css" rel="stylesheet">
+<link href="css/base/motion.css" rel="stylesheet">
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+<a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+<header class="site-navbar">
+  <nav class="navbar navbar-expand-lg" aria-label="Điều hướng chính">
+    <div class="container">
+      <a class="navbar-brand brand" href="trang-chu.html" aria-label="Hôm Nay Ăn Gì? - Trang chủ">
+        <span class="brand-mark">
+          <svg viewBox="0 0 32 32" aria-hidden="true" fill="none">
+            <path d="M5 15h22c0 6.6-4.9 11-11 11S5 21.6 5 15z" fill="#fff"/>
+            <path d="M12 12c.6-1.3.6-2.3 0-3.6M16 12c.6-1.3.6-2.3 0-3.6M20 12c.6-1.3.6-2.3 0-3.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".9"/>
+            <path d="M22 4.5 27 12M25.5 3.5 30 10.5" stroke="#FFE7C2" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">Hôm Nay Ăn Gì?</span>
+          <span class="brand-tag">Giải cứu cơn đói chỉ trong vài giây</span>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Mở menu">
+        <i class="bi bi-list fs-2"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav mx-lg-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" data-page="trang-chu.html" href="trang-chu.html"><i class="bi bi-egg-fried"></i> Trang Chủ</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="goi-y.html" href="goi-y.html"><i class="bi bi-stars"></i> Gợi Ý Ngay <span class="hot-badge">HOT</span></a></li>
+          <li class="nav-item"><a class="nav-link" data-page="kham-pha.html" href="kham-pha.html"><i class="bi bi-compass"></i> Khám Phá</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="thuc-don-suc-khoe.html" href="thuc-don-suc-khoe.html"><i class="bi bi-calendar-week"></i> Thực Đơn Sức Khỏe</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="nhat-ky-suc-khoe.html" href="nhat-ky-suc-khoe.html"><i class="bi bi-heart-pulse"></i> Nhật Ký Sức Khỏe</a></li>
+        </ul>
+        <div class="nav-actions d-flex align-items-center gap-2 mt-3 mt-lg-0">
+          <a href="kham-pha.html?tab=favorites" class="nav-fav" aria-label="Yêu thích">
+            <i class="bi bi-heart"></i> <span class="fav-text">Yêu thích</span>
+            <span class="favorite-count-badge" style="display:none;">0</span>
+          </a>
+          <div id="navUserSlot"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main id="main" class="flex-grow-1">
+
+<section class="section">
+  <div class="container acct-container">
+    <div class="page-head">
+      <h1>Tài khoản của tôi</h1>
+      <p>Xem thông tin tài khoản, hồ sơ sức khỏe và chỉnh vài cài đặt cơ bản.</p>
+    </div>
+
+    <div class="panel mb-4">
+      <div class="acct-profile">
+        <span class="nav-user-avatar acct-avatar" id="acctAvatar"></span>
+        <div>
+          <div class="fw-bold fs-5" id="acctName"></div>
+          <div class="text-muted small" id="acctEmail"></div>
+        </div>
+      </div>
+      <div class="row text-center bg-light rounded-3 py-2 my-3 border">
+        <div class="col border-end">
+          <div class="small text-muted">Món yêu thích</div>
+          <div class="fw-bold" id="acctFavCount">0</div>
+        </div>
+        <div class="col">
+          <div class="small text-muted">Dùng thử từ</div>
+          <div class="fw-bold" id="acctSince">—</div>
+        </div>
+      </div>
+      <p class="auth-note mb-0"><i class="bi bi-info-circle"></i> Thông tin tài khoản chỉ lưu trên trình duyệt này, chưa có server thật để đồng bộ nhiều thiết bị.</p>
+    </div>
+
+    <div class="panel mb-4">
+      <h2 class="panel-title mb-3"><i class="bi bi-gear"></i> Cài đặt</h2>
+      <form id="nameForm" class="mb-4">
+        <label class="form-label" for="nameInput">Tên hiển thị</label>
+        <div class="d-flex flex-column flex-sm-row gap-2">
+          <input type="text" class="form-control" id="nameInput" required>
+          <button type="submit" class="btn btn-brand">Lưu</button>
+        </div>
+      </form>
+      <label class="form-label">Email</label>
+      <p class="text-muted small mb-0" id="acctEmail2"></p>
+      <p class="text-muted small">Hiện chưa hỗ trợ đổi email.</p>
+    </div>
+
+    <div class="panel mb-4" id="health-profile">
+      <h2 class="panel-title mb-1"><i class="bi bi-heart-pulse"></i> Hồ sơ sức khỏe</h2>
+      <p class="text-muted small mb-3">Dùng để tính BMI và gợi ý lượng calo phù hợp cho trang Thực Đơn Sức Khỏe.</p>
+      <form id="healthForm">
+        <div class="row g-3 mb-3">
+          <div class="col-6 col-sm-3">
+            <label class="form-label small" for="hpHeight">Chiều cao (cm)</label>
+            <input type="number" class="form-control" id="hpHeight" min="100" max="250" required>
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label small" for="hpWeight">Cân nặng (kg)</label>
+            <input type="number" class="form-control" id="hpWeight" min="30" max="250" step="0.1" required>
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label small" for="hpAge">Tuổi</label>
+            <input type="number" class="form-control" id="hpAge" min="10" max="100" required>
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label small" for="hpGender">Giới tính</label>
+            <select class="form-select" id="hpGender">
+              <option value="nam">Nam</option>
+              <option value="nu">Nữ</option>
+            </select>
+          </div>
+        </div>
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <label class="form-label small" for="hpActivity">Mức vận động</label>
+            <select class="form-select" id="hpActivity"></select>
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label small" for="hpGoal">Mục tiêu</label>
+            <select class="form-select" id="hpGoal"></select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-brand"><i class="bi bi-save"></i> Lưu hồ sơ</button>
+      </form>
+
+      <div class="health-summary d-none mt-4" id="healthSummary">
+        <div class="row text-center bg-light rounded-3 py-3 border g-2">
+          <div class="col-6 col-sm-3 border-end">
+            <div class="small text-muted">BMI</div>
+            <div class="fw-bold fs-5" id="hsBMI">—</div>
+            <span class="badge" id="hsBMICat">—</span>
+          </div>
+          <div class="col-6 col-sm-3 border-end">
+            <div class="small text-muted">Nhu cầu/ngày</div>
+            <div class="fw-bold fs-5" id="hsTDEE">—</div>
+          </div>
+          <div class="col-6 col-sm-3 border-end">
+            <div class="small text-muted">Mục tiêu calo</div>
+            <div class="fw-bold fs-5" style="color:var(--accent);" id="hsTarget">—</div>
+          </div>
+          <div class="col-6 col-sm-3">
+            <div class="small text-muted">Mục tiêu</div>
+            <div class="fw-bold fs-5" id="hsGoal">—</div>
+          </div>
+        </div>
+        <a href="thuc-don-suc-khoe.html" class="btn btn-outline-brand w-100 mt-3"><i class="bi bi-calendar-week"></i> Xem Thực Đơn Sức Khỏe</a>
+      </div>
+      <p class="auth-note mt-3 mb-0"><i class="bi bi-info-circle"></i> Công cụ tham khảo cho vui dựa trên công thức phổ biến (Mifflin-St Jeor), không thay thế tư vấn dinh dưỡng hay y tế chuyên môn.</p>
+    </div>
+
+    <div class="panel acct-danger">
+      <h2 class="panel-title mb-2 text-danger"><i class="bi bi-exclamation-triangle"></i> Vùng nguy hiểm</h2>
+      <p class="text-muted small">Xoá hết món yêu thích đã lưu và đăng xuất khỏi trình duyệt này. Không thể hoàn tác.</p>
+      <button type="button" class="btn btn-outline-brand" id="clearDataBtn"><i class="bi bi-trash3"></i> Xoá dữ liệu &amp; đăng xuất</button>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer mt-auto" id="gioi-thieu">
+  <div class="container" style="--bs-gutter-x: 3rem;">
+    <div class="row g-5 mb-5">
+      <div class="col-md-6 col-lg-4">
+        <a href="index.html" class="brand brand-on-dark mb-3">
+          <span class="brand-mark">
+          <svg viewBox="0 0 32 32" aria-hidden="true" fill="none">
+            <path d="M5 15h22c0 6.6-4.9 11-11 11S5 21.6 5 15z" fill="#fff"/>
+            <path d="M12 12c.6-1.3.6-2.3 0-3.6M16 12c.6-1.3.6-2.3 0-3.6M20 12c.6-1.3.6-2.3 0-3.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".9"/>
+            <path d="M22 4.5 27 12M25.5 3.5 30 10.5" stroke="#FFE7C2" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </span>
+          <span class="brand-text"><span class="brand-name">Hôm Nay Ăn Gì?</span></span>
+        </a>
+        <p class="footer-lede">Ra đời từ chính nỗi phân vân "ăn gì bây giờ" mỗi ngày, Hôm Nay Ăn Gì? giúp bạn chốt một bữa ăn ngon chỉ trong vài giây — quay một vòng hoặc mở một hộp quà là xong. Miễn phí trọn đời, không quảng cáo làm phiền, và luôn lắng nghe góp ý từ bạn.</p>
+        <p class="small mb-0 footer-muted">Được làm bởi một nhóm nhỏ mê ăn ngon. 🧡</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4>Khám phá</h4>
+        <ul class="list-unstyled small d-flex flex-column gap-2">
+          <li><a href="trang-chu.html">Trang chủ</a></li>
+          <li><a href="goi-y.html">Vòng quay món ăn</a></li>
+          <li><a href="kham-pha.html">Thực đơn 31 món</a></li>
+          <li><a href="kham-pha.html?tab=favorites">Món đã lưu</a></li>
+          <li><a href="thuc-don-suc-khoe.html">Thực đơn sức khỏe</a></li>
+          <li><a href="nhat-ky-suc-khoe.html">Nhật ký sức khỏe</a></li>
+          <li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
+          <li><a href="index.html#lien-he">Liên hệ và góp ý</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4>Đội ngũ</h4>
+        <ul class="list-unstyled small d-flex flex-column gap-3">
+          <li><strong class="text-white d-block">Người A</strong><span class="footer-muted">Thiết kế sản phẩm</span></li>
+          <li><strong class="text-white d-block">Người B</strong><span class="footer-muted">Dữ liệu ẩm thực</span></li>
+          <li><strong class="text-white d-block">Người C</strong><span class="footer-muted">Nội dung &amp; đối tác quán ăn</span></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h4>Trong mỗi món ăn</h4>
+        <ul class="list-unstyled small d-flex flex-column gap-2">
+          <li><i class="bi bi-check2"></i> Nguyên liệu và các bước nấu</li>
+          <li><i class="bi bi-check2"></i> Dinh dưỡng và lượng calo</li>
+          <li><i class="bi bi-check2"></i> Quán ăn gợi ý để đến thử</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom d-flex flex-column flex-sm-row justify-content-between gap-2 small">
+      <span>© 2026 Hôm Nay Ăn Gì? Giữ mọi quyền.</span>
+      <span>Được làm với 🧡 tại Việt Nam</span>
+    </div>
+  </div>
+</footer>
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:1080;">
+  <div id="appToast" class="toast align-items-center border-0 shadow" role="alert">
+    <div class="d-flex">
+      <div class="toast-body" id="appToastBody">Thông báo</div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="../../backend/api/public/foods.php"></script>
+<script>if (typeof allFoods === "undefined") { window.allFoods = []; document.body.insertAdjacentHTML("afterbegin", '<div role="alert" style="background:#b91c1c;color:#fff;padding:10px 16px;font:600 14px/1.4 sans-serif;text-align:center">Không tải được dữ liệu món ăn từ máy chủ. Hãy mở trang qua XAMPP (Apache + PHP) hoặc chạy php -S — xem README.</div>'); }</script>
+<script src="js/core/data-utils.js"></script>
+<script src="js/core/categories.js"></script>
+<script src="js/core/health.js"></script>
+<script src="js/core/main.js"></script>
+<script src="js/core/backend.js"></script>
+<script src="js/core/sync.js"></script>
+<script src="js/core/auth.js"></script>
+<script src="js/pages/tai-khoan.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+/* components/table.css — Bảng dữ liệu (món ăn, người dùng, quán ăn, hiệu suất). */
+.table-card { background: #fff; border: 1px solid var(--ad-line); border-radius: var(--ad-radius-card); box-shadow: var(--ad-shadow); overflow: hidden; }
+.table-scroll { overflow-x: auto; }
+.data-table { width: 100%; min-width: 860px; }
+.data-table th { background: var(--ad-cream); padding: 12px 16px; text-align: left; font-size: 13px; font-weight: 500; color: var(--ad-text-2); white-space: nowrap; }
+.data-table td { padding: 12px 16px; border-top: 1px solid var(--ad-line); font-size: 14px; vertical-align: middle; }
+.data-table tbody tr:first-child td { border-top: 0; }
+.data-table tbody tr { transition: background-color .12s ease; }
+.data-table tbody tr:hover td { background: #fffaf3; }
+.data-table tr.is-selected td { background: var(--ad-orange-50); }
+.data-table .col-check { width: 44px; padding-right: 0; }
+.data-table .col-index { width: 48px; color: var(--ad-text-3); }
+.data-table .num { text-align: right; white-space: nowrap; }
+.data-table th.num { text-align: right; }
+.data-table .col-actions { width: 1%; white-space: nowrap; text-align: right; }
+.data-table th.col-actions { text-align: right; }
+.row-actions { display: inline-flex; gap: 8px; justify-content: flex-end; }
+.cell-main { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.cell-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.cell-title { font-size: 15px; font-weight: 600; color: var(--ad-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cell-sub { font-size: 13px; color: var(--ad-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rating { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.rating .ic { width: 14px; height: 14px; color: var(--ad-amber); }
+.rating b { font-weight: 700; }
+.rating span { color: var(--ad-text-3); font-size: 13px; }
+.muted-cell { color: var(--ad-text-2); }
+.money { font-weight: 600; }
+
+/* Ô chữ cái màu (thumb vuông bo 10) và avatar tròn */
+.thumb { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; color: #fff; font-weight: 700; font-size: 14px; flex: none; }
+.thumb-lg { width: 40px; height: 40px; font-size: 16px; }
+.thumb-img { object-fit: cover; }
+.avatar { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: #fff; font-weight: 700; font-size: 13px; flex: none; }
+.avatar-lg { width: 40px; height: 40px; font-size: 15px; }
+.avatar-orange { background: var(--ad-orange-500); }
+.c-amber { background: #f59e0b; } .c-purple { background: #7c3aed; } .c-rose { background: #e11d48; }
+.c-orange { background: #ea580c; } .c-blue { background: #2563eb; } .c-green { background: #15a34a; } .c-sky { background: #0ea5e9; }
+
+.table-note { padding: 14px 16px; font-size: 13px; color: var(--ad-text-3); }
+.table-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.table-foot .foot-info { font-size: 13px; color: var(--ad-text-3); }

@@ -1,0 +1,7 @@
+/* pages/account.css — Tài khoản và cài đặt. */
+
+/* ---------- 25. TÀI KHOẢN & CÀI ĐẶT ---------- */
+.acct-container { max-width: 42rem; }
+.acct-profile { display: flex; align-items: center; gap: 1rem; }
+.acct-avatar { width: 3.2rem; height: 3.2rem; font-size: 1.1rem; flex: none; }
+.acct-danger { border-color: #FBCFD6; }

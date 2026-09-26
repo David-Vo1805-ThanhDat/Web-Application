@@ -1,0 +1,5 @@
+/* pages/foods.css — Trang Quản lý món ăn (bảng danh sách). */
+.foods-table .col-price { width: 110px; }
+.foods-table .thumb-lg { background: var(--ad-orange); }
+#foodsTable td.col-cat { white-space: nowrap; }
+.status-badge { min-width: 0; }

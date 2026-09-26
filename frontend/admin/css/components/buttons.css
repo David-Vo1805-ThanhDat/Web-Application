@@ -1,0 +1,41 @@
+/* components/buttons.css — Nút bấm: chính, viền, nguy hiểm, nhạt, nút icon trong bảng. */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 10px;
+  border: 1px solid transparent; font-size: 14px; font-weight: 600; line-height: 1.2; white-space: nowrap; cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary { background: var(--ad-orange); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--ad-orange-700); }
+.btn-ghost { background: #fff; border-color: var(--ad-line-strong); color: var(--ad-text); }
+.btn-ghost:hover:not(:disabled) { border-color: var(--ad-orange); color: var(--ad-orange-700); }
+.btn-danger { background: var(--ad-rose); color: #fff; }
+.btn-danger:hover:not(:disabled) { background: #be123c; }
+.btn-soft { background: var(--ad-orange-50); color: var(--ad-orange-700); padding: 7px 12px; font-size: 13px; border-radius: 10px; }
+.btn-soft:hover:not(:disabled) { background: var(--ad-orange-100); }
+.btn-link { color: var(--ad-orange-700); font-weight: 600; font-size: 13px; padding: 4px 0; }
+.btn-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-block { width: 100%; }
+.btn-sm { padding: 6px 12px; font-size: 13px; border-radius: 8px; gap: 6px; }
+
+/* Nút icon vuông trong dòng bảng / thẻ (sửa, xoá, xem, khoá...). */
+.icon-action {
+  width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--ad-line-strong); background: #fff; display: inline-grid; place-items: center;
+  color: var(--ad-text-2); transition: border-color .15s ease, color .15s ease, background-color .15s ease; flex: none;
+}
+.icon-action .ic { width: 14px; height: 14px; }
+.icon-action:hover { border-color: var(--ad-orange); color: var(--ad-orange); }
+.icon-action.is-danger { color: var(--ad-rose); }
+.icon-action.is-danger:hover { border-color: var(--ad-rose); background: #fdecf0; }
+.icon-action.is-ok { color: var(--ad-green); }
+.icon-action.is-ok:hover { border-color: var(--ad-green); background: #e8f6ee; }
+.icon-action-lg { width: 32px; height: 32px; border-radius: 10px; }
+
+/* Nút nhỏ dạng chip trong thẻ đánh giá (Duyệt / Ẩn / Trả lời). */
+.btn-chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--ad-line-strong);
+  background: #fff; font-size: 13px; font-weight: 600; color: var(--ad-text); transition: border-color .15s ease, background-color .15s ease;
+}
+.btn-chip .ic { width: 14px; height: 14px; }
+.btn-chip:hover { border-color: var(--ad-orange); }
+.btn-chip.is-approve { background: var(--ad-orange-50); border-color: transparent; color: var(--ad-orange-700); }

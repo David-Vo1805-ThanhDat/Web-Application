@@ -1,0 +1,10 @@
+/* pages/reviews.css — Trang Đánh giá & góp ý (thẻ review dùng components/lists.css). */
+#tabs { align-self: flex-start; }
+.review-card .avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 14px; flex: none; }
+.review-head .badge { flex: none; }
+.review-actions .btn { padding: 6px 12px; font-size: 13px; }
+.btn-approve { background: var(--ad-orange-50); color: var(--ad-orange-700); }
+.btn-approve:hover { background: var(--ad-orange-100); }
+.review-actions .btn .ic { width: 14px; height: 14px; }
+.review-reply { margin-top: 2px; }
+.reply-box { display: flex; flex-direction: column; gap: 10px; }

@@ -1,0 +1,39 @@
+/* pages/health.css — Sức khỏe: thực đơn tuần và nhật ký. */
+
+/* ---------- 26. SỨC KHỎE: THỰC ĐƠN TUẦN & NHẬT KÝ ----------
+   Dùng chung cho thuc-don-suc-khoe.html và nhat-ky-suc-khoe.html (xem js/health.js). */
+
+/* hàng món ăn "tĩnh" (không phải nút bấm để chọn như .pick-item gốc ở trang Gợi Ý) */
+.pick-item.is-static { cursor: default; }
+.pick-item.is-static .pi-name { color: var(--text); text-decoration: none; }
+.pick-item.is-static .pi-name:hover { color: var(--orange-600); }
+
+/* Thực đơn tuần: mỗi ngày 1 thẻ, bên trong là 3 hàng món (sáng/trưa/tối) */
+.plan-day-card { display: flex; flex-direction: column; gap: .5rem; }
+.plan-day-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: .25rem; }
+.plan-day-title { margin: 0; font-size: 1.02rem; font-weight: 700; }
+.plan-day-total { background: var(--brand-100); color: var(--orange-700); font-weight: 700; }
+.plan-meal-icon { font-size: 1.2rem; flex: none; }
+.plan-day-card .pi-text { flex: 1; min-width: 0; }
+.plan-day-card .pi-name { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.plan-reroll-btn {
+  margin-left: auto; width: 2rem; height: 2rem; flex: none; display: grid; place-items: center;
+  border: 1.5px solid var(--line-strong); border-radius: 50%; background: #fff; color: var(--text-2); cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.plan-reroll-btn:hover { color: var(--orange-700); border-color: var(--orange-500); }
+.plan-reroll-btn:active { transform: rotate(90deg); }
+
+/* Nhật ký sức khỏe: biểu đồ cột đơn giản (không cần thư viện ngoài) */
+.trend-chart { display: flex; align-items: flex-end; gap: .5rem; height: 10rem; padding-top: 1.5rem; overflow-x: auto; }
+.trend-bar-wrap { flex: 1; min-width: 2.2rem; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.trend-bar { position: relative; width: 100%; max-width: 2.2rem; min-height: .3rem; background: var(--grad); border-radius: .4rem .4rem 0 0; }
+.trend-bar-value { position: absolute; top: -1.3rem; left: 50%; transform: translateX(-50%); font-size: .72rem; font-weight: 700; white-space: nowrap; color: var(--text); }
+.trend-bar-label { margin-top: .4rem; font-size: .7rem; color: var(--text-3); white-space: nowrap; }
+
+/* Nhật ký sức khỏe: danh sách các mốc đã ghi nhận */
+.log-row { display: grid; grid-template-columns: 1fr auto auto auto; gap: .75rem; align-items: center; padding: .6rem 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+.log-row:last-child { border-bottom: 0; }
+@media (max-width: 575.98px) {
+  .log-row { grid-template-columns: 1fr auto; row-gap: .3rem; }
+}

@@ -1,0 +1,40 @@
+/* pages/recipes.css — Trang Chất lượng công thức: thanh hợp khẩu vị, thanh phân bố nguyên liệu, hộp chi tiết. */
+#recipesMain { display: flex; flex-direction: column; gap: 20px; }
+#recipeTable td { white-space: nowrap; }
+#recipeTable td.issue { white-space: normal; min-width: 220px; }
+
+.fit { display: inline-flex; align-items: center; gap: 10px; min-width: 130px; }
+.fit b { width: 40px; font-weight: 700; }
+.fit-bar { flex: 1; height: 8px; border-radius: 6px; background: #f1eee9; overflow: hidden; min-width: 60px; }
+.fit-bar i { display: block; height: 100%; border-radius: 6px; background: var(--ad-green-700, #15803d); }
+.fit.is-mid .fit-bar i { background: var(--ad-amber, #f59e0b); }
+.fit.is-low .fit-bar i { background: var(--ad-rose, #e11d48); }
+.issue-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.issue-tag .badge { flex: none; }
+
+/* Hộp chi tiết một món */
+.recipe-detail { display: flex; flex-direction: column; gap: 18px; max-height: 72vh; overflow: auto; }
+.recipe-kpis { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--ad-text-2); }
+.recipe-kpis b { color: var(--ad-text); }
+.recipe-detail h4 { margin: 0 0 8px; font-size: 14px; font-weight: 700; }
+.ing-list { display: flex; flex-direction: column; gap: 12px; }
+.ing-row { display: flex; flex-direction: column; gap: 5px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--ad-line); }
+.ing-row.is-flag { border-color: #fde68a; background: #fffbeb; }
+.ing-head { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; }
+.ing-head span { color: var(--ad-text-3); font-size: 12px; white-space: nowrap; }
+.ibar { display: flex; height: 10px; border-radius: 6px; overflow: hidden; background: #f1eee9; }
+.ibar i { display: block; height: 100%; }
+.ibar .s-ok { background: #16a34a; } .ibar .s-less { background: #2563eb; } .ibar .s-more { background: #ea580c; }
+.ing-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ad-text-2); }
+.ing-legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+.dot.s-ok { background: #16a34a; } .dot.s-less { background: #2563eb; } .dot.s-more { background: #ea580c; }
+.dist-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.dist-item { display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
+.dist-item .ibar i { background: #cbd5e1; } .dist-item .ibar i.mid { background: #16a34a; }
+.dist-item small { color: var(--ad-text-3); }
+.note-list { display: flex; flex-direction: column; gap: 8px; }
+.note-item { padding: 10px 12px; border-radius: 12px; background: var(--ad-orange-50); font-size: 13px; }
+.note-item b { font-weight: 600; } .note-item small { display: block; color: var(--ad-text-3); margin-top: 2px; }
+.recipe-actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+
+@media (max-width: 600px) { .ing-head { flex-direction: column; gap: 2px; } }

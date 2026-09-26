@@ -1,0 +1,28 @@
+/* base/responsive.css — Responsive dùng chung (đặt cuối để thắng các luật cùng độ ưu tiên). */
+
+/* ---------- 19. RESPONSIVE ---------- */
+@media (max-width: 991.98px) {
+  .site-navbar .nav-link.active::after { left: .9rem; right: auto; width: 2rem; }
+  .site-navbar .navbar-collapse { padding-top: .75rem; }
+  .hero-actions .btn { flex: 1 1 auto; }
+  .hero-stat { padding-right: 1.25rem; }
+  .hero-stat + .hero-stat { padding-left: 1.25rem; }
+}
+@media (max-width: 575.98px) { .brand-tag { display: none; } }
+
+/* menu co gọn theo bề rộng để không ngắt chữ */
+@media (min-width: 992px) and (max-width: 1399.98px) {
+  .site-navbar .nav-link i { display: none; }
+  .site-navbar .nav-link { padding: .55rem .75rem !important; }
+}
+@media (min-width: 992px) and (max-width: 1599.98px) {
+  .nav-fav .fav-text { display: none; }   /* còn icon trái tim + số đếm (có aria-label) để navbar không tràn */
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .brand-tag, .btn-nav, .hot-badge { display: none; }
+  .brand { margin-right: .5rem; }
+  .site-navbar .nav-link { padding: .5rem .55rem !important; }
+}
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .brand { margin-right: .5rem; }
+}

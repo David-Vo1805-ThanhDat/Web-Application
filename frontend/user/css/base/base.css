@@ -1,0 +1,82 @@
+/* base/base.css — Nền tảng: reset nhẹ, ghi đè Bootstrap, các tên tiện ích cũ. */
+
+/* ---------- 2. NỀN TẢNG ---------- */
+html { scroll-behavior: smooth; }
+/* Bù chiều cao thanh nav dính (.site-navbar, position: sticky) khi nhảy neo tới các mục đã
+   gộp vào trang chủ (Giới thiệu ở footer, Liên hệ giữa trang) — không thì tiêu đề bị che mất. */
+#gioi-thieu, #lien-he { scroll-margin-top: 5.5rem; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+h2, .h2 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem); font-weight: 700; }
+
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6, .fw-black { font-weight: 800; letter-spacing: -0.03em; }
+.display-font { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; }
+.text-grad { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+p { max-width: 68ch; }
+.text-center p { margin-left: auto; margin-right: auto; }
+
+::selection { background: var(--orange-500); color: #fff; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--orange-500); }
+
+a { text-decoration: none; }
+
+:focus-visible { outline: 3px solid var(--orange-500); outline-offset: 3px; border-radius: 6px; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 2000;
+  background: var(--navy); color: #fff; padding: .6rem 1rem; border-radius: .6rem; font-weight: 600;
+}
+.skip-link:focus { top: 1rem; color: #fff; }
+
+/* ---------- 3. GHI ĐÈ BOOTSTRAP ---------- */
+.bg-white  { background-color: rgba(var(--surface-rgb), var(--bs-bg-opacity, 1)) !important; }
+.bg-light  { background-color: rgba(var(--surface-2-rgb), var(--bs-bg-opacity, 1)) !important; }
+.text-dark { color: var(--text) !important; }
+.border, .border-top, .border-bottom { border-color: var(--line) !important; }
+.card { --bs-card-bg: var(--surface); --bs-card-border-color: var(--line); }
+.accordion { --bs-accordion-bg: var(--surface); --bs-accordion-border-color: var(--line); --bs-accordion-btn-bg: var(--surface); --bs-accordion-active-bg: var(--brand-50); --bs-accordion-active-color: var(--orange-700); --bs-accordion-btn-focus-box-shadow: 0 0 0 .2rem rgba(249, 115, 22, .2); }
+.form-control, .form-select { background-color: var(--surface); border-color: var(--line-strong); color: var(--text); border-radius: .8rem; }
+.form-control::placeholder { color: #9AA3B8; }
+.form-control:focus, .form-select:focus { background-color: var(--surface); color: var(--text); border-color: var(--orange-500); box-shadow: 0 0 0 .2rem rgba(249, 115, 22, .18); }
+.bg-brand-subtle { background-color: var(--brand-50) !important; }
+.text-brand-emphasis, .text-brand { color: var(--orange-700) !important; }
+.bg-warning-subtle { background-color: #FEF3C7 !important; }
+.text-warning-emphasis { color: #92400E !important; }
+
+/* ---------- 4. TIỆN ÍCH CŨ (giữ tên) ---------- */
+.bg-gradient-brand, .bg-gradient-brand-vertical { background: var(--grad); }
+.text-gradient-food { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.glass-effect { background: rgba(255, 255, 255, .86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.glass-effect-dark { background: rgba(31, 42, 68, .8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+.rounded-xl-custom  { border-radius: var(--radius-lg) !important; }
+.rounded-2xl-custom { border-radius: var(--radius-xl) !important; }
+.rounded-3xl-custom { border-radius: var(--radius-2xl) !important; }
+
+.food-card-hover { transition: border-color .2s ease, box-shadow .2s ease; }
+.food-card-hover:hover { box-shadow: 0 14px 28px -18px rgba(234, 88, 12, .4); }
+.hover-scale { transition: transform .2s ease; }
+.hover-scale:hover { transform: scale(1.02); }
+
+/* Nhãn kicker nhạt dùng ở nhiều trang (trước đây khai báo lặp trong từng trang) */
+.bg-brand-subtle-custom{background:var(--brand-50);}
+.text-brand-emphasis-custom{color:var(--brand-700);}

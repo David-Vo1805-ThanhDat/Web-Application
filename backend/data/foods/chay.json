@@ -1,0 +1,171 @@
+[
+  {
+    "id": "salad-uc-ga-eat-clean",
+    "name": "Salad Ức Gà Sốt Mè Rang Healthy",
+    "englishName": "Healthy Chicken Breast Salad",
+    "description": "Lựa chọn vàng cho người tập gym và ăn kiêng: ức gà áp chảo xé sợi mềm ngọt không khô bã, trứng gà lòng đào béo ngậy, bơ sáp tươi dẻo, xà lách Romaine giòn ngọt và cà chua bi rưới đẫm sốt mè rang bùi thơm quyến rũ.",
+    "category": "chay",
+    "mealType": [
+      "trua",
+      "toi"
+    ],
+    "price": 50000,
+    "priceRange": "30k - 60k",
+    "taste": [
+      "thanh-dam",
+      "beo-ngay"
+    ],
+    "dietary": [
+      "eat-clean",
+      "low-carb"
+    ],
+    "region": "Quốc tế",
+    "cookTimeMinutes": 15,
+    "calories": 340,
+    "rating": 4.7,
+    "reviewCount": 73,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_Fillet_Salad.JPG?width=800",
+    "tags": [
+      "Eat clean",
+      "Giảm cân",
+      "Tăng cơ",
+      "Healthy"
+    ],
+    "nutrition": {
+      "protein": 40,
+      "carbs": 12,
+      "fat": 9
+    },
+    "ingredients": [
+      {
+        "name": "Ức gà phi lê ướp tiêu đen áp chảo",
+        "amount": "200g"
+      },
+      {
+        "name": "Trứng gà luộc lòng đào",
+        "amount": "1 quả"
+      },
+      {
+        "name": "Trái bơ sáp cắt lát dẻo",
+        "amount": "1/2 quả"
+      },
+      {
+        "name": "Xà lách Romaine, cà chua bi, dưa leo",
+        "amount": "1 tô lớn"
+      },
+      {
+        "name": "Hạt chia, hạnh nhân lát rang giòn",
+        "amount": "2 thìa"
+      },
+      {
+        "name": "Sốt mè rang Kewpie Nhật Bản",
+        "amount": "3 thìa"
+      }
+    ],
+    "instructions": [
+      "Ức gà ướp chút muối hồng, tiêu xay và dầu olive rồi áp chảo vàng 2 mặt cho thịt mọng nước xé thớ mềm.",
+      "Luộc trứng gà 6 phút canh chuẩn lòng đào dẻo quánh béo ngậy.",
+      "Rửa sạch xà lách tươi giòn, để thật ráo nước và cắt miếng vừa ăn xếp vào tô lớn.",
+      "Bày ức gà xé, bơ sáp thái lát, trứng cắt đôi và cà chua bi rực rỡ sắc màu.",
+      "Rắc hạt hạnh nhân giòn rụm, rưới sốt mè rang bùi thơm và trộn đều thưởng thức nhẹ bụng."
+    ],
+    "suggestedRestaurants": [
+      {
+        "name": "SaladStop! Vietnam",
+        "address": "Mplaza Saigon, Lê Duẩn, Quận 1",
+        "city": "TP.HCM",
+        "priceEstimate": "90.000đ - 160.000đ"
+      },
+      {
+        "name": "Healthy Bowl & Salad",
+        "address": "Phố Trúc Bạch, Ba Đình",
+        "city": "Hà Nội",
+        "priceEstimate": "55.000đ - 85.000đ"
+      }
+    ]
+  },
+  {
+    "id": "lau-nam-chay-thanh-tinh",
+    "name": "Lẩu Nấm Chay Thanh Tịnh",
+    "englishName": "Vegetarian Mushroom Hotpot",
+    "description": "Nước lẩu hầm từ củ cải, bắp ngọt, lê và táo đỏ cho vị ngọt thanh khiết thuần khiết của thiên nhiên, ăn cùng hơn 8 loại nấm quý: nấm đông cô tươi, nấm linh chi trắng, nấm đùi gà, nấm bào ngư cùng đậu hũ non và tàu hũ ky chiên giòn.",
+    "category": "chay",
+    "mealType": [
+      "trua",
+      "toi"
+    ],
+    "price": 160000,
+    "priceRange": "> 150k",
+    "taste": [
+      "thanh-dam",
+      "ngot"
+    ],
+    "dietary": [
+      "vegetarian",
+      "eat-clean"
+    ],
+    "region": "Nam",
+    "cookTimeMinutes": 35,
+    "calories": 380,
+    "rating": 4.9,
+    "reviewCount": 68,
+    "image": "https://images.unsplash.com/photo-1547928576-a4a33237cbc3?w=800&auto=format&fit=crop&q=80",
+    "tags": [
+      "Ăn chay thanh tịnh",
+      "Nấm quý tươi",
+      "Tốt cho sức khỏe"
+    ],
+    "nutrition": {
+      "protein": 22,
+      "carbs": 48,
+      "fat": 7
+    },
+    "ingredients": [
+      {
+        "name": "Các loại nấm: linh chi, đông cô, đùi gà, kim châm",
+        "amount": "400g"
+      },
+      {
+        "name": "Đậu hũ non mềm mịn",
+        "amount": "1 hộp"
+      },
+      {
+        "name": "Váng đậu (tàu hũ ky) chiên phồng giòn",
+        "amount": "50g"
+      },
+      {
+        "name": "Nước dùng hầm từ táo đỏ, kỷ tử, củ sen, bắp ngọt",
+        "amount": "1 nồi"
+      },
+      {
+        "name": "Mì chay rau củ / bún tươi",
+        "amount": "2 vắt"
+      },
+      {
+        "name": "Rau cải thìa, cải thảo, tần ô",
+        "amount": "1 rổ"
+      }
+    ],
+    "instructions": [
+      "Hầm củ sen, bắp ngọt, củ cải trắng và kỷ tử trong 45 phút lấy nước cốt ngọt tự nhiên.",
+      "Sơ chế sạch các loại nấm tươi ngâm nước muối loãng, cắt miếng vừa ăn.",
+      "Bày các khay nấm thơm ngát cùng đậu hũ non và tàu hũ ky giòn rụm quanh bàn lẩu.",
+      "Nấu sôi nước dùng nấm, thả nấm vào nấu chín mềm ngọt đậm đà vị ngọt thanh tự nhiên.",
+      "Chấm nấm với tương bần hoặc muối tiêu chanh ớt thưởng thức bữa ăn thanh lọc tâm hồn."
+    ],
+    "suggestedRestaurants": [
+      {
+        "name": "Nhà Hàng Chay Mandala",
+        "address": "110 Sương Nguyệt Ánh, Quận 1",
+        "city": "TP.HCM",
+        "priceEstimate": "120.000đ - 220.000đ"
+      },
+      {
+        "name": "Chay Ưu Đàm (Uu Dam Chay)",
+        "address": "34 Hàng Bài, Hoàn Kiếm",
+        "city": "Hà Nội",
+        "priceEstimate": "180.000đ - 350.000đ"
+      }
+    ]
+  }
+]

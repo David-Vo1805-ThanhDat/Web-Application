@@ -1,0 +1,7 @@
+/* components/tabs.css — Nhóm nút chọn dạng khối (khoảng ngày, tab Đánh giá / Góp ý). */
+.seg { display: inline-flex; gap: 2px; padding: 3px; background: #fff; border: 1px solid var(--ad-line-strong); border-radius: 10px; }
+.seg button { padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--ad-text-2); white-space: nowrap; transition: background-color .15s ease, color .15s ease; }
+.seg button:hover:not(.is-active) { color: var(--ad-orange-700); }
+.seg button.is-active { background: var(--ad-orange-50); color: var(--ad-orange-700); font-weight: 600; }
+.seg-lg button { padding: 8px 18px; font-size: 14px; }
+.seg .seg-count { margin-left: 6px; }

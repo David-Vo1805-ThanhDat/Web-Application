@@ -1,0 +1,5 @@
+/* pages/explore.css — chỉ nạp ở trang kham-pha.html (khai báo qua page_css trong tools/build/pages). */
+
+.btn-tab{border:none;background:none;padding:.75rem .25rem;margin-right:1rem;font-weight:700;color:var(--text-mid);border-bottom:2px solid transparent;border-radius:0;}
+.btn-tab.active{color:var(--brand-600);border-bottom-color:var(--brand-500);}
+.chip-filter.chip-sm{padding:.35rem .7rem;font-size:.78rem;}

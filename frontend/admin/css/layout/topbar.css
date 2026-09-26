@@ -1,0 +1,26 @@
+/* layout/topbar.css — Thanh trên cùng: tìm kiếm toàn cục, ngày, chuông, xem web người dùng. */
+.topbar {
+  position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 14px 32px; background: #fff; border-bottom: 1px solid var(--ad-line);
+}
+.search-box {
+  position: relative; display: flex; align-items: center; gap: 8px; width: 380px; max-width: 100%;
+  background: #fff; border: 1px solid var(--ad-line-strong); border-radius: 10px; padding: 0 12px; height: 38px; color: var(--ad-text-3);
+}
+.search-box:focus-within { border-color: var(--ad-orange); box-shadow: 0 0 0 3px rgba(234, 88, 12, .12); }
+.search-box input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 14px; color: var(--ad-text); }
+.search-box input::placeholder { color: var(--ad-text-3); }
+.search-box kbd { font: 500 13px var(--ad-font); color: var(--ad-text-3); white-space: nowrap; }
+.topbar-right { display: flex; align-items: center; gap: 14px; }
+.topbar-date { font-size: 13px; color: var(--ad-text-3); white-space: nowrap; }
+.icon-btn {
+  position: relative; width: 36px; height: 36px; border: 1px solid var(--ad-line-strong); border-radius: 10px; background: #fff;
+  display: grid; place-items: center; color: var(--ad-text-2); flex: none; transition: border-color .15s ease, color .15s ease;
+}
+.icon-btn:hover { border-color: var(--ad-orange); color: var(--ad-orange); }
+.icon-btn .ic { width: 16px; height: 16px; }
+.icon-btn.has-dot::after { content: ''; position: absolute; top: -3px; right: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--ad-rose); border: 2px solid #fff; }
+.search-results {
+  position: absolute; left: -1px; right: -1px; top: calc(100% + 6px); background: #fff; border: 1px solid var(--ad-line);
+  border-radius: 12px; box-shadow: 0 16px 32px -12px rgba(20, 15, 5, .25); max-height: 380px; overflow-y: auto; z-index: 50; padding: 6px;
+}

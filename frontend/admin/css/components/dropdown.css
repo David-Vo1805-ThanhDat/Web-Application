@@ -1,0 +1,12 @@
+/* components/dropdown.css — Menu thả (thông báo, kết quả tìm kiếm, menu "..." của thẻ KPI). */
+.dropdown { position: relative; }
+.dropdown-menu { position: absolute; top: calc(100% + 8px); left: 0; min-width: 240px; padding: 6px; background: #fff; border: 1px solid var(--ad-line); border-radius: 12px; box-shadow: 0 16px 32px -12px rgba(20, 15, 5, .25); z-index: 60; }
+.dropdown-menu-right { left: auto; right: 0; }
+.dropdown-head { padding: 8px 10px 6px; font-size: 12px; font-weight: 600; color: var(--ad-text-3); }
+.dropdown-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 10px; border-radius: 8px; font-size: 13px; color: var(--ad-text); text-align: left; }
+.dropdown-item:hover, .dropdown-item.is-focus { background: var(--ad-orange-50); }
+.dropdown-item .tint { width: 28px; height: 28px; border-radius: 8px; }
+.dropdown-item .tint .ic { width: 14px; height: 14px; }
+.dropdown-item small { display: block; font-size: 12px; color: var(--ad-text-3); }
+.dropdown-empty { padding: 14px 10px; font-size: 13px; color: var(--ad-text-3); text-align: center; }
+.result-group-title { padding: 8px 10px 4px; font-size: 11px; font-weight: 600; letter-spacing: .4px; color: var(--ad-text-3); text-transform: uppercase; }

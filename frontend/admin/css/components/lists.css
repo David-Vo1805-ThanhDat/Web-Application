@@ -1,0 +1,51 @@
+/* components/lists.css — Danh sách xếp hạng, dòng hoạt động, dòng nhật ký, thẻ đánh giá, cặp khoá–giá trị. */
+.rank-list { display: flex; flex-direction: column; gap: 16px; }
+.rank-item { display: flex; align-items: center; gap: 12px; }
+.rank-no { width: 20px; font-size: 13px; font-weight: 600; color: var(--ad-text-3); }
+.rank-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.rank-name { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rank-sub { font-size: 12px; color: var(--ad-text-3); }
+.rank-score { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; }
+.rank-score .ic { width: 14px; height: 14px; color: var(--ad-amber); }
+
+.activity-list { display: flex; flex-direction: column; gap: 16px; }
+.activity-item { display: flex; gap: 12px; align-items: flex-start; }
+.activity-item .tint { width: 32px; height: 32px; border-radius: 8px; }
+.activity-item .tint .ic { width: 16px; height: 16px; }
+.activity-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.activity-title { font-size: 13px; font-weight: 500; line-height: 18px; }
+.activity-sub { font-size: 12px; color: var(--ad-text-3); }
+
+/* Nhật ký hoạt động: nhóm theo ngày */
+.log-group { display: flex; flex-direction: column; gap: 8px; }
+.log-group-title { padding: 16px 0 2px; font-size: 13px; font-weight: 600; color: var(--ad-text-3); }
+.log-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: #fff; border: 1px solid var(--ad-line); border-radius: 14px; }
+.log-row .tint { width: 36px; height: 36px; }
+.log-row .tint .ic { width: 17px; height: 17px; }
+.log-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.log-line { display: flex; flex-wrap: wrap; gap: 5px; font-size: 14px; color: var(--ad-text-2); }
+.log-line b { font-weight: 600; color: var(--ad-text); }
+.log-ip { font-size: 12px; color: var(--ad-text-3); }
+.log-time { font-size: 13px; color: var(--ad-text-3); white-space: nowrap; }
+
+/* Thẻ đánh giá / góp ý */
+.review-list { display: flex; flex-direction: column; gap: 12px; }
+.review-card { display: flex; flex-direction: column; gap: 10px; padding: 16px 20px; }
+.review-head { display: flex; align-items: flex-start; gap: 12px; }
+.review-who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.review-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; font-size: 15px; font-weight: 600; }
+.review-dish { font-size: 13px; font-weight: 500; color: var(--ad-orange-700); }
+.review-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ad-text-3); }
+.stars { display: inline-flex; gap: 2px; color: var(--ad-amber); }
+.stars .ic { width: 13px; height: 13px; }
+.stars .is-off { color: #e3dccf; }
+.review-text { font-size: 14px; color: var(--ad-text); line-height: 1.5; }
+.review-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.review-reply { padding: 10px 14px; border-radius: 10px; background: var(--ad-orange-50); font-size: 13px; color: var(--ad-text-2); }
+.review-reply b { color: var(--ad-orange-700); }
+
+/* Cặp nhãn – giá trị (hiệu suất món, sao lưu...) */
+.kv-list { display: flex; flex-direction: column; gap: 12px; }
+.kv-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; }
+.kv-row span { color: var(--ad-text-3); }
+.kv-row b { font-weight: 600; color: var(--ad-text); }

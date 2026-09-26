@@ -1,0 +1,86 @@
+/* base/tokens.css — Token thiết kế: màu, font, bo góc, ánh xạ biến Bootstrap. */
+
+/* ---------- 1. TOKEN ---------- */
+:root {
+  color-scheme: light;
+
+  --bg: #FFF9F1;            /* kem ấm */
+  --bg-2: #FFF1E0;          /* mảng nền nhấn */
+  --surface: #FFFFFF;
+  --surface-2: #FFF6EA;     /* ô nhập, nền thẻ nhạt */
+  --bg-rgb: 255, 249, 241;
+  --surface-rgb: 255, 255, 255;
+  --surface-2-rgb: 255, 246, 234;
+  --line: #F2E4D3;
+  --line-strong: #E8D2B8;
+
+  --text: #1F2A44;          /* navy đậm */
+  --text-2: #4A5470;
+  --text-3: #687189;
+
+  --orange-500: #F97316;
+  --orange-600: #EA580C;
+  --orange-700: #C2410C;
+  --amber: #F59E0B;
+  --amber-400: #FBBF24;
+  --amber-600: #D97706;
+  --grad: linear-gradient(90deg, #E4520B 0%, #F5851A 100%);
+  --grad-text: linear-gradient(90deg, #DC4A0B 0%, #EE7A14 100%);
+
+  --accent: var(--orange-700);   /* chữ/liên kết nhấn */
+  --accent-solid: var(--orange-600);
+  --danger: #E11D48;
+  --la: #15A34A;
+  --navy: #1F2A44;
+  --deep: #1F2A44;               /* nền chân trang */
+
+  /* --- tên cũ, giữ để tương thích --- */
+  --su: var(--bg);
+  --su-2: var(--surface);
+  --paper: var(--surface);
+  --ink: var(--text);
+  --ink-2: var(--text-2);
+  --ink-3: var(--text-3);
+  --lam-50: var(--surface-2);
+  --lam-100: var(--line);
+  --lam-200: var(--line-strong);
+  --lam-500: var(--accent);
+  --lam-600: var(--orange-600);
+  --lam-700: var(--orange-700);
+  --chili: var(--danger);
+  --nghe: var(--amber);
+
+  --brand-50:  #FFF7ED;
+  --brand-100: #FFEDD5;
+  --brand-200: #FED7AA;
+  --brand-300: #FDBA74;
+  --brand-400: #FB923C;
+  --brand-500: #F97316;
+  --brand-600: #EA580C;
+  --brand-700: #C2410C;
+  --amber-500: var(--amber);
+
+  --bg-page: var(--bg);
+  --text-dark: var(--text);
+  --text-mid: var(--text-2);
+  --text-light: var(--text-3);
+  --border-soft: var(--line);
+  --success: var(--la);
+  --blue: #2563EB;
+
+  --radius-lg: .75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: var(--font-body);
+
+  --bs-body-font-family: var(--font-body);
+  --bs-body-bg: var(--bg);
+  --bs-body-bg-rgb: var(--bg-rgb);
+  --bs-body-color: var(--text);
+  --bs-secondary-color: var(--text-3);
+  --bs-border-color: var(--line);
+  --bs-link-color: var(--orange-700);
+  --bs-link-hover-color: var(--orange-600);
+}

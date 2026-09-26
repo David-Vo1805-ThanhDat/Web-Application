@@ -1,0 +1,11 @@
+/* base/motion.css — Giảm chuyển động (prefers-reduced-motion), luôn nạp cuối cùng. */
+
+/* ---------- 20. GIẢM CHUYỂN ĐỘNG ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track, .poster-track, .auth-col-track { animation: none !important; transform: none !important; }
+  .marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .poster-strip { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .fx [data-reveal] { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

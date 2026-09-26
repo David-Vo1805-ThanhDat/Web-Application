@@ -1,0 +1,14 @@
+/* components/badges.css — Nhãn trạng thái / danh mục dạng viên thuốc. */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; line-height: 1.3; }
+.b-orange { background: #ffedd5; color: #c2410c; }
+.b-green { background: #e8f6ee; color: #15803d; }
+.b-gray { background: #f1eee9; color: #4a5470; }
+.b-blue { background: #e8effd; color: #1d4ed8; }
+.b-amber { background: #fef3c7; color: #b45309; }
+.b-rose { background: #fdecf0; color: #e11d48; }
+.b-purple { background: #f3e8ff; color: #7c3aed; }
+.b-sky { background: #e0f2fe; color: #0369a1; }
+.b-dark { background: #eeeae4; color: #4a5470; }
+.badge-count { padding: 0 8px; font-size: 11px; background: #fef3c7; color: #b45309; }
+/* Số đếm nhỏ trong chip thẻ (Đậm đà 24) */
+.chip-count { display: inline-grid; place-items: center; min-width: 22px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--ad-orange-50); color: var(--ad-text-2); font-size: 12px; font-weight: 600; }

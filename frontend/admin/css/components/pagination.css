@@ -1,0 +1,9 @@
+/* components/pagination.css — Phân trang: nút trước/sau + số trang (1 2 3 … N). */
+.pager { display: flex; gap: 6px; align-items: center; }
+.pager button { width: 32px; height: 32px; border: 1px solid var(--ad-line-strong); border-radius: 8px; background: #fff; font-size: 13px; font-weight: 600; color: var(--ad-text); display: grid; place-items: center; transition: border-color .15s ease; }
+.pager button:hover:not(:disabled):not(.is-active) { border-color: var(--ad-orange); color: var(--ad-orange-700); }
+.pager button.pager-arrow { border-radius: 10px; }
+.pager button.pager-arrow .ic { width: 14px; height: 14px; }
+.pager button.is-active { background: var(--ad-orange); border-color: var(--ad-orange); color: #fff; }
+.pager button:disabled { opacity: .45; cursor: not-allowed; }
+.pager .pager-gap { width: 32px; text-align: center; color: var(--ad-text-3); font-size: 13px; font-weight: 600; }

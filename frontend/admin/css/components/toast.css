@@ -1,0 +1,22 @@
+/* components/toast.css — Thông báo nổi (thành công / lỗi / thông tin), góc phải trên. */
+.toast-stack { position: fixed; top: 20px; right: 20px; z-index: 200; display: flex; flex-direction: column; gap: 12px; width: min(440px, calc(100vw - 32px)); pointer-events: none; }
+.toast { pointer-events: auto; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px; color: #fff; box-shadow: 0 8px 10px rgba(20, 15, 5, .2); animation: toastIn .2s ease; }
+.toast-icon { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.toast-icon .ic { width: 15px; height: 15px; }
+.toast-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.toast-title { font-size: 14px; font-weight: 600; }
+.toast-msg { font-size: 12px; }
+.toast-close { color: rgba(255, 255, 255, .8); display: grid; place-items: center; }
+.toast-close:hover { color: #fff; }
+.toast-close .ic { width: 14px; height: 14px; }
+.toast-success { background: #16321f; }
+.toast-success .toast-icon { background: #1f6b3e; }
+.toast-success .toast-msg { color: #bfe3cc; }
+.toast-error { background: #3a1420; }
+.toast-error .toast-icon { background: #7a1f32; }
+.toast-error .toast-msg { color: #f3b8c4; }
+.toast-info { background: var(--ad-navy); }
+.toast-info .toast-icon { background: var(--ad-navy-2); }
+.toast-info .toast-msg { color: #c6cee3; }
+.toast.is-leaving { opacity: 0; transform: translateX(12px); transition: opacity .2s ease, transform .2s ease; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }

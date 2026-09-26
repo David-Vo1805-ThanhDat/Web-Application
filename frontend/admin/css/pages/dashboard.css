@@ -1,0 +1,38 @@
+/* pages/dashboard.css — Dashboard: hàng biểu đồ, hàng danh sách và bản di động rút gọn. */
+.dash-charts { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; align-items: start; }
+.dash-lists { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+a.kpi { color: inherit; transition: border-color .15s ease, transform .15s ease; }
+a.kpi:hover { border-color: #f6d8bb; transform: translateY(-1px); }
+.thumb.rank-thumb { width: 36px; height: 36px; }
+.only-mobile { display: none; }
+
+/* Bản di động (Figma "13 · Dashboard (Mobile)") — chỉ áp dụng ở màn hình hẹp */
+@media (max-width: 900px) {
+  .only-desktop { display: none !important; }
+  .only-mobile { display: block; }
+  .m-greet p { font-size: 13px; color: var(--ad-text-3); }
+  .m-greet h1 { font-size: 20px; font-weight: 800; }
+  .m-kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .m-kpi { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px; border-radius: 14px; }
+  .m-kpi-icon { width: 30px; height: 30px; border-radius: 9px; }
+  .m-kpi-icon .ic { width: 15px; height: 15px; }
+  .m-kpi-label { font-size: 12px; color: var(--ad-text-2); }
+  .m-kpi-value { font-size: 20px; font-weight: 800; }
+  .m-title { font-size: 14px; }
+  #mSpinsCard, .m-list-card, #needAction { border-radius: 14px; padding: 14px; }
+  #mSpinsCard { display: flex; flex-direction: column; gap: 10px; }
+  .m-list-card { padding: 0 0 8px; }
+  .m-list-head { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 14px 4px; }
+  .m-link { font-size: 12px; font-weight: 600; color: var(--ad-orange-700); }
+  .m-rank { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--ad-line); }
+  .m-rank:last-child { border-bottom: 0; }
+  .m-rank .thumb { width: 34px; height: 34px; }
+  .m-rank-name { font-size: 13px; font-weight: 600; }
+  .m-rank-sub { font-size: 11px; color: var(--ad-text-3); }
+  .m-need-text { font-size: 12px; line-height: 17px; color: var(--ad-orange-700); margin-top: 10px; }
+}
+
+@media (max-width: 1250px) {
+  .dash-charts { grid-template-columns: 1fr; }
+  .dash-lists { grid-template-columns: 1fr 1fr; }
+}

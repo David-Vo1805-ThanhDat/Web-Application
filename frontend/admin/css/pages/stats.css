@@ -1,0 +1,16 @@
+/* pages/stats.css — Trang Thống kê & báo cáo. */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.btn-soft-orange { background: var(--ad-orange-50); color: var(--ad-orange-700); }
+.btn-soft-orange:hover { background: var(--ad-orange-100); }
+.plain { border-collapse: collapse; }
+#perfTable .good { color: var(--ad-green-700); font-weight: 600; }
+#perfTable .strong { font-weight: 700; }
+#perfTable td.name .cell-main { gap: 10px; }
+#perfTable .thumb { width: 32px; height: 32px; font-size: 13px; }
+#lineChart .line-chart .line-a, #lineChart .line-chart .line-b { fill: none; stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+.date-range { display: flex; gap: 12px; }
+@media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+@media print {
+  .sidebar, .topbar, .mobile-topbar, .bottom-tabs, .page-actions { display: none !important; }
+  body.admin { background: #fff; }
+}

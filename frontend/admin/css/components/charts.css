@@ -1,0 +1,50 @@
+/* components/charts.css — Biểu đồ tự vẽ bằng HTML/SVG (không dùng thư viện ngoài): cột chồng, donut, đường, thanh ngang. */
+.chart-legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; }
+.legend-item { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ad-text-2); }
+.legend-dot { width: 8px; height: 8px; border-radius: 4px; flex: none; }
+.dot-orange { background: #ea580c; } .dot-blue { background: #2563eb; } .dot-purple { background: #7c3aed; }
+.dot-green { background: #15a34a; } .dot-amber { background: #f59e0b; } .dot-rose { background: #e11d48; } .dot-sky { background: #0ea5e9; }
+
+/* Cột chồng theo ngày */
+.stack-chart { display: flex; flex-direction: column; gap: 8px; }
+.stack-cols { display: flex; align-items: flex-end; gap: 10px; height: 180px; }
+.stack-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%; }
+.stack-bar { width: 34px; max-width: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+.stack-seg { width: 100%; flex: none; transition: height .3s ease; }
+.stack-seg:last-child { border-radius: 4px; }
+.stack-label { font-size: 12px; color: var(--ad-text-3); }
+.stack-col[title]:hover .stack-bar { filter: brightness(1.05); }
+
+/* Donut + chú thích */
+.donut-wrap { display: flex; align-items: center; justify-content: center; padding: 8px 0; }
+.donut { width: 140px; height: 140px; }
+.donut circle { transition: stroke-dasharray .4s ease; }
+.legend-list { display: flex; flex-direction: column; gap: 10px; }
+.legend-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; }
+.legend-row .legend-name { display: inline-flex; align-items: center; gap: 8px; color: var(--ad-text-2); }
+.legend-row b { font-weight: 600; color: var(--ad-text); }
+
+/* Thanh ngang xếp hạng */
+.hbar-list { display: flex; flex-direction: column; gap: 14px; }
+.hbar { display: flex; flex-direction: column; gap: 6px; }
+.hbar-top { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; }
+.hbar-top span { font-weight: 500; color: var(--ad-text); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hbar-top b { font-weight: 600; color: var(--ad-text-3); }
+.hbar-track { height: 8px; border-radius: 6px; background: #f1eee9; overflow: hidden; }
+.hbar-fill { height: 100%; border-radius: 6px; transition: width .4s ease; }
+.hbar-fill.is-navy { background: var(--ad-navy); }
+
+/* Đường + vùng (trang Thống kê) */
+.line-chart { width: 100%; height: 220px; display: block; overflow: visible; }
+.line-chart .grid-line { stroke: var(--ad-line); stroke-width: 1; }
+.line-chart .axis-text { font-size: 11px; fill: var(--ad-text-3); }
+.line-chart .area { fill: rgba(234, 88, 12, .1); }
+.line-chart .line-a { fill: none; stroke: #ea580c; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.line-chart .line-b { fill: none; stroke: #7c3aed; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+
+/* Cột mini 7 ngày trên mobile */
+.mini-bars { display: flex; gap: 6px; align-items: flex-end; }
+.mini-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.mini-bar { width: 20px; border-radius: 5px; background: var(--ad-orange-50); }
+.mini-bar.is-peak { background: var(--ad-orange); }
+.mini-bar-col span { font-size: 10px; color: var(--ad-text-3); }

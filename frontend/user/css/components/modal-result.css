@@ -1,0 +1,54 @@
+/* components/modal-result.css — Modal kết quả (thẻ đầy đủ và thẻ rút gọn). */
+
+/* ---------- 15. MODAL KẾT QUẢ ---------- */
+.result-modal .modal-content { border-radius: 1.5rem; overflow: hidden; border: 0; background: var(--surface); }
+.result-modal .result-banner { position: relative; height: 230px; background: var(--navy); }
+.result-modal .result-banner img { width: 100%; height: 100%; object-fit: cover; }
+.result-modal .result-banner::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(31, 42, 68, .55), transparent 32%),
+    linear-gradient(to top, rgba(31, 42, 68, .92), rgba(31, 42, 68, .2) 65%, transparent);
+}
+.result-modal .result-banner > .position-absolute { z-index: 5; }
+.result-badge { background: var(--amber-400); color: var(--navy); font-weight: 700; border-radius: .4rem; }
+.result-kicker { color: var(--amber-400); }
+.result-modal h3 { color: #fff; font-size: 1.85rem; font-weight: 800; letter-spacing: -0.02em; }
+.result-nominator { color: var(--amber-400); }
+.result-share { color: var(--text-2); text-decoration: none; font-size: .9rem; }
+.result-share:hover { color: var(--orange-700); }
+
+/* kết quả rút gọn: dùng khi cả nhóm tự gõ tên món (không có ảnh/dữ liệu món ăn thật),
+   quay/mở hộp trúng cái nào thì hiện tên + 2 lựa chọn "Chưa vừa lòng" / "Chính nó rồi".
+   Dải băng gradient phía trên (giống thiệp mừng) + huy hiệu người đề cử đè lên đúng đường nối
+   băng/thân thẻ. Nút X đặt z-index rõ ràng vì Bootstrap cho .modal-body position:relative —
+   nếu không có z-index, phần tử sau trong DOM (modal-body) sẽ đè lên nút X khiến bấm không ăn. */
+.simple-result-modal .modal-content { border-radius: 1.5rem; border: 0; background: var(--surface); overflow: hidden; }
+.simple-result-modal .btn-close { z-index: 2; opacity: .9; }
+.simple-result-modal .btn-close:hover { opacity: 1; }
+.simple-result-banner {
+  position: relative; padding: 1.9rem 1rem 2.2rem; display: grid; place-items: center; overflow: hidden;
+  background: var(--grad);
+}
+.simple-result-confetti {
+  position: absolute; inset: 0; opacity: .5;
+  background-image:
+    radial-gradient(circle, #fff 2.2px, transparent 2.6px),
+    radial-gradient(circle, #FFE8CC 2px, transparent 2.4px),
+    radial-gradient(circle, #fff 1.6px, transparent 2px);
+  background-size: 46px 46px, 62px 62px, 34px 34px;
+  background-position: 6px 10px, 34px 38px, 14px 48px;
+}
+.simple-result-emoji-wrap {
+  position: relative; width: 4.4rem; height: 4.4rem; border-radius: 50%; background: #fff;
+  display: grid; place-items: center; box-shadow: 0 10px 24px rgba(120, 53, 15, .25);
+  animation: simpleResultPop .45s cubic-bezier(.34, 1.56, .64, 1) both;
+}
+.simple-result-emoji { font-size: 2.2rem; line-height: 1; }
+@keyframes simpleResultPop { 0% { transform: scale(.4); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.simple-result-kicker {
+  position: relative; display: inline-flex; align-items: center; gap: .3rem; z-index: 1;
+  background: var(--brand-100); color: var(--orange-700); font-weight: 700; font-size: .82rem;
+  padding: .3rem .8rem; border-radius: 999px; margin: -1.3rem 0 .9rem; box-shadow: 0 3px 8px rgba(0, 0, 0, .1);
+}
+.simple-result-name { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin: .9rem 0 0; }

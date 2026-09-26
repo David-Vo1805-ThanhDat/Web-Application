@@ -1,0 +1,36 @@
+/* pages/taxonomy.css — Trang Danh mục & thẻ: danh sách danh mục, ô vùng miền, nhóm "pill" khẩu vị/chế độ/thẻ. */
+.taxo-layout { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 20px; align-items: start; }
+.taxo-main, .taxo-side { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+
+.cat-list { display: flex; flex-direction: column; margin-top: 4px; }
+.cat-row { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid var(--ad-line); }
+.cat-row:first-child { border-top: 0; }
+.cat-row .tint { width: 40px; height: 40px; border-radius: 12px; flex: none; }
+.cat-row .tint .ic { width: 18px; height: 18px; }
+.cat-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.cat-info b { font-size: 15px; font-weight: 600; }
+.cat-info small { font-size: 12px; color: var(--ad-text-3); }
+.count-pill { padding: 4px 10px; border-radius: 999px; background: var(--ad-orange-50); font-size: 12px; font-weight: 600; color: var(--ad-text-2); white-space: nowrap; }
+
+.region-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.region-tile { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; padding: 14px 16px; border-radius: 12px; background: var(--ad-orange-50); text-align: left; border: 1px solid transparent; cursor: pointer; }
+.region-tile:hover { border-color: var(--ad-orange); }
+.region-tile .dot { width: 9px; height: 9px; border-radius: 50%; margin-bottom: 4px; }
+.region-tile b { font-size: 16px; font-weight: 600; }
+.region-tile small { font-size: 12px; color: var(--ad-text-3); }
+.dot-blue { background: #2563eb; } .dot-amber { background: #f59e0b; } .dot-orange { background: var(--ad-orange); } .dot-purple { background: #7c3aed; }
+.dot-green { background: #15a34a; } .dot-rose { background: #e11d48; } .dot-sky { background: #0ea5e9; }
+
+.pill-set { display: flex; flex-wrap: wrap; gap: 10px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 8px 6px 14px; border-radius: 999px; border: 1px solid var(--ad-line-strong); background: #fff; font-size: 14px; font-weight: 500; cursor: pointer; }
+.pill:hover { border-color: var(--ad-orange); }
+.pill .n { min-width: 24px; padding: 1px 8px; border-radius: 999px; background: var(--ad-orange-50); font-size: 12px; font-weight: 600; text-align: center; color: var(--ad-text-2); }
+.btn-soft { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 8px 14px; border-radius: 999px; background: var(--ad-orange-50); color: var(--ad-orange-700); font-size: 13px; font-weight: 600; border: 0; cursor: pointer; }
+.btn-soft:hover { background: var(--ad-orange-100); }
+.btn-soft .ic { width: 14px; height: 14px; }
+
+@media (max-width: 1100px) { .taxo-layout { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .region-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* Thẻ lấy từ dữ liệu thật nên nhiều: giới hạn chiều cao, cuộn trong khung */
+#tagList { max-height: 300px; overflow-y: auto; padding-right: 4px; }

@@ -1,0 +1,4 @@
+/* pages/restaurants.css — Trang Quán ăn gợi ý. */
+#table td { white-space: nowrap; }
+#table .money { font-weight: 500; }
+#table td.addr { white-space: normal; min-width: 180px; }

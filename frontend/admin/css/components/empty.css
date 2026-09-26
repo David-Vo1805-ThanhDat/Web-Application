@@ -1,0 +1,7 @@
+/* components/empty.css — Trạng thái trống (không có dữ liệu / không khớp bộ lọc). */
+.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 48px 24px; text-align: center; }
+.empty-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--ad-orange-50); color: var(--ad-orange); display: grid; place-items: center; }
+.empty-icon .ic { width: 30px; height: 30px; }
+.empty-title { font-size: 16px; font-weight: 700; color: var(--ad-text); }
+.empty-desc { max-width: 280px; font-size: 13px; line-height: 19px; color: var(--ad-text-3); }
+.card .empty { padding: 40px 24px; }

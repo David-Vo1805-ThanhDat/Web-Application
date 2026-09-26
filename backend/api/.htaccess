@@ -1,0 +1,5 @@
+# Mở riêng thư mục api/ (các endpoint PHP); phần còn lại của backend/ bị chặn bởi ../.htaccess
+Require all granted
+
+# Không cho liệt kê thư mục
+Options -Indexes

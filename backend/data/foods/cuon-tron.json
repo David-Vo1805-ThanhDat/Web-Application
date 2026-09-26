@@ -1,0 +1,342 @@
+[
+  {
+    "id": "banh-xeo-mien-tay",
+    "name": "Bánh Xèo Miền Tây Giòn Rụm",
+    "englishName": "Crispy Vietnamese Sizzling Pancake",
+    "description": "Chiếc bánh xèo vàng ươm nghệ tây to tròn như chiếc nón, nhân đầy tôm tươi, thịt ba rọi, giá đỗ và củ sắn giòn ngọt, cuốn cùng lá cải bẹ xanh cay nồng và chấm nước mắm tỏi ớt đậm vị phù sa.",
+    "category": "cuon-tron",
+    "mealType": [
+      "trua",
+      "toi",
+      "an-vat"
+    ],
+    "price": 45000,
+    "priceRange": "30k - 60k",
+    "taste": [
+      "dam-da",
+      "beo-ngay"
+    ],
+    "dietary": [
+      "normal"
+    ],
+    "region": "Nam",
+    "cookTimeMinutes": 30,
+    "calories": 520,
+    "rating": 4.7,
+    "reviewCount": 88,
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80",
+    "tags": [
+      "Giòn rụm",
+      "Rau rừng",
+      "Ẩm thực miền Tây"
+    ],
+    "nutrition": {
+      "protein": 22,
+      "carbs": 58,
+      "fat": 23
+    },
+    "ingredients": [
+      {
+        "name": "Bột bánh xèo pha nước cốt dừa và nghệ",
+        "amount": "250g"
+      },
+      {
+        "name": "Tôm sông tươi",
+        "amount": "150g"
+      },
+      {
+        "name": "Thịt ba chỉ heo",
+        "amount": "150g"
+      },
+      {
+        "name": "Giá đỗ, đậu xanh hấp, hành lá",
+        "amount": "100g"
+      },
+      {
+        "name": "Rau cải xanh, xà lách, rau diếp cá, lá cóc",
+        "amount": "1 rổ lớn"
+      },
+      {
+        "name": "Nước mắm chua ngọt củ cải đỏ",
+        "amount": "1 chén"
+      }
+    ],
+    "instructions": [
+      "Khuấy đều bột bánh xèo với nước cốt dừa, bột nghệ và hành hoa cắt nhỏ.",
+      "Bắc chảo gang lớn lên lửa lớn, tráng dầu, xào sơ tôm và thịt ba chỉ cho săn.",
+      "Múc một vá bột rưới đều quanh chảo phát ra tiếng 'xèooo' vui tai, đậy vung cho chín rìa.",
+      "Mở vung, rải giá đỗ và đậu xanh, xịt thêm tí dầu quanh vành để bánh giòn rụm.",
+      "Gấp đôi bánh lại, xúc ra đĩa, cuốn với rau rừng chấm ngập nước mắm tỏi ớt."
+    ],
+    "suggestedRestaurants": [
+      {
+        "name": "Bánh Xèo Ăn Là Ghiền",
+        "address": "74 Sương Nguyệt Ánh, P. Bến Thành, Quận 1",
+        "city": "TP.HCM",
+        "priceEstimate": "60.000đ - 100.000đ"
+      },
+      {
+        "name": "Bánh Xèo Mười Xiềm",
+        "address": "204 Nguyễn Trãi, Quận 1",
+        "city": "TP.HCM",
+        "priceEstimate": "50.000đ - 90.000đ"
+      }
+    ]
+  },
+  {
+    "id": "bun-dau-mam-tom",
+    "name": "Bún Đậu Mắm Tôm Thập Cẩm",
+    "englishName": "Tofu Vermicelli with Shrimp Paste",
+    "description": "Mẹt bún đậu đầy đặn với đậu hũ lướt ván giòn vỏ mềm ruột bốc khói, chả cốm dẻo thơm, dồi sụn nướng, thịt bắp giò luộc và nem rán giòn tan, chấm cùng bát mắm tôm Thanh Hóa đánh bông sủi bọt với quất và ớt tươi cay nồng.",
+    "category": "cuon-tron",
+    "mealType": [
+      "trua",
+      "toi"
+    ],
+    "price": 55000,
+    "priceRange": "30k - 60k",
+    "taste": [
+      "dam-da",
+      "chua-cay",
+      "man"
+    ],
+    "dietary": [
+      "normal"
+    ],
+    "region": "Bắc",
+    "cookTimeMinutes": 25,
+    "calories": 610,
+    "rating": 4.8,
+    "reviewCount": 133,
+    "image": "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=800&auto=format&fit=crop&q=80",
+    "tags": [
+      "Mẹt thập cẩm",
+      "Gây nghiện",
+      "Hội bạn thân"
+    ],
+    "popular": true,
+    "nutrition": {
+      "protein": 36,
+      "carbs": 55,
+      "fat": 27
+    },
+    "ingredients": [
+      {
+        "name": "Đậu hũ non mơ rán vàng",
+        "amount": "3 bìa"
+      },
+      {
+        "name": "Bún lá vắt miếng nhỏ",
+        "amount": "250g"
+      },
+      {
+        "name": "Chả cốm Hà Nội chiên phồng",
+        "amount": "100g"
+      },
+      {
+        "name": "Thịt chân giò luộc thái mỏng",
+        "amount": "150g"
+      },
+      {
+        "name": "Dồi sụn nướng / nem chua rán",
+        "amount": "1 phần"
+      },
+      {
+        "name": "Mắm tôm loại ngon, quất tươi, ớt hiểm, đường",
+        "amount": "1 chén"
+      },
+      {
+        "name": "Rau kinh giới, tía tô, dưa leo",
+        "amount": "Vừa đủ"
+      }
+    ],
+    "instructions": [
+      "Đậu hũ cắt miếng vừa ăn, chiên ngập dầu sôi cho đến khi lớp vỏ ngoài vàng ruộm giòn tan.",
+      "Chiên nóng chả cốm cho phồng xốp, luộc chín thịt bắp giò rồi thái lát mỏng tang.",
+      "Xếp bún lá, đậu rán, chả cốm, dồi sụn và rau thơm lên một chiếc mẹt lót lá chuối xanh ngát.",
+      "Múc mắm tôm ra bát, thêm chút rượu trắng, đường, vắt nước quất rồi dùng đũa đánh thật nhanh tay cho mắm sủi bọt trắng bồng bềnh.",
+      "Rưới thìa mỡ sôi vào bát mắm tôm, thêm ớt thái lát rồi chấm ngập miếng đậu giòn rụm."
+    ],
+    "suggestedRestaurants": [
+      {
+        "name": "Bún Đậu Ngõ Trạm",
+        "address": "1B Ngõ Trạm, Hoàn Kiếm",
+        "city": "Hà Nội",
+        "priceEstimate": "45.000đ - 70.000đ"
+      },
+      {
+        "name": "Bún Đậu Cô Khàn",
+        "address": "102/26 Cống Quỳnh, P. Phạm Ngũ Lão, Quận 1",
+        "city": "TP.HCM",
+        "priceEstimate": "60.000đ - 90.000đ"
+      }
+    ]
+  },
+  {
+    "id": "goi-cuon-tom-thit",
+    "name": "Gỏi Cuốn Tôm Thịt Tươi Mát",
+    "englishName": "Fresh Spring Rolls with Peanut Sauce",
+    "description": "Món ăn thanh đạm lọt top món ngon nhất thế giới: tôm thẻ đỏ au mọng nước, thịt ba rọi ngọt mềm, bún tươi và hẹ cuộn trong bánh tráng trong veo dẻo dai, chấm nước tương bơ đậu phộng béo bùi rắc hành phi.",
+    "category": "cuon-tron",
+    "mealType": [
+      "trua",
+      "an-vat"
+    ],
+    "price": 35000,
+    "priceRange": "30k - 60k",
+    "taste": [
+      "thanh-dam",
+      "beo-ngay"
+    ],
+    "dietary": [
+      "eat-clean",
+      "low-carb"
+    ],
+    "region": "Nam",
+    "cookTimeMinutes": 20,
+    "calories": 280,
+    "rating": 4.8,
+    "reviewCount": 76,
+    "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&auto=format&fit=crop&q=80",
+    "tags": [
+      "Healthy",
+      "Eat clean",
+      "Thanh mát",
+      "Ít calo"
+    ],
+    "nutrition": {
+      "protein": 21,
+      "carbs": 38,
+      "fat": 6
+    },
+    "ingredients": [
+      {
+        "name": "Tôm sú hoặc tôm thẻ luộc lột vỏ",
+        "amount": "200g"
+      },
+      {
+        "name": "Thịt ba chỉ heo luộc thái mỏng",
+        "amount": "150g"
+      },
+      {
+        "name": "Bánh tráng dẻo",
+        "amount": "1 xấp"
+      },
+      {
+        "name": "Bún tươi, hẹ lá, xà lách, rau thơm",
+        "amount": "1 đĩa"
+      },
+      {
+        "name": "Tương đen nấu bơ đậu phộng bùi béo",
+        "amount": "1 chén"
+      }
+    ],
+    "instructions": [
+      "Thoa nhẹ nước lên bánh tráng dẻo cho vừa mềm dai.",
+      "Xếp xà lách, rau thơm, bún tươi và thịt ba chỉ luộc lên 1/3 bánh tráng.",
+      "Gấp hai bên mép bánh lại, cuộn một vòng chặt tay.",
+      "Xếp 2-3 con tôm đỏ chẻ đôi úp mặt lưng đỏ ra ngoài kèm nhánh hẹ xanh thò ra một đầu.",
+      "Tiếp tục cuộn chặt tay cho chiếc cuốn tròn đều đẹp mắt, chấm nước sốt tương đậu phộng béo ngậy."
+    ],
+    "suggestedRestaurants": [
+      {
+        "name": "Gỏi Cuốn Tôm Nhảy",
+        "address": "422 Châu Văn Liêm, Quận 5",
+        "city": "TP.HCM",
+        "priceEstimate": "30.000đ - 50.000đ"
+      },
+      {
+        "name": "Quán Bếp Mẹ Ỉn",
+        "address": "136 Lê Thánh Tôn, Quận 1",
+        "city": "TP.HCM",
+        "priceEstimate": "50.000đ - 80.000đ"
+      }
+    ]
+  },
+  {
+    "id": "nem-nuong-nha-trang",
+    "name": "Nem Nướng Nha Trang Cuốn Bánh Tráng",
+    "englishName": "Nha Trang Grilled Pork Rolls",
+    "description": "Từng xiên nem nướng thơm nức mùi thịt heo quết dẻo nướng trên than hồng cháy cạnh, bánh tráng chiên giòn tan rôm rốp, xoài xanh chua giòn, dưa leo và rau thơm cuốn trong bánh tráng chấm nước sốt tương nếp gan tôm vàng ươm sánh mịn.",
+    "category": "cuon-tron",
+    "mealType": [
+      "trua",
+      "toi",
+      "an-vat"
+    ],
+    "price": 55000,
+    "priceRange": "30k - 60k",
+    "taste": [
+      "dam-da",
+      "ngot",
+      "chua-cay"
+    ],
+    "dietary": [
+      "normal"
+    ],
+    "region": "Trung",
+    "cookTimeMinutes": 30,
+    "calories": 510,
+    "rating": 4.9,
+    "reviewCount": 130,
+    "image": "https://images.unsplash.com/photo-1529042410759-befb1204b468?w=800&auto=format&fit=crop&q=80",
+    "tags": [
+      "Đặc sản Nha Trang",
+      "Nước chấm thần thánh",
+      "Cuốn rau thanh mát"
+    ],
+    "popular": true,
+    "nutrition": {
+      "protein": 30,
+      "carbs": 52,
+      "fat": 19
+    },
+    "ingredients": [
+      {
+        "name": "Thịt nạc heo quết nhuyễn nướng than",
+        "amount": "250g"
+      },
+      {
+        "name": "Bánh tráng cuộn chiên giòn rụm",
+        "amount": "6 thanh"
+      },
+      {
+        "name": "Bánh tráng dẻo Nha Trang",
+        "amount": "1 xấp"
+      },
+      {
+        "name": "Xoài xanh bào sợi, dưa leo, cà rốt chua",
+        "amount": "1 đĩa"
+      },
+      {
+        "name": "Rau xà lách, tía tô, diếp cá, húng quế",
+        "amount": "1 rổ lớn"
+      },
+      {
+        "name": "Nước sốt thịt nếp tôm xay sánh mịn màu cam",
+        "amount": "1 bát ấm"
+      }
+    ],
+    "instructions": [
+      "Quết thịt heo với gia vị thật dai dẻo, xiên đũa tre nướng trên than hoa cho vàng ươm thơm lừng.",
+      "Nấu nước sốt thần thánh từ gạo nếp xay nhuyễn, gan heo, tôm tươi và dầu màu điều sánh mịn thơm bùi.",
+      "Cuộn bánh tráng mỏng chiên ngập dầu cho giòn tan rôm rốp.",
+      "Trải bánh tráng dẻo, đặt xà lách, rau thơm, thanh nem nướng, bánh tráng giòn và xoài chua.",
+      "Cuộn tròn chặt tay, chấm ngập vào bát nước sốt ấm nóng rắc chút ớt băm và đậu phộng rang."
+    ],
+    "suggestedRestaurants": [
+      {
+        "name": "Nem Nướng Đặng Văn Quyên",
+        "address": "16A Hàn Thuyên",
+        "city": "Nha Trang",
+        "priceEstimate": "45.000đ - 70.000đ"
+      },
+      {
+        "name": "Nem Nướng D’ran",
+        "address": "14 Nguyễn Văn Đậu, Phú Nhuận",
+        "city": "TP.HCM",
+        "priceEstimate": "50.000đ - 80.000đ"
+      }
+    ]
+  }
+]

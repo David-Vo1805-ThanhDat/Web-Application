@@ -1,0 +1,80 @@
+/* components/forms.css — Ô nhập, chọn, textarea, công tắc, checkbox, chip chọn, khung tải ảnh. */
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field > label, .field-label { font-size: 13px; font-weight: 600; color: var(--ad-text); }
+.field .req { color: var(--ad-rose); }
+.field-hint { font-size: 12px; color: var(--ad-text-3); }
+.field-error { font-size: 12px; color: var(--ad-rose); font-weight: 500; }
+.field-row { display: flex; gap: 14px; }
+.field-row > .field { flex: 1; }
+.form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.form-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.form-grid .span-2 { grid-column: span 2; }
+.form-grid .span-all { grid-column: 1 / -1; }
+
+.input, .textarea, .select select {
+  width: 100%; background: #fff; border: 1px solid var(--ad-line-strong); border-radius: 10px; padding: 10px 12px;
+  font-size: 14px; color: var(--ad-text); outline: none; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.input::placeholder, .textarea::placeholder { color: var(--ad-text-3); }
+.input:focus, .textarea:focus, .select select:focus { border-color: var(--ad-orange); box-shadow: 0 0 0 3px rgba(234, 88, 12, .12); }
+.input.is-invalid, .textarea.is-invalid { border-color: var(--ad-rose); }
+.textarea { resize: vertical; line-height: 1.5; min-height: 84px; }
+
+.select { position: relative; }
+.select select { appearance: none; -webkit-appearance: none; padding-right: 34px; cursor: pointer; }
+.select > .ic { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--ad-text-3); pointer-events: none; }
+.select-muted select { color: var(--ad-text-3); }
+
+.input-icon { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--ad-line-strong); border-radius: 10px; padding: 0 12px; color: var(--ad-text-3); }
+.input-icon:focus-within { border-color: var(--ad-orange); box-shadow: 0 0 0 3px rgba(234, 88, 12, .12); }
+.input-icon input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; padding: 10px 0; font-size: 14px; color: var(--ad-text); }
+.input-icon input::placeholder { color: var(--ad-text-3); }
+
+.input-unit { position: relative; }
+.input-unit .input { padding-right: 52px; }
+.input-unit .unit { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--ad-text-3); pointer-events: none; }
+
+/* Công tắc bật/tắt 36x20 */
+.toggle { position: relative; display: inline-block; width: 36px; height: 20px; flex: none; }
+.toggle input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
+.toggle .track { position: absolute; inset: 0; border-radius: 999px; background: #d9d2c7; transition: background-color .18s ease; }
+.toggle .track::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .25); transition: transform .18s ease; }
+.toggle input:checked + .track { background: var(--ad-orange); }
+.toggle input:checked + .track::after { transform: translateX(16px); }
+.toggle input:focus-visible + .track { outline: 2px solid var(--ad-orange); outline-offset: 2px; }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.toggle-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.toggle-text b { font-size: 13px; font-weight: 600; }
+.toggle-text small { font-size: 12px; color: var(--ad-text-3); }
+
+/* Checkbox vuông bo 5px */
+.check { appearance: none; -webkit-appearance: none; width: 17px; height: 17px; margin: 0; border: 1.5px solid var(--ad-line-strong); border-radius: 5px; background: #fff; cursor: pointer; display: inline-grid; place-items: center; flex: none; vertical-align: middle; }
+.check:checked, .check:indeterminate { background: var(--ad-orange); border-color: var(--ad-orange); }
+.check:checked::after { content: ''; width: 9px; height: 5px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg) translate(1px, -1px); }
+.check:indeterminate::after { content: ''; width: 8px; height: 2px; background: #fff; border-radius: 1px; }
+
+/* Chip chọn (bữa ăn, khẩu vị, chế độ ăn, thẻ) */
+.chip-set { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--ad-line-strong); background: #fff; font-size: 13px; font-weight: 600; color: var(--ad-text-2); cursor: pointer; transition: all .15s ease; }
+.chip:hover { border-color: var(--ad-orange); }
+.chip.is-on { background: var(--ad-orange); border-color: var(--ad-orange); color: #fff; }
+.chip .chip-x { display: inline-grid; place-items: center; opacity: .9; }
+.chip .chip-x .ic { width: 12px; height: 12px; }
+.chip-add { border-style: dashed; color: var(--ad-text-3); font-weight: 500; }
+.chip-add:hover { color: var(--ad-orange-700); }
+
+/* Khung kéo thả tải ảnh */
+.dropzone { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 152px; padding: 24px; border: 1.5px dashed #f2c79a; border-radius: 12px; background: var(--ad-orange-50); color: var(--ad-text-2); text-align: center; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.dropzone:hover, .dropzone.is-over { background: var(--ad-orange-100); border-color: var(--ad-orange); }
+.dropzone .ic { width: 26px; height: 26px; color: var(--ad-text-3); }
+.dropzone b { font-size: 13px; font-weight: 500; }
+.dropzone small { font-size: 12px; color: var(--ad-text-3); }
+.dropzone-preview { position: relative; border-radius: 12px; overflow: hidden; }
+.dropzone-preview img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.dropzone-preview .btn { position: absolute; right: 10px; bottom: 10px; }
+
+@media (max-width: 900px) {
+  .form-grid, .form-grid.cols-2 { grid-template-columns: 1fr; }
+  .form-grid .span-2 { grid-column: auto; }
+  .field-row { flex-direction: column; }
+}

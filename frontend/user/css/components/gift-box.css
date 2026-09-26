@@ -1,0 +1,149 @@
+/* components/gift-box.css — Hộp quà bí ẩn: lưới hộp, khung mở hộp, hiệu ứng súng bắn nổ. */
+
+/* ---------- 16. HỘP QUÀ BÍ ẨN (túi mù, thay đập niêu) ---------- */
+/* Lưới nhỏ: có bao nhiêu món thì bấy nhiêu hộp, tự xuống hàng theo bề rộng */
+.box-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(3.4rem, 1fr)); gap: .6rem; max-width: 27rem; margin: 1rem auto; }
+.box {
+  aspect-ratio: 1; border-radius: 1rem; cursor: pointer; position: relative; padding: .3rem;
+  display: grid; place-items: center; background: var(--surface); border: 2px dashed var(--brand-300);
+  transition: border-color .2s ease, transform .15s ease, background-color .2s ease;
+}
+.box:hover:not(:disabled) { border-color: var(--orange-500); transform: translateY(-3px) scale(1.05); }
+.box:disabled { cursor: not-allowed; }
+.box:disabled:not(.is-opened) { opacity: .5; }
+.box-icon { width: 68%; height: 68%; display: block; }
+.box-icon-svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 4px 6px rgba(154, 68, 8, .28)); }
+.box.is-opened { border-style: solid; border-color: var(--line); background: var(--surface-2); cursor: default; }
+.box.is-opened .box-icon-svg { opacity: .55; filter: grayscale(.6); }
+
+/* Khung phóng to giữa màn hình khi mở hộp quà: hộp (tự vẽ SVG, không dùng ảnh chụp nên không
+   bao giờ mất chi tiết/lem viền) bật to lên cạnh 1 khẩu súng đồ chơi — súng rung lên đạn, bắn
+   1 tia năng lượng bay sang, hộp NỔ TUNG làm đôi kèm ánh sáng bừng ra + sóng xung kích (không
+   pháo giấy). Khung này không tự đóng sau khi nổ: thẻ/modal kết quả (z-index cao hơn, xem bên
+   dưới) hiện chồng lên trên trong lúc hộp vẫn còn hiển thị phía sau — JS gọi box.closeReveal()
+   để ẩn khung khi thẻ kết quả đã đóng. */
+.box-open-overlay {
+  position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center;
+  background: rgba(20, 14, 8, .62); opacity: 0; pointer-events: none; transition: opacity .25s ease;
+}
+.box-open-overlay.is-show { opacity: 1; pointer-events: auto; }
+.box-open-stage { position: relative; width: min(20rem, 82vw); height: 15rem; display: grid; place-items: center; }
+.box-open-overlay.is-open .box-open-stage { animation: boxStageJolt .35s ease; }
+@keyframes boxStageJolt {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-7px, 3px); }
+  40% { transform: translate(6px, -3px); }
+  60% { transform: translate(-5px, 2px); }
+  80% { transform: translate(3px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* quầng sáng ấm bừng lên phía sau đúng lúc hộp nổ, tượng trưng ánh sáng toả ra từ trong hộp */
+.box-open-glow {
+  position: absolute; width: 18rem; height: 18rem; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 205, 130, .7) 0%, rgba(255, 205, 130, .3) 45%, rgba(255, 205, 130, 0) 72%);
+  opacity: 0; transform: scale(.55) translateY(-10%); transition: opacity .35s ease, transform .5s cubic-bezier(.2, .8, .3, 1.1);
+}
+.box-open-overlay.is-open .box-open-glow { opacity: 1; transform: scale(1) translateY(-10%); }
+
+/* vòng sóng xung kích lan nhanh ra ngoài đúng lúc hộp nổ, tạo cảm giác "bùm" bất ngờ */
+.box-open-shock {
+  position: absolute; width: 7rem; height: 7rem; border-radius: 50%;
+  border: 3px solid rgba(255, 214, 150, .95); opacity: 0; pointer-events: none;
+}
+.box-open-overlay.is-open .box-open-shock { animation: boxShock .6s cubic-bezier(.15, .7, .3, 1) both; }
+@keyframes boxShock {
+  0% { opacity: .95; transform: scale(.3); border-width: 7px; }
+  100% { opacity: 0; transform: scale(2.6); border-width: .5px; }
+}
+
+.box-open-body, .box-open-lid {
+  position: absolute; width: 12rem; height: auto;
+  filter: drop-shadow(0 20px 30px rgba(50, 20, 5, .35));
+  transform: scale(.3); opacity: 0; transition: transform .4s cubic-bezier(.34, 1.56, .64, 1), opacity .3s ease;
+}
+.box-open-overlay.is-show .box-open-body-whole,
+.box-open-overlay.is-show .box-open-lid { transform: scale(1); opacity: 1; }
+.box-open-overlay.is-open .box-open-body-whole { opacity: 0; transition-duration: .12s; } /* ẩn ngay khi hộp nổ, nhường chỗ cho 2 mảnh vỡ */
+.box-open-overlay.is-open .box-open-lid {
+  animation: boxLidFly .5s cubic-bezier(.25, .6, .4, 1) both;
+}
+@keyframes boxLidFly {
+  0% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: scale(.9) translateY(-9rem) rotate(-35deg); opacity: 0; }
+}
+
+/* 2 mảnh vỡ = chính hộp SVG cắt còn nửa trái/nửa phải bằng clip-path, ẩn kín cho tới đúng lúc
+   nổ mới hiện ra (animation bắt đầu ở opacity:1) rồi bay ngược hướng nhau, mô phỏng hộp nổ tung
+   làm đôi thay vì chỉ đổi ảnh. */
+.box-open-frag { clip-path: inset(0 50% 0 0); }
+.box-open-frag-r { clip-path: inset(0 0 0 50%); }
+.box-open-overlay.is-open .box-open-frag-l { animation: boxFragFlyL .65s ease forwards; }
+.box-open-overlay.is-open .box-open-frag-r { animation: boxFragFlyR .65s ease forwards; }
+@keyframes boxFragFlyL {
+  0% { opacity: 1; transform: scale(1) translate(0, 0) rotate(0deg); }
+  100% { opacity: 0; transform: scale(.85) translate(-4.5rem, -.6rem) rotate(-50deg); }
+}
+@keyframes boxFragFlyR {
+  0% { opacity: 1; transform: scale(1) translate(0, 0) rotate(0deg); }
+  100% { opacity: 0; transform: scale(.85) translate(4.5rem, -.6rem) rotate(50deg); }
+}
+
+/* Khẩu súng đồ chơi bên trái, chĩa mũi vào hộp — rung lên đạn rồi giật nhẹ lúc bắn. */
+.box-open-gun {
+  position: absolute; left: -34%; bottom: 20%; width: 6.5rem; height: auto;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, .35));
+  transform-origin: 88% 55%; transform: scale(.4) rotate(-8deg); opacity: 0;
+  transition: transform .4s cubic-bezier(.34, 1.56, .64, 1), opacity .3s ease;
+}
+.box-open-overlay.is-show .box-open-gun { transform: scale(1) rotate(-8deg); opacity: 1; }
+.box-open-overlay.is-aiming .box-open-gun { animation: gunRecoilPrep .32s ease; }
+.box-open-overlay.is-firing .box-open-gun { animation: gunKick .16s ease; }
+@keyframes gunRecoilPrep {
+  0%, 100% { transform: scale(1) rotate(-8deg); }
+  50% { transform: scale(1.06) rotate(-12deg); }
+}
+@keyframes gunKick {
+  0% { transform: scale(1) rotate(-8deg); }
+  35% { transform: scale(1) rotate(0deg) translateX(-.35rem); }
+  100% { transform: scale(1) rotate(-8deg); }
+}
+.box-open-muzzle-flash {
+  position: absolute; top: 32%; right: -12%; width: 2.4rem; height: 2.4rem; border-radius: 50%;
+  background: radial-gradient(circle, #FFF7ED 0%, var(--brand-400, #FB923C) 55%, rgba(251, 146, 60, 0) 75%);
+  opacity: 0; transform: scale(.3);
+}
+.box-open-overlay.is-firing .box-open-muzzle-flash { animation: boxMuzzleFlash .18s ease; }
+@keyframes boxMuzzleFlash {
+  0% { opacity: 0; transform: scale(.3); }
+  35% { opacity: 1; transform: scale(1.3); }
+  100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* Tia năng lượng bay từ nòng súng sang hộp lúc bắn */
+.box-open-bolt {
+  position: absolute; left: -20%; bottom: 32%; width: 4.5rem; height: auto; opacity: 0; transform: translateX(0) scale(.7);
+}
+.box-open-overlay.is-firing .box-open-bolt { animation: boxBoltFly .18s linear forwards; }
+@keyframes boxBoltFly {
+  0% { opacity: 1; transform: translateX(0) scale(.8); }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(9rem) scale(1.05); }
+}
+
+/* Màn hình hẹp: kéo súng vào gần hộp hơn để không bị hụt ra ngoài mép màn hình */
+@media (max-width: 480px) {
+  .box-open-gun { left: -14%; width: 5rem; }
+  .box-open-bolt { left: -6%; width: 3.6rem; }
+  @keyframes boxBoltFly {
+    0% { opacity: 1; transform: translateX(0) scale(.8); }
+    85% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(6.5rem) scale(1.05); }
+  }
+}
+
+/* Thẻ/modal kết quả phải hiện CHỒNG LÊN TRÊN khung mở hộp (z-index 2000) khi món trúng ra —
+   để hộp vẫn thấy được phía sau lúc thẻ kết quả hiện lên, thay vì đóng khung rồi mới mở modal
+   riêng lẻ. Nền mờ mặc định của modal (thấp hơn 2000) coi như bị khung hộp che luôn, không cần
+   tối 2 lớp chồng nhau. */
+.result-modal, .simple-result-modal { z-index: 2100; }

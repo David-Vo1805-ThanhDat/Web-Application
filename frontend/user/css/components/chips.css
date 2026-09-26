@@ -1,0 +1,10 @@
+/* components/chips.css — Chip lọc. */
+
+/* ---------- 18. CHIP LỌC ---------- */
+.chip-filter {
+  border: 1.5px solid var(--line-strong); background: #fff; color: var(--text-2);
+  border-radius: .8rem; padding: .5rem 1rem; min-height: 2.5rem; font-size: .92rem; font-weight: 600;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease; cursor: pointer;
+}
+.chip-filter:hover { border-color: var(--orange-500); color: var(--orange-700); }
+.chip-filter.active { background: var(--grad); border-color: transparent; color: #fff; }

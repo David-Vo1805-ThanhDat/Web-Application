@@ -1,0 +1,24 @@
+/* components/icon.css — Icon SVG (sprite <symbol id="i-*"> do tools/build/admin/layout.py chèn). Màu theo currentColor. */
+.ic { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: middle; }
+.ic-14 { width: 14px; height: 14px; }
+.ic-15 { width: 15px; height: 15px; }
+.ic-18 { width: 18px; height: 18px; }
+.ic-20 { width: 20px; height: 20px; }
+.ic-26 { width: 26px; height: 26px; }
+.ic-30 { width: 30px; height: 30px; }
+
+/* Ô icon có nền tint (thẻ KPI, dòng hoạt động, log...). Màu nền = màu icon ở độ mờ 12%. */
+.tint { display: grid; place-items: center; flex: none; border-radius: 10px; }
+.tint-orange { background: rgba(234, 88, 12, .12); color: #ea580c; }
+.tint-blue { background: rgba(37, 99, 235, .12); color: #2563eb; }
+.tint-purple { background: rgba(124, 58, 237, .12); color: #7c3aed; }
+.tint-rose { background: rgba(225, 29, 72, .12); color: #e11d48; }
+.tint-amber { background: rgba(245, 158, 11, .12); color: #f59e0b; }
+.tint-green { background: rgba(21, 163, 74, .12); color: #15a34a; }
+.tint-sky { background: rgba(14, 165, 233, .12); color: #0ea5e9; }
+.tint-gray { background: rgba(104, 113, 137, .14); color: #687189; }
+.tint-strong.tint-orange { background: rgba(234, 88, 12, .14); }
+.tint-strong.tint-blue { background: rgba(37, 99, 235, .14); }
+.tint-strong.tint-purple { background: rgba(124, 58, 237, .14); }
+.tint-strong.tint-rose { background: rgba(225, 29, 72, .14); }
+.tint-strong.tint-green { background: rgba(21, 163, 74, .14); }

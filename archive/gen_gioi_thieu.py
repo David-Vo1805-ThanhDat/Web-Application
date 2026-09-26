@@ -1,0 +1,388 @@
+# -*- coding: utf-8 -*-
+"""Sinh trang Giới thiệu (gioi-thieu.html): kể câu chuyện thương hiệu, giá trị
+cốt lõi, đội ngũ và cam kết — theo đúng bố cục một trang "Về chúng tôi" của
+các web dịch vụ hiện đại (không còn dấu vết của một bài nộp đồ án).
+
+Trang CÔNG KHAI (không cần đăng nhập, navbar_mode="site"): đây là trang xây
+lòng tin, phải đọc được TRƯỚC khi người lạ quyết định đăng ký — khoá nó sau
+đăng nhập (như bản cũ) là sai logic. Xem thêm lien-he.html (cùng lý do)."""
+import os, sys
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+from generate import page
+
+BODY = """
+<script>document.documentElement.classList.add('fx');</script>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="container text-center" style="max-width:46rem;">
+    <span class="hero-chip"><i class="bi bi-heart-fill"></i> Về Hôm Nay Ăn Gì?</span>
+    <h1 class="hero-title">Vì đói bụng không nên<br>là <span class="text-grad">nỗi phân vân</span></h1>
+    <p class="hero-lede mx-auto">
+      Chúng tôi tin rằng chọn một bữa ăn ngon không cần phải mất nửa tiếng đắn đo. Hôm Nay Ăn Gì? sinh ra để biến
+      câu hỏi quen thuộc ấy thành một trò chơi nhỏ — quay một vòng, mở một hộp quà, chốt một món, rồi đi ăn thôi.
+    </p>
+    <div class="hero-actions justify-content-center">
+      <a href="dang-ky.html" class="btn btn-brand btn-lg"><i class="bi bi-stars"></i> Bắt Đầu Miễn Phí</a>
+    </div>
+    <p class="hero-signin">Đã có tài khoản? <a href="dang-nhap.html">Đăng nhập</a></p>
+  </div>
+</section>
+
+<!-- 2. MỘT VÀI CON SỐ -->
+<section class="container py-5" style="max-width:64rem;">
+  <div class="row row-cols-2 row-cols-sm-4 g-3 g-sm-4" data-reveal>
+    <div class="col"><div class="bg-white rounded-3xl-custom border p-3 p-sm-4 text-center shadow-sm h-100 stat-card">
+      <div class="stat-icon" style="background:linear-gradient(135deg,#f97316,#f59e0b);">🍜</div>
+      <div class="fw-black fs-4 text-gradient-food" id="statFoodCount">0+</div>
+      <div class="small text-muted">Món ăn đặc sắc</div></div></div>
+    <div class="col"><div class="bg-white rounded-3xl-custom border p-3 p-sm-4 text-center shadow-sm h-100 stat-card">
+      <div class="stat-icon" style="background:linear-gradient(135deg,#3b82f6,#06b6d4);">🗺️</div>
+      <div class="fw-black fs-4" style="color:var(--accent);">4</div>
+      <div class="small text-muted">Vùng ẩm thực</div></div></div>
+    <div class="col"><div class="bg-white rounded-3xl-custom border p-3 p-sm-4 text-center shadow-sm h-100 stat-card">
+      <div class="stat-icon" style="background:linear-gradient(135deg,#10b981,#14b8a6);">⚡</div>
+      <div class="fw-black fs-4" style="color:var(--la);">5s</div>
+      <div class="small text-muted">Giây quyết định</div></div></div>
+    <div class="col"><div class="bg-white rounded-3xl-custom border p-3 p-sm-4 text-center shadow-sm h-100 stat-card">
+      <div class="stat-icon" style="background:linear-gradient(135deg,#f43f5e,#ec4899);">😋</div>
+      <div class="fw-black fs-4" style="color:#e11d48;">100%</div>
+      <div class="small text-muted">Hài lòng no nê</div></div></div>
+  </div>
+</section>
+
+<!-- 3. CÂU CHUYỆN + HÀNH TRÌNH -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-8" data-reveal>
+        <span class="badge bg-brand-subtle-custom text-brand-emphasis-custom px-3 py-1 rounded-pill small fw-bold text-uppercase">Câu Chuyện</span>
+        <h2 class="fw-extrabold mt-2">Từ Một Câu Hỏi Quen Thuộc 🍜</h2>
+        <p class="text-muted mt-3 mb-0">
+          Mọi chuyện bắt đầu từ điều mà ai cũng từng trải qua ít nhất một lần mỗi ngày: đứng giữa hằng hà sa số lựa chọn
+          mà vẫn không biết nên ăn gì. Có hôm cả nhóm bạn đứng giữa con hẻm mười lăm phút chỉ để bàn bạc, rồi vẫn về tay không.
+        </p>
+        <p class="text-muted mt-3 mb-0">
+          Chúng tôi nghĩ, nếu việc chọn món có thể vui như một trò chơi nhỏ — quay một vòng quay, mở một hộp quà bất ngờ —
+          thì cơn đói sẽ bớt đáng sợ hơn nhiều. Hôm Nay Ăn Gì? ra đời từ đó, và vẫn đang lớn lên mỗi ngày.
+        </p>
+      </div>
+    </div>
+    <ol class="steps">
+      <li data-reveal>
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <h3>Từ một câu hỏi quen thuộc</h3>
+          <p>Ý tưởng nhen nhóm từ chính nỗi phân vân "ăn gì bây giờ" mà ai trong chúng tôi cũng gặp mỗi ngày.</p>
+        </div>
+      </li>
+      <li data-reveal>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <h3>Xây dựng thực đơn đầu tiên</h3>
+          <p>Tuyển chọn hơn 30 món ăn ba miền và quốc tế, kèm công thức, dinh dưỡng và quán ăn gợi ý cho từng món.</p>
+        </div>
+      </li>
+      <li data-reveal>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <h3>Ra mắt vòng quay may mắn</h3>
+          <p>Biến việc chọn món thành một trò chơi nhẹ nhàng — quay một vòng hoặc mở một hộp quà, chốt món trong 5 giây.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 4. GIÁ TRỊ CỐT LÕI -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="text-center mb-4" data-reveal>
+      <span class="badge bg-brand-subtle-custom text-brand-emphasis-custom px-3 py-1 rounded-pill small fw-bold text-uppercase">Giá Trị Cốt Lõi</span>
+      <h2 class="fw-extrabold mt-2">Vì Sao Chọn Hôm Nay Ăn Gì? 💛</h2>
+      <p class="text-muted small mb-0">Bốn điều tụi mình luôn giữ vững trong từng tính năng.</p>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 g-lg-4">
+      <div class="col" data-reveal>
+        <div class="feature-card">
+          <span class="feature-icon"><i class="bi bi-lightning-charge"></i></span>
+          <h3>Nhanh gọn trong tích tắc</h3>
+          <p>Không cần lướt hàng chục trang, chỉ vài giây là có ngay gợi ý phù hợp với bạn.</p>
+        </div>
+      </div>
+      <div class="col" data-reveal>
+        <div class="feature-card">
+          <span class="feature-icon"><i class="bi bi-sliders"></i></span>
+          <h3>Đúng gu của riêng bạn</h3>
+          <p>Lọc theo bữa ăn, ngân sách, khẩu vị và chế độ ăn để gợi ý luôn sát với bạn.</p>
+        </div>
+      </div>
+      <div class="col" data-reveal>
+        <div class="feature-card">
+          <span class="feature-icon"><i class="bi bi-journal-check"></i></span>
+          <h3>Thông tin đáng tin cậy</h3>
+          <p>Mỗi món đều có công thức, dinh dưỡng rõ ràng và quán ăn gợi ý thật để bạn đến thử.</p>
+        </div>
+      </div>
+      <div class="col" data-reveal>
+        <div class="feature-card">
+          <span class="feature-icon"><i class="bi bi-emoji-laughing"></i></span>
+          <h3>Biến chọn món thành niềm vui</h3>
+          <p>Vòng quay may mắn và hộp quà bí ẩn giúp bữa ăn thêm phần háo hức, bớt đau đầu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ĐỘI NGŨ -->
+<section class="container py-4" style="max-width:64rem;">
+  <div class="text-center mb-4" data-reveal>
+    <span class="badge bg-brand-subtle-custom text-brand-emphasis-custom px-3 py-1 rounded-pill small fw-bold text-uppercase">Đội Ngũ</span>
+    <h2 class="fw-extrabold mt-2">Những Gương Mặt Đứng Sau Hôm Nay Ăn Gì? 👥</h2>
+    <p class="text-muted small mb-0">Một nhóm nhỏ, một mục tiêu: giúp bạn hết đau đầu mỗi khi đói bụng.</p>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4" data-reveal>
+    <div class="col">
+      <div class="bg-white rounded-3xl-custom border overflow-hidden shadow-sm h-100 team-card">
+        <div class="p-4 text-white" style="background:linear-gradient(to right,#8b5cf6,#7c3aed);">
+          <div class="d-flex align-items-center gap-3">
+            <div class="team-avatar">🎨</div>
+            <div><h3 class="h5 fw-black mb-0">Người A</h3><p class="small text-white-50 mb-0">Đồng sáng lập &amp; Thiết kế sản phẩm</p></div>
+          </div>
+        </div>
+        <div class="p-4">
+          <ul class="list-unstyled d-flex flex-column gap-2 small mb-3">
+            <li><i class="bi bi-palette text-muted"></i> Giữ cho giao diện luôn gọn gàng, dễ dùng trên mọi thiết bị</li>
+            <li><i class="bi bi-layers text-muted"></i> Thiết kế trải nghiệm mượt mà từ lúc mở web đến lúc chọn được món</li>
+            <li><i class="bi bi-stars text-muted"></i> Chăm chút từng hiệu ứng nhỏ để việc chọn món thêm thú vị</li>
+            <li><i class="bi bi-code-slash text-muted"></i> Luôn lắng nghe phản hồi để cải thiện giao diện mỗi ngày</li>
+          </ul>
+          <blockquote class="border-start border-3 ps-3 small fst-italic text-muted mb-0" style="border-color:var(--brand-400) !important; background:var(--brand-50); border-radius:0 .75rem .75rem 0; padding:.5rem .75rem;">
+            "Giao diện đẹp không chỉ để nhìn — mà để người dùng cảm thấy vui khi dùng mỗi ngày."
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="bg-white rounded-3xl-custom border overflow-hidden shadow-sm h-100 team-card">
+        <div class="p-4 text-white bg-gradient-brand">
+          <div class="d-flex align-items-center gap-3">
+            <div class="team-avatar">⚙️</div>
+            <div><h3 class="h5 fw-black mb-0">Người B</h3><p class="small text-white-50 mb-0">Đồng sáng lập &amp; Dữ liệu ẩm thực</p></div>
+          </div>
+        </div>
+        <div class="p-4">
+          <ul class="list-unstyled d-flex flex-column gap-2 small mb-3">
+            <li><i class="bi bi-database text-muted"></i> Tuyển chọn và kiểm chứng hơn 30 món ăn trong thực đơn</li>
+            <li><i class="bi bi-sliders text-muted"></i> Xây dựng bộ lọc theo bữa ăn, ngân sách, khẩu vị và chế độ ăn</li>
+            <li><i class="bi bi-patch-check text-muted"></i> Đảm bảo mọi gợi ý từ vòng quay đều chính xác và phù hợp</li>
+            <li><i class="bi bi-arrow-repeat text-muted"></i> Không ngừng bổ sung món mới theo mùa và theo góp ý</li>
+          </ul>
+          <blockquote class="border-start border-3 ps-3 small fst-italic text-muted mb-0" style="border-color:var(--brand-400) !important; background:var(--brand-50); border-radius:0 .75rem .75rem 0; padding:.5rem .75rem;">
+            "Dữ liệu tốt là nền tảng của mọi gợi ý thông minh — món ngon phải đúng gu mới tính."
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="bg-white rounded-3xl-custom border overflow-hidden shadow-sm h-100 team-card">
+        <div class="p-4 text-white" style="background:linear-gradient(to right,#0ea5e9,#0369a1);">
+          <div class="d-flex align-items-center gap-3">
+            <div class="team-avatar">📝</div>
+            <div><h3 class="h5 fw-black mb-0">Người C</h3><p class="small text-white-50 mb-0">Đồng sáng lập &amp; Nội dung</p></div>
+          </div>
+        </div>
+        <div class="p-4">
+          <ul class="list-unstyled d-flex flex-column gap-2 small mb-3">
+            <li><i class="bi bi-file-text text-muted"></i> Biên tập công thức, mô tả món ăn dễ hiểu, dễ làm theo</li>
+            <li><i class="bi bi-geo-alt text-muted"></i> Tìm kiếm và giới thiệu những quán ăn đáng thử cho từng món</li>
+            <li><i class="bi bi-chat-square-text text-muted"></i> Viết nội dung trang Giới thiệu và Liên hệ gần gũi, đúng chất</li>
+            <li><i class="bi bi-headset text-muted"></i> Tiếp nhận và phản hồi góp ý từ người dùng</li>
+          </ul>
+          <blockquote class="border-start border-3 ps-3 small fst-italic text-muted mb-0" style="border-color:var(--brand-400) !important; background:var(--brand-50); border-radius:0 .75rem .75rem 0; padding:.5rem .75rem;">
+            "Nội dung rõ ràng, dễ hiểu chính là cầu nối giữa món ăn ngon và người đang đói bụng."
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CAM KẾT -->
+<section class="container py-4" style="max-width:64rem;">
+  <div class="rounded-3xl-custom p-4 p-sm-5 text-white" style="background:var(--navy);" data-reveal>
+    <h2 class="h4 fw-extrabold text-center text-warning mb-2">🤝 Cam Kết Của Chúng Tôi</h2>
+    <p class="text-center text-white-50 small mb-4 mx-auto" style="max-width:34rem;">
+      Bốn điều chúng tôi luôn giữ, để bạn yên tâm dùng Hôm Nay Ăn Gì? mỗi ngày.
+    </p>
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+      <div class="col"><div class="tech-card text-center"><div class="fs-3 mb-1">🆓</div><div class="fw-bold small">Miễn phí trọn đời</div><div class="text-white-50" style="font-size:.7rem;">Không thu phí, không cần thẻ thanh toán</div></div></div>
+      <div class="col"><div class="tech-card text-center"><div class="fs-3 mb-1">🚫</div><div class="fw-bold small">Không quảng cáo làm phiền</div><div class="text-white-50" style="font-size:.7rem;">Chọn món luôn gọn gàng, không pop-up gây rối</div></div></div>
+      <div class="col"><div class="tech-card text-center"><div class="fs-3 mb-1">🔒</div><div class="fw-bold small">Tôn trọng dữ liệu của bạn</div><div class="text-white-50" style="font-size:.7rem;">Món yêu thích chỉ lưu trên trình duyệt của bạn</div></div></div>
+      <div class="col"><div class="tech-card text-center"><div class="fs-3 mb-1">💬</div><div class="fw-bold small">Luôn lắng nghe</div><div class="text-white-50" style="font-size:.7rem;">Góp ý, đề xuất món mới đều được đội ngũ đọc</div></div></div>
+    </div>
+    <p class="text-center small text-white-50 mt-4 mb-0">
+      Chúng tôi vẫn đang mỗi ngày hoàn thiện Hôm Nay Ăn Gì? để trở thành người bạn đồng hành đáng tin cậy trong mọi bữa ăn của bạn.
+    </p>
+  </div>
+</section>
+
+<!-- 7. CẢM NHẬN -->
+<section class="section" aria-labelledby="quoteTitle">
+  <div class="container">
+    <h2 id="quoteTitle" class="text-center mb-4" data-reveal>Người Dùng Nói Gì Về Chúng Tôi 💬</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-3 g-lg-4">
+      <div class="col" data-reveal>
+        <div class="quote-card">
+          <p>"Cả phòng trọ hết cãi nhau trưa nay ăn gì. Quay một cái xong luôn, khỏi bàn tán mất công."</p>
+          <span class="quote-by">— Người đi làm, quận Bình Thạnh</span>
+        </div>
+      </div>
+      <div class="col" data-reveal>
+        <div class="quote-card">
+          <p>"Thích nhất phần mở hộp quà, quay trúng món nào cũng có công thức và quán để đi ăn thử luôn."</p>
+          <span class="quote-by">— Sinh viên năm 2</span>
+        </div>
+      </div>
+      <div class="col" data-reveal>
+        <div class="quote-card">
+          <p>"Lọc theo ngân sách sinh viên vẫn ra cả chục món ngon, không sợ hết tiền giữa tháng."</p>
+          <span class="quote-by">— Sinh viên năm nhất</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. FAQ -->
+<section class="container py-5" style="max-width:48rem;">
+  <div class="text-center mb-4" data-reveal>
+    <h2 class="fw-extrabold">Câu Hỏi Thường Gặp ❓</h2>
+    <p class="text-muted small mb-0">Giải đáp những thắc mắc phổ biến nhất về Hôm Nay Ăn Gì?</p>
+  </div>
+  <div class="accordion" id="faqAccordion" data-reveal>
+    <div class="accordion-item rounded-3xl-custom mb-2 border">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed rounded-3xl-custom" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+          Thực đơn có bao nhiêu món và có được cập nhật thường xuyên không?
+        </button>
+      </h2>
+      <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body small text-muted">
+          Thực đơn hiện có hơn 30 món ăn được nghiên cứu và tổng hợp từ nhiều nguồn ẩm thực uy tín tại Việt Nam.
+          Đội ngũ liên tục bổ sung món mới và cập nhật thông tin để gợi ý luôn tươi mới.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item rounded-3xl-custom mb-2 border">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed rounded-3xl-custom" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+          Vòng quay may mắn hoạt động như thế nào?
+        </button>
+      </h2>
+      <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body small text-muted">
+          Vòng quay sử dụng thuật toán ngẫu nhiên dựa trên bộ lọc tiêu chí bạn chọn (bữa ăn, ngân sách, khẩu vị, chế độ ăn).
+          Chỉ những món đáp ứng đủ tiêu chí mới xuất hiện trên vòng quay — đảm bảo kết quả luôn phù hợp với mong muốn của bạn.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item rounded-3xl-custom mb-2 border">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed rounded-3xl-custom" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+          Tôi có thể lưu món ăn yêu thích ở đâu?
+        </button>
+      </h2>
+      <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body small text-muted">
+          Nhấn biểu tượng ❤️ trên bất kỳ thẻ món ăn nào để lưu vào danh sách yêu thích. Dữ liệu được lưu cục bộ trong
+          trình duyệt (localStorage) — không cần đăng nhập thêm và hoạt động offline. Xem lại tại trang Khám Phá &gt; Tab "Đã Lưu Yêu Thích".
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item rounded-3xl-custom mb-2 border">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed rounded-3xl-custom" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+          Website có hỗ trợ tìm kiếm theo nguyên liệu không?
+        </button>
+      </h2>
+      <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body small text-muted">
+          Có! Thanh tìm kiếm trên trang Khám Phá cho phép bạn tìm theo tên món ăn, tên nguyên liệu (ví dụ: "bò", "tôm",
+          "đậu hũ"), khẩu vị hay mô tả món ăn. Kết quả được cập nhật ngay khi bạn gõ chữ.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item rounded-3xl-custom mb-2 border">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed rounded-3xl-custom" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+          Sử dụng Hôm Nay Ăn Gì? có mất phí không?
+        </button>
+      </h2>
+      <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body small text-muted">
+          Hoàn toàn miễn phí. Bạn không cần nhập thẻ thanh toán hay trả bất kỳ khoản phí nào để dùng đầy đủ các tính năng:
+          vòng quay may mắn, hộp quà bí ẩn, lưu món yêu thích và xem công thức, quán ăn gợi ý.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. CTA -->
+<section class="cta-band">
+  <div class="container">
+    <div>
+      <h2 class="display-font" data-reveal="left">Đói meo chưa? Để chúng tôi lo.</h2>
+      <p class="pub-cta-note" data-reveal="left">Quay một vòng, chốt một món, hết đau đầu ngay hôm nay.</p>
+    </div>
+    <div data-reveal>
+      <a href="dang-ky.html" class="btn btn-light btn-lg">Tạo Tài Khoản Miễn Phí</a>
+      <p class="cta-signin">Đã có tài khoản? <a href="dang-nhap.html">Đăng nhập</a></p>
+    </div>
+  </div>
+</section>
+"""
+
+EXTRA_SCRIPT = """<style>
+.stat-card,.team-card{transition:.2s;}
+.stat-card:hover,.team-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.08);}
+.stat-icon{width:3.2rem;height:3.2rem;border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto .6rem;color:#fff;}
+.team-avatar{width:4rem;height:4rem;border-radius:1rem;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:2rem;border:1px solid rgba(255,255,255,.3);}
+.tech-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1rem;}
+.bg-brand-subtle-custom{background:var(--brand-50);}
+.text-brand-emphasis-custom{color:var(--brand-700);}
+</style>
+<script src="js/effects.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('statFoodCount').textContent = allFoods.length + '+';
+
+  /* Trang này công khai nên ai cũng vào được, kể cả người đã đăng nhập sẵn (vd. bấm link
+     "Về chúng tôi" ở footer trong lúc đang dùng app) — lúc đó nút "Bắt đầu/Đăng ký" nên đổi
+     thành "Vào Trang Chủ", và dòng "Đã có tài khoản? Đăng nhập" nên ẩn đi vì thừa. */
+  if (typeof getCurrentUser === 'function' && getCurrentUser()) {
+    document.querySelectorAll('a[href="dang-ky.html"]').forEach(function (a) {
+      a.href = 'trang-chu.html';
+      a.innerHTML = '<i class="bi bi-egg-fried"></i> Vào Trang Chủ';
+    });
+    document.querySelectorAll('a[href="dang-nhap.html"]').forEach(function (a) {
+      var wrap = a.closest('.hero-signin, .cta-signin');
+      if (wrap) wrap.style.display = 'none'; else a.style.display = 'none';
+    });
+  }
+});
+</script>"""
+
+if __name__ == "__main__":
+    html = page(
+        "Về Chúng Tôi | Hôm Nay Bạn Muốn Ăn Gì?",
+        "Câu chuyện, giá trị cốt lõi và đội ngũ đứng sau Hôm Nay Bạn Muốn Ăn Gì? — người bạn giúp bạn chốt món trong 5 giây.",
+        BODY, EXTRA_SCRIPT, navbar_mode="site"
+    )
+    with open(os.path.join(HERE, "gioi-thieu.html"), "w", encoding="utf-8") as f:
+        f.write(html)
+    print("gioi-thieu.html:", len(html), "ky tu")

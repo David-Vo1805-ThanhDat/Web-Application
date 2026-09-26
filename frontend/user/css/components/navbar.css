@@ -1,0 +1,87 @@
+/* components/navbar.css — Thanh điều hướng: bản trong app và bản công khai (trang ngoài, đăng nhập, đăng ký). */
+
+/* ---------- 7. NAVBAR ---------- */
+.site-navbar {
+  position: sticky; top: 0; z-index: 1030;
+  background: rgba(255, 255, 255, .88);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.site-navbar.shadow-sm { box-shadow: 0 10px 24px -16px rgba(120, 60, 10, .35) !important; }
+.site-navbar .navbar { padding-top: .65rem; padding-bottom: .65rem; }
+
+.brand { display: inline-flex; align-items: center; gap: .75rem; margin-right: 1rem; }
+.brand-mark {
+  width: 46px; height: 46px; flex: none; display: grid; place-items: center; border-radius: 15px;
+  background: linear-gradient(135deg, #EA580C, #F59E0B); box-shadow: 0 8px 16px -8px rgba(234, 88, 12, .7);
+}
+.brand-mark svg { width: 28px; height: 28px; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-name { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.025em; color: var(--text); display: inline-flex; align-items: center; gap: .35rem; }
+.brand-name::after { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: #FDBA74; }
+.brand-tag { font-size: .7rem; color: var(--text-3); font-weight: 500; }
+.brand-on-dark .brand-name { color: #fff; }
+.brand-on-dark .brand-name::after { background: var(--amber-400); }
+
+.site-navbar .nav-link {
+  position: relative; display: flex; align-items: center; gap: .45rem; color: var(--text-2); font-weight: 600; font-size: .93rem;
+  padding: .55rem .9rem !important; border-radius: .85rem; transition: background-color .15s ease, color .15s ease;
+}
+.site-navbar .nav-link i { font-size: 1rem; }
+.site-navbar .nav-link:hover { color: var(--orange-700); background: var(--brand-50); }
+.site-navbar .nav-link.active { color: var(--orange-700); background: var(--brand-100); }
+.site-navbar .nav-link.active::after {
+  content: ''; position: absolute; left: 22%; right: 22%; bottom: .2rem; height: 3px; border-radius: 3px;
+  background: var(--grad);
+}
+.site-navbar .nav-link, .nav-fav, .btn-nav, .brand-name { white-space: nowrap; }
+.hot-badge {
+  display: inline-block; padding: .12rem .5rem; border-radius: 9999px; color: #fff; font-size: .64rem; font-weight: 800; letter-spacing: .02em;
+  background: linear-gradient(90deg, #EA3B2E, #F97316);
+}
+.navbar-toggler { border: 0; padding: .25rem .4rem; color: var(--text); }
+.navbar-toggler:focus { box-shadow: none; }
+
+.nav-fav {
+  display: inline-flex; align-items: center; gap: .45rem; min-height: 2.6rem; padding: 0 1rem; border-radius: .9rem;
+  background: #fff; border: 1.5px solid var(--line-strong); color: var(--text-2); font-weight: 600; font-size: .9rem;
+  transition: border-color .15s ease, color .15s ease;
+}
+.nav-fav:hover { color: var(--danger); border-color: #FBB6C1; }
+.favorite-count-badge {
+  min-width: 1.35rem; height: 1.35rem; padding: 0 .35rem; border-radius: 9999px;
+  background: var(--danger); color: #fff; font-size: .72rem; font-weight: 700; align-items: center; justify-content: center;
+}
+.btn-nav { min-height: 2.6rem; padding: 0 1.2rem; display: inline-flex; align-items: center; gap: .45rem; font-size: .92rem; }
+
+.brand-logo-badge { width: 40px; height: 40px; border-radius: .8rem; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+
+/* ---------- 18c. NAVBAR CÔNG KHAI (trang ngoài, đăng nhập, đăng ký) ---------- */
+.navbar-public .nav-actions { margin-left: auto; }
+
+/* chip tên người dùng + menu đăng xuất, thay cho nút đăng nhập khi đã vào trong */
+.nav-user-btn {
+  display: inline-flex; align-items: center; gap: .55rem; min-height: 2.6rem; padding: .3rem .9rem .3rem .3rem;
+  border: 1.5px solid var(--line-strong); border-radius: 9999px; background: #fff; color: var(--text); font-weight: 600; font-size: .9rem;
+}
+.nav-user-btn::after { margin-left: .15rem; }
+.nav-user-btn:hover { border-color: var(--orange-500); }
+.nav-user-avatar {
+  width: 1.9rem; height: 1.9rem; flex: none; display: grid; place-items: center; border-radius: 50%;
+  background: var(--grad); color: #fff; font-size: .74rem; font-weight: 800;
+}
+.nav-user-name { display: inline-block; max-width: 8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
+/* Tên người dùng chỉ hiện khi đủ chỗ (từ 1600px); nhỏ hơn thì chỉ còn avatar (tên vẫn có trong menu xổ xuống) */
+@media (max-width: 1599.98px) { .nav-user-name { display: none; } .nav-user-btn { padding-right: .5rem; } }
+
+/* menu khi bấm vào avatar: hàng đầu hiện tên + email, dưới là các lối tắt hay dùng
+   (lấy cảm hứng từ menu tài khoản của Instagram/Facebook/TikTok, chọn lại cho đúng
+   nội dung web này — món yêu thích, quay cùng nhóm, tài khoản, hỗ trợ) */
+.dropdown-menu { border-color: var(--line); border-radius: 1rem; padding: .5rem; box-shadow: 0 24px 48px -28px rgba(31, 42, 68, .35); }
+.dropdown-header-user { display: flex; align-items: center; gap: .65rem; padding: .5rem .65rem .6rem; min-width: 15rem; }
+.dropdown-header-avatar { width: 2.4rem; height: 2.4rem; font-size: .92rem; }
+.dropdown-item { display: flex; align-items: center; gap: .6rem; border-radius: .65rem; padding: .5rem .65rem; font-size: .9rem; }
+.dropdown-item i { width: 1.1rem; text-align: center; color: var(--text-3); }
+.dropdown-item:hover, .dropdown-item:focus { background: var(--brand-50); color: var(--orange-700); }
+.dropdown-item:hover i, .dropdown-item:focus i { color: var(--orange-600); }
+.dropdown-item .favorite-count-badge { min-width: 1.2rem; height: 1.2rem; font-size: .68rem; }

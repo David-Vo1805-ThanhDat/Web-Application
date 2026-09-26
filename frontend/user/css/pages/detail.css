@@ -1,0 +1,40 @@
+/* pages/detail.css — chỉ nạp ở trang chi-tiet-mon-an.html (khai báo qua page_css trong tools/build/pages). */
+
+.step-num{flex-shrink:0;width:1.75rem;height:1.75rem;border-radius:50%;background:var(--surface-2);color:var(--text-2);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;}
+.step-num-active{background:var(--brand-500);color:#fff;}
+.step-btn{border:1px solid var(--line);border-radius:.75rem;background:var(--surface);color:var(--text);padding:.85rem;}
+.step-active{background:var(--brand-50);border-color:var(--brand-200,#fed7aa);}
+.ingredient-btn{border:1px solid var(--line);border-radius:.75rem;background:var(--surface);color:var(--text);padding:.7rem .9rem;}
+.ingredient-checked{background:#ECFDF5;border-color:#A7F3D0;}
+.restaurant-card{transition:.2s;}
+.restaurant-card:hover{border-color:var(--brand-300,#fdba74) !important;box-shadow:0 6px 18px rgba(234,88,12,.15);}
+.bg-brand-100-custom{background:var(--brand-100,#ffedd5);}
+.text-brand{color:var(--brand-600);}
+
+/* Khung chờ của khu đánh giá (đang tải) */
+@keyframes review-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.review-skel { height: 74px; border-radius: 14px; background: linear-gradient(90deg, #f6ede2 25%, #fcf6ee 45%, #f6ede2 65%) 0 0 / 200% 100%; animation: review-shimmer 1.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .review-skel { animation: none; } }
+
+/* ---------- Nấu thử món này (js/widgets/cook-feedback.js) ---------- */
+.cook-card { background: var(--surface, #fff8ef); border: 1px solid var(--line, #f0e3d2); border-radius: 1.25rem; padding: 1.25rem; }
+.cook-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.cook-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; padding: .7rem 0; border-top: 1px dashed var(--line, #f0e3d2); }
+.cook-row:first-child { border-top: 0; }
+.cook-ing { flex: 1 1 210px; display: flex; flex-direction: column; min-width: 0; }
+.cook-ing-name { font-weight: 600; }
+.cook-ing-amount { font-size: .82rem; color: #64748b; }
+.cook-community { flex: 1 1 100%; min-height: 0; }
+.cook-community:empty { display: none; }
+@media (min-width: 768px) { .cook-community { flex: 0 1 230px; text-align: right; } }
+.cook-note { font-size: .82rem; font-weight: 600; }
+.cook-note.is-ok { color: #15803d; } .cook-note.is-less { color: #1d4ed8; } .cook-note.is-more { color: #c2410c; }
+.cook-seg { display: inline-flex; flex-wrap: wrap; gap: .3rem; }
+.cook-choice { border: 1px solid var(--line-strong, #e8d2b8); background: #fff; color: #475569; border-radius: 999px; padding: .28rem .8rem; font-size: .84rem; font-weight: 600; cursor: pointer; transition: all .15s ease; }
+.cook-choice:hover { border-color: var(--orange-500, #f97316); }
+.cook-choice.is-on { background: var(--orange-500, #ea580c); border-color: var(--orange-500, #ea580c); color: #fff; }
+.cook-choice:focus-visible { outline: 2px solid var(--orange-500, #f97316); outline-offset: 2px; }
+.cook-ing-note { flex: 1 1 100%; max-width: 26rem; }
+.cook-form { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line, #f0e3d2); display: flex; flex-direction: column; gap: .9rem; }
+.cook-field { display: flex; flex-direction: column; gap: .35rem; }
+.cook-label { font-size: .82rem; font-weight: 700; color: #334155; }

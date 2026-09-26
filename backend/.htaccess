@@ -1,0 +1,3 @@
+# Chặn truy cập trực tiếp qua web vào mã nguồn, cấu hình và DỮ LIỆU (storage/db/*.json chứa mật khẩu băm).
+# Chỉ thư mục api/ được mở (xem api/.htaccess). Cần Apache bật AllowOverride (mặc định của XAMPP đã bật).
+Require all denied

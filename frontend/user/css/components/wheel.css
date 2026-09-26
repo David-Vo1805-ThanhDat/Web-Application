@@ -1,0 +1,27 @@
+/* components/wheel.css — Vòng quay (dùng chung trang chủ và trang gợi ý). */
+
+/* ---------- 9. VÒNG QUAY (dùng chung: trang gợi ý) ---------- */
+.wheel-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.wheel-pointer {
+  width: 0; height: 0; margin-bottom: -16px; z-index: 5;
+  border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid var(--danger);
+  filter: drop-shadow(0 2px 0 #fff) drop-shadow(0 4px 5px rgba(120, 30, 20, .35));
+  animation: bounceSlow 2.2s ease-in-out infinite;
+}
+.wheel-ring { border-radius: 50%; padding: 0; background: none; filter: drop-shadow(0 14px 22px rgba(234, 88, 12, .28)); }
+#wheelCanvas, #heroWheelCanvas { border-radius: 50%; cursor: pointer; max-width: 100%; height: auto; }
+
+@keyframes bounceSlow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.spin-slow-icon { animation: spinSlow 6s linear infinite; display: inline-block; }
+
+/* Nút bật/tắt âm thanh vòng quay (js/widgets/sound.js): góc trên bên phải khung vòng quay */
+.wheel-stage, .wheel-wrapper { position: relative; }
+.wheel-sound-btn {
+  position: absolute; top: 0; right: 0; z-index: 5; width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center; border: 1px solid var(--line, #f0e3d2); background: #fff; color: var(--orange-600, #ea580c);
+  box-shadow: 0 2px 8px rgba(31, 42, 68, .12); cursor: pointer; transition: transform .15s ease, background-color .15s ease;
+}
+.wheel-sound-btn:hover { transform: scale(1.08); }
+.wheel-sound-btn[aria-pressed="false"] { color: #94a3b8; background: #f8fafc; }
+.wheel-sound-btn:focus-visible { outline: 2px solid var(--orange-500, #f97316); outline-offset: 2px; }

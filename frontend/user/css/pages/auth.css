@@ -1,0 +1,65 @@
+/* pages/auth.css — Đăng nhập / Đăng ký. */
+
+/* ---------- 24. ĐĂNG NHẬP / ĐĂNG KÝ ---------- */
+/* Bố cục "bìa lệch": bên cam tràn hết ra hai mép trái/trên của trang (không có
+   khung/viền riêng), bên phải là nền be của web với một khung trắng nổi lên
+   (chính là .auth-card) chứa form — hai bên không còn chung một khung bo góc
+   như trước nữa. */
+.auth-section { padding: 0; }
+.auth-shell { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .auth-shell { grid-template-columns: 1fr 1fr; min-height: 36rem; } }
+
+.auth-side { position: relative; overflow: hidden; display: flex; align-items: center; color: #fff; background: var(--navy); min-height: 16rem; }
+
+/* nền: ảnh món ăn cuộn dọc liên tục (3 cột, tốc độ/chiều khác nhau), làm mờ và
+   phủ gradient cam của web lên trên để chữ vẫn đọc rõ — không còn để trống màu xanh gốc */
+.auth-side-bg { position: absolute; inset: 0; display: flex; gap: .4rem; padding: 0 .4rem; }
+.auth-side-bg::after {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(150deg, rgba(194, 65, 12, .93) 0%, rgba(234, 88, 12, .88) 55%, rgba(245, 158, 11, .85) 100%);
+}
+.auth-col { position: relative; flex: 1; overflow: hidden; }
+.auth-col-track { display: flex; flex-direction: column; gap: .4rem; animation: authColScroll 30s linear infinite; }
+.auth-col-track-rev { animation-direction: reverse; animation-duration: 38s; }
+.auth-col-track img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; filter: blur(3px) saturate(1.1); display: block; border-radius: .5rem; }
+@keyframes authColScroll { to { transform: translateY(-50%); } }
+
+.auth-side-content { position: relative; z-index: 2; padding: clamp(2rem, 4vw, 3rem); }
+.auth-side-content .lucky-chip { background: rgba(255, 255, 255, .2); color: #fff; }
+.auth-side-content h2 { margin: .9rem 0 .6rem; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; }
+.auth-side-content p { color: rgba(255, 255, 255, .95); }
+.auth-side-list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: .75rem; }
+.auth-side-list i { margin-right: .5rem; }
+
+/* câu "hook" trên nền ảnh: từng chữ trong tiêu đề hiện ra lần lượt khi tải trang
+   (đăng nhập và đăng ký dùng câu khác nhau, xem auth_hook() trong generate.py) */
+.auth-hook { position: relative; z-index: 2; padding: clamp(2rem, 4vw, 3rem); }
+.auth-hook-title {
+  margin: 0; font-weight: 900; letter-spacing: -0.03em; line-height: 1.08; color: #fff;
+  font-size: clamp(2.1rem, 1.2rem + 3.4vw, 3.4rem); text-shadow: 0 10px 30px rgba(20, 8, 0, .35);
+}
+.auth-hook-title .w {
+  display: inline-block; opacity: 0; transform: translateY(22px);
+  animation: authHookWord .65s cubic-bezier(.2, .75, .25, 1) forwards; animation-delay: calc(var(--i) * 80ms);
+}
+.auth-hook-sub {
+  margin: 1.1rem 0 0; max-width: 26rem; font-size: 1.05rem; font-weight: 500; color: rgba(255, 255, 255, .95);
+  opacity: 0; animation: authHookFade .7s ease forwards;
+}
+@keyframes authHookWord { to { opacity: 1; transform: translateY(0); } }
+@keyframes authHookFade { to { opacity: 1; } }
+
+/* bên phải: nền be của trang, khung trắng (auth-card) nổi lên ở giữa chứa form */
+.auth-form-panel { display: flex; align-items: center; justify-content: center; padding: clamp(2.5rem, 6vw, 4rem) 1.25rem; background: var(--bg); }
+.auth-card {
+  width: 100%; max-width: 25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 1.5rem;
+  box-shadow: 0 30px 54px -32px rgba(31, 42, 68, .3); padding: clamp(1.75rem, 4vw, 2.5rem);
+}
+.auth-card h1 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 .75rem; }
+.auth-note {
+  display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; color: var(--text-2);
+  background: var(--brand-50); border: 1px solid var(--brand-200); border-radius: .9rem; padding: .75rem 1rem; margin-bottom: 1.5rem;
+}
+.auth-switch { margin: .9rem 0 0; font-size: .92rem; color: var(--text-2); }
+.auth-switch a { font-weight: 600; color: var(--orange-700); }
+.auth-switch a:hover { text-decoration: underline; text-underline-offset: 3px; }
