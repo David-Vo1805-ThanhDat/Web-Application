@@ -8,6 +8,13 @@
 CREATE DATABASE IF NOT EXISTS hom_nay_an_gi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE hom_nay_an_gi;
 
+-- API ordering and the difference between a missing state key and an explicitly deleted key.
+-- The relational business data stays in the tables below.
+CREATE TABLE app_storage_meta (
+  meta_key VARCHAR(190) NOT NULL PRIMARY KEY,
+  value JSON NOT NULL
+) ENGINE=InnoDB;
+
 -- ----------------------------------------------------------------------------
 -- Phân loại (taxonomy.json) — trang "Danh mục & thẻ"
 -- ----------------------------------------------------------------------------

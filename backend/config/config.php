@@ -7,14 +7,14 @@ return [
 
     // ----- Nơi lưu dữ liệu -----
     // 'json'  : file JSON trong storage/db (không cần cài gì, chạy thẳng trên XAMPP). Lần chạy đầu tự khởi tạo từ data/seed.
-    // 'mysql' : (chưa bật) dùng khi đã chuyển sang MySQL — xem database/schema.sql và mục "Chuyển sang MySQL" trong backend/README.md.
-    'storage' => 'json',
+    // 'mysql' : dữ liệu trên MySQL của máy này. HNAG_STORAGE=json dành cho test JSON / chuyển dữ liệu.
+    'storage' => getenv('HNAG_STORAGE') ?: 'mysql',
     'storage_dir' => getenv('HNAG_STORAGE_DIR') ?: dirname(__DIR__) . '/storage', // HNAG_STORAGE_DIR: dùng khi chạy kiểm thử để không đụng dữ liệu thật
     'seed_dir' => dirname(__DIR__) . '/data/seed',
 
     'mysql' => [
-        'host' => '127.0.0.1', 'port' => (int) (getenv('DB_PORT') ?: 3306), 'dbname' => 'hom_nay_an_gi',
-        'user' => 'root', 'password' => '', 'charset' => 'utf8mb4',
+        'host' => getenv('DB_HOST') ?: '127.0.0.1', 'port' => (int) (getenv('DB_PORT') ?: 3306), 'dbname' => getenv('DB_DATABASE') ?: 'hom_nay_an_gi',
+        'user' => getenv('DB_USER') ?: 'root', 'password' => getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : '123456', 'charset' => 'utf8mb4',
     ],
 
     // ----- Phiên đăng nhập -----

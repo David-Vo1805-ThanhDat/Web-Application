@@ -109,7 +109,7 @@ Quy tắc `status` (quyết định ở **server** để frontend không tự t�
 **Khi xong:** thêm test vào `backend/tests/backend-api.js` (kiểm tra ngưỡng giấu số liệu, ghi đè phản hồi, quy tắc `status`, 401/403/404/422), rồi báo frontend; test giao diện `tools/tests/cook-feedback.js` và `tools/tests/admin-recipes.js` hiện chạy bằng **bản giả lập** đúng hợp đồng này — khi backend thật xong hãy chạy thêm `node tools/tests/run.js cook-feedback admin-recipes` với `REAL_API=1` (frontend sẽ cung cấp cờ này) để kiểm chứng.
 
 ### P1
-1. **Chuyển sang MySQL.** `database/schema.sql` (21 bảng) và `scripts/import_json_to_mysql.php` đã sẵn sàng và đã chạy thử trên MariaDB của XAMPP. Việc còn lại: viết bản MySQL (PDO) của các Repository trong `src/Repositories/` rồi cho `App::store()`/Repository dùng MySQL theo `config['storage']`. Giữ nguyên tên phương thức Repository để Service/Controller/API/frontend **không phải đổi**. Chạy `run.js backend-api` (109 kiểm tra) trên MySQL phải đạt như trên JSON. Lưu ý các thao tác đang "đọc cả bảng rồi ghi lại" (ví dụ `replaceAll`) cần đổi thành truy vấn từng dòng, và cần **transaction** cho các thao tác nhiều bước (lưu món + quán gợi ý; duyệt đánh giá + cập nhật điểm món).
+1. **Chuyển sang MySQL — đã hoàn thiện.** `App::store()` dùng `MySqlStore` theo cấu hình, ánh xạ các bảng quan hệ thành dữ liệu API hiện tại. Ghi từng bản ghi thay đổi trong transaction, có khóa ứng dụng theo database trước bước đọc-sửa-ghi. `scripts/mysql_setup.php` nâng cấp database đã import mà giữ dữ liệu; `node backend/tests/run-mysql.js` chạy 109 kiểm tra API và các kiểm tra transaction/đồng thời/state/backup/restore/reset trên database test riêng. Service vẫn lọc trong bộ nhớ; tối ưu truy vấn trực tiếp theo từng nghiệp vụ là việc tiếp theo (mục 12).
 2. **Ghi sự kiện để thống kê thật.** Hiện Dashboard/Thống kê có số **ước lượng** (`PLACEHOLDER` trong `src/Services/StatsService.php`): biểu đồ theo ngày/thứ, lượt quay/xem/thả tim theo thời gian, tỉ lệ chốt món, % so với kỳ trước. Cần: bảng sự kiện + endpoint nhận sự kiện từ web (đề xuất `api/public` hành động `events.track { type: 'view'|'spin'|'favorite'|'pick', foodId, meal? }`, chống spam theo IP/phiên), rồi viết lại `StatsService` tính từ đó và cộng dồn vào `foods.stats`. **Khi endpoint xong, báo frontend để nối phía web** (frontend sẽ gọi ở: xem chi tiết món, quay vòng quay/mở hộp quà, thả tim, chốt món).
 3. **Bảo vệ đăng nhập**: giới hạn số lần đăng nhập sai (theo IP + email, khoá tạm), bắt buộc HTTPS + cờ `Secure` cho cookie khi lên máy chủ thật, chống fixation đã có (`session_regenerate_id`). Thêm **đổi mật khẩu** (người dùng và admin) và **quên mật khẩu** nếu cần — hiện chưa có; frontend sẽ thêm form khi có API.
 4. **Đổi mật khẩu demo** (`admin123`, `123456` trong `config/config.php`) trước khi đưa lên môi trường thật; bỏ hẳn dữ liệu mẫu khỏi bản chạy thật.
@@ -119,7 +119,7 @@ Quy tắc `status` (quyết định ở **server** để frontend không tự t�
 6. **Các cài đặt đang chỉ được lưu, chưa có tác dụng** (trang Cài đặt admin): `general.maintenance` (chế độ bảo trì — cần: `foods.php`/`public` và web người dùng trả trạng thái bảo trì, chỉ admin vào được; báo frontend để làm trang bảo trì), `notify.*` (gửi email khi có đánh giá chờ duyệt / người dùng mới / báo cáo tuần), `security.twoFactor`, `security.autoLogout` (hiện phiên cố định 8 giờ), `security.ipRestrict`, `general.timezone`. Quyết định cái nào làm thật, cái nào bỏ khỏi giao diện (báo frontend để gỡ).
 7. **Phân quyền admin theo vai trò**: hiện `super` và `moderator` (điều hành viên) quyền như nhau. Định nghĩa moderator được làm gì (ví dụ không xoá món, không đổi cài đặt/quản trị viên) và trả 403 tương ứng; frontend sẽ ẩn nút theo `role` từ `me`.
 8. **Ảnh món**: hiện ảnh admin tải lên được thu nhỏ ở trình duyệt và lưu dạng data URL trong dữ liệu (≤ 2,5 MB). Nên có endpoint upload thật (lưu file vào thư mục, kiểm tra loại/kích thước, trả đường dẫn) — báo frontend để đổi phần tải ảnh.
-9. **Sao lưu/khôi phục**: hiện chỉ có sao lưu (`settings.backup` copy `storage/db`); chưa có khôi phục, chưa có sao lưu tự động theo lịch (`backup.freq` đang là chữ hiển thị).
+9. **Sao lưu/khôi phục**: MySQL đã có sao lưu SQL gồm schema và dữ liệu (`storage/backups/mysql-*.sql`), khôi phục vào database trống bằng MySQL client; chưa có giao diện khôi phục hoặc sao lưu tự động theo lịch (`backup.freq` đang là chữ hiển thị).
 10. **Gửi phản hồi qua email**: admin trả lời góp ý hiện chỉ lưu vào hệ thống, chưa gửi mail cho người gửi.
 11. **Hiệu năng công khai**: `foods.php` đọc và dựng lại toàn bộ danh sách mỗi lần tải trang (~90 KB, `no-cache`). Thêm `ETag`/`Last-Modified` (trả 304) hoặc cache theo thời điểm sửa món.
 12. **Tìm kiếm/lọc trên MySQL**: hiện lọc trong bộ nhớ (bỏ dấu bằng `Support/Str`). Trên MySQL dùng collation `utf8mb4_unicode_ci` / cột đã chuẩn hoá / FULLTEXT (đã có `ft_foods_name` trong schema).
@@ -146,10 +146,11 @@ Quy tắc `status` (quyết định ở **server** để frontend không tự t�
 
 ```
 C:\xampp\php\php.exe -S 127.0.0.1:8099 -t .           chạy thử nhanh ở thư mục gốc dự án (hoặc dùng XAMPP)
-node tools/tests/run.js backend-api                   109 kiểm tra API, dữ liệu tạm, không đụng dữ liệu thật
+node backend/tests/run-mysql.js                       API + lưu trữ MySQL, database hnag_test_* riêng
+node tools/tests/run.js backend-api                   109 kiểm tra API JSON, dữ liệu tạm
 node tools/tests/run.js                               toàn bộ test (backend + giao diện) — chạy trước khi báo xong
 ```
 
 - Thêm hành động mới: khai báo trong `api/<nhóm>/index.php` → Controller → Service → Repository, **viết test** trong `backend/tests/backend-api.js`.
-- Đổi dữ liệu khởi tạo: `node backend/scripts/export_seed.js` rồi xoá `backend/storage/`.
+- Đổi dữ liệu khởi tạo: `node backend/scripts/export_seed.js`, dùng seed cho database mới hoặc chủ động đặt lại demo trên MySQL.
 - Không sửa file dưới `frontend/` (các trang HTML là file **sinh ra**); cần frontend đổi gì thì ghi vào danh sách ở mục 4.

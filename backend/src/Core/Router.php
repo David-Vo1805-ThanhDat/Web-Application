@@ -30,7 +30,12 @@ final class Router
                 ($this->guard)($request->action);
             }
             [$class, $method] = $route;
-            $data = (new $class())->$method($request->params, $request);
+            // Acquire the PHP session before the database write lock on every endpoint (same lock order).
+            if ($request->action !== 'ping') Session::user();
+            $work = static fn () => (new $class())->$method($request->params, $request);
+            $readOnly = in_array($request->action, ['me', 'counts', 'search', 'dashboard', 'stats'], true)
+                || preg_match('/\.(get|list|stats|filterOptions|forFood)$/', $request->action);
+            $data = $request->action === 'ping' ? $work() : App::transaction($work, !$readOnly);
             self::send(200, ['data' => $data]);
         } catch (HttpException $e) {
             self::send($e->status, ['error' => $e->getMessage()]);

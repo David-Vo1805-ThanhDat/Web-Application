@@ -60,7 +60,7 @@ hom-nay-an-gi/
 │   │   │   └── pages/           ← logic riêng của từng trang (goi-y.js, kham-pha.js, ...)
 │   │   └── assets/
 │   ├── admin/                   ← BẢNG QUẢN TRỊ, có css/ js/ assets/ riêng (xem mục "Bảng quản trị" bên dưới)
-├── backend/                     ← PHP + dữ liệu (xem backend/README.md): api/ → src/{Controllers,Services,Repositories} → storage (JSON, sẵn schema MySQL). Người làm backend đọc [backend/HANDOFF.md](backend/HANDOFF.md)
+├── backend/                     ← PHP + MySQL trên máy tính (xem backend/README.md): api/ → src/{Controllers,Services,Repositories} → storage. Người làm backend đọc [backend/HANDOFF.md](backend/HANDOFF.md)
 │   ├── data/foods/              ← dữ liệu món ăn GỐC (mỗi danh mục 1 file JSON + _order.json) — chỉ dùng để khởi tạo CSDL lần đầu
 │   ├── scripts/                 ← export_seed.js (sinh data/seed), seed/ (bộ sinh dữ liệu mẫu), import_json_to_mysql.php
 │   ├── api/                     ← endpoint PHP: admin/ (bảng quản trị), auth/ (đăng nhập), user/ (dữ liệu người dùng), public/ (món ăn, góp ý, đánh giá công khai)
@@ -75,7 +75,7 @@ hom-nay-an-gi/
 
 ## Bảng quản trị (admin)
 
-Đăng nhập bằng `admin@homnayangi.vn` / `admin123` ở trang đăng nhập — tự chuyển vào bảng quản trị (`frontend/admin/dashboard.html`). Thiết kế theo file Figma "Admin Web"; toàn bộ dữ liệu lấy từ backend PHP (hiện lưu file JSON, sẵn schema MySQL). Số liệu tính từ dữ liệu thật của dự án.
+Đăng nhập bằng `admin@homnayangi.vn` / `admin123` ở trang đăng nhập — tự chuyển vào bảng quản trị (`frontend/admin/dashboard.html`). Thiết kế theo file Figma "Admin Web"; toàn bộ dữ liệu lấy từ backend PHP và lưu trên MySQL của máy tính. Số liệu tính từ dữ liệu thật của dự án.
 
 ```
 frontend/admin/
@@ -144,7 +144,7 @@ Món ăn do **backend** quản lý: thêm/sửa/ẩn/xoá ở Bảng quản tr�
 }
 ```
 
-Thêm món: dùng Bảng quản trị → Món ăn → "Thêm món mới". (Muốn thêm vào dữ liệu khởi tạo: thêm object có `id` duy nhất vào file JSON của danh mục trong `backend/data/foods/`, thêm `id` vào `_order.json`, chạy lại `export_seed.js`, rồi xoá `backend/storage/`.)
+Thêm món: dùng Bảng quản trị → Món ăn → "Thêm món mới", dữ liệu được lưu vào MySQL. Muốn thêm vào seed: thêm object có `id` duy nhất vào file JSON của danh mục trong `backend/data/foods/`, thêm `id` vào `_order.json`, chạy lại `export_seed.js`; seed dùng cho database mới hoặc thao tác chủ động đặt lại demo.
 
 ## Build (sinh lại dữ liệu và các trang HTML)
 
@@ -153,7 +153,7 @@ Các file `.html` được sinh bởi script Python (chỉ dùng thư viện chu
 ```bash
 python tools/build/build.py                  # build mọi trang (người dùng + admin)
 python tools/build/pages/kham_pha.py         # chỉ build một trang
-node backend/scripts/export_seed.js           # sinh lại dữ liệu khởi tạo backend từ backend/data/foods (xong xoá backend/storage)
+node backend/scripts/export_seed.js           # sinh lại seed, dùng cho database mới hoặc thao tác đặt lại demo
 ```
 
 Sửa nội dung/khung một trang → sửa `tools/build/pages/<trang>.py` (khung HTML) hoặc `frontend/user/js/pages/<trang>.js` (logic), rồi build lại. Khung chung (head, navbar, footer, danh sách CSS) nằm ở `tools/build/generate.py`.

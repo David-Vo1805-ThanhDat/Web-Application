@@ -11,6 +11,7 @@ declare(strict_types=1);
 require dirname(__DIR__) . '/src/bootstrap.php';
 
 use App\Core\App;
+use App\Storage\JsonFileStore;
 
 $force = in_array('--force', $argv, true);
 $cfg = App::config('mysql');
@@ -19,7 +20,8 @@ $pdo = new PDO(
     $cfg['user'], $cfg['password'],
     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
 );
-$store = App::store();
+$store = new JsonFileStore((string) App::config('storage_dir'), (string) App::config('seed_dir'),
+    (string) App::config('demo_admin_password'), (string) App::config('demo_user_password'));
 
 $ts = static fn (?int $ms): ?string => $ms === null ? null : date('Y-m-d H:i:s', intdiv($ms, 1000)) . '.' . str_pad((string) ($ms % 1000), 3, '0', STR_PAD_LEFT);
 $insert = static function (string $table, array $row) use ($pdo): void {
@@ -31,12 +33,17 @@ $insert = static function (string $table, array $row) use ($pdo): void {
 $tables = ['user_state', 'food_tags', 'food_diets', 'food_tastes', 'food_meals', 'food_instructions', 'food_ingredients', 'reviews', 'restaurants', 'feedback', 'audit_logs',
     'settings', 'admins', 'users', 'foods', 'tags', 'meals', 'diets', 'tastes', 'regions', 'categories'];
 if ($force) {
+    if ($pdo->query("SHOW TABLES LIKE 'app_storage_meta'")->fetchColumn() !== false) $pdo->exec('DELETE FROM app_storage_meta');
     $pdo->exec('SET FOREIGN_KEY_CHECKS=0');
     foreach ($tables as $t) $pdo->exec("TRUNCATE TABLE `$t`");
     $pdo->exec('SET FOREIGN_KEY_CHECKS=1');
-} elseif ((int) $pdo->query('SELECT COUNT(*) FROM foods')->fetchColumn() > 0) {
-    fwrite(STDERR, "Bảng foods đã có dữ liệu. Chạy lại với --force nếu muốn xoá và nạp lại.\n");
-    exit(1);
+} else {
+    foreach ($tables as $table) {
+        if ((int) $pdo->query("SELECT COUNT(*) FROM `$table`")->fetchColumn() > 0) {
+            fwrite(STDERR, "Bảng $table đã có dữ liệu. Script chỉ nhập vào database trống; --force sẽ xoá dữ liệu đích.\n");
+            exit(1);
+        }
+    }
 }
 
 $pdo->beginTransaction();

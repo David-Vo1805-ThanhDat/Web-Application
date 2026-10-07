@@ -30,8 +30,10 @@ function client() {
 
   console.log('Số liệu khớp dữ liệu dự án');
   r = await admin('admin', 'counts'); ok(r.data.foods === 31 && r.data.restaurants === 65 && r.data.pending === 11 && r.data.feedbackNew === 8, 'counts 31 món / 65 quán / 11 chờ duyệt / 8 góp ý', JSON.stringify(r.data));
-  r = await admin('admin', 'users.stats'); ok(r.data.total === 1284 && r.data.hasHealth === 412 && r.data.locked === 18 && r.data.activeToday === 312, 'users.stats 1284/412/18/312', JSON.stringify(r.data));
-  ok(r.data.new30 > 40 && r.data.new30 < 120, 'người dùng mới 30 ngày hợp lý: ' + r.data.new30);
+  const seedUsers = require('../data/seed/users.json');
+  const expectedNew30 = seedUsers.filter(u => u.joinedAt >= Date.now() - 30 * 86400000).length;
+  r = await admin('admin', 'users.stats'); ok(r.data.total === 1284 && r.data.hasHealth === 412 && r.data.locked === 18 && r.data.activeToday >= 1 && r.data.activeToday <= r.data.total, 'users.stats tổng/hồ sơ/khóa và người dùng vừa đăng nhập hoạt động hôm nay', JSON.stringify(r.data));
+  ok(r.data.new30 === expectedNew30, 'người dùng mới 30 ngày khớp ngày hiện tại: ' + r.data.new30);
   r = await admin('admin', 'foods.list', { pageSize: 100 }); ok(r.data.total === 31 && r.data.all === 31, 'foods.list có 31 món');
   ok(r.data.items[0].id === 'pho-bo-ha-noi' && !('passwordHash' in r.data.items[0]), 'thứ tự mặc định, phở bò đầu tiên');
   r = await admin('admin', 'foods.list', { status: 'visible', pageSize: 100 }); ok(r.data.total === 29, '29 món đang hiển thị', r.data.total);

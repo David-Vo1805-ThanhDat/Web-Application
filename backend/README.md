@@ -1,7 +1,7 @@
 # Backend — Hôm Nay Ăn Gì?
 
 PHP thuần (không framework, không Composer) chạy thẳng trên XAMPP. Toàn bộ dữ liệu của bảng quản trị nằm ở đây, giao diện chỉ gọi API.
-Hiện dữ liệu lưu bằng **file JSON**; cấu trúc **MySQL** (`database/schema.sql`) và script chuyển dữ liệu đã sẵn sàng để đổi sang MySQL sau này.
+Hiện dữ liệu lưu trên **MySQL của máy tính**, PHP chạy bằng Apache/XAMPP. `config/config.php` chọn `mysql` mặc định; `HNAG_STORAGE=json` dùng cho kiểm thử JSON hoặc chuyển dữ liệu.
 
 **Người phụ trách backend đọc [HANDOFF.md](HANDOFF.md) trước**: ranh giới với frontend, hợp đồng API, danh sách việc còn lại theo mức ưu tiên.
 
@@ -16,14 +16,14 @@ backend/
 │   ├── Controllers/           ← nhận tham số từ API, gọi Service, trả dữ liệu (mỏng)
 │   ├── Services/              ← LOGIC NGHIỆP VỤ: kiểm tra dữ liệu, quy tắc (không xoá món đang trong thực đơn sức khỏe...), ghi nhật ký
 │   ├── Repositories/          ← LỚP DUY NHẤT chạm vào nơi lưu dữ liệu (mỗi bảng 1 repository)
-│   ├── Storage/               ← DataStore (giao diện), JsonFileStore (đang dùng), Seeder (dữ liệu mẫu + mật khẩu demo)
+│   ├── Storage/               ← DataStore, MySqlStore, MySqlConnection, JsonFileStore, Seeder
 │   ├── Core/                  ← App (cấu hình), Router, Request, Session, HttpException
 │   └── Support/               ← Str (bỏ dấu tiếng Việt, slug), Paginator
 ├── config/config.php          ← cấu hình: kiểu lưu trữ, MySQL, phiên, mật khẩu demo
 ├── data/
 │   ├── foods/                 ← dữ liệu món ăn GỐC (mỗi danh mục 1 file JSON + _order.json) — chỉ dùng để khởi tạo CSDL lần đầu
 │   └── seed/                  ← dữ liệu mẫu khởi tạo CSDL lần đầu (sinh bằng scripts/export_seed.js)
-├── database/schema.sql        ← cấu trúc MySQL (21 bảng) cho khi chuyển sang MySQL
+├── database/schema.sql        ← cấu trúc MySQL + bảng app_storage_meta giữ thứ tự và trạng thái đồng bộ
 ├── scripts/
 │   ├── seed/                  ← bộ sinh dữ liệu mẫu (trạng thái/thống kê món, người dùng, đánh giá, góp ý, nhật ký, cài đặt)
 │   ├── export_seed.js         ← gộp data/foods + chạy seed/ → data/seed/*.json
@@ -38,7 +38,7 @@ Luồng một yêu cầu: `api/<nhóm>/index.php` → `Router` (kiểm tra đăn
 
 1. **XAMPP**: trỏ Apache vào thư mục dự án (xem README gốc), bấm Start. Mở `http://localhost:8080/frontend/` (theo cổng bạn đặt).
    Hoặc không cần Apache: `C:\xampp\php\php.exe -S 127.0.0.1:8099 -t .` (chạy ở thư mục gốc dự án) rồi mở `http://127.0.0.1:8099/frontend/`.
-2. Lần chạy đầu, backend tự tạo `storage/db/*.json` từ `data/seed/`. **Xoá thư mục `storage/`** (hoặc Cài đặt → "Xoá toàn bộ dữ liệu demo") để quay về dữ liệu mẫu.
+2. Với MySQL, database phải có schema và dữ liệu đã import (xem bên dưới). Apache và MySQL có thể thuộc hai bản cài đặt riêng, chỉ cần cấu hình đúng host/cổng. Nếu Apache trỏ trực tiếp vào thư mục dự án thì mở `http://localhost/frontend/`; nếu đặt dự án trong `htdocs/Web-Application` thì mở `http://localhost/Web-Application/frontend/`. Xóa file JSON không đặt lại dữ liệu MySQL.
 3. Đăng nhập ở `frontend/user/dang-nhap.html`:
 
 | Tài khoản | Mật khẩu | Vào đâu |
@@ -53,7 +53,7 @@ Với `php -S` (chỉ để phát triển) không có lớp bảo vệ này.
 
 Đổi mật khẩu demo ở `config/config.php` (chỉ áp dụng khi khởi tạo dữ liệu). **Trước khi đưa lên môi trường thật phải đổi mật khẩu quản trị.**
 
-Giao diện admin ở chế độ `auto` (`frontend/admin/js/core/config.js`): mở qua http và có PHP → gọi API này; mở bằng `file://` hoặc không có PHP → dùng dữ liệu mẫu trong trình duyệt.
+Giao diện admin gọi API PHP thật; cần mở qua HTTP với Apache hoặc `php -S`.
 
 ## API
 
@@ -79,21 +79,29 @@ Tính trực tiếp từ dữ liệu dự án: số món/quán/người dùng/đ
 **Ước lượng (đánh dấu `PLACEHOLDER` trong `Services/StatsService.php`)**: biểu đồ theo ngày/thứ, tỉ lệ chốt món, % thay đổi so với kỳ trước. Lý do: chưa có bảng ghi sự kiện (lượt quay, lượt xem, lượt tim theo thời gian);
 sẽ có khi web người dùng gửi sự kiện (quay, xem, thả tim) lên backend — việc này CHƯA làm; hiện web chỉ gửi yêu thích/hồ sơ/đánh giá/góp ý.
 
-## Chuyển sang MySQL
+## MySQL trên máy tính
 
-1. Bật MySQL trong XAMPP, tạo CSDL: `C:\xampp\mysql\bin\mysql.exe -u root < backend\database\schema.sql`
-2. Chỉnh `config/config.php` → `mysql` (host, user, mật khẩu).
-3. Nạp dữ liệu hiện tại: `C:\xampp\php\php.exe backend\scripts\import_json_to_mysql.php` (thêm `--force` để nạp lại). Đã kiểm tra: 31 món, 65 quán, 1.284 người dùng, 342 nhật ký, cả `user_state`, đánh giá và góp ý từ web… khớp 100%.
-4. Viết bản MySQL của các Repository (`src/Repositories/*`, dùng PDO — schema đã khớp từng trường) và cho `App::store()` trả về kho MySQL. Chỉ cần sửa tầng Repository, tầng **Service / Controller / API và toàn bộ giao diện giữ nguyên**.
+1. Khởi động MySQL đã cài trên máy và Apache trong XAMPP. PHP cần bật `pdo_mysql`.
+2. Điền `mysql` trong `config/config.php`: host, port, dbname, user, password. Có thể ghi đè bằng `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USER`, `DB_PASSWORD`.
+3. Database mới: import `database/schema.sql` bằng phpMyAdmin hoặc MySQL client, rồi chạy `C:\xampp\php\php.exe backend\scripts\import_json_to_mysql.php`. Script luôn đọc nguồn JSON, kể cả khi website đã chọn MySQL; từ chối database có dữ liệu. `--force` xóa dữ liệu đích trước khi nạp lại.
+4. Database đã import: **không import lại**. Chạy `C:\xampp\php\php.exe backend\scripts\mysql_setup.php` để sao lưu SQL và thêm bảng metadata. Script giữ dữ liệu nghiệp vụ và có thể chạy lại. Nguồn JSON chỉ dùng một lần ở bước setup để lấy thứ tự; lúc website hoạt động, dữ liệu đọc/ghi từ MySQL.
+5. Chọn `storage => mysql` trong cấu hình (mặc định). `App::store()` trả `MySqlStore`, ánh xạ schema SQL thành dữ liệu mà Repository/Service/frontend đang sử dụng.
+
+Các API thay đổi dữ liệu chạy trong một transaction, có khóa ghi theo database trước khi đọc để các thao tác cấp ID/đọc-sửa-ghi không ghi đè nhau. Tầng lưu trữ chỉ INSERT/UPDATE các bản ghi thay đổi và DELETE các bản ghi bị xóa, không TRUNCATE toàn bảng. Khóa này bảo vệ các request của ứng dụng; SQL được sửa trực tiếp bằng công cụ khác không dùng khóa ứng dụng. Cách này phù hợp quy mô hiện tại; để tăng khả năng xử lý đồng thời có thể chuyển tiếp từng Service sang truy vấn và khóa theo bản ghi.
+
+`app_storage_meta` giữ thứ tự danh sách, thứ tự liên kết món, các khóa dữ liệu đã lưu/xóa và dữ liệu riêng của tài khoản admin (admin không có khóa ngoại vào bảng users). Dữ liệu nghiệp vụ chính vẫn nằm ở `foods`, `users`, `restaurants`, `user_state` và các bảng liên quan.
+
+Sao lưu trong admin tạo `storage/backups/mysql-*.sql` gồm schema và dữ liệu. Khôi phục vào một database **trống**, sau đó sửa `dbname` để chọn database đã khôi phục. Đặt lại dữ liệu demo sao lưu trước, rồi xóa và nạp seed trong transaction; không chạy thao tác này nếu muốn giữ dữ liệu hiện tại.
 
 ## Sinh lại dữ liệu mẫu
 
-Khi đổi dữ liệu khởi tạo ở `data/foods/`: `node backend/scripts/export_seed.js`, sau đó xoá `storage/` để nạp lại. (Món ăn đang chạy được sửa ở Bảng quản trị, không cần đụng file này.)
+Khi đổi dữ liệu khởi tạo ở `data/foods/`: `node backend/scripts/export_seed.js`. Seed chỉ có hiệu lực với database mới hoặc khi chủ động đặt lại demo. Món đang chạy sửa ở Bảng quản trị sẽ được lưu vào MySQL.
 
 ## Kiểm thử
 
 ```
-node tools/tests/run.js                 chạy tất cả (tự dựng php -S với thư mục dữ liệu TẠM cho từng test, không đụng dữ liệu thật)
+node backend/tests/run-mysql.js         109 kiểm tra API + kiểm tra transaction, ghi đồng thời, state, backup/restore và reset trên database hnag_test_* riêng, tự dọn sau test
+node tools/tests/run.js                 chạy các test JSON/giao diện (ép HNAG_STORAGE=json, dữ liệu TẠM cho từng test)
 node tools/tests/run.js backend-api     109 kiểm tra API: phân quyền, số liệu khớp dữ liệu dự án, thêm/sửa/xoá, xác thực dữ liệu, món công khai, dữ liệu người dùng, góp ý, đánh giá
 node tools/tests/run.js user-sync       13 kiểm tra đồng bộ giữa 2 trình duyệt, đăng xuất dọn dữ liệu, chuyển dữ liệu cũ lên tài khoản
 node tools/tests/run.js admin-e2e-http  23 kiểm tra trên trình duyệt thật: đăng nhập, dashboard, lưu món, hết phiên

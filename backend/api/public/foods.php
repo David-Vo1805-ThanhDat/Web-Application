@@ -9,11 +9,12 @@ declare(strict_types=1);
 require dirname(__DIR__, 2) . '/src/bootstrap.php';
 
 use App\Services\PublicFoodService;
+use App\Core\App;
 
 header('Content-Type: application/javascript; charset=utf-8');
 header('Cache-Control: no-cache');
 try {
-    $foods = (new PublicFoodService())->catalog();
+    $foods = App::transaction(static fn () => (new PublicFoodService())->catalog(), false);
     echo '// Sinh tự động bởi backend/api/public/foods.php — KHÔNG sửa tay. Sửa món ở bảng quản trị.', "\n";
     echo 'const allFoods = ', json_encode($foods, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR), ";\n";
 } catch (Throwable $e) {

@@ -12,7 +12,7 @@ const http = require('http');
 const ROOT = path.resolve(__dirname, '../..');
 const PHP = process.env.PHP_BIN || 'C:/xampp/php/php.exe';
 const TEST_DIRS = [__dirname, path.join(ROOT, 'backend/tests')];   // test giao diện (tools/tests) + test backend (backend/tests)
-const SKIP = new Set(['lib', 'run', 'recipe-mock']);   // tệp hỗ trợ, không phải test
+const SKIP = new Set(['lib', 'run', 'recipe-mock', 'run-mysql']);   // tệp hỗ trợ, không phải test
 const fileOf = name => { const d = TEST_DIRS.find(dir => fs.existsSync(path.join(dir, name + '.js'))); if (!d) throw new Error('Không thấy test: ' + name); return path.join(d, name + '.js'); };
 
 function waitUp(port) {
@@ -27,7 +27,7 @@ function waitUp(port) {
 
 async function runOne(name, port) {
   const storage = fs.mkdtempSync(path.join(os.tmpdir(), 'hnag-test-'));
-  const server = spawn(PHP, ['-S', `127.0.0.1:${port}`, '-t', ROOT], { env: { ...process.env, HNAG_STORAGE_DIR: storage }, stdio: 'ignore' });
+  const server = spawn(PHP, ['-S', `127.0.0.1:${port}`, '-t', ROOT], { env: { ...process.env, HNAG_STORAGE: 'json', HNAG_STORAGE_DIR: storage }, stdio: 'ignore' });
   try {
     await waitUp(port);
     const r = spawnSync('node', [fileOf(name)], { stdio: 'inherit', env: { ...process.env, BASE_URL: `http://127.0.0.1:${port}/frontend`, API_BASE: `http://127.0.0.1:${port}/backend/api` } });
