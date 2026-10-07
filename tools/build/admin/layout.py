@@ -86,10 +86,11 @@ def _mobile_tabs(active):
     return "".join(tabs)
 
 
-GUARD = """<script>
+GUARD = """<script src="../../backend/api/auth/bootstrap.php"></script>
+<script>
 (function () {
   try {
-    var u = JSON.parse(localStorage.getItem('hom_nay_an_gi_user') || 'null');
+    var u = window.APP_USER;
     var page = location.pathname.split('/').pop() || 'dashboard.html';
     if (!u) { location.replace('../user/dang-nhap.html?next=' + encodeURIComponent('../admin/' + page)); }
     else if (u.role !== 'admin') { location.replace('../user/trang-chu.html'); }

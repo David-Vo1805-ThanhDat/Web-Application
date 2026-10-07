@@ -63,12 +63,12 @@ const dings = p => p.evaluate(() => window.__notes.filter(n => n.type === 'sine'
   console.log('Tắt tiếng');
   await p.click('#resultModal .btn-close'); await p.waitForSelector('#resultModal:not(.show)'); await p.waitForTimeout(600);
   await p.click('.wheel-sound-btn');
-  ok(await p.getAttribute('.wheel-sound-btn', 'aria-pressed') === 'false' && await p.evaluate(() => localStorage.getItem('hom_nay_an_gi_sound')) === 'off', 'bấm loa → tắt và ghi nhớ');
+  ok(await p.getAttribute('.wheel-sound-btn', 'aria-pressed') === 'false' && await p.evaluate(() => Sound.isEnabled()) === false, 'bấm loa → tắt âm thanh');
   const before = await p.evaluate(() => window.__notes.length);
   await spinAndWait(p);
   ok(await p.evaluate(n => window.__notes.length === n, before), 'tắt tiếng thì quay không phát tiếng nào (kể cả pháo giấy)', (await p.evaluate(() => window.__notes.length)) + ' vs ' + before);
   await p.reload({ waitUntil: 'networkidle' });
-  ok(await p.getAttribute('.wheel-sound-btn', 'aria-pressed') === 'false', 'tải lại trang vẫn nhớ đang tắt tiếng');
+  ok(await p.getAttribute('.wheel-sound-btn', 'aria-pressed') === 'true', 'tải lại trang dùng tùy chọn âm thanh mặc định');
 
   console.log('Từ chối chia sẻ vị trí → vẫn mở Google Maps thường');
   const ctx2 = await b.newContext({ viewport: { width: 1280, height: 900 } });   // không cấp quyền vị trí

@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return Backend.register(name, email, password);
     }).then(function (serverUser) {
       loginUser(serverUser);
-      return Sync.pull(); // dữ liệu có sẵn ở trình duyệt (nếu có) được chuyển lên tài khoản mới
+      return Sync.pull(); // tải dữ liệu của tài khoản từ database
     }).then(function () {
       btn.textContent = 'Đang vào…';
       window.location.href = next;

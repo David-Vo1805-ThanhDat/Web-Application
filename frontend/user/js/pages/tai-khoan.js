@@ -20,20 +20,19 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
     var newName = document.getElementById('nameInput').value.trim();
     if (!newName) { showToast('error', 'Tên hiển thị không được để trống'); return; }
-    var updated = updateUserName(newName);
-    paintUser(updated);
-    if (typeof renderAuthNav === 'function') renderAuthNav(); // cập nhật luôn chip tên trên navbar
-    showToast('success', 'Đã cập nhật tên hiển thị');
+    updateUserName(newName).then(function (updated) {
+      paintUser(updated); renderAuthNav(); showToast('success', 'Đã cập nhật tên hiển thị');
+    }).catch(function (error) { showToast('error', error.message); });
   });
 
   document.getElementById('clearDataBtn').addEventListener('click', function () {
     if (!window.confirm('Xoá hết món yêu thích và đăng xuất khỏi trình duyệt này?')) return;
-    try { localStorage.removeItem('hom_nay_an_gi_favorites'); } catch (e) {}
+    try { Sync.storage.removeItem('hom_nay_an_gi_favorites'); } catch (e) {}
     logoutUser();
   });
 
   /* ---- Hồ sơ sức khỏe (xem js/health.js): nhập 1 lần, dùng chung cho Thực Đơn Sức Khỏe
-     và Nhật Ký Sức Khỏe. Chỉ lưu trên trình duyệt này, giống mọi dữ liệu khác của trang. ---- */
+     và Nhật Ký Sức Khỏe. Lưu trong database của tài khoản. ---- */
   var activitySelect = document.getElementById('hpActivity');
   activitySelect.innerHTML = Object.keys(ACTIVITY_LABEL).map(function (key) {
     return '<option value="' + key + '">' + ACTIVITY_LABEL[key] + '</option>';

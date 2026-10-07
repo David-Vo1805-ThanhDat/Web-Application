@@ -60,8 +60,7 @@ final class MySqlStore implements DataStore
     private string $lockName;
     private bool $insideTransaction = false;
 
-    public function __construct(private array $config, private string $storageDir, private string $seedDir,
-        private string $adminPassword, private string $userPassword)
+    public function __construct(private array $config, private string $storageDir)
     {
         $this->pdo = MySqlConnection::open($config);
         $this->lockName = 'hnag:' . hash('sha256', $config['dbname']);
@@ -346,19 +345,6 @@ final class MySqlStore implements DataStore
             }
             fclose($handle);
         }, false);
-    }
-
-    public function reset(): void
-    {
-        $this->transaction(function (): void {
-            $this->backup();
-            foreach (self::SQL_TABLES as $table) $this->query("DELETE FROM `$table`");
-            foreach (self::TABLES as $table) {
-                $path = $this->seedDir . '/' . $table . '.json';
-                $rows = is_file($path) ? json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR) : [];
-                $this->write($table, Seeder::withDemoCredentials($table, $rows, $this->adminPassword, $this->userPassword));
-            }
-        });
     }
 
     private function query(string $sql, array $params = []): \PDOStatement

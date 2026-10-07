@@ -1,21 +1,4 @@
-/* =========================================================
-   data-utils.js
-   Chuyển từ lib/food-utils.ts (TypeScript) sang JavaScript thuần.
-   Toàn bộ logic hàm giữ nguyên 100% — chỉ bỏ khai báo kiểu (type/interface).
-   Yêu cầu: phải nhúng shared/data/foods.js (khai báo biến `allFoods`) TRƯỚC file này.
-
-   Ghi chú cấu trúc 1 món ăn (trước đây khai báo ở types/food.ts):
-   {
-     id, name, englishName, description,
-     category: 'mon-nuoc' | 'com' | 'cuon-tron' | 'an-vat' | 'lau-nuong' | 'chay' | 'trang-mieng',
-     mealType: ['sang'|'trua'|'toi'|'an-vat', ...],
-     price, priceRange, taste: [...], dietary: [...], region: 'Bắc'|'Trung'|'Nam'|'Quốc tế',
-     cookTimeMinutes, calories, rating, reviewCount, image, tags: [...],
-     ingredients: [{name, amount}], instructions: [...],
-     suggestedRestaurants: [{name, address, city, priceEstimate}],
-     nutrition: {protein, carbs, fat}, popular
-   }
-   ========================================================= */
+/* Filtering and recommendation helpers for the catalog supplied by the backend. */
 
 function getAllFoods() {
   return allFoods;
@@ -176,7 +159,7 @@ const FAVORITES_KEY = 'hom_nay_an_gi_favorites';
 function getFavoritesFromStorage() {
   if (typeof window === 'undefined') return [];
   try {
-    const data = localStorage.getItem(FAVORITES_KEY);
+    const data = Sync.storage.getItem(FAVORITES_KEY);
     return data ? JSON.parse(data) : [];
   } catch {
     return [];
@@ -193,7 +176,7 @@ function toggleFavoriteInStorage(id) {
     } else {
       updated = [...list, id];
     }
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(updated));
+    Sync.storage.setItem(FAVORITES_KEY, JSON.stringify(updated));
     // Bắn sự kiện để Navbar/FoodCard khác cập nhật ngay lập tức
     window.dispatchEvent(new Event('favorites-updated'));
     return !exists;

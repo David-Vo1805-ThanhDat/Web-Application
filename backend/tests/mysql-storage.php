@@ -77,7 +77,4 @@ try {
     $check((int) $restore->query('SELECT COUNT(*) FROM foods')->fetchColumn() === count($foods)
         && (int) $restore->query('SELECT COUNT(*) FROM users')->fetchColumn() === count($usersBefore), 'SQL backup restores into a fresh database');
 } finally { $pdo->exec("DROP DATABASE `$restoreName`"); }
-$store->reset();
-$check(count($store->read('foods')) === 31 && count($store->read('users')) === 1284 && $store->read('user_state') === [], 'demo reset restores data transactionally');
-$check($store->read('taxonomy')['CATEGORIES'][0]['slug'] === 'mon-nuoc', 'taxonomy order after reset');
 echo "$checks MySQL storage checks passed.\n";

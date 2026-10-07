@@ -53,6 +53,6 @@ var Backend = (function () {
     recipeSubmit: function (data) { return post(USER, 'recipe.submit', data); },
     login: function (email, password) { return call('login', { email: email, password: password }).then(unwrap); },
     register: function (name, email, password) { return call('register', { name: name, email: email, password: password }).then(unwrap); },
-    logout: function () { return call('logout').catch(function () {}); },
+    logout: function () { return call('logout').then(unwrap); },
   };
 })();

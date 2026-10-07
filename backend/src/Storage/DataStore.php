@@ -13,5 +13,4 @@ interface DataStore
 
     public function backup(): void;
 
-    public function reset(): void;
 }

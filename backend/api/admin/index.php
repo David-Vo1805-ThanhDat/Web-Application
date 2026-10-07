@@ -55,7 +55,6 @@ $routes = [
     'settings.get' => [System::class, 'settingsGet'],
     'settings.save' => [System::class, 'settingsSave'],
     'settings.backup' => [System::class, 'settingsBackup'],
-    'settings.resetDemo' => [System::class, 'settingsResetDemo'],
     'audit.list' => [System::class, 'auditList'],
 ];
 

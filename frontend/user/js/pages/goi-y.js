@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function loadPeople() {
     var fallback = [{ name: '', dish: '' }, { name: '', dish: '' }, { name: '', dish: '' }, { name: '', dish: '' }];
     try {
-      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      var saved = JSON.parse(Sync.storage.getItem(STORAGE_KEY));
       if (Array.isArray(saved) && saved.length >= 2) {
         return saved.slice(0, MAX_PEOPLE).map(function (p) {
           return { name: String(p.name || '').slice(0, 20), dish: p.dish || '' };
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return fallback;
   }
   function savePeople() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(people)); } catch (e) { /* không lưu được cũng không sao */ }
+    try { Sync.storage.setItem(STORAGE_KEY, JSON.stringify(people)); } catch (e) { /* không lưu được cũng không sao */ }
   }
 
   function renderPeople() {

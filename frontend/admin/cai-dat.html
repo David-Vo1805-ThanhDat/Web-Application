@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+<script src="../../backend/api/auth/bootstrap.php"></script>
 <script>
 (function () {
   try {
-    var u = JSON.parse(localStorage.getItem('hom_nay_an_gi_user') || 'null');
+    var u = window.APP_USER;
     var page = location.pathname.split('/').pop() || 'dashboard.html';
     if (!u) { location.replace('../user/dang-nhap.html?next=' + encodeURIComponent('../admin/' + page)); }
     else if (u.role !== 'admin') { location.replace('../user/trang-chu.html'); }
@@ -298,10 +299,6 @@
             <button class="btn btn-ghost" type="button" id="backupBtn">Sao lưu ngay</button>
           </section>
 
-          <section class="card card-stack card-warn">
-            <div class="card-titles"><h2 class="card-title">Vùng nguy hiểm</h2><p class="card-sub">Các thao tác không thể hoàn tác</p></div>
-            <button class="btn btn-danger" type="button" id="resetBtn">Xoá toàn bộ dữ liệu demo</button>
-          </section>
         </div>
       </div>
 

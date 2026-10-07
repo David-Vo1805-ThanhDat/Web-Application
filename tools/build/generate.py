@@ -7,7 +7,6 @@ import os
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT_DIR = os.path.join(ROOT, "frontend", "user")
 
-AUTH_KEY = "hom_nay_an_gi_user"
 
 def brand_mark():
     return """<span class="brand-mark">
@@ -39,7 +38,7 @@ def build_head(title, desc, page_css="", gated=False):
     guard = f"""<script>
 (function () {{
   try {{
-    if (!localStorage.getItem('{AUTH_KEY}')) {{
+    if (!window.APP_USER) {{
       var back = location.pathname.split('/').pop() + location.search;
       location.replace('dang-nhap.html?next=' + encodeURIComponent(back || 'trang-chu.html'));
     }}
@@ -48,7 +47,9 @@ def build_head(title, desc, page_css="", gated=False):
 </script>
 """ if gated else ""
     return f"""<head>
-{guard}<meta charset="UTF-8">
+<meta charset="UTF-8">
+<script src="../../backend/api/auth/bootstrap.php"></script>
+{guard}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -293,12 +294,12 @@ def scripts_block(extra=""):
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 {FOODS_SCRIPT}
+<script src="js/core/backend.js"></script>
+<script src="js/core/sync.js"></script>
 <script src="js/core/data-utils.js"></script>
 <script src="js/core/categories.js"></script>
 <script src="js/core/health.js"></script>
 <script src="js/core/main.js"></script>
-<script src="js/core/backend.js"></script>
-<script src="js/core/sync.js"></script>
 <script src="js/core/auth.js"></script>
 {extra}
 </body>

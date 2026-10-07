@@ -1,14 +1,10 @@
-/* widgets/sound.js — Âm thanh vòng quay, tạo trực tiếp bằng Web Audio (không cần file âm thanh):
-   - "tách" mỗi khi một ô đi qua mũi tên (nhanh lúc đầu, thưa dần khi vòng quay chậm lại — tự nhiên theo tốc độ quay)
-   - "ting-ting" ngắn khi dừng ở món trúng (sau đó hộp thoại kết quả còn có tiếng pháo giấy riêng trong core/main.js).
-   Trình duyệt chỉ cho phát tiếng sau một cú bấm của người dùng, nên bộ âm thanh được "mở khoá" ngay lúc bấm quay.
-   Có nút bật/tắt loa cạnh vòng quay; lựa chọn được nhớ trên thiết bị này (khoá localStorage riêng, không đồng bộ lên server). */
+/* Web Audio effects. Sound preference is temporary for the current page. */
 var WheelSound = (function () {
-  var KEY = 'hom_nay_an_gi_sound';   // 'off' = tắt; chưa có/khác = bật
   var ctx = null, master = null, lastTick = 0;
 
-  function enabled() { try { return localStorage.getItem(KEY) !== 'off'; } catch (e) { return true; } }
-  function setEnabled(on) { try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) { /* không nhớ được cũng không sao */ } }
+  var soundOn = true;
+  function enabled() { return soundOn; }
+  function setEnabled(on) { soundOn = !!on; }
 
   // Tạo/đánh thức AudioContext (gọi trong lúc xử lý cú bấm). Trả null nếu đang tắt hoặc trình duyệt không hỗ trợ.
   function ensure() {

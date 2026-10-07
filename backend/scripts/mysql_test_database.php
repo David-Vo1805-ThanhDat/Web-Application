@@ -18,6 +18,22 @@ try {
         $sql = (string) file_get_contents(BACKEND_ROOT . '/database/schema.sql');
         $sql = preg_replace('/^CREATE DATABASE[^;]+;\s*USE[^;]+;/m', '', $sql);
         $pdo->exec($sql);
+        $sourceName = (string) ($argv[3] ?? '');
+        if ($sourceName !== '') {
+            if (!preg_match('/^[a-zA-Z][a-zA-Z0-9_]*$/', $sourceName) || $sourceName === $name) throw new RuntimeException('Invalid source database');
+            $source = MySqlConnection::open(array_replace(App::config('mysql'), ['dbname'=>$sourceName]));
+            $source->beginTransaction();
+            try {
+                foreach (array_reverse(\App\Storage\MySqlStore::SQL_TABLES) as $table) {
+                    foreach ($source->query("SELECT * FROM `$table`")->fetchAll() as $row) {
+                        $columns = implode(',', array_map(static fn ($c) => "`$c`", array_keys($row)));
+                        $stmt = $pdo->prepare("INSERT INTO `$table` ($columns) VALUES (" . implode(',', array_fill(0, count($row), '?')) . ')');
+                        $stmt->execute(array_values($row));
+                    }
+                }
+                $source->commit();
+            } catch (Throwable $e) { $source->rollBack(); throw $e; }
+        }
     } elseif (($argv[1] ?? '') === 'drop') {
         $pdo->exec("DROP DATABASE IF EXISTS `$name`");
     } else {

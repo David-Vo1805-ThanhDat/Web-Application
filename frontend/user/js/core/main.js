@@ -5,8 +5,8 @@
      1. Bootstrap JS bundle
      2. AOS JS
      3. confetti (canvas-confetti CDN)
-     4. shared/data/foods.js (sinh từ backend/data, xem backend/scripts/build_data.py)
-     5. js/core/data-utils.js
+     4. backend/api/public/foods.php (MySQL catalog)
+     5. js/core/sync.js, rồi js/core/data-utils.js
      6. js/core/health.js (hồ sơ sức khỏe, nhật ký, lịch sử món ăn — showResultModal gọi logFoodHistory)
      7. js/core/main.js (file này)
      8. js/core/auth.js
