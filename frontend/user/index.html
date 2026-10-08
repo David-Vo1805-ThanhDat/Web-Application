@@ -32,7 +32,7 @@
 <link href="css/pages/health.css" rel="stylesheet">
 <link href="css/base/responsive.css" rel="stylesheet">
 <link href="css/base/motion.css" rel="stylesheet">
-
+<link href="css/components/chatbot.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column min-vh-100">
 <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
@@ -399,7 +399,28 @@
 <script src="js/core/backend.js"></script>
 <script src="js/core/sync.js"></script>
 <script src="js/core/auth.js"></script>
+
+<button class="chatbot-launcher" id="chatbot-launcher" type="button"
+        aria-label="Trò chuyện với FoodBot" aria-controls="chatbot-panel" aria-expanded="false">
+  <span aria-hidden="true">🍽️</span>
+</button>
+<section class="chatbot-panel" id="chatbot-panel" role="dialog" aria-labelledby="chatbot-title" hidden>
+  <header class="chatbot-header">
+    <h2 class="chatbot-title" id="chatbot-title"><span aria-hidden="true">🍽️</span> FoodBot</h2>
+    <button class="chatbot-close" id="chatbot-close" type="button" aria-label="Đóng trò chuyện">×</button>
+  </header>
+  <div class="chatbot-messages" id="chatbot-messages" role="log" aria-label="Tin nhắn với FoodBot"
+       aria-live="polite" aria-relevant="additions" aria-busy="false" tabindex="0"></div>
+  <form class="chatbot-form" id="chatbot-form">
+    <label class="chatbot-sr-only" for="chatbot-input">Tin nhắn cho FoodBot</label>
+    <input class="chatbot-input" id="chatbot-input" type="text" name="message"
+           placeholder="Bạn muốn ăn gì…" maxlength="2000" autocomplete="off" enterkeyhint="send">
+    <button class="chatbot-send" id="chatbot-send" type="submit">Gửi</button>
+  </form>
+  <span class="chatbot-sr-only" id="chatbot-status" role="status"></span>
+</section>
 <script src="js/widgets/effects.js"></script>
 <script src="js/pages/index.js"></script>
+<script src="js/widgets/chatbot.js"></script>
 </body>
 </html>

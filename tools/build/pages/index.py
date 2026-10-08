@@ -269,14 +269,37 @@ BODY = """
 </section>
 """
 
-EXTRA_SCRIPT = """<script src="js/widgets/effects.js"></script>
-<script src="js/pages/index.js"></script>"""
+CHATBOT = """
+<button class="chatbot-launcher" id="chatbot-launcher" type="button"
+        aria-label="Trò chuyện với FoodBot" aria-controls="chatbot-panel" aria-expanded="false">
+  <span aria-hidden="true">🍽️</span>
+</button>
+<section class="chatbot-panel" id="chatbot-panel" role="dialog" aria-labelledby="chatbot-title" hidden>
+  <header class="chatbot-header">
+    <h2 class="chatbot-title" id="chatbot-title"><span aria-hidden="true">🍽️</span> FoodBot</h2>
+    <button class="chatbot-close" id="chatbot-close" type="button" aria-label="Đóng trò chuyện">×</button>
+  </header>
+  <div class="chatbot-messages" id="chatbot-messages" role="log" aria-label="Tin nhắn với FoodBot"
+       aria-live="polite" aria-relevant="additions" aria-busy="false" tabindex="0"></div>
+  <form class="chatbot-form" id="chatbot-form">
+    <label class="chatbot-sr-only" for="chatbot-input">Tin nhắn cho FoodBot</label>
+    <input class="chatbot-input" id="chatbot-input" type="text" name="message"
+           placeholder="Bạn muốn ăn gì…" maxlength="2000" autocomplete="off" enterkeyhint="send">
+    <button class="chatbot-send" id="chatbot-send" type="submit">Gửi</button>
+  </form>
+  <span class="chatbot-sr-only" id="chatbot-status" role="status"></span>
+</section>
+"""
+
+EXTRA_SCRIPT = CHATBOT + """<script src="js/widgets/effects.js"></script>
+<script src="js/pages/index.js"></script>
+<script src="js/widgets/chatbot.js"></script>"""
 
 if __name__ == "__main__":
     html = page(
         "Hôm Nay Ăn Gì? Vòng quay may mắn chọn món trong 5 giây",
         'Web gợi ý món ăn ngẫu nhiên theo bữa ăn, ngân sách, khẩu vị và chế độ ăn. Tạo tài khoản miễn phí để quay vòng quay và khám phá hơn 31 món ăn.',
-        BODY, EXTRA_SCRIPT, navbar_mode="site"
+        BODY, EXTRA_SCRIPT, page_css='<link href="css/components/chatbot.css" rel="stylesheet">', navbar_mode="site"
     )
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)

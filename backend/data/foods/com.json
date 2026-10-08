@@ -24,7 +24,7 @@
     "calories": 680,
     "rating": 4.9,
     "reviewCount": 160,
-    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/com-tam-suon-bi-cha.jpg",
     "tags": [
       "Đặc sản Sài Gòn",
       "No lâu",
@@ -113,7 +113,7 @@
     "calories": 620,
     "rating": 4.9,
     "reviewCount": 118,
-    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/com-nieu-kho-quet.jpg",
     "tags": [
       "Cơm cháy giòn",
       "Kho quẹt dân dã",
@@ -193,7 +193,7 @@
     "calories": 580,
     "rating": 4.7,
     "reviewCount": 98,
-    "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/com-chien-duong-chau.jpg",
     "tags": [
       "Chắc bụng",
       "Hạt cơm tơi xốp",
@@ -276,7 +276,7 @@
     "calories": 720,
     "rating": 4.8,
     "reviewCount": 110,
-    "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/com-ga-xoi-mo.jpg",
     "tags": [
       "Da giòn rôm rốp",
       "Cơm rang sốt cà chua",
@@ -357,7 +357,7 @@
     "calories": 680,
     "rating": 4.9,
     "reviewCount": 94,
-    "image": "https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/vit-quay-bac-kinh.jpg",
     "tags": [
       "Da giòn màu cánh gián",
       "Lá móc mật",
@@ -438,7 +438,7 @@
     "calories": 480,
     "rating": 4.9,
     "reviewCount": 87,
-    "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/ca-hoi-nuong-bo-toi.jpg",
     "tags": [
       "Omega-3 dồi dào",
       "Món Âu sang trọng",

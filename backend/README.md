@@ -55,6 +55,31 @@ Với `php -S` (chỉ để phát triển) không có lớp bảo vệ này.
 
 Giao diện admin ở chế độ `auto` (`frontend/admin/js/core/config.js`): mở qua http và có PHP → gọi API này; mở bằng `file://` hoặc không có PHP → dùng dữ liệu mẫu trong trình duyệt.
 
+## FoodBot trên trang giới thiệu
+
+Chatbot được tích hợp vào `frontend/user/index.html`; `frontend/index.html` chuyển hướng tới trang này. Giao diện nằm ở `frontend/user/css/components/chatbot.css`, tương tác ở `frontend/user/js/widgets/chatbot.js`. Khung rộng 380px, vùng tin nhắn cao 420px và nút mở 60 × 60px trên màn hình đủ rộng/cao; khung tự thu gọn trên điện thoại.
+
+FoodBot chạy bằng PHP trên cùng Apache với website, không cần chạy Node.js hay cổng 3000. Các phần của bản chatbot cũ đã được chuyển vào dự án:
+
+| Thành phần | File hiện tại |
+|---|---|
+| HTML và các thẻ nhúng | `frontend/user/index.html`, sinh bởi `tools/build/pages/index.py` |
+| CSS | `frontend/user/css/components/chatbot.css` |
+| JavaScript trình duyệt | `frontend/user/js/widgets/chatbot.js` |
+| API nhận hội thoại | `backend/api/chat/index.php` |
+| Xác thực và phát SSE | `backend/src/Controllers/ChatController.php` |
+| Gọi Gemini REST | `backend/src/Services/ChatService.php` |
+| Chỉ dẫn FoodBot | `backend/prompts/foodbot.txt` |
+| Cấu hình | `backend/config/chatbot.php`, khóa riêng trong `backend/.env` |
+
+**Cấu hình trên XAMPP:** sao chép `.env.example` thành `.env` trong `backend/`, điền `GEMINI_API_KEY` và tùy chọn `GEMINI_MODEL`. Bản chuyển đổi cũng đọc tên `API_KEY` của chatbot cũ. Biến môi trường của Apache/PHP được ưu tiên hơn `.env`; PHP cần bật `curl` và `mbstring`. Khóa thật không được commit hoặc nhúng vào frontend. `backend/.htaccess` chặn truy cập cấu hình qua Apache với `AllowOverride All`; không dùng `php -S` thuần để phục vụ thư mục chứa `.env` ra mạng vì nó bỏ qua `.htaccess`.
+
+Model mặc định giữ `gemini-3.5-flash-lite`. Dịch vụ gọi `streamGenerateContent` và chuyển từng đoạn trả lời thành SSE, kết thúc bằng `event: done`; lỗi giữa luồng trả `event: error`. Xem [Gemini REST](https://ai.google.dev/api/generate-content) và [tài liệu model](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite). Lỗi 429/503 từ dịch vụ AI sẽ hiện nút **Thử lại**; đây không phải lỗi đăng nhập hoặc kho dữ liệu món ăn. Chatbot không dùng lớp `Storage` của backend hiện tại.
+
+Lịch sử nằm trong bộ nhớ của tab, được giới hạn khi gửi và mất khi tải lại trang. Hội thoại được gửi đến Gemini để trả lời. API chỉ nhận JSON POST `{ "history": [{ "role": "user", "parts": [{ "text": "hôm nay ăn gì" }] }] }`, tối đa 25 lượt user/model xen kẽ, 20.000 ký tự và 64 KiB cho một yêu cầu. Khung hiển thị văn bản, chữ đậm và liên kết bằng DOM, không chạy HTML từ tin nhắn.
+
+Sau khi sửa bố cục, chạy `python tools/build/pages/index.py` để sinh lại trang. Kiểm tra backend không gọi AI thật: `node backend/tests/chatbot-api.js`. Kiểm tra giao diện với Playwright và Chrome đã cài: `node tools/tests/chatbot.js`.
+
 ## API
 
 `POST backend/api/admin/index.php?action=<hành động>` với thân JSON, trả `{ "data": ... }` hoặc `{ "error": "..." }` (kèm mã HTTP 401 chưa đăng nhập, 403 không phải admin, 404, 409 xung đột, 422 dữ liệu sai).

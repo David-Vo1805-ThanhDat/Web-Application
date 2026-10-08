@@ -22,7 +22,7 @@
     "calories": 320,
     "rating": 4.9,
     "reviewCount": 84,
-    "image": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/che-buoi-an-giang.jpg",
     "tags": [
       "Tráng miệng",
       "Ngọt ngào",
@@ -105,7 +105,7 @@
     "calories": 420,
     "rating": 4.9,
     "reviewCount": 210,
-    "image": "https://images.unsplash.com/photo-1558857563-b371033873b8?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/tra-sua-tran-chau-duong-den.jpg",
     "tags": [
       "Thức uống quốc dân",
       "Giải nhiệt",
@@ -186,7 +186,7 @@
     "calories": 180,
     "rating": 5.0,
     "reviewCount": 320,
-    "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/ca-phe-sua-da-sai-gon.jpg",
     "tags": [
       "Tỉnh táo",
       "Thức uống quốc hồn",

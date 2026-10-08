@@ -24,7 +24,7 @@
     "calories": 520,
     "rating": 4.7,
     "reviewCount": 88,
-    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/banh-xeo-mien-tay.jpg",
     "tags": [
       "Giòn rụm",
       "Rau rừng",
@@ -108,7 +108,7 @@
     "calories": 610,
     "rating": 4.8,
     "reviewCount": 133,
-    "image": "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/bun-dau-mam-tom.jpg",
     "tags": [
       "Mẹt thập cẩm",
       "Gây nghiện",
@@ -197,7 +197,7 @@
     "calories": 280,
     "rating": 4.8,
     "reviewCount": 76,
-    "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/goi-cuon-tom-thit.jpg",
     "tags": [
       "Healthy",
       "Eat clean",
@@ -279,7 +279,7 @@
     "calories": 510,
     "rating": 4.9,
     "reviewCount": 130,
-    "image": "https://images.unsplash.com/photo-1529042410759-befb1204b468?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/nem-nuong-nha-trang.jpg",
     "tags": [
       "Đặc sản Nha Trang",
       "Nước chấm thần thánh",

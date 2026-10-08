@@ -24,7 +24,7 @@
     "calories": 340,
     "rating": 4.7,
     "reviewCount": 73,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_Fillet_Salad.JPG?width=800",
+    "image": "assets/images/salad-uc-ga-eat-clean.png",
     "tags": [
       "Eat clean",
       "Giảm cân",
@@ -109,7 +109,7 @@
     "calories": 380,
     "rating": 4.9,
     "reviewCount": 68,
-    "image": "https://images.unsplash.com/photo-1547928576-a4a33237cbc3?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/lau-nam-chay-thanh-tinh.jpg",
     "tags": [
       "Ăn chay thanh tịnh",
       "Nấm quý tươi",

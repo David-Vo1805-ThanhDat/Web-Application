@@ -24,7 +24,7 @@
     "calories": 480,
     "rating": 4.9,
     "reviewCount": 128,
-    "image": "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/pho-bo-ha-noi.jpg",
     "tags": [
       "Phổ biến",
       "Đặc sản",
@@ -117,7 +117,7 @@
     "calories": 560,
     "rating": 4.9,
     "reviewCount": 114,
-    "image": "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/bun-bo-hue.jpg",
     "tags": [
       "Cay nồng",
       "Đặc sản Huế",
@@ -208,7 +208,7 @@
     "calories": 590,
     "rating": 4.9,
     "reviewCount": 142,
-    "image": "https://images.unsplash.com/photo-1559847844-5315695dadae?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/bun-cha-ha-noi.jpg",
     "tags": [
       "Đặc sản Hà Nội",
       "Thơm mùi than hoa",
@@ -293,7 +293,7 @@
     "calories": 510,
     "rating": 4.7,
     "reviewCount": 92,
-    "image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/hu-tieu-nam-vang.jpg",
     "tags": [
       "Hủ tiếu khô",
       "Đặc sản phương Nam",
@@ -377,7 +377,7 @@
     "calories": 490,
     "rating": 4.8,
     "reviewCount": 81,
-    "image": "https://images.unsplash.com/photo-1612927601601-6638404737ce?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/mi-quang-ga-ta.jpg",
     "tags": [
       "Đặc sản Quảng Nam",
       "Bánh tráng nướng",
@@ -460,7 +460,7 @@
     "calories": 390,
     "rating": 4.8,
     "reviewCount": 65,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Banh_cuon.jpg?width=800",
+    "image": "assets/images/banh-cuon-nong.jpg",
     "tags": [
       "Ăn sáng nhẹ nhàng",
       "Hành phi thơm nức",
@@ -541,7 +541,7 @@
     "calories": 460,
     "rating": 4.8,
     "reviewCount": 102,
-    "image": "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/bun-rieu-cua-dong.jpg",
     "tags": [
       "Chua thanh giấm bỗng",
       "Cua đồng tươi",
@@ -625,7 +625,7 @@
     "calories": 360,
     "rating": 4.8,
     "reviewCount": 79,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Bowl_of_Vietnamese_bun_rieu_soup_with_tomato.jpg?width=800",
+    "image": "assets/images/canh-chua-ca-loc.webp",
     "tags": [
       "Món cơm gia đình",
       "Chua ngọt Nam Bộ",
@@ -709,7 +709,7 @@
     "calories": 390,
     "rating": 4.8,
     "reviewCount": 105,
-    "image": "https://images.unsplash.com/photo-1548946526-f69e2424cf45?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/chao-suon-sun-ha-noi.jpg",
     "tags": [
       "Cháo mịn như kem",
       "Sườn sụn giòn sần sật",
@@ -789,7 +789,7 @@
     "calories": 540,
     "rating": 4.6,
     "reviewCount": 140,
-    "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&auto=format&fit=crop&q=80",
+    "image": "assets/images/mi-cay-7-cap-do.jpg",
     "tags": [
       "Thách thức ăn cay",
       "Sôi ùng ục thố đất",
