@@ -63,10 +63,6 @@ BODY = f"""
             <button class="btn btn-ghost" type="button" id="backupBtn">Sao lưu ngay</button>
           </section>
 
-          <section class="card card-stack card-warn">
-            <div class="card-titles"><h2 class="card-title">Vùng nguy hiểm</h2><p class="card-sub">Các thao tác không thể hoàn tác</p></div>
-            <button class="btn btn-danger" type="button" id="resetBtn">Xoá toàn bộ dữ liệu demo</button>
-          </section>
         </div>
       </div>
 """

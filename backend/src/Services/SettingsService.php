@@ -62,15 +62,8 @@ final class SettingsService
         return $s['backup'];
     }
 
-    /** Xoá mọi thay đổi, quay về dữ liệu mẫu ban đầu. */
-    public function resetDemo(): array
-    {
-        App::store()->reset();
-        return ['ok' => true];
-    }
-
     /**
-     * Giữ mật khẩu băm của quản trị viên cũ; người mới mời nhận mật khẩu demo. Phải còn ít nhất 1 Super admin.
+     * Giữ mật khẩu băm của quản trị viên cũ; người mới phải có mật khẩu được nhập. Phải còn ít nhất 1 Super admin.
      * @param list<array<string,mixed>> $old
      * @param list<mixed> $incoming
      * @return list<array<string,mixed>>
@@ -89,10 +82,11 @@ final class SettingsService
             $emails[$email] = true;
             $role = ($a['role'] ?? '') === 'super' ? 'super' : 'moderator';
             $known = isset($a['id']) ? ($byId[$a['id']] ?? null) : null;
+            if ($known === null && mb_strlen((string) ($a['password'] ?? '')) < 8) throw new HttpException(422, 'Mật khẩu quản trị viên mới cần ít nhất 8 ký tự');
             $out[] = $known
                 ? ['id' => $known['id'], 'name' => mb_substr($name, 0, 80), 'email' => $email, 'role' => $role, 'passwordHash' => $known['passwordHash'] ?? '']
                 : ['id' => $nextId++, 'name' => mb_substr($name, 0, 80), 'email' => $email, 'role' => $role,
-                    'passwordHash' => password_hash((string) App::config('demo_admin_password'), PASSWORD_DEFAULT)];
+                    'passwordHash' => password_hash((string) $a['password'], PASSWORD_DEFAULT)];
         }
         if (!array_filter($out, static fn ($a) => $a['role'] === 'super')) throw new HttpException(422, 'Phải còn ít nhất một Super admin');
         return $out;

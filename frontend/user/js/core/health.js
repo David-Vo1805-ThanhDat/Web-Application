@@ -1,15 +1,4 @@
-/* =========================================================
-   health.js — hồ sơ sức khỏe, nhật ký cân nặng/BMI, lịch sử món đã chọn,
-   và bộ tạo thực đơn tuần theo nhu cầu calo. Toàn bộ vẫn lưu ở localStorage,
-   giống cách favorites/tài khoản đang lưu (xem data-utils.js/auth.js) —
-   không có server thật, dữ liệu chỉ nằm trên trình duyệt này.
-
-   CHÚ Ý: đây là công cụ tham khảo cho vui, không thay thế tư vấn dinh dưỡng
-   hay y tế chuyên môn. Công thức tính dùng Mifflin-St Jeor (ước lượng phổ
-   biến, không phải chỉ số đo đạc y khoa chính xác cho từng cá nhân).
-
-   Yêu cầu: nhúng SAU js/core/data-utils.js (dùng allFoods/filterFoods).
-   ========================================================= */
+/* Health profile, log and weekly plan use Sync.storage, backed by MySQL. */
 
 var HEALTH_PROFILE_KEY = 'hom_nay_an_gi_health_profile';
 var HEALTH_LOG_KEY = 'hom_nay_an_gi_health_log';
@@ -38,14 +27,14 @@ function toLocalDateStr(d) {
 /* ---------- Hồ sơ sức khỏe ---------- */
 function getHealthProfile() {
   try {
-    var raw = localStorage.getItem(HEALTH_PROFILE_KEY);
+    var raw = Sync.storage.getItem(HEALTH_PROFILE_KEY);
     return raw ? JSON.parse(raw) : null;
   } catch (e) { return null; }
 }
 
 function saveHealthProfile(profile) {
   profile.updatedAt = Date.now();
-  try { localStorage.setItem(HEALTH_PROFILE_KEY, JSON.stringify(profile)); } catch (e) {}
+  try { Sync.storage.setItem(HEALTH_PROFILE_KEY, JSON.stringify(profile)); } catch (e) {}
   return profile;
 }
 
@@ -89,7 +78,7 @@ function calcTargetCalories(profile) {
 /* ---------- Nhật ký cân nặng ---------- */
 function getHealthLog() {
   try {
-    var raw = localStorage.getItem(HEALTH_LOG_KEY);
+    var raw = Sync.storage.getItem(HEALTH_LOG_KEY);
     return raw ? JSON.parse(raw) : [];
   } catch (e) { return []; }
 }
@@ -100,7 +89,7 @@ function addHealthLogEntry(dateStr, weightKg, heightCm) {
   var log = getHealthLog().filter(function (e) { return e.date !== dateStr; });
   log.push({ date: dateStr, weightKg: weightKg, bmi: calcBMI(weightKg, heightCm), ts: Date.now() });
   log.sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
-  try { localStorage.setItem(HEALTH_LOG_KEY, JSON.stringify(log)); } catch (e) {}
+  try { Sync.storage.setItem(HEALTH_LOG_KEY, JSON.stringify(log)); } catch (e) {}
 
   var profile = getHealthProfile();
   if (profile) {
@@ -146,7 +135,7 @@ function groupHealthLog(period) {
    có kết quả mới, để Nhật Ký Sức Khỏe đối chiếu được "gần đây ăn gì". */
 function getFoodHistory() {
   try {
-    var raw = localStorage.getItem(FOOD_HISTORY_KEY);
+    var raw = Sync.storage.getItem(FOOD_HISTORY_KEY);
     return raw ? JSON.parse(raw) : [];
   } catch (e) { return []; }
 }
@@ -161,7 +150,7 @@ function logFoodHistory(food) {
     if (list[0] && list[0].id === food.id && Date.now() - list[0].ts < 4000) return;
     list.unshift({ id: food.id, name: food.name, image: food.image, calories: food.calories, ts: Date.now() });
     if (list.length > 30) list = list.slice(0, 30);
-    localStorage.setItem(FOOD_HISTORY_KEY, JSON.stringify(list));
+    Sync.storage.setItem(FOOD_HISTORY_KEY, JSON.stringify(list));
   } catch (e) {}
 }
 
@@ -247,12 +236,12 @@ function saveWeeklyPlan(days, options) {
     }),
     savedAt: Date.now(),
   };
-  try { localStorage.setItem(WEEKLY_PLAN_KEY, JSON.stringify(compact)); } catch (e) {}
+  try { Sync.storage.setItem(WEEKLY_PLAN_KEY, JSON.stringify(compact)); } catch (e) {}
 }
 
 function loadWeeklyPlan() {
   try {
-    var raw = localStorage.getItem(WEEKLY_PLAN_KEY);
+    var raw = Sync.storage.getItem(WEEKLY_PLAN_KEY);
     if (!raw) return null;
     var compact = JSON.parse(raw);
     var days = compact.days.map(function (day) {

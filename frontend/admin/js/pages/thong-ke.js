@@ -7,6 +7,7 @@
   var state = { range: '30', days: null }, last = null;
 
   function delta(el, v, suffix) {
+    if (v == null) { el.className = 'stat-note'; el.textContent = 'Chưa có dữ liệu theo kỳ'; return; }
     var up = v >= 0; el.className = 'stat-note ' + (up ? 'is-up' : 'is-down');
     el.innerHTML = D.icon(up ? 'up' : 'down') + (up ? '+' : '−') + F.dec(Math.abs(v), 1) + '%' + (suffix ? ' ' + suffix : '');
     var i = el.querySelector('.ic'); if (i) { i.style.width = '12px'; i.style.height = '12px'; }
@@ -17,10 +18,10 @@
     D.$('[data-stat=newUsers]').textContent = F.int(k.newUsers.value); delta(D.$('[data-note=newUsers]'), k.newUsers.delta, 'so với kỳ trước');
     D.$('[data-stat=spins]').textContent = F.int(k.spins.value); delta(D.$('[data-note=spins]'), k.spins.delta);
     D.$('[data-stat=favorites]').textContent = F.int(k.favorites.value); delta(D.$('[data-note=favorites]'), k.favorites.delta);
-    D.$('[data-stat=decideRate]').textContent = k.decideRate.value + '%'; delta(D.$('[data-note=decideRate]'), k.decideRate.delta, 'so với kỳ trước');
+    D.$('[data-stat=decideRate]').textContent = (k.decideRate.value == null ? '—' : k.decideRate.value + '%'); delta(D.$('[data-note=decideRate]'), k.decideRate.delta, 'so với kỳ trước');
     C.lines(D.$('#lineChart'), d.series);
     var total = d.byMeal.reduce(function (s, x) { return s + x.value; }, 0);
-    D.$('#mealSub').textContent = 'Tổng ' + F.int(total) + ' lượt trong ' + (state.days || { '7': 7, '30': 30, quy: 90 }[state.range]) + ' ngày';
+    D.$('#mealSub').textContent = 'Phân bổ ' + F.int(total) + ' lượt lưu trong database theo bữa của món';
     C.hbars(D.$('#mealBars'), d.byMeal);
     var regions = d.byRegion.slice().sort(function (a, b) { return b.count - a.count; });
     D.$('#regionSub').textContent = regions.reduce(function (s, x) { return s + x.count; }, 0) + ' món · ' + regions.length + ' vùng miền';
@@ -28,7 +29,7 @@
     D.$('#perfBody').innerHTML = d.performance.map(function (p, i) {
       return '<tr><td class="name"><div class="cell-main"><span class="thumb c-' + RANK[i % RANK.length] + '">' + D.initial(p.name) + '</span><a class="cell-title" href="mon-an-sua.html?id=' + encodeURIComponent(p.id) + '">' + D.esc(p.name) + '</a></div></td>' +
         '<td class="num muted-cell">' + F.int(p.views) + '</td><td class="num strong">' + F.int(p.spins) + '</td><td class="num muted-cell">' + F.int(p.favorites) + '</td>' +
-        '<td class="num good">' + p.decide + '%</td><td class="num"><span class="rating">' + D.icon('star') + '<b>' + F.dec(p.rating, 1) + '</b></span></td></tr>';
+        '<td class="num good">' + (p.decide == null ? '—' : p.decide + '%') + '</td><td class="num"><span class="rating">' + D.icon('star') + '<b>' + F.dec(p.rating, 1) + '</b></span></td></tr>';
     }).join('');
   }
 

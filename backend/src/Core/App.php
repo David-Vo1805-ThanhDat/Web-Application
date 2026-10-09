@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Core;
 
 use App\Storage\DataStore;
-use App\Storage\JsonFileStore;
+use App\Storage\MySqlStore;
 
 /** Điểm truy cập chung: cấu hình và nơi lưu dữ liệu (một bản duy nhất cho mỗi request). */
 final class App
@@ -21,9 +21,14 @@ final class App
     public static function store(): DataStore
     {
         if (self::$store === null) {
-            // Khi chuyển sang MySQL: trả về store/kho dữ liệu MySQL ở đây (xem backend/README.md).
-            self::$store = new JsonFileStore((string) self::config('storage_dir'), (string) self::config('seed_dir'));
+            self::$store = new MySqlStore(self::config('mysql'), (string) self::config('storage_dir'));
         }
         return self::$store;
+    }
+
+    public static function transaction(callable $work, bool $write = true): mixed
+    {
+        $store = self::store();
+        return $store instanceof MySqlStore ? $store->transaction($work, $write) : $work();
     }
 }

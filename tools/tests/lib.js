@@ -4,13 +4,12 @@ const ROOT = 'http://127.0.0.1:8099';
 const BASE = process.env.BASE_URL || ROOT + '/frontend';       // .../frontend
 const API = BASE.replace(/\/frontend$/, '') + '/backend/api';
 
-// Đăng nhập thật (cookie phiên PHP nằm trong context) rồi lưu thông tin như trang đăng nhập làm.
+// Đăng nhập thật; cookie phiên PHP được chia sẻ với các trang trong context.
 async function login(ctx, page, email, password) {
   const r = await ctx.request.post(`${API}/auth/index.php?action=login`, { data: { email, password } });
   const body = await r.json();
   if (!body.data) throw new Error('Đăng nhập test thất bại: ' + JSON.stringify(body));
   await page.goto(BASE + '/user/index.html');
-  await page.evaluate(u => localStorage.setItem('hom_nay_an_gi_user', JSON.stringify({ email: u.email, name: u.name, since: Date.now(), role: u.role, server: true })), body.data);
   return body.data;
 }
 const loginAdmin = (ctx, page) => login(ctx, page, 'admin@homnayangi.vn', 'admin123');

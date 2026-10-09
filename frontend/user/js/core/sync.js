@@ -1,87 +1,61 @@
-/* core/sync.js — Đồng bộ dữ liệu riêng của người dùng (yêu thích, hồ sơ sức khỏe, nhật ký, lịch sử món, thực đơn tuần, nhóm bạn)
-   lên backend (backend/api/user). SERVER là nơi lưu chính; localStorage chỉ là bản sao để các trang đọc nhanh, đồng bộ.
-   - Đăng nhập xong: Sync.pull() kéo dữ liệu từ server xuống localStorage (nếu server chưa có gì mà trình duyệt đang có dữ liệu
-     từ trước thì đẩy lên server — chuyển dữ liệu cũ một lần).
-   - Mỗi lần code trang ghi các khoá bên dưới vào localStorage, tự đẩy lên server sau ~0,3 giây (không cần sửa từng chỗ ghi).
-   - Đăng xuất: xoá các khoá này khỏi trình duyệt để người dùng khác dùng chung máy không thấy.
-   Chỉ hoạt động khi đã đăng nhập bằng backend thật (user.server === true); chưa đăng nhập thì không làm gì. */
+/* Account data comes from MySQL on every page. This module keeps only an in-memory view. */
 var Sync = (function () {
-  var API = '../../backend/api/user/index.php';
-  // khoá localStorage → khoá phía server
-  var MAP = {
-    hom_nay_an_gi_favorites: 'favorites',
-    hom_nay_an_gi_health_profile: 'healthProfile',
-    hom_nay_an_gi_health_log: 'healthLog',
-    hom_nay_an_gi_food_history: 'foodHistory',
-    hom_nay_an_gi_weekly_plan: 'weeklyPlan',
-    hom_nay_an_gi_group: 'group',
-  };
-  var rawSet = Storage.prototype.setItem, rawRemove = Storage.prototype.removeItem, rawGet = Storage.prototype.getItem;
-  var pending = {}; // khoá local → { timer, value }
-
-  function active() {
-    var u = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
-    return !!(u && u.server);
-  }
-
+  var MAP = { hom_nay_an_gi_favorites:'favorites', hom_nay_an_gi_health_profile:'healthProfile',
+    hom_nay_an_gi_health_log:'healthLog', hom_nay_an_gi_food_history:'foodHistory',
+    hom_nay_an_gi_weekly_plan:'weeklyPlan', hom_nay_an_gi_group:'group' };
+  var state = window.APP_STATE || {}, pending = {}, chains = {}, timers = {}, revisions = {}, inFlight = {};
   function call(action, params, keepalive) {
     var body = JSON.stringify(params || {});
-    return fetch(API + '?action=' + action, {
-      method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: body,
-      keepalive: !!keepalive && body.length < 60000, // cho phép gửi nốt khi vừa bấm chuyển trang
-    }).then(function (res) {
-      return res.json().then(function (b) { if (!res.ok || b.error) throw new Error(b.error || 'Lỗi máy chủ'); return b.data; });
+    return fetch('../../backend/api/user/index.php?action=' + action, {
+      method:'POST', credentials:'same-origin', headers:{ 'Content-Type':'application/json' }, body:body,
+      keepalive:!!keepalive && new Blob([body]).size < 60000,
+    }).then(function (r) { return r.json().then(function (b) {
+      if (!r.ok || b.error) throw new Error(b.error || 'Không lưu được dữ liệu'); return b.data;
+    }); });
+  }
+  function active() { return !!window.APP_USER; }
+  function send(key) {
+    clearTimeout(timers[key]);
+    if (!Object.prototype.hasOwnProperty.call(pending, key)) return chains[key] || Promise.resolve();
+    var value = pending[key], revision = revisions[key]; delete pending[key]; inFlight[key] = true;
+    chains[key] = (chains[key] || Promise.resolve()).catch(function () {}).then(function () {
+      return call('state.save', { key:key, value:value }, true);
+    }).catch(function (error) {
+      if (revisions[key] === revision && !Object.prototype.hasOwnProperty.call(pending, key)) pending[key] = value;
+      window.dispatchEvent(new CustomEvent('state-save-error', { detail:error.message })); throw error;
     });
+    var task = chains[key];
+    task.then(function () { if (chains[key] === task) delete inFlight[key]; }, function () { if (chains[key] === task) delete inFlight[key]; });
+    return task;
   }
-
-  function send(localKey) {
-    var p = pending[localKey]; if (!p) return Promise.resolve();
-    clearTimeout(p.timer); delete pending[localKey];
-    var value = null;
-    if (p.value !== null) { try { value = JSON.parse(p.value); } catch (e) { return Promise.resolve(); } }
-    return call('state.save', { key: MAP[localKey], value: value }, true).catch(function (e) { console.warn('[sync] không lưu được ' + MAP[localKey] + ':', e.message); });
-  }
-
-  function schedule(localKey, value) {
-    if (pending[localKey]) clearTimeout(pending[localKey].timer);
-    pending[localKey] = { value: value, timer: setTimeout(function () { send(localKey); }, 300) };
-  }
-
-  // Ghi vào localStorage như bình thường, rồi lên lịch đẩy lên server
-  Storage.prototype.setItem = function (k, v) {
-    rawSet.call(this, k, v);
-    try { if (this === window.localStorage && MAP[k] && active()) schedule(k, String(v)); } catch (e) { /* không ảnh hưởng việc ghi */ }
+  var storage = {
+    getItem:function (name) { var key = MAP[name]; return key && state[key] != null ? JSON.stringify(state[key]) : null; },
+    setItem:function (name, raw) {
+      var key = MAP[name]; if (!key || !active()) throw new Error('Bạn cần đăng nhập để lưu dữ liệu');
+      var value = JSON.parse(raw); state[key] = value; pending[key] = value; revisions[key] = (revisions[key] || 0) + 1;
+      clearTimeout(timers[key]); timers[key] = setTimeout(function () { send(key).catch(function () {}); }, 150);
+    },
+    removeItem:function (name) { this.setItem(name, 'null'); },
   };
-  Storage.prototype.removeItem = function (k) {
-    rawRemove.call(this, k);
-    try { if (this === window.localStorage && MAP[k] && active()) schedule(k, null); } catch (e) { /* không ảnh hưởng việc xoá */ }
-  };
-
-  // Kéo dữ liệu từ server xuống trình duyệt (gọi sau khi đăng nhập)
-  function pull() {
-    return call('state.get').then(function (state) {
-      var pushes = [];
-      Object.keys(MAP).forEach(function (localKey) {
-        var key = MAP[localKey];
-        if (key in state) {                          // server đã có (kể cả null = người dùng đã xoá)
-          if (state[key] === null) rawRemove.call(localStorage, localKey);
-          else rawSet.call(localStorage, localKey, JSON.stringify(state[key]));
-        } else if (rawGet.call(localStorage, localKey) !== null) { // server chưa có gì: nhận dữ liệu cũ đang có ở trình duyệt
-          schedule(localKey, rawGet.call(localStorage, localKey));
-          pushes.push(send(localKey));
-        }
-      });
-      return Promise.all(pushes);
-    }).catch(function (e) { console.warn('[sync] không kéo được dữ liệu:', e.message); });
+  function flush() {
+    var keys = Object.keys(pending).concat(Object.keys(chains)).filter(function (k,i,all) { return all.indexOf(k) === i; });
+    return Promise.all(keys.map(send));
   }
-
-  // Gửi ngay mọi thay đổi đang chờ (trước khi đăng xuất / chuyển trang)
-  function flush() { return Promise.all(Object.keys(pending).map(send)); }
-
-  // Xoá dữ liệu người dùng khỏi trình duyệt (khi đăng xuất)
-  function clearLocal() { Object.keys(MAP).forEach(function (k) { rawRemove.call(localStorage, k); }); }
-
-  window.addEventListener('pagehide', function () { flush(); });
-
-  return { pull: pull, flush: flush, clearLocal: clearLocal, active: active };
+  function pull() { return call('state.get').then(function (data) { state = data; }); }
+  function clearLocal() { state = {}; pending = {}; Object.keys(timers).forEach(function (k) { clearTimeout(timers[k]); }); }
+  window.addEventListener('pagehide', function () { flush().catch(function () {}); });
+  window.addEventListener('online', function () { flush().catch(function () {}); });
+  function unsaved() { return Object.keys(pending).length || Object.keys(inFlight).length; }
+  window.addEventListener('beforeunload', function (e) { if (unsaved()) { e.preventDefault(); e.returnValue = ''; } });
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href]');
+    if (!link || !unsaved() || link.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    var url = new URL(link.href, location.href);
+    if (url.origin !== location.origin || (url.pathname === location.pathname && url.search === location.search)) return;
+    e.preventDefault(); flush().then(function () { location.href = url.href; }).catch(function () {});
+  });
+  window.addEventListener('state-save-error', function (e) {
+    if (typeof showToast === 'function') showToast('error', e.detail + '. Thay đổi chưa lưu; hãy giữ trang mở và thử lại khi có mạng.');
+  });
+  return { storage:storage, pull:pull, flush:flush, clearLocal:clearLocal, active:active };
 })();

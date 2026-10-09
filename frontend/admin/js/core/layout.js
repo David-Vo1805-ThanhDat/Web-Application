@@ -17,7 +17,8 @@
     if (logout) logout.addEventListener('click', function () {
       window.Modal.confirm({ title: 'Đăng xuất?', text: 'Bạn sẽ thoát khỏi bảng quản trị trên trình duyệt này.', confirmText: 'Đăng xuất', danger: false, confirmIcon: 'logout' }).then(function (ok) {
         if (!ok) return;
-        window.Api.logout().then(function () { location.href = '../user/index.html'; });
+        window.Api.logout().then(function () { location.href = '../user/index.html'; })
+          .catch(function (err) { window.Toast.error('Đăng xuất thất bại', err.message); });
       });
     });
 

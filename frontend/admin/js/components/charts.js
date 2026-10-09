@@ -7,6 +7,7 @@
 
   // Cột chồng: data = [{ label, values: [sáng, trưa, ăn vặt, tối] }], unit = số lượt ứng với 1px chiều cao.
   function stack(el, data, opts) {
+    if (!data.length) { el.textContent = 'Chưa có dữ liệu sự kiện theo thời gian.'; return; }
     opts = opts || {};
     var tones = opts.tones || ['orange', 'blue', 'purple', 'green'], unit = opts.unit || 2.36;
     var max = Math.max.apply(null, data.map(function (d) { return d.values.reduce(function (a, b) { return a + b; }, 0); }));
@@ -41,6 +42,7 @@
 
   // Đường + vùng: series = [{ users, spins }]
   function lines(el, series) {
+    if (series.length < 2) { el.textContent = 'Chưa có dữ liệu sự kiện theo thời gian.'; return; }
     var W = 1000, H = 220, pad = 10, n = series.length;
     var max = Math.max.apply(null, series.map(function (p) { return Math.max(p.users, p.spins); })) * 1.08;
     function x(i) { return pad + i * (W - pad * 2) / (n - 1); }

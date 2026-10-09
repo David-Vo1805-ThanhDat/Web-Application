@@ -1,6 +1,7 @@
 // Kiểm thử API backend PHP (đăng nhập, phân quyền, CRUD, xác thực dữ liệu, số liệu khớp dữ liệu dự án).
 // Chạy server:  C:\xampp\php\php.exe -S 127.0.0.1:8099 -t .   (từ thư mục gốc dự án) rồi:  node tools/tests/backend-api.js
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8099/backend/api';
+const expected = JSON.parse(process.env.TEST_EXPECTED || '{}');
 let pass = 0, fail = 0;
 const ok = (cond, name, extra) => { cond ? pass++ : fail++; console.log((cond ? '  ✓ ' : '  ✗ ') + name + (cond ? '' : '   ' + (extra ?? ''))); };
 
@@ -29,18 +30,18 @@ function client() {
   r = await admin('admin', 'me'); ok(r.data.email === 'admin@homnayangi.vn', 'me trả đúng tài khoản');
 
   console.log('Số liệu khớp dữ liệu dự án');
-  r = await admin('admin', 'counts'); ok(r.data.foods === 31 && r.data.restaurants === 65 && r.data.pending === 11 && r.data.feedbackNew === 8, 'counts 31 món / 65 quán / 11 chờ duyệt / 8 góp ý', JSON.stringify(r.data));
-  r = await admin('admin', 'users.stats'); ok(r.data.total === 1284 && r.data.hasHealth === 412 && r.data.locked === 18 && r.data.activeToday === 312, 'users.stats 1284/412/18/312', JSON.stringify(r.data));
-  ok(r.data.new30 > 40 && r.data.new30 < 120, 'người dùng mới 30 ngày hợp lý: ' + r.data.new30);
-  r = await admin('admin', 'foods.list', { pageSize: 100 }); ok(r.data.total === 31 && r.data.all === 31, 'foods.list có 31 món');
+  r = await admin('admin', 'counts'); ok(r.data.foods === expected.foods && r.data.restaurants === expected.restaurants && r.data.pending === expected.pending && r.data.feedbackNew === expected.feedbackNew, 'counts khớp database', JSON.stringify(r.data));
+  r = await admin('admin', 'users.stats'); ok(r.data.total === expected.users && r.data.hasHealth === expected.hasHealth && r.data.locked === expected.locked && r.data.activeToday >= 1 && r.data.activeToday <= r.data.total, 'users.stats tổng/hồ sơ/khóa và người dùng vừa đăng nhập hoạt động hôm nay', JSON.stringify(r.data));
+  ok(r.data.new30 >= 0 && r.data.new30 <= r.data.total, 'người dùng mới 30 ngày tính từ database: ' + r.data.new30);
+  r = await admin('admin', 'foods.list', { pageSize: 100 }); ok(r.data.total === expected.foods && r.data.all === expected.foods, 'foods.list khớp số món trong database');
   ok(r.data.items[0].id === 'pho-bo-ha-noi' && !('passwordHash' in r.data.items[0]), 'thứ tự mặc định, phở bò đầu tiên');
-  r = await admin('admin', 'foods.list', { status: 'visible', pageSize: 100 }); ok(r.data.total === 29, '29 món đang hiển thị', r.data.total);
+  r = await admin('admin', 'foods.list', { status: 'visible', pageSize: 100 }); ok(r.data.total === expected.visible, 'số món hiển thị khớp database', r.data.total);
   r = await admin('admin', 'foods.list', { q: 'pho bo', pageSize: 100 }); ok(r.data.total >= 1 && r.data.items[0].name.includes('Phở'), 'tìm không dấu "pho bo"');
-  r = await admin('admin', 'taxonomy.get'); ok(r.data.CATEGORIES[0].count === 10 && r.data.TASTES.find(t => t.slug === 'dam-da').count === 24, 'danh mục Món nước 10, khẩu vị đậm đà 24');
+  r = await admin('admin', 'taxonomy.get'); ok(r.data.CATEGORIES[0].count === expected.firstCategoryCount && r.data.TASTES.find(t => t.slug === 'dam-da').count === expected.damDa, 'thống kê danh mục và khẩu vị khớp database');
   ok(r.data.TAGS.length > 50 && r.data.TAGS[0].count >= 1, 'thẻ lấy từ dữ liệu thật: ' + r.data.TAGS.length);
-  r = await admin('admin', 'restaurants.stats'); ok(r.data.total === 65 && r.data.cities.length === 7 && r.data.foodsWithoutRestaurant === 0, 'quán: 65, 7 thành phố, 0 món thiếu quán', JSON.stringify(r.data));
-  r = await admin('admin', 'reviews.stats'); ok(r.data.total === 3581 && Math.abs(r.data.avg - 4.842) < 0.001, 'đánh giá 3581, TB 4,842', JSON.stringify(r.data));
-  r = await admin('admin', 'dashboard', { range: '30' }); ok(r.data.kpis.foods.value === 29 && r.data.kpis.spins.value === 9412 && r.data.categories.length === 7, 'dashboard: 29 hiển thị, 9412 lượt quay', JSON.stringify(r.data.kpis));
+  r = await admin('admin', 'restaurants.stats'); ok(r.data.total === expected.restaurants && r.data.cities.length === expected.cities && r.data.foodsWithoutRestaurant === expected.withoutRestaurant, 'thống kê quán khớp database', JSON.stringify(r.data));
+  r = await admin('admin', 'reviews.stats'); ok(r.data.total === expected.reviewCount && Math.abs(r.data.avg - expected.rating) < 0.001, 'thống kê đánh giá khớp database', JSON.stringify(r.data));
+  r = await admin('admin', 'dashboard', { range: '30' }); ok(r.data.kpis.foods.value === expected.visible && r.data.kpis.spins.value === expected.spins && r.data.categories.length === expected.categories, 'dashboard khớp số liệu database', JSON.stringify(r.data.kpis));
   r = await admin('admin', 'stats', { range: '30' }); ok(r.data.byMeal.reduce((s, x) => s + x.value, 0) > 9000 && r.data.performance.length === 8, 'thống kê: theo bữa + 8 món hiệu suất');
 
   console.log('Món ăn: thêm / sửa / xác thực / xoá');
@@ -48,11 +49,11 @@ function client() {
   r = await admin('admin', 'foods.save', { food: { name: 'Món Test', description: 'x', price: 0, category: 'com', region: 'Nam' } }); ok(r.status === 422, 'giá 0 → 422');
   r = await admin('admin', 'foods.save', { food: { name: 'Món Test', description: 'x', price: 1000, category: 'khong-co', region: 'Nam' } }); ok(r.status === 422, 'danh mục không tồn tại → 422');
   r = await admin('admin', 'foods.save', { food: { name: 'Món Test Đặc Biệt', description: 'Mô tả', price: 45000, category: 'com', region: 'Nam', mealType: ['trua', 'bay'], tags: ['Thẻ Test'], ingredients: [{ name: 'Gạo', amount: '1 chén' }, { name: ' ', amount: '' }], instructions: ['Nấu', ''], status: 'visible' }, restaurants: [{ name: 'Quán Test', address: '1 Test', city: 'TP.HCM', priceText: '30.000đ - 50.000đ' }] });
-  ok(r.status === 200 && r.data.id === 'mon-test-dac-biet' && r.data.no === 32, 'thêm món mới, id slug', JSON.stringify(r.data).slice(0, 120));
+  ok(r.status === 200 && r.data.id === 'mon-test-dac-biet' && r.data.no === expected.foods + 1, 'thêm món mới, id slug', JSON.stringify(r.data).slice(0, 120));
   ok(JSON.stringify(r.data.mealType) === '["trua"]' && r.data.ingredients.length === 1 && r.data.instructions.length === 1, 'lọc giá trị không hợp lệ (bữa lạ, nguyên liệu trống)');
   const id = r.data.id;
   r = await admin('admin', 'foods.get', { id }); ok(r.data.restaurants.length === 1 && r.data.restaurants[0].priceMin === 30000, 'quán gợi ý được lưu kèm món');
-  r = await admin('admin', 'foods.save', { food: { ...r.data, name: 'Món Test Sửa', restaurants: undefined }, restaurants: [] }); ok(r.data.name === 'Món Test Sửa' && r.data.no === 32, 'sửa món giữ số thứ tự');
+  r = await admin('admin', 'foods.save', { food: { ...r.data, name: 'Món Test Sửa', restaurants: undefined }, restaurants: [] }); ok(r.data.name === 'Món Test Sửa' && r.data.no === expected.foods + 1, 'sửa món giữ số thứ tự');
   r = await admin('admin', 'foods.get', { id }); ok(r.data.restaurants.length === 0, 'danh sách quán được thay bằng rỗng');
   r = await admin('admin', 'foods.bulk', { ids: [id], action: 'hide' }); ok(r.data.count === 1, 'ẩn hàng loạt');
   r = await admin('admin', 'foods.remove', { id: 'bun-bo-hue' }); ok(r.status === 409, 'món nhiều yêu thích không xoá được → 409', r.error);
@@ -82,27 +83,27 @@ function client() {
   r = await client()('auth', 'login', { email: 'nguyenvana@gmail.com', password: '123456' }); ok(r.status === 403, 'tài khoản vừa khoá không đăng nhập được');
   r = await admin('admin', 'users.setStatus', { id: uid, status: 'active' }); ok(r.data.status === 'active', 'mở khoá');
   r = await admin('admin', 'users.setStatus', { id: uid, status: 'bay-bay' }); ok(r.status === 422, 'trạng thái lạ → 422');
-  r = await admin('admin', 'reviews.list', { status: 'pending', pageSize: 100 }); ok(r.data.total === 11, '11 đánh giá chờ duyệt');
+  r = await admin('admin', 'reviews.list', { status: 'pending', pageSize: 100 }); ok(r.data.total === expected.pending, 'số đánh giá chờ duyệt khớp database');
   const rvId = r.data.items[0].id;
   r = await admin('admin', 'reviews.setStatus', { id: rvId, status: 'approved' }); ok(r.data.status === 'approved', 'duyệt đánh giá');
   r = await admin('admin', 'reviews.reply', { id: rvId, text: '   ' }); ok(r.status === 422, 'trả lời rỗng → 422');
   r = await admin('admin', 'reviews.reply', { id: rvId, text: 'Cảm ơn bạn' }); ok(r.data.reply === 'Cảm ơn bạn', 'trả lời đánh giá');
   r = await admin('admin', 'feedback.list', { pageSize: 100 }); const fb = r.data.items.find(x => x.status === 'new');
   r = await admin('admin', 'feedback.reply', { id: fb.id, text: 'Đã ghi nhận' }); ok(r.data.status === 'replied', 'phản hồi góp ý → replied');
-  r = await admin('admin', 'counts'); ok(r.data.pending === 10 && r.data.feedbackNew === 7, 'số đếm cập nhật sau thao tác', JSON.stringify(r.data));
+  r = await admin('admin', 'counts'); ok(r.data.pending === expected.pending - 1 && r.data.feedbackNew === expected.feedbackNew - 1, 'số đếm cập nhật sau thao tác', JSON.stringify(r.data));
 
   console.log('Đăng ký & cài đặt & nhật ký');
   const em = `test${Date.now()}@example.com`;
   r = await client()('auth', 'register', { name: 'Người Test', email: em, password: '12345' }); ok(r.status === 422, 'mật khẩu ngắn → 422');
   r = await client()('auth', 'register', { name: 'Người Test', email: em, password: '123456' }); ok(r.status === 200 && r.data.role === 'user', 'đăng ký người mới');
   r = await client()('auth', 'register', { name: 'Người Test', email: em, password: '123456' }); ok(r.status === 409, 'email trùng → 409');
-  r = await admin('admin', 'users.stats'); ok(r.data.total === 1285, 'tổng người dùng tăng thành 1285');
-  r = await admin('admin', 'settings.get'); ok(r.data.admins.length === 2 && !('passwordHash' in r.data.admins[0]), 'settings.get không lộ mật khẩu băm');
+  r = await admin('admin', 'users.stats'); ok(r.data.total === expected.users + 1, 'tổng người dùng tăng một sau đăng ký');
+  r = await admin('admin', 'settings.get'); ok(r.data.admins.length === expected.admins && !('passwordHash' in r.data.admins[0]), 'settings.get không lộ mật khẩu băm');
   const s = r.data;
   r = await admin('admin', 'settings.save', { settings: { ...s, general: { ...s.general, contactEmail: 'khong-hop-le' } } }); ok(r.status === 422, 'email liên hệ sai → 422');
   r = await admin('admin', 'settings.save', { settings: { ...s, admins: s.admins.map(a => ({ ...a, role: 'moderator' })) } }); ok(r.status === 422, 'không còn Super admin → 422');
-  r = await admin('admin', 'settings.save', { settings: { ...s, notify: { ...s.notify, newUser: true }, admins: [...s.admins, { name: 'Admin Mới', email: 'moi@homnayangi.vn', role: 'moderator' }] } }); ok(r.status === 200 && r.data.admins.length === 3 && r.data.notify.newUser === true, 'lưu cài đặt + mời admin mới');
-  r = await client()('auth', 'login', { email: 'moi@homnayangi.vn', password: 'admin123' }); ok(r.status === 200 && r.data.role === 'admin', 'admin mới đăng nhập được (mật khẩu demo)');
+  r = await admin('admin', 'settings.save', { settings: { ...s, notify: { ...s.notify, newUser: true }, admins: [...s.admins, { name: 'Admin Mới', email: 'moi@homnayangi.vn', role: 'moderator', password: 'test-admin-password' }] } }); ok(r.status === 200 && r.data.admins.length === expected.admins + 1 && r.data.notify.newUser === true, 'lưu cài đặt + mời admin mới');
+  r = await client()('auth', 'login', { email: 'moi@homnayangi.vn', password: 'test-admin-password' }); ok(r.status === 200 && r.data.role === 'admin', 'admin mới đăng nhập được bằng mật khẩu đã nhập');
   r = await admin('admin', 'settings.backup'); ok(/^Hôm nay/.test(r.data.last), 'sao lưu dữ liệu');
   r = await admin('admin', 'audit.list', { days: 1, pageSize: 100 }); ok(r.data.total >= 15 && r.data.items[0].ts >= r.data.items[1].ts, 'nhật ký ghi lại thao tác, mới nhất trước: ' + r.data.total);
   ok(r.data.items.some(e => e.text.includes('Món Test')), 'nhật ký có thao tác thêm món test');
@@ -118,15 +119,15 @@ function client() {
   r = await fetch(`${BASE}/public/foods.php`); const js = await r.text();
   ok(r.status === 200 && /javascript/.test(r.headers.get('content-type')) && js.includes('const allFoods = ['), 'foods.php phát ra script allFoods');
   const catalog = new Function(js + '; return allFoods;')();
-  ok(catalog.length === 29 && catalog[0].id === 'pho-bo-ha-noi', 'chỉ món đang hiển thị (29), đúng thứ tự dự án', catalog.length);
+  ok(catalog.length === expected.visible && catalog[0].id === 'pho-bo-ha-noi', 'chỉ món hiển thị, đúng thứ tự database', catalog.length);
   ok(catalog[0].suggestedRestaurants.length === 3 && catalog[0].suggestedRestaurants[0].priceEstimate, 'kèm quán gợi ý dạng web dùng (priceEstimate)');
   ok(!('status' in catalog[0]) && !('stats' in catalog[0]) && !('createdBy' in catalog[0]), 'không lộ trường quản trị (status, stats, createdBy)');
-  r = await anon('public', 'foods.list'); ok(r.data.length === 29, 'foods.list JSON công khai');
+  r = await anon('public', 'foods.list'); ok(r.data.length === expected.visible, 'foods.list JSON công khai');
   r = await adm('admin', 'foods.save', { food: { name: 'Món Công Khai Test', description: 'd', price: 10000, category: 'com', region: 'Nam', status: 'visible' } });
   const pubId = r.data.id;
-  r = await anon('public', 'foods.list'); ok(r.data.length === 30 && r.data.some(f => f.id === pubId), 'admin thêm món → hiện ngay trên web người dùng');
+  r = await anon('public', 'foods.list'); ok(r.data.length === expected.visible + 1 && r.data.some(f => f.id === pubId), 'admin thêm món → hiện ngay trên web người dùng');
   await adm('admin', 'foods.bulk', { ids: [pubId], action: 'hide' });
-  r = await anon('public', 'foods.list'); ok(r.data.length === 29, 'admin ẩn món → biến mất khỏi web người dùng');
+  r = await anon('public', 'foods.list'); ok(r.data.length === expected.visible, 'admin ẩn món → biến mất khỏi web người dùng');
   await adm('admin', 'foods.remove', { id: pubId });
 
   console.log('Dữ liệu riêng của người dùng (state)');

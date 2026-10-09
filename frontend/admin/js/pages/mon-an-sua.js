@@ -120,7 +120,7 @@
     var fr = new FileReader();
     fr.onload = function () {
       var img = new Image();
-      img.onload = function () { // thu nhỏ để lưu vừa localStorage (bản mock); bản PHP sẽ upload file thật
+      img.onload = function () { // thu nhỏ ảnh trước khi lưu qua API vào database
         var k = Math.min(1, 800 / Math.max(img.width, img.height)), c = document.createElement('canvas');
         c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
         image = c.toDataURL('image/jpeg', 0.8); D.$('#fImage').value = ''; markDirty(); renderImage();

@@ -21,7 +21,6 @@ final class SystemController
     public function settingsGet(): array { return (new SettingsService())->get(); }
     public function settingsSave(array $p): array { return (new SettingsService())->save($p); }
     public function settingsBackup(): array { return (new SettingsService())->backup(); }
-    public function settingsResetDemo(): array { return (new SettingsService())->resetDemo(); }
 
     public function auditList(array $p): array { return (new AuditService())->list($p); }
 }

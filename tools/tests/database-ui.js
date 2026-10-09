@@ -1,0 +1,50 @@
+const assert = require('node:assert/strict');
+const { chromium } = require('playwright');
+const { BASE, API } = require('./lib');
+(async () => {
+  const browser = await chromium.launch({channel:'chrome'});
+  const a = await browser.newContext(), b = await browser.newContext();
+  const page = await a.newPage(), other = await b.newPage();
+  const errors = [];
+  page.on('pageerror', e => errors.push(e.message));
+  const email = 'database-ui-' + Date.now() + '@example.com', password = 'ui-test-password';
+  try {
+    await page.goto(BASE + '/user/index.html');
+    await page.evaluate(() => localStorage.setItem('hom_nay_an_gi_user', JSON.stringify({role:'admin',name:'Fake'})));
+    await page.goto(BASE + '/admin/dashboard.html');
+    await page.waitForURL(/dang-nhap/);
+    console.log('OK: browser storage cannot grant access');
+    const response = await a.request.post(API + '/auth/index.php?action=register', {data:{name:'Database User',email,password}});
+    assert.equal(response.status(),200);
+    await page.goto(BASE + '/user/tai-khoan.html', {waitUntil:'networkidle'});
+    assert.equal(await page.textContent('#acctName'),'Database User');
+    await page.evaluate(async () => {
+      localStorage.setItem('hom_nay_an_gi_favorites','["fake-food"]');
+      toggleFavoriteInStorage('pho-bo-ha-noi');
+      saveHealthProfile({heightCm:170,weightKg:60,age:25,gender:'male',activity:'moderate',goal:'maintain'});
+      await Sync.flush();
+    });
+    await page.reload({waitUntil:'networkidle'});
+    assert.deepEqual(await page.evaluate(() => getFavoritesFromStorage()),['pho-bo-ha-noi']);
+    assert.equal(await page.evaluate(() => getHealthProfile().weightKg),60);
+    assert.equal(await page.evaluate(() => localStorage.getItem('hom_nay_an_gi_health_profile')),null);
+    console.log('OK: favorites and health reload from database; old browser data ignored');
+    await b.request.post(API + '/auth/index.php?action=login',{data:{email,password}});
+    await other.goto(BASE + '/user/tai-khoan.html',{waitUntil:'networkidle'});
+    assert.deepEqual(await other.evaluate(() => getFavoritesFromStorage()),['pho-bo-ha-noi']);
+    await page.fill('#nameInput','Database Updated Name');
+    await page.click('#nameForm [type=submit]');
+    await page.waitForFunction(() => getCurrentUser().name === 'Database Updated Name');
+    await other.reload({waitUntil:'networkidle'});
+    assert.equal(await other.textContent('#acctName'),'Database Updated Name');
+    console.log('OK: another browser reads the same state and updated profile name');
+    await page.evaluate(async () => { toggleFavoriteInStorage('bun-bo-hue'); await Sync.flush(); });
+    await page.evaluate(() => logoutUser());
+    await page.waitForURL(/index\.html/);
+    await page.goto(BASE + '/user/tai-khoan.html');
+    await page.waitForURL(/dang-nhap/);
+    console.log('OK: logout clears the PHP session');
+    assert.deepEqual(errors,[]);
+    console.log('Database UI checks passed.');
+  } finally { await browser.close(); }
+})().catch(e => {console.error(e);process.exitCode=1;});

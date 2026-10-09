@@ -30,7 +30,7 @@
     collect();
     if (!S.general.platformName) { window.Toast.error('Chưa thể lưu', 'Tên nền tảng không được để trống.'); D.$('#sName').focus(); return; }
     if (!/^\S+@\S+\.\S+$/.test(S.general.contactEmail)) { window.Toast.error('Chưa thể lưu', 'Email liên hệ không hợp lệ.'); D.$('#sMail').focus(); return; }
-    window.Api.call('settings.save', { settings: { general: S.general, admins: S.admins, notify: S.notify, security: S.security } }).then(function () { dirty = false; window.Toast.success('Đã lưu cài đặt', 'Các thay đổi đã được áp dụng.'); });
+    window.Api.call('settings.save', { settings: { general: S.general, admins: S.admins, notify: S.notify, security: S.security } }).then(function (result) { S = result; fill(); dirty = false; window.Toast.success('Đã lưu cài đặt', 'Các thay đổi đã được áp dụng.'); });
   }
 
   function adminForm(a) {
@@ -39,13 +39,14 @@
       html: '<div class="field"><label>Họ tên <span class="req">*</span></label><input class="input" name="name" value="' + D.esc(a ? a.name : '') + '"></div>' +
         '<div class="field"><label>Email <span class="req">*</span></label><input class="input" type="email" name="email" value="' + D.esc(a ? a.email : '') + '"></div>' +
         '<div class="field"><label>Vai trò</label><div class="select"><select name="role"><option value="moderator"' + (a && a.role === 'moderator' ? ' selected' : '') + '>Điều hành viên</option><option value="super"' + (a && a.role === 'super' ? ' selected' : '') + '>Super admin</option></select>' + D.icon('chev') + '</div></div>' +
+        (a ? '' : '<div class="field"><label>Mật khẩu</label><input class="input" type="password" name="password" minlength="8" required autocomplete="new-password"></div>') +
         '<span class="field-error" data-modal-err hidden></span>',
       onSubmit: function (f) {
         var name = f.name.value.trim(), email = f.email.value.trim(), e = f.querySelector('[data-modal-err]');
         if (!name || !/^\S+@\S+\.\S+$/.test(email)) { e.textContent = 'Vui lòng nhập họ tên và email hợp lệ.'; e.hidden = false; return false; }
         if (S.admins.some(function (x) { return x.email === email && (!a || x.id !== a.id); })) { e.textContent = 'Email này đã là quản trị viên.'; e.hidden = false; return false; }
         if (a) { a.name = name; a.email = email; a.role = f.role.value; }
-        else S.admins.push({ id: Date.now(), name: name, email: email, role: f.role.value });
+        else { if (f.password.value.length < 8) { e.textContent = 'Mật khẩu cần ít nhất 8 ký tự.'; e.hidden = false; return false; } S.admins.push({ id: Date.now(), name: name, email: email, role: f.role.value, password:f.password.value }); }
         renderAdmins(); dirty = true; window.Toast.info(a ? 'Đã cập nhật' : 'Đã thêm quản trị viên', 'Bấm “Lưu thay đổi” để lưu vào hệ thống.');
       },
     });
@@ -64,11 +65,6 @@
     });
     D.$('#backupBtn').addEventListener('click', function () {
       window.Api.call('settings.backup').then(function (b) { S.backup = b; D.$('#bkLast').textContent = b.last; window.Toast.success('Đã sao lưu', 'Bản sao lưu dữ liệu vừa được tạo.'); });
-    });
-    D.$('#resetBtn').addEventListener('click', function () {
-      window.Modal.confirm({ title: 'Xoá toàn bộ dữ liệu demo?', text: 'Mọi thay đổi bạn đã thực hiện trong bản demo (món, quán, đánh giá, cài đặt…) sẽ được đặt lại về dữ liệu mẫu ban đầu.', confirmText: 'Xoá dữ liệu demo' }).then(function (ok) {
-        if (!ok) return; window.Api.call('settings.resetDemo').then(function () { dirty = false; window.Toast.success('Đã đặt lại dữ liệu demo', 'Đang tải lại…'); setTimeout(function () { location.reload(); }, 600); });
-      });
     });
     window.addEventListener('beforeunload', function (e) { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
   });

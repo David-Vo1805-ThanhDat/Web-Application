@@ -21,7 +21,7 @@
   // Hết phiên (401): xoá thông tin đăng nhập cũ rồi về trang đăng nhập, sau đó quay lại đúng trang này
   function toLogin() {
     var cfg = window.ADMIN_CONFIG, page = location.pathname.split('/').pop() + location.search;
-    try { localStorage.removeItem(cfg.userKey); } catch (e) {}
+    window.APP_USER = null;
     location.replace(cfg.loginPage + '?next=' + encodeURIComponent('../admin/' + page));
     return new Promise(function () {}); // đang chuyển trang: không cho các bước sau chạy tiếp
   }
@@ -58,8 +58,11 @@
   // Đăng xuất: huỷ phiên PHP rồi xoá đăng nhập phía trình duyệt
   function logout() {
     var cfg = window.ADMIN_CONFIG;
-    return fetch(cfg.authBase + 'index.php?action=logout', { method: 'POST', credentials: 'include' }).catch(function () {})
-      .then(function () { try { localStorage.removeItem(cfg.userKey); } catch (e) {} });
+    return fetch(cfg.authBase + 'index.php?action=logout', { method: 'POST', credentials: 'include' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Không đăng xuất được. Hãy thử lại.');
+        window.APP_USER = null;
+      });
   }
 
   window.Api = { call: call, logout: logout };

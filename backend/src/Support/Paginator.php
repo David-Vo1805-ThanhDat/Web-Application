@@ -26,19 +26,4 @@ final class Paginator
         ];
     }
 
-    /** Hàm băm FNV-1a 32 bit — cùng công thức với bản mock JS, để dữ liệu mẫu ổn định giữa hai chế độ. */
-    public static function hash(string $s): int
-    {
-        $h = 2166136261;
-        foreach (mb_str_split($s) as $ch) {
-            $h ^= mb_ord($ch);
-            $h = ($h * 16777619) & 0xFFFFFFFF;
-        }
-        return $h;
-    }
-
-    public static function rnd(string $seed, int $min, int $max): int
-    {
-        return $min + self::hash($seed) % ($max - $min + 1);
-    }
 }

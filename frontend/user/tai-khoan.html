@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+<meta charset="UTF-8">
+<script src="../../backend/api/auth/bootstrap.php"></script>
 <script>
 (function () {
   try {
-    if (!localStorage.getItem('hom_nay_an_gi_user')) {
+    if (!window.APP_USER) {
       var back = location.pathname.split('/').pop() + location.search;
       location.replace('dang-nhap.html?next=' + encodeURIComponent(back || 'trang-chu.html'));
     }
   } catch (e) {}
 })();
 </script>
-<meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tài Khoản Của Tôi | Hôm Nay Ăn Gì?</title>
 <meta name="description" content="Xem thông tin tài khoản, chỉnh tên hiển thị, hồ sơ sức khỏe và món yêu thích.">
@@ -266,12 +268,12 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script src="../../backend/api/public/foods.php"></script>
 <script>if (typeof allFoods === "undefined") { window.allFoods = []; document.body.insertAdjacentHTML("afterbegin", '<div role="alert" style="background:#b91c1c;color:#fff;padding:10px 16px;font:600 14px/1.4 sans-serif;text-align:center">Không tải được dữ liệu món ăn từ máy chủ. Hãy mở trang qua XAMPP (Apache + PHP) hoặc chạy php -S — xem README.</div>'); }</script>
+<script src="js/core/backend.js"></script>
+<script src="js/core/sync.js"></script>
 <script src="js/core/data-utils.js"></script>
 <script src="js/core/categories.js"></script>
 <script src="js/core/health.js"></script>
 <script src="js/core/main.js"></script>
-<script src="js/core/backend.js"></script>
-<script src="js/core/sync.js"></script>
 <script src="js/core/auth.js"></script>
 <script src="js/pages/tai-khoan.js"></script>
 </body>

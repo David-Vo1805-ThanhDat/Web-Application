@@ -1,54 +1,20 @@
-/* =========================================================
-   auth.js — trạng thái đăng nhập phía trình duyệt.
-   Đăng nhập/đăng ký/đăng xuất là THẬT, do backend PHP xử lý (xem
-   js/core/backend.js, backend/api/auth). Trình duyệt chỉ nhớ tên,
-   email và vai trò server trả về (localStorage) để vẽ giao diện;
-   quyền truy cập luôn được server kiểm tra lại ở mỗi lời gọi API.
+/* Account identity comes from the PHP session and database bootstrap. */
 
-   Các trang cần đăng nhập ("gated") đã tự chặn ngay trong <head>
-   (xem build_head() trong generate.py) để không loé nội dung ra
-   rồi mới đá về trang đăng nhập. File này chỉ lo phần còn lại:
-   lưu/đọc người dùng, hiện tên trên navbar và đăng xuất.
-   ========================================================= */
-
-var AUTH_KEY = 'hom_nay_an_gi_user';
-
-function getCurrentUser() {
-  try {
-    var raw = localStorage.getItem(AUTH_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch (e) { return null; }
-}
-
-// Vai trò ('admin' | 'user') do SERVER quyết định và trả về khi đăng nhập
+function getCurrentUser() { return window.APP_USER || null; }
 function isAdminUser(user) { return !!user && user.role === 'admin'; }
-
-// serverUser: { email, name, role } do backend trả về sau khi đăng nhập/đăng ký thành công
-function loginUser(serverUser) {
-  var user = { email: serverUser.email, name: serverUser.name, since: Date.now(), role: serverUser.role, server: true };
-  try { localStorage.setItem(AUTH_KEY, JSON.stringify(user)); } catch (e) {}
-  return user;
-}
-
+function loginUser(serverUser) { window.APP_USER = Object.assign({}, serverUser, { server:true }); return window.APP_USER; }
 function logoutUser() {
-  var done = function () { window.location.href = 'index.html'; };
-  var clearAuth = function () { try { localStorage.removeItem(AUTH_KEY); } catch (e) {} };
-  if (typeof Backend === 'undefined' || typeof Sync === 'undefined') { clearAuth(); return done(); }
-  // Gửi nốt thay đổi còn chờ lên server, huỷ phiên PHP, rồi xoá đăng nhập + dữ liệu người dùng khỏi trình duyệt (máy dùng chung)
-  var wasServer = Sync.active();
-  Sync.flush()
-    .then(function () { return Backend.available(); })
-    .then(function (ok) { return ok ? Backend.logout() : null; })
-    .then(function () { clearAuth(); if (wasServer) Sync.clearLocal(); })
-    .then(done, function () { clearAuth(); done(); });
+  Sync.flush().then(function () { return Backend.logout(); }).then(function () {
+    window.APP_USER = null; Sync.clearLocal(); window.location.href = 'index.html';
+  }).catch(function (e) { showToast('error', e.message || 'Chưa lưu được thay đổi. Hãy thử lại.'); });
 }
-
 function updateUserName(name) {
-  var user = getCurrentUser();
-  if (!user) return null;
-  user.name = (name || '').trim() || user.email.split('@')[0];
-  try { localStorage.setItem(AUTH_KEY, JSON.stringify(user)); } catch (e) {}
-  return user;
+  return fetch('../../backend/api/user/index.php?action=profile.update', {
+    method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'}, body:JSON.stringify({name:name}),
+  }).then(function (r) { return r.json().then(function (b) {
+    if (!r.ok || b.error) throw new Error(b.error || 'Không cập nhật được tên');
+    window.APP_USER.name = b.data.name; return window.APP_USER;
+  }); });
 }
 
 function initials(name) {

@@ -13,6 +13,7 @@ use App\Core\Session;
 (new Router([
     'state.get' => [UserApi::class, 'stateGet'],
     'state.save' => [UserApi::class, 'stateSave'],
+    'profile.update' => [UserApi::class, 'profileUpdate'],
     'reviews.create' => [UserApi::class, 'reviewCreate'],
 ], static function (string $action): void {
     if (Session::user() === null) {

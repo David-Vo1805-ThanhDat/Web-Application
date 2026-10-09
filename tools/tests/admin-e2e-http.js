@@ -1,6 +1,6 @@
 // Kiểm thử đầu-cuối admin với backend PHP thật (qua http). Chạy server:  C:\xampp\php\php.exe -S 127.0.0.1:8099 -t .
-// rồi:  node tools/tests/admin-e2e-http.js      (nên xoá backend/storage trước để có dữ liệu sạch)
-const { chromium } = require('C:/Users/admin/Downloads/hom-nay-an-gi-html-css-js/tools/node_modules/playwright');
+// Chạy qua node backend/tests/run-mysql.js admin-e2e-http để dùng database test riêng.
+const { chromium } = require('playwright');
 const { BASE } = require('./lib');
 let pass = 0, fail = 0;
 const ok = (c, n, x) => { c ? pass++ : fail++; console.log((c ? '  ✓ ' : '  ✗ ') + n + (c ? '' : '   ' + (x ?? ''))); };
