@@ -96,7 +96,7 @@ if __name__ == "__main__":
     html = page(
         "Nhật Ký Sức Khỏe | Hôm Nay Bạn Muốn Ăn Gì?",
         "Ghi nhận cân nặng theo thời gian, theo dõi BMI thay đổi theo tuần/tháng/năm và đối chiếu với món ăn gần đây đã chọn.",
-        BODY, EXTRA_SCRIPT, gated=True
+        BODY, EXTRA_SCRIPT, gated=True, chatbot=True
     )
     with open(os.path.join(OUT_DIR, "nhat-ky-suc-khoe.html"), "w", encoding="utf-8") as f:
         f.write(html)

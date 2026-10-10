@@ -142,7 +142,7 @@ if __name__ == "__main__":
     html = page(
         "Hôm Nay Ăn Gì? Quay một vòng, chốt món ngay",
         'Gợi ý món ăn ngẫu nhiên theo bữa ăn, ngân sách, khẩu vị và chế độ ăn. Món nào cũng có công thức và quán để đến thử.',
-        BODY, EXTRA_SCRIPT, gated=True
+        BODY, EXTRA_SCRIPT, gated=True, chatbot=True
     )
     with open(os.path.join(OUT_DIR, "trang-chu.html"), "w", encoding="utf-8") as f:
         f.write(html)

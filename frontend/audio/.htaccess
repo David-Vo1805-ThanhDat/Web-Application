@@ -1,0 +1,6 @@
+# Cho trình duyệt giữ file nhạc 7 ngày, chuyển trang không phải tải lại
+<IfModule mod_headers.c>
+  <FilesMatch "\.mp3$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>

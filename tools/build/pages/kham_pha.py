@@ -33,7 +33,7 @@ BODY = """
 
   <!-- Category Pills -->
   <div class="d-flex flex-nowrap gap-2 overflow-auto pb-2 mb-3" id="categoryPills" data-aos="fade-up">
-    <button class="chip-filter active" data-value="all">🍽️ Tất Cả</button>
+    <button class="chip-filter active" data-value="all"><span class="cat-icon"><img src="../image/kham-pha/menu-192.png" alt="" width="96" height="96"></span><span class="cat-label">Menu</span></button>
     <!-- các nút danh mục còn lại do js/pages/kham-pha.js vẽ từ backend (js/core/categories.js) -->
   </div>
 
@@ -131,7 +131,7 @@ if __name__ == "__main__":
     html = page(
         "Khám Phá Ẩm Thực | Hôm Nay Bạn Muốn Ăn Gì?",
         "Tìm kiếm, lọc theo bữa ăn, ngân sách, khẩu vị, vùng miền và lưu các món ăn yêu thích của bạn.",
-        BODY, EXTRA_SCRIPT, page_css='<link href="css/pages/explore.css" rel="stylesheet">', gated=True
+        BODY, EXTRA_SCRIPT, page_css='<link href="css/pages/explore.css" rel="stylesheet">', gated=True, chatbot=True
     )
     with open(os.path.join(OUT_DIR, "kham-pha.html"), "w", encoding="utf-8") as f:
         f.write(html)

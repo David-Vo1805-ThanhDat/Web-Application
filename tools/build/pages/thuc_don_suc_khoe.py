@@ -96,7 +96,7 @@ if __name__ == "__main__":
     html = page(
         "Thực Đơn Sức Khỏe | Hôm Nay Bạn Muốn Ăn Gì?",
         "Thực đơn 7 ngày tự động, canh đúng lượng calo bạn cần dựa trên chiều cao, cân nặng và mục tiêu sức khỏe.",
-        BODY, EXTRA_SCRIPT, gated=True
+        BODY, EXTRA_SCRIPT, gated=True, chatbot=True
     )
     with open(os.path.join(OUT_DIR, "thuc-don-suc-khoe.html"), "w", encoding="utf-8") as f:
         f.write(html)

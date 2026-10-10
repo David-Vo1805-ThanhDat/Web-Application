@@ -18,7 +18,20 @@ document.addEventListener('DOMContentLoaded', function () {
   var pillsBox = document.getElementById('categoryPills');
   getCategories().forEach(function (c) {
     var b = document.createElement('button');
-    b.className = 'chip-filter'; b.dataset.value = c.slug; b.textContent = c.emoji + ' ' + c.label;
+    b.className = 'chip-filter'; b.dataset.value = c.slug;
+    // Thẻ danh mục: hình (hoặc emoji nếu chưa có hình) ở trên, tên ở dưới — xem #categoryPills trong css/pages/explore.css
+    var icon = document.createElement('span');
+    icon.className = 'cat-icon';
+    if (c.image) {
+      var img = document.createElement('img');
+      img.src = c.image; img.alt = ''; img.width = 96; img.height = 96;
+      icon.appendChild(img);
+    } else {
+      icon.textContent = c.emoji;
+    }
+    var label = document.createElement('span');
+    label.className = 'cat-label'; label.textContent = c.label;
+    b.append(icon, label);
     pillsBox.appendChild(b);
   });
   // Đường dẫn ?category=<mã> của danh mục không còn tồn tại → quay về "Tất cả"

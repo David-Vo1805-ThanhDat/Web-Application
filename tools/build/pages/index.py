@@ -24,16 +24,16 @@ BODY = """
         <span class="hero-chip"><span id="chipText">🌅 Sáng ăn gì ta?</span></span>
         <h1 class="hero-title">Đói meo mà chưa<br>biết <span class="text-grad">ăn gì hôm nay?</span></h1>
         <p class="hero-lede">
-          Lướt vài thẻ món là web nắm được gu của bạn, chưa ưng thì bấm vòng quay may mắn chốt trong 5 giây —
+          Lướt vài thẻ món là web nắm được gu của bạn, chưa ưng thì bấm vòng quay may mắn chốt trong 5 giây,
           kèm công thức và quán ăn gợi ý liền tay. Rủ thêm hội bạn cùng chọn cho đỡ cãi nhau "ăn gì bây giờ".
         </p>
         <div class="hero-actions">
-          <a href="dang-ky.html" class="btn btn-brand btn-lg"><i class="bi bi-stars"></i> Bắt đầu thật á nha</a>
+          <a href="dang-ky.html" class="btn btn-brand btn-lg">Bắt đầu thật á nha</a>
         </div>
         <p class="hero-signin">Đã có tài khoản? <a href="dang-nhap.html">Đăng nhập</a></p>
         <div class="hero-stats">
           <div class="hero-stat"><b id="statFoods">31+</b><span>Món ngon đặc sắc</span></div>
-          <div class="hero-stat"><b>5 Giây</b><span>Quyết định bữa ăn</span></div>
+          <div class="hero-stat"><b>5 giây</b><span>Quyết định bữa ăn</span></div>
           <div class="hero-stat"><b>100%</b><span>Miễn phí sử dụng</span></div>
         </div>
       </div>
@@ -43,7 +43,6 @@ BODY = """
           <div class="swipe-card-pad">
             <span class="lucky-chip">Lướt để chọn gu ăn</span>
             <h2 class="lucky-title">Bạn thích món nào?</h2>
-            <p class="lucky-note">Bạn thích món nào và bạn không thích món nào thế — Bạn hãy bấm nút bên dưới nhanh nào</p>
           </div>
 
           <div class="swipe-stage" id="swipeStage">
@@ -54,10 +53,11 @@ BODY = """
 
           <div class="swipe-card-pad">
             <div class="swipe-controls" id="swipeControls">
-              <button type="button" class="swipe-btn swipe-btn-nope" id="swipeNopeBtn" aria-label="Bỏ qua món này"><i class="bi bi-x-lg"></i></button>
+              <button type="button" class="swipe-btn swipe-btn-nope" id="swipeNopeBtn" aria-label="Bỏ qua món này"><img src="../image/chu-x-96.png" alt="" width="30" height="30"></button>
               <span class="swipe-counter" id="swipeCounter">1/6</span>
-              <button type="button" class="swipe-btn swipe-btn-like" id="swipeLikeBtn" aria-label="Thích món này"><i class="bi bi-heart-fill"></i></button>
+              <button type="button" class="swipe-btn swipe-btn-like" id="swipeLikeBtn" aria-label="Thích món này"><img src="../image/trai-tim-96.png" alt="" width="34" height="34"></button>
             </div>
+            <p class="swipe-help">Kéo thẻ sang phải nếu thích, sang trái nếu không</p>
 
             <div class="swipe-result d-none" id="swipeResult">
               <p class="swipe-result-title">Bạn thích <span id="swipeLikeCount">0</span> món!</p>
@@ -91,28 +91,28 @@ BODY = """
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 g-lg-4">
       <div class="col" data-reveal>
         <div class="feature-card">
-          <span class="feature-icon"><i class="bi bi-stars"></i></span>
+          <span class="feature-icon feature-icon-img"><img src="../image/vong-quay-160.png" alt="" width="48" height="48"></span>
           <h3>Vòng quay may mắn</h3>
           <p>Không biết chọn gì thì để vòng quay chọn giúp. Quay lại thoải mái tới khi ưng ý.</p>
         </div>
       </div>
       <div class="col" data-reveal>
         <div class="feature-card">
-          <span class="feature-icon"><i class="bi bi-sliders"></i></span>
+          <span class="feature-icon feature-icon-img feature-icon-full"><img src="../image/loc-160.png" alt="" width="48" height="48"></span>
           <h3>Lọc theo ý bạn</h3>
-          <p>Chọn bữa ăn, ngân sách, khẩu vị và chế độ ăn — vòng quay chỉ quay trong các món hợp với bạn.</p>
+          <p>Chọn bữa ăn, ngân sách, khẩu vị và chế độ ăn. Vòng quay chỉ quay trong các món hợp với bạn.</p>
         </div>
       </div>
       <div class="col" data-reveal>
         <div class="feature-card">
-          <span class="feature-icon"><i class="bi bi-people"></i></span>
+          <span class="feature-icon feature-icon-img feature-icon-full"><img src="../image/cung-nhom-160.png" alt="" width="48" height="48"></span>
           <h3>Quyết định cùng cả nhóm</h3>
           <p>Mỗi người đề cử một món, món nào nhiều người chọn sẽ dễ trúng hơn khi quay chung.</p>
         </div>
       </div>
       <div class="col" data-reveal>
         <div class="feature-card">
-          <span class="feature-icon"><i class="bi bi-journal-text"></i></span>
+          <span class="feature-icon feature-icon-img feature-icon-full"><img src="../image/note-160.png" alt="" width="48" height="48"></span>
           <h3>Công thức và quán gợi ý</h3>
           <p>Mỗi món đều có nguyên liệu, các bước nấu, dinh dưỡng và vài quán để bạn đến thử.</p>
         </div>
@@ -192,17 +192,17 @@ BODY = """
     <!-- Contact info cards -->
     <div class="row row-cols-1 row-cols-sm-3 g-3 mb-5" data-reveal>
       <div class="col"><div class="bg-white rounded-3xl-custom border p-4 text-center h-100 shadow-sm">
-        <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+        <div class="contact-icon"><img src="../image/gmail-96.png" alt="" width="32" height="32"></div>
         <h3 class="h6 fw-bold mt-2 mb-1">Email Hỗ Trợ</h3>
         <p class="small text-muted mb-0">hotro@homnayangi.vn</p>
       </div></div>
       <div class="col"><div class="bg-white rounded-3xl-custom border p-4 text-center h-100 shadow-sm">
-        <div class="contact-icon"><i class="bi bi-facebook"></i></div>
+        <div class="contact-icon"><img src="../image/fb-96.png" alt="" width="32" height="32"></div>
         <h3 class="h6 fw-bold mt-2 mb-1">Fanpage</h3>
         <p class="small text-muted mb-0">Theo dõi để cập nhật món mới</p>
       </div></div>
       <div class="col"><div class="bg-white rounded-3xl-custom border p-4 text-center h-100 shadow-sm">
-        <div class="contact-icon"><i class="bi bi-clock-history"></i></div>
+        <div class="contact-icon"><img src="../image/clock-128.png" alt="" width="40" height="40"></div>
         <h3 class="h6 fw-bold mt-2 mb-1">Thời Gian Phản Hồi</h3>
         <p class="small text-muted mb-0">Trong vòng 1-2 ngày làm việc</p>
       </div></div>
@@ -276,7 +276,7 @@ if __name__ == "__main__":
     html = page(
         "Hôm Nay Ăn Gì? Vòng quay may mắn chọn món trong 5 giây",
         'Web gợi ý món ăn ngẫu nhiên theo bữa ăn, ngân sách, khẩu vị và chế độ ăn. Tạo tài khoản miễn phí để quay vòng quay và khám phá hơn 31 món ăn.',
-        BODY, EXTRA_SCRIPT, navbar_mode="site"
+        BODY, EXTRA_SCRIPT, navbar_mode="site", chatbot=True
     )
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)

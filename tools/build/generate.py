@@ -8,13 +8,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 OUT_DIR = os.path.join(ROOT, "frontend", "user")
 
 
+# Logo: bản thu nhỏ 256px của frontend/image/logo.png (ảnh gốc ~5,7 MB quá nặng để nạp ở mọi trang).
+# Đổi logo: thay logo.png rồi tạo lại logo-256.png (cắt vuông quanh phần hình, 256×256).
 def brand_mark():
     return """<span class="brand-mark">
-          <svg viewBox="0 0 32 32" aria-hidden="true" fill="none">
-            <path d="M5 15h22c0 6.6-4.9 11-11 11S5 21.6 5 15z" fill="#fff"/>
-            <path d="M12 12c.6-1.3.6-2.3 0-3.6M16 12c.6-1.3.6-2.3 0-3.6M20 12c.6-1.3.6-2.3 0-3.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".9"/>
-            <path d="M22 4.5 27 12M25.5 3.5 30 10.5" stroke="#FFE7C2" stroke-width="1.7" stroke-linecap="round"/>
-          </svg>
+          <img src="../image/logo-256.png" alt="" width="46" height="46">
         </span>"""
 
 # Thứ tự nạp CSS QUAN TRỌNG (luật sau thắng luật trước khi cùng độ ưu tiên):
@@ -23,7 +21,7 @@ CSS_FILES = [
     "base/tokens.css", "base/base.css",
     "components/buttons.css", "components/navbar.css", "components/footer.css",
     "components/sections.css", "components/food-card.css", "components/chips.css",
-    "components/wheel.css", "components/modal-result.css", "components/gift-box.css",
+    "components/wheel.css", "components/modal-result.css", "components/gift-box.css", "components/music.css",
     "pages/home.css", "pages/goi-y.css", "pages/landing.css", "pages/auth.css",
     "pages/account.css", "pages/health.css",
     "base/responsive.css", "base/motion.css",
@@ -82,7 +80,7 @@ def navbar(mode="app"):
       </a>
       <div class="nav-actions d-flex align-items-center gap-2">
         <a href="dang-nhap.html" class="btn btn-outline-brand btn-nav">Đăng nhập</a>
-        <a href="dang-ky.html" class="btn btn-brand btn-nav"><i class="bi bi-stars"></i> Đăng ký</a>
+        <a href="dang-ky.html" class="btn btn-brand btn-nav">Đăng ký</a>
       </div>
     </div>
   </nav>
@@ -113,7 +111,7 @@ def navbar(mode="app"):
         </ul>
         <div class="nav-actions d-flex align-items-center gap-2 mt-3 mt-lg-0">
           <a href="dang-nhap.html" class="btn btn-outline-brand btn-nav">Đăng nhập</a>
-          <a href="dang-ky.html" class="btn btn-brand btn-nav"><i class="bi bi-stars"></i> Đăng ký</a>
+          <a href="dang-ky.html" class="btn btn-brand btn-nav">Đăng ký</a>
         </div>
       </div>
     </div>
@@ -136,14 +134,14 @@ def navbar(mode="app"):
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav mx-lg-auto align-items-lg-center gap-lg-1">
           <li class="nav-item"><a class="nav-link" data-page="trang-chu.html" href="trang-chu.html"><i class="bi bi-egg-fried"></i> Trang Chủ</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="goi-y.html" href="goi-y.html"><i class="bi bi-stars"></i> Gợi Ý Ngay <span class="hot-badge">HOT</span></a></li>
+          <li class="nav-item"><a class="nav-link" data-page="goi-y.html" href="goi-y.html"><i class="bi bi-shuffle"></i> Gợi Ý Ngay <span class="hot-badge">HOT</span></a></li>
           <li class="nav-item"><a class="nav-link" data-page="kham-pha.html" href="kham-pha.html"><i class="bi bi-compass"></i> Khám Phá</a></li>
           <li class="nav-item"><a class="nav-link" data-page="thuc-don-suc-khoe.html" href="thuc-don-suc-khoe.html"><i class="bi bi-calendar-week"></i> Thực Đơn Sức Khỏe</a></li>
           <li class="nav-item"><a class="nav-link" data-page="nhat-ky-suc-khoe.html" href="nhat-ky-suc-khoe.html"><i class="bi bi-heart-pulse"></i> Nhật Ký Sức Khỏe</a></li>
         </ul>
         <div class="nav-actions d-flex align-items-center gap-2 mt-3 mt-lg-0">
           <a href="kham-pha.html?tab=favorites" class="nav-fav" aria-label="Yêu thích">
-            <i class="bi bi-heart"></i> <span class="fav-text">Yêu thích</span>
+            <img class="nav-fav-icon" src="../image/Muc-Yeu-Thich/tim-banh-mi-96.png" alt="" width="26" height="26"> <span class="fav-text">Yêu thích</span>
             <span class="favorite-count-badge" style="display:none;">0</span>
           </a>
           <div id="navUserSlot"></div>
@@ -219,7 +217,7 @@ def result_modal_block():
       <div class="result-banner">
         <img id="resultImage" src="" alt="">
         <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Đóng"></button>
-        <span class="position-absolute top-0 start-0 m-3 badge result-badge" style="z-index:5;"><i class="bi bi-stars"></i> Món của bạn hôm nay</span>
+        <span class="position-absolute top-0 start-0 m-3 badge result-badge" style="z-index:5;">Món của bạn hôm nay</span>
         <div class="position-absolute bottom-0 start-0 end-0 p-3 text-white">
           <div class="small fw-semibold result-kicker" id="resultRegionCat"></div>
           <h3 class="fw-bold mb-0" id="resultName"></h3>
@@ -301,14 +299,45 @@ def scripts_block(extra=""):
 <script src="js/core/health.js"></script>
 <script src="js/core/main.js"></script>
 <script src="js/core/auth.js"></script>
+<script src="js/widgets/bg-music.js"></script>
 {extra}
 </body>
 </html>"""
 
-def page(title, desc, body_content, extra_scripts="", page_css="", navbar_mode="app", gated=False):
+# FoodBot (nút tròn góc dưới phải + khung chat). Logic ở frontend/user/js/widgets/chatbot.js, giao diện ở
+# css/components/chatbot.css, API ở backend/api/chat. Bật cho trang nào thì gọi page(..., chatbot=True).
+# Hình FoodBot: bản thu nhỏ 192px của frontend/image/chat-bot.png (ảnh gốc ~4,9 MB).
+CHATBOT_CSS = '<link href="css/components/chatbot.css" rel="stylesheet">'
+CHATBOT_BLOCK = """
+<button class="chatbot-launcher" id="chatbot-launcher" type="button"
+        aria-label="Trò chuyện với FoodBot" aria-controls="chatbot-panel" aria-expanded="false">
+  <img src="../image/chat-bot-192.png" alt="" width="60" height="60">
+</button>
+<section class="chatbot-panel" id="chatbot-panel" role="dialog" aria-labelledby="chatbot-title" hidden>
+  <header class="chatbot-header">
+    <h2 class="chatbot-title" id="chatbot-title"><img class="chatbot-title-icon" src="../image/chat-bot-192.png" alt="" width="34" height="34"> FoodBot</h2>
+    <button class="chatbot-close" id="chatbot-close" type="button" aria-label="Đóng trò chuyện">×</button>
+  </header>
+  <div class="chatbot-messages" id="chatbot-messages" role="log" aria-label="Tin nhắn với FoodBot"
+       aria-live="polite" aria-relevant="additions" aria-busy="false" tabindex="0"></div>
+  <form class="chatbot-form" id="chatbot-form">
+    <label class="chatbot-sr-only" for="chatbot-input">Tin nhắn cho FoodBot</label>
+    <input class="chatbot-input" id="chatbot-input" type="text" name="message"
+           placeholder="Bạn muốn ăn gì…" maxlength="2000" autocomplete="off" enterkeyhint="send">
+    <button class="chatbot-send" id="chatbot-send" type="submit">Gửi</button>
+  </form>
+  <span class="chatbot-sr-only" id="chatbot-status" role="status"></span>
+</section>
+<script src="js/widgets/chatbot.js"></script>"""
+
+def page(title, desc, body_content, extra_scripts="", page_css="", navbar_mode="app", gated=False, chatbot=False):
     """navbar_mode: "app" (menu đầy đủ, dùng cho các trang sau khi đăng nhập) hoặc
     "public" (chỉ logo + nút đăng nhập/đăng ký, dùng cho trang ngoài và trang đăng nhập/đăng ký).
-    gated: True để chặn trang này lại cho tới khi đăng nhập (xem build_head)."""
+    gated: True để chặn trang này lại cho tới khi đăng nhập (xem build_head).
+    chatbot: True để gắn FoodBot (khách chưa đăng nhập chỉ được hỏi 2 lượt — xem backend/api/chat)."""
+    if chatbot:
+        page_css = (page_css + "\n" if page_css else "") + CHATBOT_CSS
+        extra_scripts += "\n" + CHATBOT_BLOCK
     return f"""<!DOCTYPE html>
 <html lang="vi">
 {build_head(title, desc, page_css, gated)}

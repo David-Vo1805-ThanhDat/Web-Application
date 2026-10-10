@@ -18,7 +18,7 @@
 .swipe-card { padding-left: 0; padding-right: 0; }
 .swipe-card-pad { padding-left: 1.5rem; padding-right: 1.5rem; }
 
-.swipe-stage { position: relative; width: 100%; aspect-ratio: 4 / 3; margin: 1.1rem 0 0; overflow: hidden; background: var(--brand-100); }
+.swipe-stage { position: relative; width: 100%; aspect-ratio: 16 / 10;   /* thấp hơn 4/3 để nút ✗ ♥ nằm gọn trong màn hình laptop */ margin: 1.1rem 0 0; overflow: hidden; background: var(--brand-100); }
 .swipe-deck { position: relative; width: 100%; height: 100%; }
 .swipe-card-item {
   position: absolute; inset: 0; overflow: hidden; background: var(--brand-100);
@@ -44,6 +44,9 @@
 .swipe-hint-nope { right: .9rem; color: var(--danger); border-color: var(--danger); transform: rotate(10deg); }
 
 .swipe-controls { display: flex; align-items: center; justify-content: center; gap: 1.75rem; margin-top: 1.2rem; }
+/* Dòng hướng dẫn dưới nút; tự ẩn cùng nút khi index.js hiện kết quả (thêm .d-none vào #swipeControls) */
+.swipe-help { margin: .6rem 0 0; text-align: center; font-size: .8rem; color: var(--text-3); }
+.swipe-controls.d-none + .swipe-help { display: none; }
 .swipe-btn {
   width: 3.75rem; height: 3.75rem; border-radius: 50%; border: 2px solid var(--line-strong); background: #fff;
   display: grid; place-items: center; font-size: 1.5rem; cursor: pointer;
@@ -54,11 +57,12 @@
 .swipe-btn:active { transform: translateY(0) scale(.96); }
 .swipe-btn-nope { color: var(--danger); border-color: #FBCFD6; }
 .swipe-btn-nope:hover { border-color: var(--danger); box-shadow: 0 14px 26px -14px rgba(225, 29, 72, .55); }
+/* Nền trắng viền cam: trái tim tương cà (trai-tim-96.png) đỏ sẽ chìm nếu đặt trên nền cam gradient */
 .swipe-btn-like {
-  color: #fff; background: var(--grad); border-color: transparent;
+  background: #fff; border-color: var(--orange-500);
   box-shadow: 0 14px 26px -12px rgba(234, 88, 12, .75);
 }
-.swipe-btn-like:hover { box-shadow: 0 18px 30px -12px rgba(234, 88, 12, .8); }
+.swipe-btn-like:hover { border-color: var(--orange-600); box-shadow: 0 18px 30px -12px rgba(234, 88, 12, .8); }
 .swipe-counter { font-weight: 700; color: var(--text-3); font-size: .88rem; min-width: 2.4rem; text-align: center; }
 
 .swipe-result { margin-top: 1rem; }
@@ -108,6 +112,11 @@
   display: inline-grid; place-items: center; width: 3rem; height: 3rem; margin-bottom: 1.1rem; border-radius: 1rem;
   background: var(--brand-100); color: var(--orange-700); font-size: 1.35rem;
 }
+/* Ô icon dùng hình (frontend/image/*-160.png) thay cho icon Bootstrap */
+.feature-icon-img { padding: .3rem; }
+.feature-icon-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* Hình đã có sẵn khung bo góc riêng (vd. cung-nhom-160.png, note-160.png): lấp đầy ô, bỏ nền kem để khỏi thành 2 lớp khung */
+.feature-icon-full { padding: 0; background: none; }
 .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin: 0 0 .5rem; }
 .feature-card p { margin: 0; color: var(--text-2); font-size: .92rem; }
 
