@@ -27,6 +27,7 @@
 <link href="css/components/modal-result.css" rel="stylesheet">
 <link href="css/components/gift-box.css" rel="stylesheet">
 <link href="css/components/music.css" rel="stylesheet">
+<link href="css/components/feedback.css" rel="stylesheet">
 <link href="css/pages/home.css" rel="stylesheet">
 <link href="css/pages/goi-y.css" rel="stylesheet">
 <link href="css/pages/landing.css" rel="stylesheet">
@@ -55,11 +56,7 @@
         <i class="bi bi-list fs-2"></i>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav mx-lg-auto align-items-lg-center gap-lg-1">
-          <li class="nav-item"><a class="nav-link" data-page="index.html" href="index.html"><i class="bi bi-house-heart"></i> Trang Chủ</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html#gioi-thieu"><i class="bi bi-info-circle"></i> Giới Thiệu</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html#lien-he"><i class="bi bi-envelope"></i> Liên Hệ</a></li>
-        </ul>
+        <div class="mx-lg-auto"></div>
         <div class="nav-actions d-flex align-items-center gap-2 mt-3 mt-lg-0">
           <a href="dang-nhap.html" class="btn btn-outline-brand btn-nav">Đăng nhập</a>
           <a href="dang-ky.html" class="btn btn-brand btn-nav">Đăng ký</a>
@@ -98,7 +95,11 @@
         <div class="lucky-card swipe-card">
           <div class="swipe-card-pad">
             <span class="lucky-chip">Lướt để chọn gu ăn</span>
-            <h2 class="lucky-title">Bạn thích món nào?</h2>
+            <!-- FoodBot bình luận theo từng lần lướt (js/pages/index.js → botSay) -->
+            <div class="swipe-bot">
+              <img class="swipe-bot-avatar" src="../image/chat-bot-192.png" alt="" width="48" height="48">
+              <p class="swipe-bot-bubble" id="swipeBotText" aria-live="polite">Kéo thẻ sang phải nếu thích, sang trái nếu không nha. Lướt hết 6 món là mình đoán ra gu bạn liền!</p>
+            </div>
           </div>
 
           <div class="swipe-stage" id="swipeStage">
@@ -113,13 +114,18 @@
               <span class="swipe-counter" id="swipeCounter">1/6</span>
               <button type="button" class="swipe-btn swipe-btn-like" id="swipeLikeBtn" aria-label="Thích món này"><img src="../image/trai-tim-96.png" alt="" width="34" height="34"></button>
             </div>
-            <p class="swipe-help">Kéo thẻ sang phải nếu thích, sang trái nếu không</p>
 
+            <!-- "Gu ăn của bạn" sau khi lướt hết thẻ (js/pages/index.js → showResult) -->
             <div class="swipe-result d-none" id="swipeResult">
-              <p class="swipe-result-title">Bạn thích <span id="swipeLikeCount">0</span> món!</p>
+              <div class="gu-emoji" id="guEmoji" aria-hidden="true"></div>
+              <p class="gu-credit" id="guCredit"></p>
+              <p class="gu-label">Gu ăn của bạn là</p>
+              <p class="gu-title" id="guTitle"></p>
+              <p class="gu-desc" id="guDesc"></p>
+              <div class="gu-badges" id="guBadges"></div>
+              <p class="swipe-result-title">Bạn đã thả tim <span id="swipeLikeCount">0</span> món</p>
               <div class="swipe-result-chips" id="swipeResultChips"></div>
-              <p class="swipe-result-lock"><i class="bi bi-lock-fill"></i> Đăng ký để xem đủ gợi ý hợp gu này, kèm công thức &amp; quán ăn</p>
-              <a href="dang-ky.html" class="btn btn-brand btn-sm">Xem gợi ý đầy đủ</a>
+              <a href="dang-ky.html" class="btn btn-brand">Đăng ký để nhận gợi ý đúng gu</a>
               <button type="button" class="text-btn mt-2" id="swipeReplayBtn">Lướt lại từ đầu</button>
             </div>
           </div>
@@ -135,49 +141,77 @@
   <div class="poster-strip" id="posterB"></div>
 </section>
 
-<!-- 3. VÌ SAO NÊN DÙNG -->
-<section class="section" aria-labelledby="whyTitle">
+<!-- 3. VÌ SAO NÊN DÙNG: tiêu đề (cùng kiểu .section-head với "Hôm nay bạn thèm gì?") + 4 thẻ (kiểu ở .why-* trong landing.css) -->
+<section class="section why-section" aria-labelledby="whyTitle">
   <div class="container">
     <div class="section-head" data-reveal>
       <div>
-        <h2 id="whyTitle">Vì sao nên thử Hôm Nay Ăn Gì?</h2>
-        <p>Bốn lý do để đăng ký chỉ mất mười giây.</p>
+        <h2 id="whyTitle">Ăn gì, để tụi mình lo</h2>
+        <p>Bốn thứ giúp bạn chốt món nhanh hơn mỗi ngày.</p>
       </div>
     </div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 g-lg-4">
-      <div class="col" data-reveal>
-        <div class="feature-card">
-          <span class="feature-icon feature-icon-img"><img src="../image/vong-quay-160.png" alt="" width="48" height="48"></span>
-          <h3>Vòng quay may mắn</h3>
-          <p>Không biết chọn gì thì để vòng quay chọn giúp. Quay lại thoải mái tới khi ưng ý.</p>
-        </div>
+    <div class="why-grid">
+      <article class="why-card is-hero" data-reveal>
+        <span class="why-num" aria-hidden="true">01</span>
+        <span class="why-icon"><img src="../image/vong-quay-160.png" alt="" width="64" height="64"></span>
+        <h3>Vòng quay may mắn</h3>
+        <p>Không biết chọn gì thì để vòng quay chọn giúp. Quay lại thoải mái tới khi ưng ý.</p>
+        <span class="why-tag">Tính năng được dùng nhiều nhất</span>
+      </article>
+      <article class="why-card" data-reveal>
+        <span class="why-num" aria-hidden="true">02</span>
+        <span class="why-icon why-icon-full"><img src="../image/loc-160.png" alt="" width="64" height="64"></span>
+        <h3>Lọc theo ý bạn</h3>
+        <p>Chọn bữa ăn, ngân sách, khẩu vị và chế độ ăn. Vòng quay chỉ quay trong các món hợp với bạn.</p>
+        <span class="why-tag">Bữa ăn · Giá · Khẩu vị</span>
+      </article>
+      <article class="why-card" data-reveal>
+        <span class="why-num" aria-hidden="true">03</span>
+        <span class="why-icon why-icon-full"><img src="../image/cung-nhom-160.png" alt="" width="64" height="64"></span>
+        <h3>Quyết định cùng cả nhóm</h3>
+        <p>Mỗi người đề cử một món, món nào nhiều người chọn sẽ dễ trúng hơn khi quay chung.</p>
+        <span class="why-tag">Hết cảnh "ăn gì cũng được"</span>
+      </article>
+      <article class="why-card" data-reveal>
+        <span class="why-num" aria-hidden="true">04</span>
+        <span class="why-icon why-icon-full"><img src="../image/note-160.png" alt="" width="64" height="64"></span>
+        <h3>Công thức và quán gợi ý</h3>
+        <p>Mỗi món đều có nguyên liệu, các bước nấu, dinh dưỡng và vài quán để bạn đến thử.</p>
+        <span class="why-tag">Tự nấu hay đi ăn đều có</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 4. VIDEO GIỚI THIỆU (frontend/video/: gioi-thieu.mp4 + ảnh bìa + phụ đề .vtt; nút phát + tạm dừng nhạc nền ở js/pages/index.js) -->
+<section class="section pt-0 demo-section" id="video" aria-labelledby="demoTitle">
+  <div class="container">
+    <div class="row g-4 g-lg-5 align-items-center">
+      <div class="col-lg-5" data-reveal>
+        <h2 id="demoTitle" class="demo-title">Bụng bạn đã chọn được món chưa?</h2>
+        <p class="demo-lead">Từ "ăn gì cũng được" tới lúc chốt kèo. Bấm vào từng phần để xem nhanh.</p>
+        <ol class="demo-chapters" id="demoChapters">
+          <li><button type="button" data-t="5.6"><span class="demo-time">0:05</span>Vòng quay may mắn</button></li>
+          <li><button type="button" data-t="15.2"><span class="demo-time">0:15</span>Cả nhóm cùng đề cử</button></li>
+          <li><button type="button" data-t="20.8"><span class="demo-time">0:21</span>Bắn hộp quà bí ẩn</button></li>
+          <li><button type="button" data-t="26.6"><span class="demo-time">0:27</span>Công thức và quán gợi ý</button></li>
+        </ol>
       </div>
-      <div class="col" data-reveal>
-        <div class="feature-card">
-          <span class="feature-icon feature-icon-img feature-icon-full"><img src="../image/loc-160.png" alt="" width="48" height="48"></span>
-          <h3>Lọc theo ý bạn</h3>
-          <p>Chọn bữa ăn, ngân sách, khẩu vị và chế độ ăn. Vòng quay chỉ quay trong các món hợp với bạn.</p>
-        </div>
-      </div>
-      <div class="col" data-reveal>
-        <div class="feature-card">
-          <span class="feature-icon feature-icon-img feature-icon-full"><img src="../image/cung-nhom-160.png" alt="" width="48" height="48"></span>
-          <h3>Quyết định cùng cả nhóm</h3>
-          <p>Mỗi người đề cử một món, món nào nhiều người chọn sẽ dễ trúng hơn khi quay chung.</p>
-        </div>
-      </div>
-      <div class="col" data-reveal>
-        <div class="feature-card">
-          <span class="feature-icon feature-icon-img feature-icon-full"><img src="../image/note-160.png" alt="" width="48" height="48"></span>
-          <h3>Công thức và quán gợi ý</h3>
-          <p>Mỗi món đều có nguyên liệu, các bước nấu, dinh dưỡng và vài quán để bạn đến thử.</p>
+      <div class="col-lg-7" data-reveal>
+        <div class="demo-video">
+          <video id="demoVideo" preload="none" playsinline poster="../video/gioi-thieu-poster.jpg" aria-label="Video giới thiệu Hôm Nay Ăn Gì?">
+            <source src="../video/gioi-thieu.mp4" type="video/mp4">
+            <track kind="captions" src="../video/gioi-thieu.vtt" srclang="vi" label="Tiếng Việt">
+          </video>
+          <button type="button" class="demo-play" id="demoPlay" aria-label="Phát video giới thiệu"><i class="bi bi-play-fill"></i></button>
+          <span class="demo-duration" id="demoDuration">0:38</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 4. BA BƯỚC BẮT ĐẦU -->
+<!-- 5. BA BƯỚC BẮT ĐẦU -->
 <section class="section pt-0" aria-labelledby="howTitle">
   <div class="container">
     <h2 id="howTitle" class="mb-4" data-reveal>Bắt đầu chỉ với ba bước</h2>
@@ -207,105 +241,29 @@
   </div>
 </section>
 
-<!-- 5. CẢM NHẬN -->
+<!-- 6. CẢM NHẬN -->
 <section class="section pt-0" aria-labelledby="quoteTitle">
   <div class="container">
     <h2 id="quoteTitle" class="mb-4" data-reveal>Mọi người nói gì</h2>
     <div class="row row-cols-1 row-cols-md-3 g-3 g-lg-4">
       <div class="col" data-reveal>
         <div class="quote-card">
-          <p>"Cả phòng trọ hết cãi nhau trưa nay ăn gì. Quay một cái xong luôn."</p>
-          <span class="quote-by">— Nhóm sinh viên năm 3</span>
+          <p>"Cả nhóm tôi hết phải ngồi trước tòa E cãi nhau " trưa nay ăn gì? ". Quay một cái xong luôn."</p>
+          <span class="quote-by">Nhóm bạn Tuấn Anh TDTU</span>
         </div>
       </div>
       <div class="col" data-reveal>
         <div class="quote-card">
-          <p>"Thích nhất là có sẵn quán gợi ý, khỏi phải tìm thêm trên bản đồ."</p>
-          <span class="quote-by">— Người đi làm, quận Bình Thạnh</span>
+          <p>"Thích nhất là có sẵn quán gợi ý, khỏi phải suy nghĩ rồi lại ngập ngừng 15-20 phút."</p>
+          <span class="quote-by">Các bạn bên CLB ETIT khoa CNTT</span>
         </div>
       </div>
       <div class="col" data-reveal>
         <div class="quote-card">
           <p>"Lọc theo ngân sách sinh viên vẫn ra cả chục món ngon, không sợ hết tiền."</p>
-          <span class="quote-by">— Sinh viên năm nhất</span>
+          <span class="quote-by">Bạn Đỗ Quang Huy </span>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- 6. LIÊN HỆ (gộp từ trang lien-he.html cũ — xem ghi chú đầu file) -->
-<section class="section pt-0" id="lien-he" aria-labelledby="lienHeTitle">
-  <div class="container" style="max-width:52rem;">
-    <div class="text-center mb-5" data-reveal>
-      <span class="badge bg-brand-subtle-custom text-brand-emphasis-custom px-3 py-2 rounded-pill mb-2">
-        <i class="bi bi-envelope-heart"></i> Chúng Mình Luôn Lắng Nghe
-      </span>
-      <h2 id="lienHeTitle" class="fw-black display-6">Liên Hệ &amp; Góp Ý 💌</h2>
-      <p class="text-muted mb-0">Có góp ý, muốn đề xuất món ăn mới hay phát hiện lỗi? Gửi cho đội ngũ ngay bên dưới nhé!</p>
-    </div>
-
-    <!-- Contact info cards -->
-    <div class="row row-cols-1 row-cols-sm-3 g-3 mb-5" data-reveal>
-      <div class="col"><div class="bg-white rounded-3xl-custom border p-4 text-center h-100 shadow-sm">
-        <div class="contact-icon"><img src="../image/gmail-96.png" alt="" width="32" height="32"></div>
-        <h3 class="h6 fw-bold mt-2 mb-1">Email Hỗ Trợ</h3>
-        <p class="small text-muted mb-0">hotro@homnayangi.vn</p>
-      </div></div>
-      <div class="col"><div class="bg-white rounded-3xl-custom border p-4 text-center h-100 shadow-sm">
-        <div class="contact-icon"><img src="../image/fb-96.png" alt="" width="32" height="32"></div>
-        <h3 class="h6 fw-bold mt-2 mb-1">Fanpage</h3>
-        <p class="small text-muted mb-0">Theo dõi để cập nhật món mới</p>
-      </div></div>
-      <div class="col"><div class="bg-white rounded-3xl-custom border p-4 text-center h-100 shadow-sm">
-        <div class="contact-icon"><img src="../image/clock-128.png" alt="" width="40" height="40"></div>
-        <h3 class="h6 fw-bold mt-2 mb-1">Thời Gian Phản Hồi</h3>
-        <p class="small text-muted mb-0">Trong vòng 1-2 ngày làm việc</p>
-      </div></div>
-    </div>
-
-    <!-- Contact / contribute form -->
-    <div class="bg-white rounded-3xl-custom border shadow-sm p-4 p-sm-5" data-reveal>
-      <h3 class="h4 fw-extrabold mb-1">Gửi Lời Nhắn Cho Đội Ngũ</h3>
-      <p class="small text-muted mb-4">Bạn có thể góp ý chung, đề xuất món ăn mới muốn thêm vào thực đơn, hoặc báo lỗi bạn gặp phải khi dùng website.</p>
-
-      <form id="contactForm" novalidate>
-        <div class="row g-3 mb-3">
-          <div class="col-sm-6">
-            <label class="form-label small fw-bold text-uppercase text-muted">Tên của bạn</label>
-            <input type="text" class="form-control" id="cfName" placeholder="Nguyễn Văn A">
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label small fw-bold text-uppercase text-muted">Email liên hệ <span class="text-danger">*</span></label>
-            <input type="email" class="form-control" id="cfEmail" placeholder="email@example.com">
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label small fw-bold text-uppercase text-muted">Chủ đề</label>
-          <select class="form-select" id="cfSubject">
-            <option value="gop-y">Góp ý chung về website</option>
-            <option value="de-xuat-mon">Đề xuất món ăn mới</option>
-            <option value="bao-loi">Báo lỗi / Bug</option>
-            <option value="hop-tac">Hợp tác khác</option>
-          </select>
-        </div>
-
-        <div class="mb-3 d-none" id="dishNameGroup">
-          <label class="form-label small fw-bold text-uppercase text-muted">Tên Món Ăn Đề Xuất <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" id="cfDishName" placeholder="Ví dụ: Cháo lòng Hà Nội, Bánh căn Phan Rang...">
-        </div>
-
-        <div class="mb-4">
-          <label class="form-label small fw-bold text-uppercase text-muted">Nội Dung <span class="text-danger">*</span></label>
-          <textarea class="form-control" id="cfMessage" rows="4" placeholder="Nhập nội dung góp ý, đề xuất hoặc mô tả lỗi bạn gặp phải..."></textarea>
-          <div class="invalid-feedback d-block text-danger small mt-1 d-none" id="cfError">Vui lòng điền đầy đủ các trường bắt buộc!</div>
-        </div>
-
-        <button type="submit" class="btn btn-brand btn-lg w-100 d-flex align-items-center justify-content-center gap-2" id="cfSubmitBtn">
-          <i class="bi bi-send"></i> <span id="cfSubmitLabel">Gửi Lời Nhắn</span>
-        </button>
-      </form>
     </div>
   </div>
 </section>
@@ -343,20 +301,20 @@
         <ul class="list-unstyled small d-flex flex-column gap-2">
           <li><a href="trang-chu.html">Trang chủ</a></li>
           <li><a href="goi-y.html">Vòng quay món ăn</a></li>
-          <li><a href="kham-pha.html">Thực đơn 31 món</a></li>
+          <li><a href="kham-pha.html">Thực đơn món ăn</a></li>
           <li><a href="kham-pha.html?tab=favorites">Món đã lưu</a></li>
           <li><a href="thuc-don-suc-khoe.html">Thực đơn sức khỏe</a></li>
           <li><a href="nhat-ky-suc-khoe.html">Nhật ký sức khỏe</a></li>
           <li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
-          <li><a href="index.html#lien-he">Liên hệ và góp ý</a></li>
+          <li><a href="#" role="button" data-open-feedback>Góp ý &amp; liên hệ</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-3">
-        <h4>Đội ngũ</h4>
+        <h4>Đội ngũ trong bếp</h4>
         <ul class="list-unstyled small d-flex flex-column gap-3">
-          <li><strong class="text-white d-block">Người A</strong><span class="footer-muted">Thiết kế sản phẩm</span></li>
-          <li><strong class="text-white d-block">Người B</strong><span class="footer-muted">Dữ liệu ẩm thực</span></li>
-          <li><strong class="text-white d-block">Người C</strong><span class="footer-muted">Nội dung &amp; đối tác quán ăn</span></li>
+          <li><strong class="text-white d-block">Phong <span class="footer-kitchen-role">· Bếp trưởng hậu trường</span></strong><span class="footer-muted">Backend &amp; cơ sở dữ liệu</span></li>
+          <li><strong class="text-white d-block">An <span class="footer-kitchen-role">· Người nếm thử</span></strong><span class="footer-muted">FoodBot &amp; kiểm thử</span></li>
+          <li><strong class="text-white d-block">Đạt <span class="footer-kitchen-role">· Người bày món</span></strong><span class="footer-muted">Giao diện &amp; trải nghiệm người dùng</span></li>
         </ul>
       </div>
       <div class="col-lg-3">
@@ -394,7 +352,7 @@
 <script src="js/core/health.js"></script>
 <script src="js/core/main.js"></script>
 <script src="js/core/auth.js"></script>
-<script src="js/widgets/bg-music.js"></script>
+<script src="js/widgets/feedback.js"></script>
 <script src="js/widgets/effects.js"></script>
 <script src="js/pages/index.js"></script>
 

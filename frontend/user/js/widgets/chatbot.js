@@ -13,25 +13,31 @@
   const send = document.getElementById('chatbot-send');
   const status = document.getElementById('chatbot-status');
   const endpoint = new URL('../../backend/api/chat/index.php', document.baseURI);
-  // Khách chưa đăng nhập chỉ được hỏi GUEST_TURNS lượt; server (backend/api/chat) mới là nơi chặn thật — trả 403.
-  const GUEST_TURNS = 2;
-  const GREETING = 'hôm nay ăn gì';   // phải trùng GREETING_TEXT ở backend/api/chat/index.php (lời chào không tính lượt)
+  // FoodBot chỉ trò chuyện với người ĐÃ ĐĂNG NHẬP (server backend/api/chat trả 403 cho khách).
+  // Khách vẫn mở khung và gõ được, nhưng FoodBot không gọi AI mà đáp bằng lời mời tạo tài khoản bên dưới.
+  const GREETING = 'hôm nay ăn gì';   // câu tự gửi khi người đã đăng nhập mở khung lần đầu
+  const GUEST_HELLO = 'Hí lô! Mình là FoodBot 🍜, chuyên gia giải cứu câu hỏi "hôm nay ăn gì" đây. ' +
+    'Có điều mình hơi nhát người lạ xíu 🙈 Bạn tạo tài khoản (chưa tới 1 phút) là mình mở lòng tư vấn liền nha!';
+  const GUEST_REPLIES = [
+    'Ơ kìa, mình còn chưa biết tên bạn mà bạn đã rủ mình đi ăn rồi 🙈 Tạo tài khoản cho mình làm quen cái đã, rồi mình mách món ngon cho nè!',
+    'Mẹ mình dặn không được nói chuyện với người lạ đâu 🥺 Bạn đăng ký một cái là hết lạ liền, tụi mình tám chuyện ăn uống tới bến luôn!',
+    'Bụng mình đang réo đòi tư vấn cho bạn lắm rồi nè 🤤 Mà phải có tài khoản mình mới mở được "thực đơn bí mật". Đăng nhập lẹ lẹ nha!',
+    'Món ngon thì nhiều vô số kể, mà vé vào cửa chỉ là một tài khoản miễn phí thôi 🎟️ Tạo xong là mình phục vụ tận răng luôn!',
+    'Mình là bot có nguyên tắc nha 😤: chưa đăng nhập là chưa tiết lộ món ngon. Nhưng mà đăng nhập rồi thì... hỏi gì mình cũng chiều 😋',
+  ];
   let history = [];
   let busy = false;
   let greeted = false;
-  let guestTurns = 0;
+  let guestReplyIndex = 0;
 
   function isGuest() { return !window.APP_USER; }
 
-  // Lời mời đăng nhập khi khách hết lượt, kèm 2 nút; quay lại đúng trang đang xem sau khi đăng nhập.
-  function showLoginPrompt(message) {
+  // Tin nhắn mời đăng nhập/tạo tài khoản kèm 2 nút; đăng nhập xong quay lại đúng trang đang xem.
+  function showLoginPrompt(message, line) {
     const next = location.pathname.split('/').pop() + location.search;
     const text = document.createElement('p');
     text.className = 'chatbot-login-text';
-    text.textContent = 'Bạn đã dùng hết ' + GUEST_TURNS + ' lượt trò chuyện miễn phí rồi nè 🍜 ' +
-      'Đăng nhập (hoặc tạo tài khoản miễn phí chưa tới 1 phút) để FoodBot tiếp tục đồng hành cùng bạn: ' +
-      'trò chuyện thoải mái không giới hạn lượt, gợi ý món hợp khẩu vị, lưu món yêu thích ' +
-      'và lên thực đơn theo sức khỏe của riêng bạn!';
+    text.textContent = line || GUEST_REPLIES[0];
     const actions = document.createElement('div');
     actions.className = 'chatbot-login-actions';
     const login = document.createElement('a');
@@ -44,8 +50,15 @@
     register.textContent = 'Tạo tài khoản';
     actions.append(login, register);
     message.replaceChildren(text, actions);
-    status.textContent = 'Bạn đã hết lượt trò chuyện miễn phí. Hãy đăng nhập để tiếp tục.';
+    status.textContent = 'FoodBot mời bạn đăng nhập hoặc tạo tài khoản để trò chuyện.';
     scrollToLatest();
+  }
+
+  // Câu mời tiếp theo (xoay vòng để không lặp lại đúng một câu)
+  function nextGuestReply() {
+    const line = GUEST_REPLIES[guestReplyIndex % GUEST_REPLIES.length];
+    guestReplyIndex += 1;
+    return line;
   }
 
   function scrollToLatest() {
@@ -60,7 +73,8 @@
       input.focus({ preventScroll: true });
       if (!greeted) {
         greeted = true;
-        requestReply(GREETING, true);
+        if (isGuest()) showLoginPrompt(appendMessage('', 'bot'), GUEST_HELLO);   // khách: chào + mời, không gọi AI
+        else requestReply(GREETING, true);
       }
     } else {
       launcher.focus({ preventScroll: true });
@@ -207,14 +221,12 @@
         body: JSON.stringify({ history: requestHistory }),
         signal: controller.signal
       });
-      if (response.status === 403) {   // khách hết lượt (server đếm theo phiên, tải lại trang vẫn tính)
-        guestTurns = GUEST_TURNS;
-        showLoginPrompt(reply);
+      if (response.status === 403) {   // chưa đăng nhập hoặc phiên đăng nhập đã hết hạn
+        showLoginPrompt(reply, nextGuestReply());
         return;
       }
       if (!response.ok) throw new Error('Chat unavailable');
       const answer = await readReply(response, reply);
-      if (!isGreeting && !retryMessage && isGuest()) guestTurns += 1;
       // Commit the pair only once a complete response has arrived.
       history = requestHistory.concat({ role: 'model', parts: [{ text: answer }] });
       status.textContent = 'FoodBot đã trả lời.';
@@ -252,9 +264,9 @@
     const text = input.value.trim();
     if (busy || !text) return;
     input.value = '';
-    if (isGuest() && guestTurns >= GUEST_TURNS) {   // đã biết hết lượt: trả lời ngay, không gọi server
+    if (isGuest()) {   // khách: FoodBot đáp bằng lời mời tạo tài khoản, không gọi server/AI
       appendMessage(text, 'user');
-      showLoginPrompt(appendMessage('', 'bot'));
+      showLoginPrompt(appendMessage('', 'bot'), nextGuestReply());
       input.focus({ preventScroll: true });
       return;
     }

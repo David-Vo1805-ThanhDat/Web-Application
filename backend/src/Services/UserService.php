@@ -71,7 +71,9 @@ final class UserService
     /** @param array<string,mixed> $u */
     public static function publicUser(array $u): array
     {
-        unset($u['passwordHash']);
+        $u['googleLinked'] = !empty($u['googleId']);   // admin chỉ cần biết có liên kết Google hay không
+        $u['hasAvatar'] = !empty($u['avatar']);        // ảnh (tới 150 KB/người) không gửi kèm danh sách cho nhẹ
+        unset($u['passwordHash'], $u['googleId'], $u['avatar']);
         return $u;
     }
 }

@@ -37,6 +37,7 @@
 <link href="css/components/modal-result.css" rel="stylesheet">
 <link href="css/components/gift-box.css" rel="stylesheet">
 <link href="css/components/music.css" rel="stylesheet">
+<link href="css/components/feedback.css" rel="stylesheet">
 <link href="css/pages/home.css" rel="stylesheet">
 <link href="css/pages/goi-y.css" rel="stylesheet">
 <link href="css/pages/landing.css" rel="stylesheet">
@@ -66,11 +67,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav mx-lg-auto align-items-lg-center gap-lg-1">
-          <li class="nav-item"><a class="nav-link" data-page="trang-chu.html" href="trang-chu.html"><i class="bi bi-egg-fried"></i> Trang Chủ</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="goi-y.html" href="goi-y.html"><i class="bi bi-shuffle"></i> Gợi Ý Ngay <span class="hot-badge">HOT</span></a></li>
-          <li class="nav-item"><a class="nav-link" data-page="kham-pha.html" href="kham-pha.html"><i class="bi bi-compass"></i> Khám Phá</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="thuc-don-suc-khoe.html" href="thuc-don-suc-khoe.html"><i class="bi bi-calendar-week"></i> Thực Đơn Sức Khỏe</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="nhat-ky-suc-khoe.html" href="nhat-ky-suc-khoe.html"><i class="bi bi-heart-pulse"></i> Nhật Ký Sức Khỏe</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="trang-chu.html" href="trang-chu.html"><img class="nav-page-icon" src="../image/icon-page/trang-chu-icon-72.png" alt="" width="22" height="22"> Trang Chủ</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="goi-y.html" href="goi-y.html"><img class="nav-page-icon" src="../image/icon-page/goi-y-icon-72.png" alt="" width="22" height="22"> Gợi Ý Ngay <span class="hot-badge">HOT</span></a></li>
+          <li class="nav-item"><a class="nav-link" data-page="kham-pha.html" href="kham-pha.html"><img class="nav-page-icon" src="../image/icon-page/kham-pha-icon-72.png" alt="" width="22" height="22"> Khám Phá</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="thuc-don-suc-khoe.html" href="thuc-don-suc-khoe.html"><img class="nav-page-icon" src="../image/icon-page/thuc-don-icon-72.png" alt="" width="22" height="22"> Thực Đơn Sức Khỏe</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="nhat-ky-suc-khoe.html" href="nhat-ky-suc-khoe.html"><img class="nav-page-icon" src="../image/icon-page/nhat-ky-icon-72.png" alt="" width="22" height="22"> Nhật Ký Sức Khỏe</a></li>
         </ul>
         <div class="nav-actions d-flex align-items-center gap-2 mt-3 mt-lg-0">
           <a href="kham-pha.html?tab=favorites" class="nav-fav" aria-label="Yêu thích">
@@ -90,9 +91,9 @@
 <!-- 1. HERO: khung theo thiết kế gốc (nhãn, tiêu đề, hai nút, ba chỉ số | thẻ vòng quay) -->
 <section class="hero">
   <div class="container" style="--bs-gutter-x: 3rem;">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <span class="hero-chip"><i class="bi bi-stars"></i> Giải cứu chiếc bụng đói chỉ trong 5 giây</span>
+    <div class="row align-items-start g-5">
+      <div class="col-lg-6 hero-copy">
+        <span class="hero-chip">Giải cứu chiếc bụng đói chỉ trong 5 giây</span>
         <h1 class="hero-title">Hôm Nay Bạn<br><span class="text-grad">Muốn Ăn Gì?</span> <svg class="hero-bowl" viewBox="0 0 72 62" aria-hidden="true">
             <path d="M40 4 58 30M48 1 66 26" stroke="#D4A05A" stroke-width="4" stroke-linecap="round"/>
             <path d="M10 30c4-9 9-9 13 0s9 9 13 0 9-9 13 0 9 9 12 1" stroke="#FCD34D" stroke-width="5" stroke-linecap="round" fill="none"/>
@@ -106,13 +107,13 @@
         </p>
 
         <div class="hero-actions">
-          <button type="button" class="btn btn-brand btn-lg" data-spin><i class="bi bi-stars"></i> <span class="spin-label">Quay Ngẫu Nhiên Ngay</span></button>
+          <button type="button" class="btn btn-brand btn-lg" data-spin><span class="spin-label">Quay Ngẫu Nhiên Ngay</span></button>
           <button type="button" class="btn btn-outline-brand btn-lg" id="quickPickBtn"><i class="bi bi-dice-5"></i> Gợi ý nhanh 1 món</button>
         </div>
 
         <div class="hero-stats">
           <div class="hero-stat"><b id="statFoods">31+</b><span>Món ngon đặc sắc</span></div>
-          <div class="hero-stat"><b>5 Giây</b><span>Quyết định bữa ăn</span></div>
+          <div class="hero-stat"><b>5 giây</b><span>Quyết định bữa ăn</span></div>
           <div class="hero-stat"><b>100%</b><span>Hài lòng no nê</span></div>
         </div>
       </div>
@@ -131,7 +132,7 @@
             <div class="wheel-pointer" aria-hidden="true"></div>
             <canvas id="heroWheelCanvas" width="640" height="640" role="img" aria-label="Vòng quay chọn món ăn. Bấm để quay."></canvas>
           </div>
-          <button type="button" class="btn btn-brand btn-lg" data-spin><i class="bi bi-stars"></i> <span class="spin-label">BẤM ĐỂ QUAY NGAY</span> 🎯</button>
+          <button type="button" class="btn btn-brand btn-lg" data-spin><span class="spin-label">BẤM ĐỂ QUAY NGAY</span> 🎯</button>
           <p class="lucky-note" id="heroNote" aria-live="polite"></p>
           <p class="lucky-note">Đi ăn cùng nhóm? <a href="goi-y.html#nhom">Chọn cùng cả nhóm</a></p>
         </div>
@@ -269,20 +270,20 @@
         <ul class="list-unstyled small d-flex flex-column gap-2">
           <li><a href="trang-chu.html">Trang chủ</a></li>
           <li><a href="goi-y.html">Vòng quay món ăn</a></li>
-          <li><a href="kham-pha.html">Thực đơn 31 món</a></li>
+          <li><a href="kham-pha.html">Thực đơn món ăn</a></li>
           <li><a href="kham-pha.html?tab=favorites">Món đã lưu</a></li>
           <li><a href="thuc-don-suc-khoe.html">Thực đơn sức khỏe</a></li>
           <li><a href="nhat-ky-suc-khoe.html">Nhật ký sức khỏe</a></li>
           <li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
-          <li><a href="index.html#lien-he">Liên hệ và góp ý</a></li>
+          <li><a href="#" role="button" data-open-feedback>Góp ý &amp; liên hệ</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-3">
-        <h4>Đội ngũ</h4>
+        <h4>Đội ngũ trong bếp</h4>
         <ul class="list-unstyled small d-flex flex-column gap-3">
-          <li><strong class="text-white d-block">Người A</strong><span class="footer-muted">Thiết kế sản phẩm</span></li>
-          <li><strong class="text-white d-block">Người B</strong><span class="footer-muted">Dữ liệu ẩm thực</span></li>
-          <li><strong class="text-white d-block">Người C</strong><span class="footer-muted">Nội dung &amp; đối tác quán ăn</span></li>
+          <li><strong class="text-white d-block">Phong <span class="footer-kitchen-role">· Bếp trưởng hậu trường</span></strong><span class="footer-muted">Backend &amp; cơ sở dữ liệu</span></li>
+          <li><strong class="text-white d-block">An <span class="footer-kitchen-role">· Người nếm thử</span></strong><span class="footer-muted">FoodBot &amp; kiểm thử</span></li>
+          <li><strong class="text-white d-block">Đạt <span class="footer-kitchen-role">· Người bày món</span></strong><span class="footer-muted">Giao diện &amp; trải nghiệm người dùng</span></li>
         </ul>
       </div>
       <div class="col-lg-3">
@@ -321,6 +322,7 @@
 <script src="js/core/main.js"></script>
 <script src="js/core/auth.js"></script>
 <script src="js/widgets/bg-music.js"></script>
+<script src="js/widgets/feedback.js"></script>
 <script src="js/widgets/sound.js"></script>
 <script src="js/widgets/wheel.js"></script>
 <script src="js/widgets/effects.js"></script>

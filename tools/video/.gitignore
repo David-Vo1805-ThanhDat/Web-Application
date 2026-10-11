@@ -1,0 +1,15 @@
+# File tạo lại được bằng script — không đẩy lên GitHub
+shots/
+assets/
+frames/
+preview/
+rec/
+rec-d/
+voice/
+*.mp4
+*.webm
+*.wav
+*.jpg
+*.png
+rec-times.json
+rec-d-times.json

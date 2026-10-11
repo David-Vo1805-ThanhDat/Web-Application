@@ -24,7 +24,10 @@ try {
             $source = MySqlConnection::open(array_replace(App::config('mysql'), ['dbname'=>$sourceName]));
             $source->beginTransaction();
             try {
+                // Bỏ qua bảng mà database nguồn chưa có (vd. chưa chạy migration mới) thay vì báo lỗi.
+                $sourceTables = $source->query('SHOW TABLES')->fetchAll(\PDO::FETCH_COLUMN);
                 foreach (array_reverse(\App\Storage\MySqlStore::SQL_TABLES) as $table) {
+                    if (!in_array($table, $sourceTables, true)) continue;
                     foreach ($source->query("SELECT * FROM `$table`")->fetchAll() as $row) {
                         $columns = implode(',', array_map(static fn ($c) => "`$c`", array_keys($row)));
                         $stmt = $pdo->prepare("INSERT INTO `$table` ($columns) VALUES (" . implode(',', array_fill(0, count($row), '?')) . ')');

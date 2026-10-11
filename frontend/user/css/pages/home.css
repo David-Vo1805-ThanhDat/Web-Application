@@ -116,3 +116,6 @@
 @media (min-width: 768px) {
   .bento { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 11rem; gap: 1rem; }
 }
+
+/* Cột chữ của hero Trang chủ canh theo đỉnh thẻ vòng quay (row align-items-start) thay vì canh giữa — bỏ khoảng trống phía trên */
+@media (min-width: 992px) { .hero-copy { padding-top: 1.75rem; } }

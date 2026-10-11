@@ -3,5 +3,7 @@
 /* ---------- 25. TÀI KHOẢN & CÀI ĐẶT ---------- */
 .acct-container { max-width: 42rem; }
 .acct-profile { display: flex; align-items: center; gap: 1rem; }
-.acct-avatar { width: 3.2rem; height: 3.2rem; font-size: 1.1rem; flex: none; }
+.acct-avatar { width: 4.5rem; height: 4.5rem; font-size: 1.4rem; flex: none; box-shadow: 0 0 0 3px #fff, 0 0 0 4px var(--line-strong); }
+.acct-profile .min-w-0 { min-width: 0; }
+.acct-avatar-actions { display: flex; align-items: center; gap: .35rem; margin-top: .45rem; }
 .acct-danger { border-color: #FBCFD6; }

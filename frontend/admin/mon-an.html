@@ -20,30 +20,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="css/base/tokens.css" rel="stylesheet">
-<link href="css/base/base.css" rel="stylesheet">
-<link href="css/layout/shell.css" rel="stylesheet">
-<link href="css/layout/sidebar.css" rel="stylesheet">
-<link href="css/layout/topbar.css" rel="stylesheet">
-<link href="css/layout/page-header.css" rel="stylesheet">
-<link href="css/layout/mobile.css" rel="stylesheet">
-<link href="css/components/icon.css" rel="stylesheet">
-<link href="css/components/buttons.css" rel="stylesheet">
-<link href="css/components/cards.css" rel="stylesheet">
-<link href="css/components/badges.css" rel="stylesheet">
-<link href="css/components/forms.css" rel="stylesheet">
-<link href="css/components/toolbar.css" rel="stylesheet">
-<link href="css/components/table.css" rel="stylesheet">
-<link href="css/components/pagination.css" rel="stylesheet">
-<link href="css/components/tabs.css" rel="stylesheet">
-<link href="css/components/modal.css" rel="stylesheet">
-<link href="css/components/toast.css" rel="stylesheet">
-<link href="css/components/empty.css" rel="stylesheet">
-<link href="css/components/charts.css" rel="stylesheet">
-<link href="css/components/lists.css" rel="stylesheet">
-<link href="css/components/dropdown.css" rel="stylesheet">
-<link href="css/components/skeleton.css" rel="stylesheet">
-<link href="css/pages/foods.css" rel="stylesheet">
+<link href="css/base/tokens.css?v=1791566487" rel="stylesheet">
+<link href="css/base/base.css?v=1791566487" rel="stylesheet">
+<link href="css/layout/shell.css?v=1791566487" rel="stylesheet">
+<link href="css/layout/sidebar.css?v=1791743302" rel="stylesheet">
+<link href="css/layout/topbar.css?v=1791745282" rel="stylesheet">
+<link href="css/layout/page-header.css?v=1791566487" rel="stylesheet">
+<link href="css/layout/mobile.css?v=1791742630" rel="stylesheet">
+<link href="css/components/icon.css?v=1791742629" rel="stylesheet">
+<link href="css/components/buttons.css?v=1791566487" rel="stylesheet">
+<link href="css/components/cards.css?v=1791744095" rel="stylesheet">
+<link href="css/components/badges.css?v=1791566487" rel="stylesheet">
+<link href="css/components/forms.css?v=1791566487" rel="stylesheet">
+<link href="css/components/toolbar.css?v=1791566487" rel="stylesheet">
+<link href="css/components/table.css?v=1791566487" rel="stylesheet">
+<link href="css/components/pagination.css?v=1791566487" rel="stylesheet">
+<link href="css/components/tabs.css?v=1791566487" rel="stylesheet">
+<link href="css/components/modal.css?v=1791566487" rel="stylesheet">
+<link href="css/components/toast.css?v=1791566487" rel="stylesheet">
+<link href="css/components/empty.css?v=1791566487" rel="stylesheet">
+<link href="css/components/charts.css?v=1791566487" rel="stylesheet">
+<link href="css/components/lists.css?v=1791566487" rel="stylesheet">
+<link href="css/components/dropdown.css?v=1791566487" rel="stylesheet">
+<link href="css/components/skeleton.css?v=1791566487" rel="stylesheet">
+<link href="css/pages/foods.css?v=1791566487" rel="stylesheet">
 </head>
 <body class="admin is-loading">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrowl" viewBox="0 0 14 14" fill="none"><g>
@@ -195,7 +195,7 @@
   <aside class="sidebar" id="sidebar" aria-label="Điều hướng quản trị">
     <div class="sidebar-scroll">
       <a class="brand" href="dashboard.html">
-        <span class="brand-mark"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+        <span class="brand-mark brand-mark-logo" style="background:none"><img class="brand-logo" src="../image/admin/logo-128.png" alt="" width="40" height="40"></span>
         <span class="brand-text"><b>Hôm Nay Ăn Gì?</b><small>Bảng quản trị</small></span>
       </a>
       <nav class="nav">
@@ -242,7 +242,7 @@
     </header>
     <header class="mobile-topbar">
       <button class="icon-btn icon-btn-soft" type="button" data-open-drawer aria-label="Mở menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
-      <a class="mobile-brand" href="dashboard.html"><span class="brand-mark brand-mark-sm"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span><b>Bảng quản trị</b></a>
+      <a class="mobile-brand" href="dashboard.html"><span class="brand-mark brand-mark-sm brand-mark-logo" style="background:none"><img class="brand-logo" src="../image/admin/logo-128.png" alt="" width="40" height="40"></span><b>Bảng quản trị</b></a>
       <button class="icon-btn icon-btn-soft has-dot" type="button" id="notifBtnMobile" aria-label="Thông báo"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></button>
     </header>
     <main class="content" id="content">
@@ -310,19 +310,19 @@
   <nav class="bottom-tabs" aria-label="Điều hướng nhanh"><a class="tab" href="dashboard.html"><svg class="ic" aria-hidden="true"><use href="#i-grid"/></svg><span>Dashboard</span></a><a class="tab is-active" href="mon-an.html"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg><span>Món ăn</span></a><a class="tab" href="thong-ke.html"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg><span>Thống kê</span></a><a class="tab" href="nguoi-dung.html"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><span>Người dùng</span></a><button class="tab" type="button" data-open-drawer><svg class="ic" aria-hidden="true"><use href="#i-more"/></svg><span>Thêm</span></button></nav>
 </div>
 <div class="toast-stack" id="toastStack" aria-live="polite"></div>
-<script src="js/core/config.js"></script>
-<script src="js/core/dom.js"></script>
-<script src="js/core/format.js"></script>
-<script src="js/core/download.js"></script>
-<script src="js/core/audit-types.js"></script>
-<script src="js/core/api.js"></script>
-<script src="js/components/toast.js"></script>
-<script src="js/components/modal.js"></script>
-<script src="js/components/pagination.js"></script>
-<script src="js/components/table.js"></script>
-<script src="js/components/charts.js"></script>
-<script src="js/components/dropdown.js"></script>
-<script src="js/core/layout.js"></script>
-<script src="js/pages/mon-an.js"></script>
+<script src="js/core/config.js?v=1791566487"></script>
+<script src="js/core/dom.js?v=1791742629"></script>
+<script src="js/core/format.js?v=1791566487"></script>
+<script src="js/core/download.js?v=1791566487"></script>
+<script src="js/core/audit-types.js?v=1791742629"></script>
+<script src="js/core/api.js?v=1791566487"></script>
+<script src="js/components/toast.js?v=1791566487"></script>
+<script src="js/components/modal.js?v=1791566487"></script>
+<script src="js/components/pagination.js?v=1791566487"></script>
+<script src="js/components/table.js?v=1791566487"></script>
+<script src="js/components/charts.js?v=1791566487"></script>
+<script src="js/components/dropdown.js?v=1791566487"></script>
+<script src="js/core/layout.js?v=1791742629"></script>
+<script src="js/pages/mon-an.js?v=1791566487"></script>
 </body>
 </html>

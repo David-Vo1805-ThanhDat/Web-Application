@@ -21,7 +21,7 @@ CSS_FILES = [
     "base/tokens.css", "base/base.css",
     "components/buttons.css", "components/navbar.css", "components/footer.css",
     "components/sections.css", "components/food-card.css", "components/chips.css",
-    "components/wheel.css", "components/modal-result.css", "components/gift-box.css", "components/music.css",
+    "components/wheel.css", "components/modal-result.css", "components/gift-box.css", "components/music.css", "components/feedback.css",
     "pages/home.css", "pages/goi-y.css", "pages/landing.css", "pages/auth.css",
     "pages/account.css", "pages/health.css",
     "base/responsive.css", "base/motion.css",
@@ -86,8 +86,7 @@ def navbar(mode="app"):
   </nav>
 </header>"""
     if mode == "site":
-        # Trang công khai có nội dung thật (trang chủ ngoài, giới thiệu, liên hệ): đầy đủ menu
-        # điều hướng giữa các trang công khai + hai nút đăng nhập/đăng ký. Không có menu công cụ
+        # Trang giới thiệu (index.html): chỉ logo + hai nút đăng nhập/đăng ký. Liên hệ & góp ý đã chuyển thành hộp thoại (js/widgets/feedback.js). Không có menu công cụ
         # trong app (vòng quay, khám phá...) vì những trang đó cần đăng nhập mới dùng được.
         return f"""<a class="skip-link" href="#main">Bỏ qua điều hướng</a>
 <header class="site-navbar">
@@ -104,11 +103,7 @@ def navbar(mode="app"):
         <i class="bi bi-list fs-2"></i>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav mx-lg-auto align-items-lg-center gap-lg-1">
-          <li class="nav-item"><a class="nav-link" data-page="index.html" href="index.html"><i class="bi bi-house-heart"></i> Trang Chủ</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html#gioi-thieu"><i class="bi bi-info-circle"></i> Giới Thiệu</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html#lien-he"><i class="bi bi-envelope"></i> Liên Hệ</a></li>
-        </ul>
+        <div class="mx-lg-auto"></div>
         <div class="nav-actions d-flex align-items-center gap-2 mt-3 mt-lg-0">
           <a href="dang-nhap.html" class="btn btn-outline-brand btn-nav">Đăng nhập</a>
           <a href="dang-ky.html" class="btn btn-brand btn-nav">Đăng ký</a>
@@ -133,11 +128,11 @@ def navbar(mode="app"):
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav mx-lg-auto align-items-lg-center gap-lg-1">
-          <li class="nav-item"><a class="nav-link" data-page="trang-chu.html" href="trang-chu.html"><i class="bi bi-egg-fried"></i> Trang Chủ</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="goi-y.html" href="goi-y.html"><i class="bi bi-shuffle"></i> Gợi Ý Ngay <span class="hot-badge">HOT</span></a></li>
-          <li class="nav-item"><a class="nav-link" data-page="kham-pha.html" href="kham-pha.html"><i class="bi bi-compass"></i> Khám Phá</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="thuc-don-suc-khoe.html" href="thuc-don-suc-khoe.html"><i class="bi bi-calendar-week"></i> Thực Đơn Sức Khỏe</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="nhat-ky-suc-khoe.html" href="nhat-ky-suc-khoe.html"><i class="bi bi-heart-pulse"></i> Nhật Ký Sức Khỏe</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="trang-chu.html" href="trang-chu.html"><img class="nav-page-icon" src="../image/icon-page/trang-chu-icon-72.png" alt="" width="22" height="22"> Trang Chủ</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="goi-y.html" href="goi-y.html"><img class="nav-page-icon" src="../image/icon-page/goi-y-icon-72.png" alt="" width="22" height="22"> Gợi Ý Ngay <span class="hot-badge">HOT</span></a></li>
+          <li class="nav-item"><a class="nav-link" data-page="kham-pha.html" href="kham-pha.html"><img class="nav-page-icon" src="../image/icon-page/kham-pha-icon-72.png" alt="" width="22" height="22"> Khám Phá</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="thuc-don-suc-khoe.html" href="thuc-don-suc-khoe.html"><img class="nav-page-icon" src="../image/icon-page/thuc-don-icon-72.png" alt="" width="22" height="22"> Thực Đơn Sức Khỏe</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="nhat-ky-suc-khoe.html" href="nhat-ky-suc-khoe.html"><img class="nav-page-icon" src="../image/icon-page/nhat-ky-icon-72.png" alt="" width="22" height="22"> Nhật Ký Sức Khỏe</a></li>
         </ul>
         <div class="nav-actions d-flex align-items-center gap-2 mt-3 mt-lg-0">
           <a href="kham-pha.html?tab=favorites" class="nav-fav" aria-label="Yêu thích">
@@ -168,20 +163,20 @@ def footer():
         <ul class="list-unstyled small d-flex flex-column gap-2">
           <li><a href="trang-chu.html">Trang chủ</a></li>
           <li><a href="goi-y.html">Vòng quay món ăn</a></li>
-          <li><a href="kham-pha.html">Thực đơn 31 món</a></li>
+          <li><a href="kham-pha.html">Thực đơn món ăn</a></li>
           <li><a href="kham-pha.html?tab=favorites">Món đã lưu</a></li>
           <li><a href="thuc-don-suc-khoe.html">Thực đơn sức khỏe</a></li>
           <li><a href="nhat-ky-suc-khoe.html">Nhật ký sức khỏe</a></li>
           <li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
-          <li><a href="index.html#lien-he">Liên hệ và góp ý</a></li>
+          <li><a href="#" role="button" data-open-feedback>Góp ý &amp; liên hệ</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-3">
-        <h4>Đội ngũ</h4>
+        <h4>Đội ngũ trong bếp</h4>
         <ul class="list-unstyled small d-flex flex-column gap-3">
-          <li><strong class="text-white d-block">Người A</strong><span class="footer-muted">Thiết kế sản phẩm</span></li>
-          <li><strong class="text-white d-block">Người B</strong><span class="footer-muted">Dữ liệu ẩm thực</span></li>
-          <li><strong class="text-white d-block">Người C</strong><span class="footer-muted">Nội dung &amp; đối tác quán ăn</span></li>
+          <li><strong class="text-white d-block">Phong <span class="footer-kitchen-role">· Bếp trưởng hậu trường</span></strong><span class="footer-muted">Backend &amp; cơ sở dữ liệu</span></li>
+          <li><strong class="text-white d-block">An <span class="footer-kitchen-role">· Người nếm thử</span></strong><span class="footer-muted">FoodBot &amp; kiểm thử</span></li>
+          <li><strong class="text-white d-block">Đạt <span class="footer-kitchen-role">· Người bày món</span></strong><span class="footer-muted">Giao diện &amp; trải nghiệm người dùng</span></li>
         </ul>
       </div>
       <div class="col-lg-3">
@@ -281,13 +276,28 @@ def auth_hook(title_lines, subtitle):
           <p class="auth-hook-sub" style="animation-delay:{sub_delay}ms">{subtitle}</p>
         </div>"""
 
+# Nút "Tiếp tục với Google" + dòng phân cách, đặt dưới form ở trang đăng nhập/đăng ký. Bấm → backend/api/auth/google.php
+# (js/pages/auth-google.js gắn thêm ?next= và hiện thông báo lỗi khi Google trả về ?google=<mã>).
+GOOGLE_AUTH_BLOCK = """<div class="auth-divider"><span>hoặc</span></div>
+        <a class="btn-google" id="googleAuthBtn" href="../../backend/api/auth/google.php">
+          <svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true">
+            <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/>
+            <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+            <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
+            <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/>
+          </svg>
+          <span>Tiếp tục với Google</span>
+        </a>"""
+GOOGLE_AUTH_SCRIPT = '<script src="js/pages/auth-google.js"></script>'
+
 AUTH_BG_SCRIPT = '<script src="js/pages/auth-bg.js"></script>'  # logic nằm ở frontend/user/js/pages/auth-bg.js
 
 # Món ăn do BACKEND cấp (backend/api/public/foods.php phát ra `const allFoods = [...]`). Nếu không có PHP thì báo lỗi rõ ràng.
 FOODS_SCRIPT = """<script src="../../backend/api/public/foods.php"></script>
 <script>if (typeof allFoods === "undefined") { window.allFoods = []; document.body.insertAdjacentHTML("afterbegin", '<div role="alert" style="background:#b91c1c;color:#fff;padding:10px 16px;font:600 14px/1.4 sans-serif;text-align:center">Không tải được dữ liệu món ăn từ máy chủ. Hãy mở trang qua XAMPP (Apache + PHP) hoặc chạy php -S — xem README.</div>'); }</script>"""
 
-def scripts_block(extra=""):
+# music=False: không nạp nhạc nền (3 trang cho khách chưa đăng nhập: giới thiệu, đăng nhập, đăng ký — xem page())
+def scripts_block(extra="", music=True):
     return f"""<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -299,7 +309,7 @@ def scripts_block(extra=""):
 <script src="js/core/health.js"></script>
 <script src="js/core/main.js"></script>
 <script src="js/core/auth.js"></script>
-<script src="js/widgets/bg-music.js"></script>
+{'<script src="js/widgets/bg-music.js"></script>' + chr(10) if music else ""}<script src="js/widgets/feedback.js"></script>
 {extra}
 </body>
 </html>"""
@@ -330,7 +340,18 @@ CHATBOT_BLOCK = """
 </section>
 <script src="js/widgets/chatbot.js"></script>"""
 
-def page(title, desc, body_content, extra_scripts="", page_css="", navbar_mode="app", gated=False, chatbot=False):
+# Banner ảnh lớn ở đầu trang (ảnh trong frontend/image/icon-page/<tên>-banner.jpg).
+# banner=("trang-chu", "22%"): tên ảnh + vị trí dọc của khung cắt (object-position) để chữ tiêu đề trong ảnh luôn lọt khung.
+def page_banner(banner):
+    if not banner:
+        return ""
+    name, pos = banner
+    return f"""<div class="container pt-4">
+  <div class="page-banner"><img src="../image/icon-page/{name}-banner.jpg" alt="" style="object-position: center {pos};"></div>
+</div>
+"""
+
+def page(title, desc, body_content, extra_scripts="", page_css="", navbar_mode="app", gated=False, chatbot=False, banner=None):
     """navbar_mode: "app" (menu đầy đủ, dùng cho các trang sau khi đăng nhập) hoặc
     "public" (chỉ logo + nút đăng nhập/đăng ký, dùng cho trang ngoài và trang đăng nhập/đăng ký).
     gated: True để chặn trang này lại cho tới khi đăng nhập (xem build_head).
@@ -344,11 +365,11 @@ def page(title, desc, body_content, extra_scripts="", page_css="", navbar_mode="
 <body class="d-flex flex-column min-vh-100">
 {navbar(navbar_mode)}
 <main id="main" class="flex-grow-1">
-{body_content}
+{page_banner(banner)}{body_content}
 </main>
 {footer()}
 {toast_block()}
-{scripts_block(extra_scripts)}"""
+{scripts_block(extra_scripts, music=(navbar_mode == "app"))}"""
 
 if __name__ == "__main__":
     print("Module sẵn sàng — import từ các script sinh trang khác.")

@@ -4,7 +4,7 @@ backend/api/auth) rồi đăng nhập luôn; yêu cầu mật khẩu ≥ 6 ký t
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))  # tools/build (nơi có generate.py)
-from generate import OUT_DIR, page, auth_side_bg, auth_hook, AUTH_BG_SCRIPT
+from generate import OUT_DIR, page, auth_side_bg, auth_hook, AUTH_BG_SCRIPT, GOOGLE_AUTH_BLOCK, GOOGLE_AUTH_SCRIPT
 
 BODY = """
 <section class="auth-section">
@@ -37,6 +37,7 @@ BODY = """
           </div>
           <button type="submit" class="btn btn-brand btn-lg w-100">Tạo tài khoản</button>
         </form>
+        """ + GOOGLE_AUTH_BLOCK + """
         <p class="auth-switch">Đã có tài khoản? <a href="dang-nhap.html">Đăng nhập</a></p>
         <p class="auth-switch"><a href="index.html"><i class="bi bi-arrow-left"></i> Về trang chủ</a></p>
       </div>
@@ -45,7 +46,7 @@ BODY = """
 </section>
 """
 
-EXTRA_SCRIPT = AUTH_BG_SCRIPT + """<script src="js/pages/dang-ky.js"></script>"""
+EXTRA_SCRIPT = AUTH_BG_SCRIPT + GOOGLE_AUTH_SCRIPT + """<script src="js/pages/dang-ky.js"></script>"""
 
 if __name__ == "__main__":
     html = page(

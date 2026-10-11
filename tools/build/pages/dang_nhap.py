@@ -4,7 +4,7 @@ js/pages/dang-nhap.js); trình duyệt chỉ nhớ tên/email/vai trò server tr
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))  # tools/build (nơi có generate.py)
-from generate import OUT_DIR, page, auth_side_bg, auth_hook, AUTH_BG_SCRIPT
+from generate import OUT_DIR, page, auth_side_bg, auth_hook, AUTH_BG_SCRIPT, GOOGLE_AUTH_BLOCK, GOOGLE_AUTH_SCRIPT
 
 BODY = """
 <section class="auth-section">
@@ -18,7 +18,6 @@ BODY = """
     <div class="auth-form-panel">
       <div class="auth-card">
         <h1>Đăng nhập</h1>
-        <p class="auth-note"><i class="bi bi-shield-check"></i> <span>Một tài khoản dùng chung cho người dùng và quản trị viên. Đăng nhập xong, hệ thống tự nhận diện vai trò và đưa bạn thẳng vào đúng giao diện — Trang chủ hoặc Bảng quản trị.</span></p>
         <form id="loginForm" novalidate>
           <div class="mb-3">
             <label class="form-label" for="loginEmail">Email</label>
@@ -34,6 +33,7 @@ BODY = """
           </div>
           <button type="submit" class="btn btn-brand btn-lg w-100">Đăng nhập</button>
         </form>
+        """ + GOOGLE_AUTH_BLOCK + """
         <p class="auth-switch">Chưa có tài khoản? <a href="dang-ky.html">Đăng ký ngay</a></p>
         <p class="auth-switch"><a href="index.html"><i class="bi bi-arrow-left"></i> Về trang chủ</a></p>
       </div>
@@ -42,7 +42,7 @@ BODY = """
 </section>
 """
 
-EXTRA_SCRIPT = AUTH_BG_SCRIPT + """<script src="js/pages/dang-nhap.js"></script>"""
+EXTRA_SCRIPT = AUTH_BG_SCRIPT + GOOGLE_AUTH_SCRIPT + """<script src="js/pages/dang-nhap.js"></script>"""
 
 if __name__ == "__main__":
     html = page(

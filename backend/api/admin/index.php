@@ -8,6 +8,7 @@ declare(strict_types=1);
 require dirname(__DIR__, 2) . '/src/bootstrap.php';
 
 use App\Controllers\FoodsController as Foods;
+use App\Controllers\RecipesController as Recipes;
 use App\Controllers\RestaurantsController as Restaurants;
 use App\Controllers\ReviewsController as Reviews;
 use App\Controllers\SystemController as System;
@@ -51,6 +52,9 @@ $routes = [
     'reviews.reply' => [Reviews::class, 'reply'],
     'feedback.list' => [Reviews::class, 'feedbackList'],
     'feedback.reply' => [Reviews::class, 'feedbackReply'],
+
+    'recipe.quality.list' => [Recipes::class, 'qualityList'],
+    'recipe.quality.get' => [Recipes::class, 'qualityGet'],
 
     'settings.get' => [System::class, 'settingsGet'],
     'settings.save' => [System::class, 'settingsSave'],

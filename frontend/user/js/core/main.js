@@ -53,7 +53,8 @@ function initNavbar() {
   window.addEventListener('storage', updateFavoriteBadge);
 }
 
-/* ---------- Menu neo cuộn của trang chủ ngoài (index.html): Trang Chủ / Giới Thiệu / Liên Hệ
+/* ---------- (Hiện menu trang ngoài chỉ còn "Giới Thiệu" nên hàm này tự bỏ qua; giữ lại phòng khi thêm mục neo.)
+   Menu neo cuộn của trang chủ ngoài (index.html): Trang Chủ / Giới Thiệu / Liên Hệ
    không phải 3 trang riêng nữa mà là 3 đoạn trong cùng 1 trang — ô tô sáng (active) phải tắt
    ở mục cũ và bật ở mục đang xem, dù bấm menu hay tự cuộn tay. Trên các trang khác (navbar
    "app") không có link #gioi-thieu/#lien-he nên hàm này tự bỏ qua, không làm gì cả.

@@ -11,16 +11,17 @@ use Throwable;
 /** Maps the existing API documents to the normalized MySQL schema, without replacing whole SQL tables. */
 final class MySqlStore implements DataStore
 {
-    public const TABLES = ['taxonomy', 'foods', 'users', 'settings', 'restaurants', 'reviews', 'feedback', 'user_state', 'audit'];
+    public const TABLES = ['taxonomy', 'foods', 'users', 'settings', 'restaurants', 'reviews', 'feedback', 'user_state', 'audit', 'recipe_feedback'];
     // Child tables first for deletion; reversed for restoring an SQL backup.
-    public const SQL_TABLES = ['app_storage_meta', 'user_state', 'food_tags', 'food_diets', 'food_tastes', 'food_meals',
+    public const SQL_TABLES = ['app_storage_meta', 'recipe_feedback', 'user_state', 'food_tags', 'food_diets', 'food_tastes', 'food_meals',
         'food_instructions', 'food_ingredients', 'reviews', 'restaurants', 'feedback', 'audit_logs', 'settings',
         'admins', 'users', 'foods', 'tags', 'meals', 'diets', 'tastes', 'regions', 'categories'];
 
-    /** API field => SQL column and conversion (integer, boolean, decimal, milliseconds, string). */
+    /** API field => SQL column and conversion (integer, boolean, decimal, milliseconds, string, j = JSON). */
     private const MAPS = [
         'users' => [
             'id'=>['id','i'], 'name'=>['name','s'], 'email'=>['email','s'], 'passwordHash'=>['password_hash','s'],
+            'googleId'=>['google_id','?s'], 'avatar'=>['avatar','?s'],
             'role'=>['role','s'], 'status'=>['status','s'], 'hasHealthProfile'=>['has_health_profile','b'],
             'favorites'=>['favorites_count','i'], 'joinedAt'=>['joined_at','t'], 'lastActiveAt'=>['last_active_at','t'],
         ],
@@ -38,6 +39,12 @@ final class MySqlStore implements DataStore
             'id'=>['id','i'], 'name'=>['name','s'], 'email'=>['email','s'], 'subject'=>['subject','s'],
             'subjectLabel'=>['subject_label','s'], 'message'=>['message','s'], 'status'=>['status','s'],
             'reply'=>['reply','s'], 'ip'=>['ip','s'], 'createdAt'=>['created_at','t'],
+        ],
+        'recipe_feedback' => [
+            'id'=>['id','i'], 'userId'=>['user_id','i'], 'userName'=>['user_name','s'], 'foodId'=>['food_id','s'],
+            'portions'=>['portions','i'], 'fit'=>['fit','b'], 'difficulty'=>['difficulty','?s'], 'time'=>['time_actual','?s'],
+            'taste'=>['taste','j'], 'ingredients'=>['ingredients','j'], 'note'=>['note','s'],
+            'createdAt'=>['created_at','t'], 'updatedAt'=>['updated_at','t'],
         ],
         'audit' => ['id'=>['id','i'], 'type'=>['type','s'], 'actor'=>['actor','s'], 'text'=>['text','s'], 'ip'=>['ip','s'], 'ts'=>['created_at','t']],
         'foods' => [
@@ -99,7 +106,7 @@ final class MySqlStore implements DataStore
             'settings' => $this->readSettings(),
             'user_state' => $this->readState(),
             'foods' => $this->readFoods(),
-            'users', 'restaurants', 'reviews', 'feedback', 'audit' => $this->readSimple($table),
+            'users', 'restaurants', 'reviews', 'feedback', 'audit', 'recipe_feedback' => $this->readSimple($table),
             default => throw new RuntimeException('Bảng không được hỗ trợ: ' . $table),
         };
     }
@@ -112,7 +119,7 @@ final class MySqlStore implements DataStore
                 'settings' => $this->writeSettings($rows),
                 'user_state' => $this->writeState($rows),
                 'foods' => $this->writeFoods($rows),
-                'users', 'restaurants', 'reviews', 'feedback', 'audit' => $this->writeSimple($table, $rows),
+                'users', 'restaurants', 'reviews', 'feedback', 'audit', 'recipe_feedback' => $this->writeSimple($table, $rows),
                 default => throw new RuntimeException('Bảng không được hỗ trợ: ' . $table),
             };
         });
@@ -406,7 +413,9 @@ final class MySqlStore implements DataStore
         foreach (self::MAPS[$table] as $field => [$column, $type]) {
             $value = $sql[$column];
             $value = match ($type) { 'i'=>(int) $value, '?i'=>$value === null ? null : (int) $value,
-                'b'=>(bool) $value, 'd'=>(float) $value, 't'=>$this->fromDate($value), default=>(string) $value };
+                '?s'=>$value === null ? null : (string) $value,
+                'b'=>(bool) $value, 'd'=>(float) $value, 't'=>$this->fromDate($value),
+                'j'=>$value === null ? null : json_decode((string) $value, true, 512, JSON_THROW_ON_ERROR), default=>(string) $value };
             $parts = explode('.', $field);
             if (count($parts) === 2) $row[$parts[0]][$parts[1]] = $value;
             else $row[$field] = $value;
@@ -421,7 +430,9 @@ final class MySqlStore implements DataStore
             $parts = explode('.', $field);
             $value = count($parts) === 2 ? ($row[$parts[0]][$parts[1]] ?? null) : ($row[$field] ?? null);
             $sql[$column] = match ($type) { 'i', 'b'=>(int) $value, '?i'=>is_numeric($value) ? (int) $value : null,
-                'd'=>(float) $value, 't'=>$this->toDate($value), default=>(string) ($value ?? ($field === 'source' ? 'seed' : '')) };
+                '?s'=>($value === null || $value === '') ? null : (string) $value,   // NULL thật (cột UNIQUE cho phép nhiều NULL)
+                'd'=>(float) $value, 't'=>$this->toDate($value), 'j'=>$this->json($value ?? []),
+                default=>(string) ($value ?? ($field === 'source' ? 'seed' : '')) };
         }
         return $sql;
     }

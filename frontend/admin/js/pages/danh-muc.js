@@ -4,13 +4,21 @@
   var D = window.Dom, T = null;
   var TONES = [['orange', 'Cam'], ['blue', 'Xanh dương'], ['purple', 'Tím'], ['green', 'Xanh lá'], ['amber', 'Vàng'], ['rose', 'Hồng'], ['sky', 'Xanh da trời']];
   var ICONS = ['bowl', 'tag', 'leaf', 'fire', 'star', 'heart'];
+  // Hình danh mục giống web người dùng (frontend/user/js/core/categories.js → CATEGORY_IMAGE, ảnh ở frontend/image/kham-pha/).
+  // Danh mục mới chưa có hình thì vẫn dùng icon đã chọn.
+  var CATEGORY_IMAGE = { 'mon-nuoc': 'mon-nuoc', com: 'com-tam', 'an-vat': 'an-vat', 'cuon-tron': 'banh-cuon', chay: 'salad', 'lau-nuong': 'lau', 'trang-mieng': 'tra-sua' };
+  function catIcon(c) {
+    var img = CATEGORY_IMAGE[c.slug];
+    return img ? '<span class="cat-thumb tint tint-' + c.tone + '"><img src="../image/kham-pha/' + img + '-192.png" alt="" width="48" height="48"></span>'
+      : '<span class="tint tint-' + c.tone + '">' + D.icon(c.icon || 'tag') + '</span>';
+  }
   var NAMES = { CATEGORIES: 'danh mục', REGIONS: 'vùng miền', TASTES: 'khẩu vị', DIETS: 'chế độ ăn', TAGS: 'thẻ' };
 
   function render() {
     D.$('#catSub').textContent = T.CATEGORIES.length + ' danh mục · ' + T.CATEGORIES.reduce(function (a, c) { return a + c.count; }, 0) + ' món ăn';
     D.$('#catList').innerHTML = T.CATEGORIES.map(function (c) {
-      return '<div class="cat-row"><span class="tint tint-' + c.tone + '">' + D.icon(c.icon || 'tag') + '</span>' +
-        '<div class="cat-info"><b>' + D.esc(c.label) + '</b><small>slug: ' + D.esc(c.slug) + '</small></div><span class="count-pill">' + c.count + ' món</span>' +
+      return '<div class="cat-row">' + catIcon(c) +
+        '<div class="cat-info"><b>' + D.esc(c.label) + '</b></div><span class="count-pill">' + c.count + ' món</span>' +
         '<button class="icon-action" type="button" data-edit="CATEGORIES:' + D.esc(c.slug) + '" aria-label="Sửa ' + D.esc(c.label) + '">' + D.icon('edit') + '</button>' +
         '<button class="icon-action is-danger" type="button" data-del="CATEGORIES:' + D.esc(c.slug) + '" aria-label="Xoá ' + D.esc(c.label) + '">' + D.icon('trash') + '</button></div>';
     }).join('');

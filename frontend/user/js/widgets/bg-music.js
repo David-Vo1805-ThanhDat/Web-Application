@@ -1,5 +1,5 @@
-/* widgets/bg-music.js — Nhạc nền cho mọi trang người dùng (frontend/audio/nhac-nen.mp3), nạp ở scripts_block() của
-   tools/build/generate.py.
+/* widgets/bg-music.js — Nhạc nền cho các trang SAU KHI ĐĂNG NHẬP (frontend/audio/nhac-nen.mp3), nạp ở scripts_block() của
+   tools/build/generate.py. Trang giới thiệu / đăng nhập / đăng ký không có nhạc (music=False).
    - Trình duyệt chặn tự phát nhạc có tiếng khi vừa mở trang → thử phát ngay; bị chặn thì phát ở lần bấm/chạm/gõ phím đầu tiên.
    - Nút tròn góc dưới bên trái để bật/tắt. Lựa chọn TẮT nhớ trong localStorage, vị trí đang nghe nhớ trong sessionStorage
      (chuyển trang thì phát tiếp từ chỗ cũ). Đây chỉ là tuỳ chọn giao diện, không phải dữ liệu tài khoản. */
@@ -23,6 +23,7 @@
   audio.volume = 0;
   audio.preload = 'auto';
   var off = read('localStorage', KEY_OFF) === '1';
+  var held = false;   // đang nhường tiếng cho video (BgMusic.hold) — tạm dừng, không đổi lựa chọn bật/tắt của người dùng
 
   // Phát tiếp từ chỗ đang nghe ở trang trước, CỘNG thêm thời gian đã trôi qua lúc chuyển trang
   // (nghe như nhạc vẫn chạy, chỉ "mất sóng" thoáng qua, thay vì khựng rồi lặp lại đoạn cũ)
@@ -75,7 +76,7 @@
   }
 
   function tryPlay() {
-    if (off || !audio.paused) return;
+    if (off || held || !audio.paused) return;
     var p = audio.play();
     if (p && p.catch) p.catch(function () { /* bị chặn: chờ người dùng tương tác */ });
   }
@@ -83,7 +84,7 @@
   // Lần tương tác đầu tiên trên trang (trừ chính nút nhạc) → phát
   var EVENTS = ['pointerdown', 'keydown', 'touchstart'];
   function onFirstInteraction(e) {
-    if (e.target && e.target.closest && e.target.closest('.music-toggle')) return;
+    if (e.target && e.target.closest && e.target.closest('.music-toggle, .demo-video')) return; // bấm xem video thì không bật nhạc
     tryPlay();
   }
   function listen(on) {
@@ -102,6 +103,14 @@
     if (off) audio.pause(); else tryPlay();
     paint();
   });
+
+  // Trang khác gọi để tạm dừng / phát lại nhạc nền, vd. lúc xem video giới thiệu (js/pages/index.js)
+  window.BgMusic = {
+    hold: function (on) {
+      held = !!on;
+      if (held) audio.pause(); else tryPlay();
+    },
+  };
 
   function mount() {
     document.body.appendChild(btn);

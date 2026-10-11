@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-/** API người dùng đã đăng nhập:  POST backend/api/user/index.php?action=state.get | state.save | reviews.create */
+/** API người dùng đã đăng nhập:  POST backend/api/user/index.php?action=state.get | state.save | profile.update | recipe.mine | recipe.submit | reviews.create */
 require dirname(__DIR__, 2) . '/src/bootstrap.php';
 
 use App\Controllers\UserController as UserApi;
@@ -14,6 +14,8 @@ use App\Core\Session;
     'state.get' => [UserApi::class, 'stateGet'],
     'state.save' => [UserApi::class, 'stateSave'],
     'profile.update' => [UserApi::class, 'profileUpdate'],
+    'recipe.mine' => [UserApi::class, 'recipeMine'],
+    'recipe.submit' => [UserApi::class, 'recipeSubmit'],
     'reviews.create' => [UserApi::class, 'reviewCreate'],
 ], static function (string $action): void {
     if (Session::user() === null) {

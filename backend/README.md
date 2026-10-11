@@ -42,6 +42,42 @@ node backend/tests/run-mysql.js database-ui
 
 Runner tạo database `hnag_test_*` từ schema, sao chép dữ liệu hiện tại, chạy kiểm tra rồi dọn database test. Tài khoản MySQL chạy test cần quyền tạo/xóa database test. `PHP_BIN` đổi đường dẫn PHP CLI nếu khác `C:/xampp/php/php.exe`.
 
+## Ảnh đại diện
+
+Người dùng đổi/xoá ảnh ở trang Tài khoản (thêm 11/10/2026 — Đạt). Ảnh lưu thẳng trong cột `users.avatar` dạng data URL (giống `foods.image`); trình duyệt tự cắt vuông, thu nhỏ 256px, nén JPEG trước khi gửi.
+
+- API: `POST api/user/index.php?action=profile.update` với `{ "avatar": "data:image/jpeg;base64,..." }` (hoặc `null` để xoá); gửi kèm `name` hay không đều được. Chỉ nhận JPEG/PNG/WebP ≤ 150 KB, ≤ 1024px, server giải mã thật để kiểm tra. Tài khoản quản trị chưa hỗ trợ ảnh.
+- `api/auth/bootstrap.php` trả `avatar` trong `window.APP_USER`; danh sách người dùng của admin chỉ có `hasAvatar` (không kèm ảnh).
+- Database cũ cần chạy `database/migrations/2026-10-11-user-avatar.sql` một lần. Kiểm tra: `node backend/tests/user-avatar.js`.
+
+## Nấu thử món này
+
+Người dùng nấu thử rồi phản hồi ở trang chi tiết món; admin xem ở trang "Chất lượng công thức" (backend thêm 12/10/2026 — Đạt, theo hợp đồng P0 cũ trong `git show c7e000f:backend/HANDOFF.md`). Hợp đồng đầy đủ: [HANDOFF.md](HANDOFF.md) mục 5.
+
+- `api/user`: `recipe.mine`, `recipe.submit` (mỗi người 1 phản hồi cho mỗi món, gửi lại là ghi đè; quá 20 món/giờ → 429; admin → 403). `api/public`: `recipe.stats` (dưới `recipe_cook_min` = 5 lượt chỉ trả số lượt). `api/admin`: `recipe.quality.list`, `recipe.quality.get`; `counts`/`dashboard` có `recipesToReview`.
+- Bảng `recipe_feedback` (danh sách nguyên liệu và vị lưu cột JSON; `UNIQUE (user_id, food_id)`; xoá món/người dùng thì xoá theo). `MySqlStore` có kiểu cột mới `'j'` (JSON).
+- Code: `src/Services/RecipeFeedbackService.php`, `src/Repositories/RecipeFeedbackRepository.php`, `src/Controllers/RecipesController.php`.
+- Database cũ cần chạy `database/migrations/2026-10-12-recipe-feedback.sql` một lần. Kiểm tra: `node backend/tests/recipe-feedback.js`.
+
+## Đăng nhập bằng Google
+
+Nút "Tiếp tục với Google" ở trang đăng nhập/đăng ký (thêm 11/10/2026 — Đạt). OAuth 2.0 Authorization Code + PKCE, chỉ nhận email Google **đã xác minh**.
+
+- `api/auth/google.php?next=<trang.html>` → lưu `state` + PKCE vào phiên PHP, chuyển sang trang chọn tài khoản Google. Chưa cấu hình thì quay về `dang-nhap.html?google=chua-cau-hinh`.
+- `api/auth/google-callback.php` (Google gọi về) → kiểm tra `state`, đổi `code` lấy token, đọc email/tên → `AuthService::loginWithGoogle()`: tài khoản đã liên kết `google_id` → tài khoản **cùng email** (liên kết luôn) → tạo tài khoản mới (mật khẩu ngẫu nhiên không ai biết). Email trùng **tài khoản quản trị** thì từ chối (admin chỉ đăng nhập bằng mật khẩu). Lỗi → `dang-nhap.html?google=<mã>`; `frontend/user/js/pages/auth-google.js` đổi mã thành câu tiếng Việt.
+- `next` chỉ nhận dạng `ten-trang.html[?...]` của web người dùng (chặn chuyển hướng ra trang lạ).
+- Code: `src/Services/GoogleAuthService.php`, `config/google.php`, `AuthService::loginWithGoogle()`, `UserRepository::findByGoogleId()`, cột `users.google_id` (map `googleId` trong `MySqlStore`). Admin chỉ thấy `googleLinked` (true/false), không thấy mã Google.
+
+**Database:** cột mới `users.google_id VARCHAR(64) NULL UNIQUE`. Database tạo từ `schema.sql` đã có sẵn; database đang dùng phải chạy **một lần** `database/migrations/2026-10-11-google-login.sql` (thiếu cột này thì đăng nhập/đăng ký sẽ lỗi).
+
+**Thiết lập Google (mỗi người tự làm trên máy mình, hoặc dùng chung một OAuth client):**
+1. Vào https://console.cloud.google.com → tạo project (vd. "Hom Nay An Gi").
+2. *APIs & Services → OAuth consent screen*: User type **External**, điền tên app + email hỗ trợ, scope `openid`, `email`, `profile`. Khi app ở chế độ **Testing**, chỉ các Gmail thêm vào mục **Test users** mới đăng nhập được — thêm Gmail của cả nhóm và thầy.
+3. *Credentials → Create credentials → OAuth client ID → Web application*. Mục **Authorized redirect URIs** thêm đúng địa chỉ của máy chạy web, vd. `http://localhost:8080/backend/api/auth/google-callback.php` (Apache cổng 80 thì `http://localhost/backend/api/auth/google-callback.php`; thêm được nhiều dòng).
+4. Chép **Client ID** và **Client secret** vào `backend/.env` (`GOOGLE_CLIENT_ID=`, `GOOGLE_CLIENT_SECRET=`, xem `.env.example`). Không cần khởi động lại Apache. **Không commit** `.env`.
+
+Kiểm tra (Google giả lập + database tạm, không gọi Google thật): `node backend/tests/google-login.js` — 17 kiểm tra.
+
 ## FoodBot trên trang giới thiệu
 
 Chatbot được tích hợp vào `frontend/user/index.html`; `frontend/index.html` chuyển hướng tới trang này. Giao diện nằm ở `frontend/user/css/components/chatbot.css`, tương tác ở `frontend/user/js/widgets/chatbot.js`. Khung rộng 380px, vùng tin nhắn cao 420px và nút mở 60 × 60px trên màn hình đủ rộng/cao; khung tự thu gọn trên điện thoại.
@@ -67,5 +103,5 @@ Lịch sử nằm trong bộ nhớ của tab, được giới hạn khi gửi v�
 
 Sau khi sửa bố cục, chạy `python tools/build/pages/index.py` để sinh lại trang. Kiểm tra backend không gọi AI thật: `node backend/tests/chatbot-api.js`.
 
-**Trang có FoodBot và giới hạn lượt:** FoodBot có ở trang giới thiệu (`index.html`) và 5 trang sau khi đăng nhập (Trang chủ, Gợi ý ngay, Khám phá, Thực đơn sức khỏe, Nhật ký sức khỏe) — bật bằng `page(..., chatbot=True)` trong `tools/build/pages/*.py`. Khách **chưa đăng nhập** chỉ được hỏi `GUEST_CHAT_TURNS = 2` lượt (đếm trong phiên PHP ở `backend/api/chat/index.php`, tải lại trang vẫn tính); lời chào tự động khi mở khung không tính lượt. Hết lượt, API trả **403** và `chatbot.js` hiện lời mời đăng nhập kèm nút Đăng nhập / Tạo tài khoản. Người đã đăng nhập không bị giới hạn lượt.
+**Trang có FoodBot và ai được dùng:** FoodBot có ở trang giới thiệu (`index.html`) và 5 trang sau khi đăng nhập (Trang chủ, Gợi ý ngay, Khám phá, Thực đơn sức khỏe, Nhật ký sức khỏe) — bật bằng `page(..., chatbot=True)` trong `tools/build/pages/*.py`. Từ 11/10/2026 FoodBot **chỉ trò chuyện với người đã đăng nhập**: `backend/api/chat/index.php` (`requireMember()`) trả **403** cho khách; `chatbot.js` không gọi API khi chưa đăng nhập mà tự đáp bằng câu mời tạo tài khoản kèm nút Đăng nhập / Tạo tài khoản. Biến môi trường `HNAG_CHAT_ALLOW_GUEST=1` chỉ để test gọi API khi chưa đăng nhập — không bật trên web thật.
 

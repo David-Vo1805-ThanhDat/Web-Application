@@ -28,6 +28,8 @@
   padding: .55rem .9rem !important; border-radius: .85rem; transition: background-color .15s ease, color .15s ease;
 }
 .site-navbar .nav-link i { font-size: 1rem; }
+/* Icon ảnh của 5 mục menu sau đăng nhập (frontend/image/icon-page/*-icon-72.png, khai báo ở navbar() trong tools/build/generate.py) */
+.nav-page-icon { width: 22px; height: 22px; flex: none; display: block; border-radius: 6px; box-shadow: 0 1px 3px rgba(31, 42, 68, .18); }
 .site-navbar .nav-link:hover { color: var(--orange-700); background: var(--brand-50); }
 .site-navbar .nav-link.active { color: var(--orange-700); background: var(--brand-100); }
 .site-navbar .nav-link.active::after {
@@ -74,6 +76,9 @@
   width: 1.9rem; height: 1.9rem; flex: none; display: grid; place-items: center; border-radius: 50%;
   background: var(--grad); color: #fff; font-size: .74rem; font-weight: 800;
 }
+/* Có ảnh đại diện (auth.js → avatarInner) thì ảnh lấp kín vòng tròn */
+.nav-user-avatar { overflow: hidden; }
+.nav-user-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .nav-user-name { display: inline-block; max-width: 8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
 /* Tên người dùng chỉ hiện khi đủ chỗ (từ 1600px); nhỏ hơn thì chỉ còn avatar (tên vẫn có trong menu xổ xuống) */
 @media (max-width: 1599.98px) { .nav-user-name { display: none; } .nav-user-btn { padding-right: .5rem; } }
@@ -89,3 +94,4 @@
 .dropdown-item:hover, .dropdown-item:focus { background: var(--brand-50); color: var(--orange-700); }
 .dropdown-item:hover i, .dropdown-item:focus i { color: var(--orange-600); }
 .dropdown-item .favorite-count-badge { min-width: 1.2rem; height: 1.2rem; font-size: .68rem; }
+

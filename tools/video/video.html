@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Video giới thiệu Hôm Nay Ăn Gì?</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #FFF9F1; --bg2: #FFF1E0; --o5: #F97316; --o6: #EA580C; --o7: #C2410C; --navy: #1F2A44; --t2: #5B6474; --line: #F1E4D6; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 720px; overflow: hidden; background: var(--bg); font-family: Inter, system-ui, sans-serif; color: var(--navy); }
+  .stage { position: relative; width: 1280px; height: 720px; overflow: hidden;
+    background: radial-gradient(600px 420px at 85% 15%, #FFE3C2 0%, transparent 70%), radial-gradient(520px 380px at 8% 95%, #FFE9D6 0%, transparent 70%), var(--bg); }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  .abs { position: absolute; }
+
+  /* chữ chú thích */
+  .eyebrow { display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFE3C7; color: var(--o7); font-weight: 800; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; }
+  .title { font-weight: 900; font-size: 54px; line-height: 1.06; letter-spacing: -0.035em; margin-top: 16px; }
+  .title em { font-style: normal; color: var(--o6); }
+  .lead { margin-top: 16px; font-size: 21px; line-height: 1.5; color: var(--t2); max-width: 440px; }
+
+  /* khung chat nhóm */
+  .chat { width: 520px; background: #fff; border-radius: 28px; box-shadow: 0 30px 60px -30px rgba(74,37,17,.35); border: 1px solid var(--line); overflow: hidden; }
+  .chat-head { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .chat-head b { font-size: 18px; } .chat-head span { display: block; font-size: 13px; color: var(--t2); }
+  .stack { display: flex; } .stack .av { margin-left: -10px; border: 2px solid #fff; } .stack .av:first-child { margin-left: 0; }
+  .chat-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 12px; min-height: 360px; }
+  .msg { display: flex; align-items: flex-end; gap: 10px; }
+  .msg.me { flex-direction: row-reverse; }
+  .av { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; }
+  .bubble { max-width: 330px; padding: 11px 16px; border-radius: 20px; background: #F4EEE8; font-size: 18px; line-height: 1.35; }
+  .bubble small { display: block; font-size: 12px; font-weight: 700; color: var(--t2); margin-bottom: 2px; }
+  .me .bubble { background: var(--o5); color: #fff; } .me .bubble small { color: rgba(255,255,255,.8); }
+  .typing { display: inline-flex; gap: 5px; padding: 14px 16px; }
+  .typing i { width: 8px; height: 8px; border-radius: 50%; background: #B9AFA6; }
+  .clock { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 700; font-size: 18px; }
+  .clock i { width: 10px; height: 10px; border-radius: 50%; background: var(--o5); }
+  .big-q { font-weight: 900; font-size: 92px; letter-spacing: -0.045em; line-height: .98; }
+  .big-q em { font-style: normal; color: var(--o6); }
+
+  /* điện thoại */
+  .phone { width: 316px; height: 666px; padding: 8px; border-radius: 46px; background: #1B1B1F; box-shadow: 0 40px 70px -30px rgba(31,42,68,.55), inset 0 0 0 2px #3A3A40; }
+  .screen { position: relative; width: 300px; height: 650px; border-radius: 38px; overflow: hidden; background: #fff; }
+  .screen img { position: absolute; left: 0; top: 34px; width: 300px; display: block; }
+  .status { position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 34px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; background: #fff; font-size: 13px; font-weight: 700; }
+  .status .bat { width: 22px; height: 11px; border: 1.5px solid var(--navy); border-radius: 3px; position: relative; }
+  .status .bat::after { content: ""; position: absolute; inset: 1.5px; right: 5px; background: var(--navy); border-radius: 1px; }
+  .notch { position: absolute; z-index: 3; top: 10px; left: 50%; width: 92px; height: 24px; margin-left: -46px; border-radius: 14px; background: #1B1B1F; }
+
+  /* vòng quay */
+  .wheel { position: absolute; border-radius: 50%; box-shadow: 0 30px 60px -25px rgba(194,65,12,.55); }
+  .wheel img { width: 100%; height: 100%; display: block; }
+  .pointer { position: absolute; width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 36px solid #E11D48; filter: drop-shadow(0 4px 4px rgba(0,0,0,.25)); }
+
+  /* thẻ kết quả */
+  .result { width: 380px; background: #fff; border-radius: 26px; overflow: hidden; box-shadow: 0 40px 70px -30px rgba(31,42,68,.5); }
+  .result img { width: 100%; height: 210px; object-fit: cover; display: block; }
+  .result .rb { padding: 16px 20px 20px; }
+  .result .tag { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #FFE3C7; color: var(--o7); font-size: 13px; font-weight: 800; }
+  .result h3 { margin-top: 8px; font-size: 30px; font-weight: 900; letter-spacing: -0.02em; }
+  .result .meta { margin-top: 6px; display: flex; gap: 16px; color: var(--t2); font-size: 16px; font-weight: 600; }
+  .result .meta b { color: var(--o6); }
+  .chip { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; background: #fff; border: 2px solid var(--o5); font-weight: 800; font-size: 19px; color: var(--o7); box-shadow: 0 14px 30px -18px rgba(194,65,12,.6); }
+
+  .check { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: #fff; border: 1px solid var(--line); border-radius: 18px; font-size: 20px; font-weight: 700; box-shadow: 0 12px 24px -20px rgba(74,37,17,.4); }
+  .check i { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--o5); position: relative; }
+  .check i::after { content: ""; position: absolute; left: 10px; top: 6px; width: 8px; height: 14px; border: solid #fff; border-width: 0 3px 3px 0; transform: rotate(45deg); }
+
+  .browser { width: 760px; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 40px 70px -30px rgba(31,42,68,.55); border: 1px solid #E7DCCF; }
+  .browser .bar { height: 36px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #F3EDE6; }
+  .browser .bar i { width: 11px; height: 11px; border-radius: 50%; }
+  .browser .url { margin-left: 14px; flex: 1; height: 22px; line-height: 22px; padding: 0 12px; border-radius: 8px; background: #fff; font-size: 12px; color: var(--t2); }
+  .browser .view { position: relative; width: 760px; height: 417px; }
+  .browser video { width: 100%; height: 100%; display: block; }
+  .tap { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; border: 3px solid var(--o5); background: rgba(249,115,22,.25); opacity: 0; }
+  .brand-mini { position: absolute; left: 40px; bottom: 30px; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; opacity: 0; }
+  .brand-mini img { width: 40px; height: 40px; }
+  .dots { position: absolute; right: 44px; bottom: 40px; display: flex; gap: 8px; opacity: 0; }
+  .dots i { width: 9px; height: 9px; border-radius: 99px; background: #E9D9C7; transition: none; }
+  .dots i.on { width: 28px; background: var(--o5); }
+
+  .endcard { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; background: radial-gradient(700px 500px at 50% 45%, #FFE3C2, var(--bg) 70%); opacity: 0; }
+  .endcard img.logo { width: 150px; height: 150px; filter: drop-shadow(0 20px 30px rgba(194,65,12,.35)); }
+  .endcard h1 { margin-top: 18px; font-size: 76px; font-weight: 900; letter-spacing: -0.045em; }
+  .endcard p { margin-top: 8px; font-size: 26px; color: var(--t2); font-weight: 600; }
+  .endcard .cta { display: inline-block; margin-top: 26px; padding: 16px 34px; border-radius: 999px; background: linear-gradient(135deg, var(--o5), var(--o6)); color: #fff; font-size: 22px; font-weight: 800; box-shadow: 0 20px 40px -18px rgba(234,88,12,.8); }
+  .bot { position: absolute; width: 110px; }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+
+  <!-- CẢNH 1: cả nhóm vắt óc trong group chat -->
+  <section class="scene" id="s1">
+    <div class="abs" style="left:110px;top:60px" id="clock"><span class="clock"><i></i>18:47 · Thứ Sáu</span></div>
+    <div class="chat abs" style="left:110px;top:130px" id="chat1">
+      <div class="chat-head">
+        <div class="stack"><span class="av" style="background:#EA580C">MA</span><span class="av" style="background:#0B8F82">T</span><span class="av" style="background:#E23F52">L</span><span class="av" style="background:#3D405B">K</span></div>
+        <div><b>Hội Ăn Uống</b><span>4 thành viên</span></div>
+      </div>
+      <div class="chat-body">
+        <div class="msg me m1"><span class="av" style="background:#EA580C">MA</span><div class="bubble"><small>Minh Anh</small>Tối nay ăn gì đây mọi người?</div></div>
+        <div class="msg m2"><span class="av" style="background:#0B8F82">T</span><div class="bubble"><small>Tuấn</small>Gì cũng được</div></div>
+        <div class="msg m3"><span class="av" style="background:#E23F52">L</span><div class="bubble"><small>Linh</small>Tùy mọi người á</div></div>
+        <div class="msg m4"><span class="av" style="background:#3D405B">K</span><div class="bubble"><small>Khoa</small>Hôm qua ăn bún rồi nha...</div></div>
+        <div class="msg me m5"><span class="av" style="background:#EA580C">MA</span><div class="bubble typing"><i></i><i></i><i></i></div></div>
+      </div>
+    </div>
+    <div class="abs" style="left:700px;top:215px" id="bigq">
+      <div class="big-q">Ăn gì<br><em>bây giờ?</em></div>
+      <p class="lead" style="margin-top:22px;font-size:23px">Câu hỏi khó nhất mỗi ngày của mọi nhóm bạn.</p>
+    </div>
+  </section>
+
+  <!-- CẢNH 2: mở app -->
+  <section class="scene" id="s2">
+    <div class="abs" style="left:120px;top:190px" id="cap2">
+      <span class="eyebrow">Bước 1</span>
+      <h2 class="title">Mở <em>Hôm Nay<br>Ăn Gì?</em></h2>
+      <p class="lead">Vòng quay may mắn nằm ngay trang chủ, chọn bữa sáng, trưa, tối hay ăn vặt.</p>
+    </div>
+    <div class="phone abs" style="left:822px;top:27px" id="phone2"><div class="screen"><span class="status"><span>18:52</span><span class="bat"></span></span><span class="notch"></span><img id="scr2" src="shots/trang-chu.png" alt=""></div></div>
+  </section>
+
+  <!-- CẢNH 3: quay một vòng -->
+  <section class="scene" id="s3">
+    <div class="abs" style="left:120px;top:200px" id="cap3">
+      <span class="eyebrow">Bước 2</span>
+      <h2 class="title">Quay một vòng,<br><em>chốt một món.</em></h2>
+      <p class="lead">Lọc theo ngân sách, khẩu vị, chế độ ăn rồi để vòng quay chọn giúp.</p>
+    </div>
+    <div class="wheel" id="wheel3" style="left:690px;top:110px;width:500px;height:500px"><img src="assets/wheel.png" alt=""></div>
+    <div class="pointer" id="ptr3" style="left:920px;top:92px"></div>
+    <div class="result abs" id="res3" style="left:750px;top:150px">
+      <img src="assets/pho.jpg" alt="">
+      <div class="rb"><span class="tag">Món của hôm nay</span><h3>Phở Bò Hà Nội</h3>
+        <div class="meta"><span><b>4.9</b> sao</span><span>45 phút</span><span>480 kcal</span></div></div>
+    </div>
+  </section>
+
+  <!-- CẢNH 4: cả nhóm cùng đề cử -->
+  <section class="scene" id="s4">
+    <div class="abs" style="left:110px;top:70px" id="cap4">
+      <span class="eyebrow">Bước 3</span>
+      <h2 class="title" style="font-size:48px">Cả nhóm <em>cùng đề cử.</em></h2>
+      <p class="lead" style="max-width:520px">Món nào nhiều người chọn sẽ chiếm nhiều ô hơn, dễ trúng hơn.</p>
+    </div>
+    <div class="wheel" id="wheel4" style="left:120px;top:275px;width:330px;height:330px"><img src="assets/wheel-nhom.png" alt=""></div>
+    <div class="pointer" id="ptr4" style="left:265px;top:258px"></div>
+    <div class="abs" id="res4" style="left:480px;top:410px"><span class="chip">Phở bò · 2/4 người chọn</span></div>
+    <div class="phone abs" style="left:842px;top:27px" id="phone4"><div class="screen"><span class="status"><span>18:52</span><span class="bat"></span></span><span class="notch"></span><img src="assets/nhom-view.jpg" alt=""></div></div>
+  </section>
+
+  <!-- CẢNH 5: bắn hộp quà bí ẩn (clip quay màn hình thật: assets/box-clip-d.mp4) -->
+  <section class="scene" id="s5">
+    <div class="abs" style="left:90px;top:170px;width:360px" id="cap5b">
+      <span class="eyebrow">Bước 4</span>
+      <h2 class="title" style="font-size:46px">Hoặc bắn<br><em>hộp quà bí ẩn.</em></h2>
+      <p class="lead" style="font-size:19px">Mỗi hộp giấu một món. Súng đồ chơi bắn nổ hộp, món trúng hiện ra ngay.</p>
+    </div>
+    <div class="browser abs" id="browser5" style="left:470px;top:128px">
+      <div class="bar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span class="url">homnayangi.vn/goi-y</span></div>
+      <div class="view"><video id="clip5" src="assets/box-clip-d.mp4" muted playsinline preload="auto"></video><span class="tap" id="tap5"></span></div>
+    </div>
+  </section>
+
+  <!-- CẢNH 6: công thức + quán -->
+  <section class="scene" id="s6">
+    <div class="abs" style="left:110px;top:90px" id="cap5">
+      <span class="eyebrow">Bước 5</span>
+      <h2 class="title" style="font-size:50px">Biết nấu thế nào,<br><em>ăn ở đâu.</em></h2>
+    </div>
+    <div class="abs" style="left:110px;top:330px;display:grid;gap:14px;width:470px" id="checks">
+      <div class="check"><i></i>Nguyên liệu cần chuẩn bị</div>
+      <div class="check"><i></i>Các bước nấu chi tiết</div>
+      <div class="check"><i></i>Dinh dưỡng của từng món</div>
+      <div class="check"><i></i>Quán gợi ý để đến thử</div>
+    </div>
+    <div class="phone abs" style="left:822px;top:27px" id="phone5"><div class="screen"><span class="status"><span>18:52</span><span class="bat"></span></span><span class="notch"></span><img id="scr5" src="shots/chi-tiet.png" alt=""></div></div>
+  </section>
+
+  <!-- CẢNH 6: chốt kèo + kết -->
+  <section class="scene" id="s7">
+    <div class="chat abs" style="left:380px;top:120px" id="chat6">
+      <div class="chat-head">
+        <div class="stack"><span class="av" style="background:#EA580C">MA</span><span class="av" style="background:#0B8F82">T</span><span class="av" style="background:#E23F52">L</span><span class="av" style="background:#3D405B">K</span></div>
+        <div><b>Hội Ăn Uống</b><span>4 thành viên</span></div>
+      </div>
+      <div class="chat-body" style="min-height:300px">
+        <div class="msg me n1"><span class="av" style="background:#EA580C">MA</span><div class="bubble"><small>Minh Anh</small>Chốt: Phở Bò Hà Nội nha!</div></div>
+        <div class="msg n2"><span class="av" style="background:#0B8F82">T</span><div class="bubble"><small>Tuấn</small>Đi luôn!</div></div>
+        <div class="msg n3"><span class="av" style="background:#E23F52">L</span><div class="bubble"><small>Linh</small>Có quán gần trường luôn kìa</div></div>
+        <div class="msg n4"><span class="av" style="background:#3D405B">K</span><div class="bubble"><small>Khoa</small>Lần đầu chốt nhanh vậy</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="endcard" id="end">
+    <div>
+      <img class="logo" src="assets/logo-256.png" alt="">
+      <h1>Hôm Nay Ăn Gì?</h1>
+      <p>Chốt món trong vài giây, cho cả nhóm.</p>
+      <span class="cta">Đăng ký miễn phí</span>
+    </div>
+    <img class="bot" id="bot" src="assets/chat-bot-192.png" alt="" style="left:1060px;top:470px">
+  </div>
+
+  <div class="brand-mini" id="brandMini"><img src="assets/logo-256.png" alt="">Hôm Nay Ăn Gì?</div>
+  <div class="dots" id="dots"><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<script>
+  var DURATION = 38.6;
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var prog = function (t, a, b) { return clamp((t - a) / (b - a)); };
+  var easeOut = function (x) { return 1 - Math.pow(1 - x, 3); };
+  var easeInOut = function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var easeOutQuart = function (x) { return 1 - Math.pow(1 - x, 4); };
+  var backOut = function (x) { var c1 = 1.7, c3 = c1 + 1; return x === 0 ? 0 : 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+  var $ = function (s) { return document.querySelector(s); };
+  function vis(t, a, b) { return Math.min(prog(t, a - .3, a + .3), 1 - prog(t, b - .3, b + .3)); } // hòa cảnh: cảnh sau hiện trong lúc cảnh trước mờ
+  function pop(el, t, at, dy) {
+    var x = prog(t, at, at + .45), e = backOut(x);
+    el.style.opacity = clamp(x * 2.2);
+    el.style.transform = 'translateY(' + ((1 - e) * (dy == null ? 18 : dy)) + 'px) scale(' + (.88 + .12 * e) + ')';
+  }
+  function slideIn(el, t, at, dx) {
+    var e = easeOut(prog(t, at, at + .7));
+    el.style.opacity = e; el.style.transform = 'translateX(' + ((1 - e) * dx) + 'px)';
+  }
+
+  // Vòng quay dừng đúng lát "Phở": lát cần chỉ lên trên (270°) — xem số đo góc trong ghi chú dựng video
+  var SPIN3 = 360 * 5 + (270 - 157.5);
+  var SPIN4 = 360 * 4 + (270 - 10.5);
+  var SC = [[-1, 5.6], [5.6, 10.2], [10.2, 15.2], [15.2, 20.8], [20.8, 26.6], [26.6, 31.6], [31.6, 35.0]];
+  var CLIP_AT = 21.5;  // giây bắt đầu phát clip hộp quà; trong clip: bấm hộp ~1,55s, nổ ~2,3s, thẻ kết quả ~2,8s
+
+  function render(t) {
+    SC.forEach(function (r, i) { $('#s' + (i + 1)).style.opacity = vis(t, r[0], r[1]); });
+
+    // Cảnh 1
+    pop($('#clock'), t, .2, -10);
+    pop($('#chat1'), t, .35, 30);
+    [['.m1', .9], ['.m2', 1.7], ['.m3', 2.35], ['.m4', 3.0], ['.m5', 3.7]].forEach(function (m) { pop($('#s1 ' + m[0]), t, m[1]); });
+    $('#s1 .typing').querySelectorAll('i').forEach(function (d, i) { d.style.transform = 'translateY(' + (Math.sin((t * 9) - i * .9) * 3) + 'px)'; });
+    var q = prog(t, 3.9, 4.5); $('#bigq').style.opacity = clamp(q * 2);
+    $('#bigq').style.transform = 'scale(' + (.8 + .2 * backOut(q)) + ') rotate(' + (Math.sin(t * 14) * 2.5 * (1 - prog(t, 4.3, 5.2)) * (q > 0 ? 1 : 0)) + 'deg)';
+
+    // Cảnh 2: mở app, cuộn xuống vòng quay
+    slideIn($('#cap2'), t, 5.8, -60);
+    var ph = easeOut(prog(t, 5.9, 6.8)); $('#phone2').style.transform = 'translateY(' + ((1 - ph) * 120) + 'px) rotate(' + ((1 - ph) * 6) + 'deg)'; $('#phone2').style.opacity = ph;
+    $('#scr2').style.transform = 'translateY(' + (-easeInOut(prog(t, 7.2, 9.4)) * 548) + 'px)';
+
+    // Cảnh 3: quay
+    slideIn($('#cap3'), t, 10.4, -60);
+    var w3 = backOut(prog(t, 10.4, 11.0)); $('#wheel3').style.transform = 'scale(' + (.6 + .4 * w3) + ') rotate(' + (SPIN3 * easeOutQuart(prog(t, 11.0, 13.6))) + 'deg)';
+    $('#wheel3').style.opacity = clamp(prog(t, 10.4, 10.8)); $('#ptr3').style.opacity = Math.min(clamp(prog(t, 10.7, 11.0)), 1 - prog(t, 13.8, 14.1));
+    var r3 = prog(t, 13.8, 14.3); $('#res3').style.opacity = clamp(r3 * 2); $('#res3').style.transform = 'translateY(' + ((1 - backOut(r3)) * 40) + 'px) scale(' + (.85 + .15 * backOut(r3)) + ')';
+    $('#wheel3').style.filter = 'blur(' + (r3 * 3) + 'px)';
+
+    // Cảnh 4: nhóm
+    slideIn($('#cap4'), t, 15.4, -60);
+    var p4 = easeOut(prog(t, 15.5, 16.3)); $('#phone4').style.opacity = p4; $('#phone4').style.transform = 'translateX(' + ((1 - p4) * 80) + 'px)';
+    var w4 = backOut(prog(t, 16.3, 16.9)); $('#wheel4').style.opacity = clamp(prog(t, 16.3, 16.6)); $('#ptr4').style.opacity = clamp(prog(t, 16.6, 16.9));
+    $('#wheel4').style.transform = 'scale(' + (.6 + .4 * w4) + ') rotate(' + (SPIN4 * easeOutQuart(prog(t, 17.0, 19.4))) + 'deg)';
+    pop($('#res4'), t, 19.6, 20);
+
+    // Cảnh 5: bắn hộp quà (clip thật) — thời điểm trong clip do seekClip() tua tới
+    slideIn($('#cap5b'), t, 21.0, -60);
+    var b5 = easeOut(prog(t, 21.0, 21.7)); $('#browser5').style.opacity = b5; $('#browser5').style.transform = 'translateY(' + ((1 - b5) * 60) + 'px) scale(' + (.94 + .06 * b5) + ')';
+    window.__clipT = Math.max(0, Math.min(4.75, t - CLIP_AT));
+    var tp = prog(t, CLIP_AT + 1.2, CLIP_AT + 1.75), tap = $('#tap5');
+    tap.style.left = '477px'; tap.style.top = '93px';
+    tap.style.opacity = Math.min(clamp(tp * 3), 1 - prog(t, CLIP_AT + 1.6, CLIP_AT + 1.9));
+    tap.style.transform = 'scale(' + (1.6 - .6 * easeOut(tp)) + ')';
+
+    // Cảnh 6: chi tiết món
+    slideIn($('#cap5'), t, 26.8, -60);
+    var p5 = easeOut(prog(t, 26.8, 27.6)); $('#phone5').style.opacity = p5; $('#phone5').style.transform = 'translateY(' + ((1 - p5) * 100) + 'px)';
+    $('#scr5').style.transform = 'translateY(' + (-easeInOut(prog(t, 27.8, 31)) * 1250) + 'px)';
+    document.querySelectorAll('#checks .check').forEach(function (c, i) { slideIn(c, t, 27.7 + i * .65, -40); });
+
+    // Cảnh 7: chốt kèo trong group chat
+    pop($('#chat6'), t, 31.7, 30);
+    [['.n1', 32.1], ['.n2', 32.7], ['.n3', 33.2], ['.n4', 33.7]].forEach(function (m) { pop($('#s7 ' + m[0]), t, m[1]); });
+
+    // Màn kết
+    $('#end').style.opacity = prog(t, 34.6, 35.1);
+    $('#end > div').style.opacity = prog(t, 35, 35.4);
+    var lg = backOut(prog(t, 35, 35.6)); $('#end .logo').style.transform = 'scale(' + (.5 + .5 * lg) + ') rotate(' + ((1 - lg) * -20) + 'deg)';
+    $('#bot').style.transform = 'translateY(' + ((1 - backOut(prog(t, 35.5, 36.1))) * 160) + 'px) rotate(' + (Math.sin(t * 4) * 4) + 'deg)';
+
+    // logo nhỏ + chấm tiến trình ở cảnh 2–5
+    var mid = Math.min(prog(t, 5.8, 6.3), 1 - prog(t, 31.2, 31.7)); $('#brandMini').style.opacity = mid; $('#dots').style.opacity = mid;
+    var step = t < 10.2 ? 0 : t < 15.2 ? 1 : t < 20.8 ? 2 : t < 26.6 ? 3 : 4;
+    document.querySelectorAll('#dots i').forEach(function (d, i) { d.classList.toggle('on', i === step); });
+  }
+  // tua clip hộp quà tới đúng khung (render.js gọi sau mỗi render)
+  window.seekClip = function () {
+    var v = document.getElementById('clip5'), want = window.__clipT || 0;
+    if (Math.abs(v.currentTime - want) < 0.004) return Promise.resolve();
+    return new Promise(function (r) { v.addEventListener('seeked', function h() { v.removeEventListener('seeked', h); r(); }); v.currentTime = want; });
+  };
+  window.render = render;
+  window.DURATION = DURATION;
+  render(0);
+  // xem thử trong trình duyệt: ?play
+  if (location.search.indexOf('play') !== -1) { var t0 = performance.now(); (function loop(now) { var t = ((now - t0) / 1000) % DURATION; render(t); requestAnimationFrame(loop); })(t0); }
+</script>
+</body>
+</html>

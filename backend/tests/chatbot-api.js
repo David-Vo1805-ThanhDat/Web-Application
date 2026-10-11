@@ -128,7 +128,8 @@ try {
 `);
     php = spawn(PHP, ['-d', `sys_temp_dir=${temporary}`, '-d', `upload_tmp_dir=${temporary}`, '-S', `127.0.0.1:${phpPort}`, '-t', ROOT, routerPath], {
       cwd: ROOT,
-      env: { ...process.env, GEMINI_API_KEY: '', API_KEY: '', HNAG_STORAGE_DIR: path.join(temporary, 'storage') },
+      // HNAG_CHAT_ALLOW_GUEST: test gọi API khi chưa đăng nhập (web thật chỉ cho người đã đăng nhập dùng FoodBot)
+      env: { ...process.env, GEMINI_API_KEY: '', API_KEY: '', HNAG_STORAGE_DIR: path.join(temporary, 'storage'), HNAG_CHAT_ALLOW_GUEST: '1' },
       stdio: 'ignore',
       windowsHide: true,
     });

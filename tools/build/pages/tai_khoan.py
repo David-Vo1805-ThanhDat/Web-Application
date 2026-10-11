@@ -13,18 +13,22 @@ BODY = """
   <div class="container acct-container">
     <div class="page-head">
       <h1>Tài khoản của tôi</h1>
-      <p>Xem thông tin tài khoản, hồ sơ sức khỏe và chỉnh vài cài đặt cơ bản.</p>
     </div>
 
     <div class="panel mb-4">
       <div class="acct-profile">
         <span class="nav-user-avatar acct-avatar" id="acctAvatar"></span>
-        <div>
+        <div class="min-w-0">
           <div class="fw-bold fs-5" id="acctName"></div>
           <div class="text-muted small" id="acctEmail"></div>
+          <div class="acct-avatar-actions">
+            <button type="button" class="btn btn-sm btn-outline-brand" id="avatarPickBtn"><i class="bi bi-camera"></i> Đổi ảnh</button>
+            <button type="button" class="btn btn-sm btn-link text-muted d-none" id="avatarRemoveBtn">Xoá ảnh</button>
+            <input type="file" id="avatarInput" accept="image/png,image/jpeg,image/webp" hidden>
+          </div>
         </div>
       </div>
-      <div class="row text-center bg-light rounded-3 py-2 my-3 border">
+      <div class="row text-center bg-light rounded-3 py-2 mt-3 border">
         <div class="col border-end">
           <div class="small text-muted">Món yêu thích</div>
           <div class="fw-bold" id="acctFavCount">0</div>
@@ -34,7 +38,6 @@ BODY = """
           <div class="fw-bold" id="acctSince">—</div>
         </div>
       </div>
-      <p class="auth-note mb-0"><i class="bi bi-info-circle"></i> Thông tin tài khoản chỉ lưu trên trình duyệt này, chưa có server thật để đồng bộ nhiều thiết bị.</p>
     </div>
 
     <div class="panel mb-4">
@@ -111,7 +114,6 @@ BODY = """
         </div>
         <a href="thuc-don-suc-khoe.html" class="btn btn-outline-brand w-100 mt-3"><i class="bi bi-calendar-week"></i> Xem Thực Đơn Sức Khỏe</a>
       </div>
-      <p class="auth-note mt-3 mb-0"><i class="bi bi-info-circle"></i> Công cụ tham khảo cho vui dựa trên công thức phổ biến (Mifflin-St Jeor), không thay thế tư vấn dinh dưỡng hay y tế chuyên môn.</p>
     </div>
 
     <div class="panel acct-danger">

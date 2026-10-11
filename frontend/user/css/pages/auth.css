@@ -63,3 +63,15 @@
 .auth-switch { margin: .9rem 0 0; font-size: .92rem; color: var(--text-2); }
 .auth-switch a { font-weight: 600; color: var(--orange-700); }
 .auth-switch a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* "— hoặc —" + nút "Tiếp tục với Google" (GOOGLE_AUTH_BLOCK trong tools/build/generate.py) — kiểu nút trắng theo hướng dẫn của Google */
+.auth-divider { display: flex; align-items: center; gap: .75rem; margin: 1.1rem 0; color: var(--text-3); font-size: .85rem; }
+.auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.btn-google {
+  display: flex; align-items: center; justify-content: center; gap: .65rem; width: 100%; min-height: 3rem; padding: .6rem 1rem;
+  border: 1.5px solid var(--line-strong); border-radius: .8rem; background: #fff; color: #1F1F1F;
+  font-weight: 600; font-size: 1rem; text-decoration: none; transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.btn-google:hover { background: #F8F9FA; border-color: #C4C7C5; color: #1F1F1F; box-shadow: 0 4px 12px -8px rgba(31, 42, 68, .45); }
+.btn-google:focus-visible { outline: 3px solid var(--orange-500); outline-offset: 2px; }
+.btn-google svg { flex: none; }

@@ -73,6 +73,47 @@ final class AuthService
         return $this->open($id, $email, $name, 'user');
     }
 
+    /**
+     * Đăng nhập bằng Google (email đã được Google xác minh). Thứ tự tìm: tài khoản đã liên kết googleId → tài khoản cùng email
+     * (liên kết luôn) → tạo tài khoản mới (mật khẩu ngẫu nhiên không ai biết; muốn dùng mật khẩu thì sau này "đặt lại mật khẩu").
+     * Email trùng tài khoản QUẢN TRỊ thì từ chối: admin chỉ đăng nhập bằng mật khẩu.
+     * @return array{email:string,name:string,role:string}
+     */
+    public function loginWithGoogle(string $googleId, string $email, string $name): array
+    {
+        $email = mb_strtolower(trim($email));
+        if ($googleId === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) throw new HttpException(422, 'Google không trả về email hợp lệ');
+        foreach ($this->settings->get()['admins'] as $a) {
+            if (mb_strtolower($a['email']) === $email) {
+                throw new HttpException(403, 'Tài khoản quản trị vui lòng đăng nhập bằng email và mật khẩu.');
+            }
+        }
+        $u = $this->users->findByGoogleId($googleId) ?? $this->users->findByEmail($email);
+        if ($u !== null) {
+            if ($u['status'] === 'locked') throw new HttpException(403, 'Tài khoản đã bị tạm khoá. Vui lòng liên hệ quản trị viên.');
+            if (($u['googleId'] ?? null) === null) {
+                (new AuditService())->log('user', 'liên kết Google cho tài khoản ' . $u['email'], 'Hệ thống');
+            }
+            $u['googleId'] = $googleId;
+            $u['lastActiveAt'] = AuditService::nowMs();
+            $this->users->update($u);
+            return $this->open($u['id'], $u['email'], $u['name'], 'user');
+        }
+
+        $name = trim($name) !== '' ? trim($name) : explode('@', $email)[0];
+        $rows = $this->users->all();
+        $id = $this->users->nextId();
+        array_unshift($rows, [
+            'id' => $id, 'name' => mb_substr($name, 0, 80), 'email' => $email, 'joinedAt' => AuditService::nowMs(), 'favorites' => 0,
+            'hasHealthProfile' => false, 'role' => 'member', 'status' => 'active',
+            'passwordHash' => password_hash(bin2hex(random_bytes(32)), PASSWORD_DEFAULT), 'googleId' => $googleId,
+            'lastActiveAt' => AuditService::nowMs(),
+        ]);
+        $this->users->replaceAll($rows);
+        (new AuditService())->log('user', 'người dùng mới đăng ký bằng Google: ' . $email, 'Hệ thống');
+        return $this->open($id, $email, mb_substr($name, 0, 80), 'user');
+    }
+
     /** @return array{email:string,name:string,role:string} */
     public function me(): array
     {

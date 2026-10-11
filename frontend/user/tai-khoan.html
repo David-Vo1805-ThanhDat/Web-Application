@@ -37,6 +37,7 @@
 <link href="css/components/modal-result.css" rel="stylesheet">
 <link href="css/components/gift-box.css" rel="stylesheet">
 <link href="css/components/music.css" rel="stylesheet">
+<link href="css/components/feedback.css" rel="stylesheet">
 <link href="css/pages/home.css" rel="stylesheet">
 <link href="css/pages/goi-y.css" rel="stylesheet">
 <link href="css/pages/landing.css" rel="stylesheet">
@@ -66,11 +67,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav mx-lg-auto align-items-lg-center gap-lg-1">
-          <li class="nav-item"><a class="nav-link" data-page="trang-chu.html" href="trang-chu.html"><i class="bi bi-egg-fried"></i> Trang Chủ</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="goi-y.html" href="goi-y.html"><i class="bi bi-shuffle"></i> Gợi Ý Ngay <span class="hot-badge">HOT</span></a></li>
-          <li class="nav-item"><a class="nav-link" data-page="kham-pha.html" href="kham-pha.html"><i class="bi bi-compass"></i> Khám Phá</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="thuc-don-suc-khoe.html" href="thuc-don-suc-khoe.html"><i class="bi bi-calendar-week"></i> Thực Đơn Sức Khỏe</a></li>
-          <li class="nav-item"><a class="nav-link" data-page="nhat-ky-suc-khoe.html" href="nhat-ky-suc-khoe.html"><i class="bi bi-heart-pulse"></i> Nhật Ký Sức Khỏe</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="trang-chu.html" href="trang-chu.html"><img class="nav-page-icon" src="../image/icon-page/trang-chu-icon-72.png" alt="" width="22" height="22"> Trang Chủ</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="goi-y.html" href="goi-y.html"><img class="nav-page-icon" src="../image/icon-page/goi-y-icon-72.png" alt="" width="22" height="22"> Gợi Ý Ngay <span class="hot-badge">HOT</span></a></li>
+          <li class="nav-item"><a class="nav-link" data-page="kham-pha.html" href="kham-pha.html"><img class="nav-page-icon" src="../image/icon-page/kham-pha-icon-72.png" alt="" width="22" height="22"> Khám Phá</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="thuc-don-suc-khoe.html" href="thuc-don-suc-khoe.html"><img class="nav-page-icon" src="../image/icon-page/thuc-don-icon-72.png" alt="" width="22" height="22"> Thực Đơn Sức Khỏe</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="nhat-ky-suc-khoe.html" href="nhat-ky-suc-khoe.html"><img class="nav-page-icon" src="../image/icon-page/nhat-ky-icon-72.png" alt="" width="22" height="22"> Nhật Ký Sức Khỏe</a></li>
         </ul>
         <div class="nav-actions d-flex align-items-center gap-2 mt-3 mt-lg-0">
           <a href="kham-pha.html?tab=favorites" class="nav-fav" aria-label="Yêu thích">
@@ -89,18 +90,22 @@
   <div class="container acct-container">
     <div class="page-head">
       <h1>Tài khoản của tôi</h1>
-      <p>Xem thông tin tài khoản, hồ sơ sức khỏe và chỉnh vài cài đặt cơ bản.</p>
     </div>
 
     <div class="panel mb-4">
       <div class="acct-profile">
         <span class="nav-user-avatar acct-avatar" id="acctAvatar"></span>
-        <div>
+        <div class="min-w-0">
           <div class="fw-bold fs-5" id="acctName"></div>
           <div class="text-muted small" id="acctEmail"></div>
+          <div class="acct-avatar-actions">
+            <button type="button" class="btn btn-sm btn-outline-brand" id="avatarPickBtn"><i class="bi bi-camera"></i> Đổi ảnh</button>
+            <button type="button" class="btn btn-sm btn-link text-muted d-none" id="avatarRemoveBtn">Xoá ảnh</button>
+            <input type="file" id="avatarInput" accept="image/png,image/jpeg,image/webp" hidden>
+          </div>
         </div>
       </div>
-      <div class="row text-center bg-light rounded-3 py-2 my-3 border">
+      <div class="row text-center bg-light rounded-3 py-2 mt-3 border">
         <div class="col border-end">
           <div class="small text-muted">Món yêu thích</div>
           <div class="fw-bold" id="acctFavCount">0</div>
@@ -110,7 +115,6 @@
           <div class="fw-bold" id="acctSince">—</div>
         </div>
       </div>
-      <p class="auth-note mb-0"><i class="bi bi-info-circle"></i> Thông tin tài khoản chỉ lưu trên trình duyệt này, chưa có server thật để đồng bộ nhiều thiết bị.</p>
     </div>
 
     <div class="panel mb-4">
@@ -187,7 +191,6 @@
         </div>
         <a href="thuc-don-suc-khoe.html" class="btn btn-outline-brand w-100 mt-3"><i class="bi bi-calendar-week"></i> Xem Thực Đơn Sức Khỏe</a>
       </div>
-      <p class="auth-note mt-3 mb-0"><i class="bi bi-info-circle"></i> Công cụ tham khảo cho vui dựa trên công thức phổ biến (Mifflin-St Jeor), không thay thế tư vấn dinh dưỡng hay y tế chuyên môn.</p>
     </div>
 
     <div class="panel acct-danger">
@@ -217,20 +220,20 @@
         <ul class="list-unstyled small d-flex flex-column gap-2">
           <li><a href="trang-chu.html">Trang chủ</a></li>
           <li><a href="goi-y.html">Vòng quay món ăn</a></li>
-          <li><a href="kham-pha.html">Thực đơn 31 món</a></li>
+          <li><a href="kham-pha.html">Thực đơn món ăn</a></li>
           <li><a href="kham-pha.html?tab=favorites">Món đã lưu</a></li>
           <li><a href="thuc-don-suc-khoe.html">Thực đơn sức khỏe</a></li>
           <li><a href="nhat-ky-suc-khoe.html">Nhật ký sức khỏe</a></li>
           <li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
-          <li><a href="index.html#lien-he">Liên hệ và góp ý</a></li>
+          <li><a href="#" role="button" data-open-feedback>Góp ý &amp; liên hệ</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-3">
-        <h4>Đội ngũ</h4>
+        <h4>Đội ngũ trong bếp</h4>
         <ul class="list-unstyled small d-flex flex-column gap-3">
-          <li><strong class="text-white d-block">Người A</strong><span class="footer-muted">Thiết kế sản phẩm</span></li>
-          <li><strong class="text-white d-block">Người B</strong><span class="footer-muted">Dữ liệu ẩm thực</span></li>
-          <li><strong class="text-white d-block">Người C</strong><span class="footer-muted">Nội dung &amp; đối tác quán ăn</span></li>
+          <li><strong class="text-white d-block">Phong <span class="footer-kitchen-role">· Bếp trưởng hậu trường</span></strong><span class="footer-muted">Backend &amp; cơ sở dữ liệu</span></li>
+          <li><strong class="text-white d-block">An <span class="footer-kitchen-role">· Người nếm thử</span></strong><span class="footer-muted">FoodBot &amp; kiểm thử</span></li>
+          <li><strong class="text-white d-block">Đạt <span class="footer-kitchen-role">· Người bày món</span></strong><span class="footer-muted">Giao diện &amp; trải nghiệm người dùng</span></li>
         </ul>
       </div>
       <div class="col-lg-3">
@@ -269,6 +272,7 @@
 <script src="js/core/main.js"></script>
 <script src="js/core/auth.js"></script>
 <script src="js/widgets/bg-music.js"></script>
+<script src="js/widgets/feedback.js"></script>
 <script src="js/pages/tai-khoan.js"></script>
 </body>
 </html>

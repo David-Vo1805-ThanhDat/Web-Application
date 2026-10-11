@@ -162,7 +162,7 @@ if __name__ == "__main__":
     html = page(
         "Gợi Ý Ngay | Hôm Nay Ăn Gì?",
         "Chọn món cho cả nhóm: mỗi người đề cử một món rồi quay vòng quay để chốt, hoặc lọc theo bữa, ngân sách và khẩu vị.",
-        BODY, EXTRA_SCRIPT, gated=True, chatbot=True
+        BODY, EXTRA_SCRIPT, gated=True, chatbot=True, banner=("goi-y", "30%")
     )
     with open(os.path.join(OUT_DIR, "goi-y.html"), "w", encoding="utf-8") as f:
         f.write(html)

@@ -10,9 +10,9 @@ BODY = """
 <!-- 1. HERO: khung theo thiết kế gốc (nhãn, tiêu đề, hai nút, ba chỉ số | thẻ vòng quay) -->
 <section class="hero">
   <div class="container" style="--bs-gutter-x: 3rem;">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <span class="hero-chip"><i class="bi bi-stars"></i> Giải cứu chiếc bụng đói chỉ trong 5 giây</span>
+    <div class="row align-items-start g-5">
+      <div class="col-lg-6 hero-copy">
+        <span class="hero-chip">Giải cứu chiếc bụng đói chỉ trong 5 giây</span>
         <h1 class="hero-title">Hôm Nay Bạn<br><span class="text-grad">Muốn Ăn Gì?</span> <svg class="hero-bowl" viewBox="0 0 72 62" aria-hidden="true">
             <path d="M40 4 58 30M48 1 66 26" stroke="#D4A05A" stroke-width="4" stroke-linecap="round"/>
             <path d="M10 30c4-9 9-9 13 0s9 9 13 0 9-9 13 0 9 9 12 1" stroke="#FCD34D" stroke-width="5" stroke-linecap="round" fill="none"/>
@@ -26,13 +26,13 @@ BODY = """
         </p>
 
         <div class="hero-actions">
-          <button type="button" class="btn btn-brand btn-lg" data-spin><i class="bi bi-stars"></i> <span class="spin-label">Quay Ngẫu Nhiên Ngay</span></button>
+          <button type="button" class="btn btn-brand btn-lg" data-spin><span class="spin-label">Quay Ngẫu Nhiên Ngay</span></button>
           <button type="button" class="btn btn-outline-brand btn-lg" id="quickPickBtn"><i class="bi bi-dice-5"></i> Gợi ý nhanh 1 món</button>
         </div>
 
         <div class="hero-stats">
           <div class="hero-stat"><b id="statFoods">31+</b><span>Món ngon đặc sắc</span></div>
-          <div class="hero-stat"><b>5 Giây</b><span>Quyết định bữa ăn</span></div>
+          <div class="hero-stat"><b>5 giây</b><span>Quyết định bữa ăn</span></div>
           <div class="hero-stat"><b>100%</b><span>Hài lòng no nê</span></div>
         </div>
       </div>
@@ -51,7 +51,7 @@ BODY = """
             <div class="wheel-pointer" aria-hidden="true"></div>
             <canvas id="heroWheelCanvas" width="640" height="640" role="img" aria-label="Vòng quay chọn món ăn. Bấm để quay."></canvas>
           </div>
-          <button type="button" class="btn btn-brand btn-lg" data-spin><i class="bi bi-stars"></i> <span class="spin-label">BẤM ĐỂ QUAY NGAY</span> 🎯</button>
+          <button type="button" class="btn btn-brand btn-lg" data-spin><span class="spin-label">BẤM ĐỂ QUAY NGAY</span> 🎯</button>
           <p class="lucky-note" id="heroNote" aria-live="polite"></p>
           <p class="lucky-note">Đi ăn cùng nhóm? <a href="goi-y.html#nhom">Chọn cùng cả nhóm</a></p>
         </div>

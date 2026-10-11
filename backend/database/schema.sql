@@ -125,6 +125,8 @@ CREATE TABLE users (
   name                VARCHAR(80)  NOT NULL,
   email               VARCHAR(190) NOT NULL UNIQUE,
   password_hash       VARCHAR(255) NOT NULL,                           -- password_hash() của PHP (bcrypt)
+  google_id           VARCHAR(64)  NULL UNIQUE,                        -- mã tài khoản Google ("sub") khi đăng nhập bằng Google
+  avatar              MEDIUMTEXT   NULL,                               -- ảnh đại diện (data URL JPEG/PNG/WebP, tối đa 150 KB); NULL = dùng chữ cái đầu
   role                ENUM('member','moderator') NOT NULL DEFAULT 'member',
   status              ENUM('active','unverified','locked') NOT NULL DEFAULT 'active',
   has_health_profile  TINYINT(1)   NOT NULL DEFAULT 0,
@@ -162,6 +164,29 @@ CREATE TABLE reviews (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
   FOREIGN KEY (food_id) REFERENCES foods(id) ON DELETE CASCADE,
   INDEX idx_reviews_status (status, created_at)
+) ENGINE=InnoDB;
+
+-- Phản hồi "Nấu thử món này" (12/10/2026, Đạt): mỗi người dùng 1 dòng cho mỗi món, gửi lại là ghi đè.
+-- ingredients = [{"index":0,"status":"ok|less|more","note":"..."}] (chỉ số theo foods.ingredients, 0-based);
+-- taste = {"salty":"low|ok|high"|null, "sweet":..., "spicy":...}. Ghi chú (note) chỉ admin đọc, không hiện công khai.
+CREATE TABLE recipe_feedback (
+  id           INT UNSIGNED NOT NULL PRIMARY KEY,
+  user_id      INT UNSIGNED NOT NULL,
+  user_name    VARCHAR(80)  NOT NULL,
+  food_id      VARCHAR(80)  NOT NULL,
+  portions     TINYINT UNSIGNED NOT NULL,
+  fit          TINYINT(1)   NOT NULL,
+  difficulty   ENUM('easy','medium','hard') NULL,
+  time_actual  ENUM('faster','same','slower') NULL,
+  taste        JSON         NOT NULL,
+  ingredients  JSON         NOT NULL,
+  note         VARCHAR(300) NOT NULL DEFAULT '',
+  created_at   DATETIME(3)  NOT NULL,
+  updated_at   DATETIME(3)  NOT NULL,
+  UNIQUE KEY uq_recipe_feedback_user_food (user_id, food_id),
+  INDEX idx_recipe_feedback_food (food_id, updated_at),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (food_id) REFERENCES foods(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE feedback (

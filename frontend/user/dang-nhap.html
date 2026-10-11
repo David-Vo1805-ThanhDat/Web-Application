@@ -27,6 +27,7 @@
 <link href="css/components/modal-result.css" rel="stylesheet">
 <link href="css/components/gift-box.css" rel="stylesheet">
 <link href="css/components/music.css" rel="stylesheet">
+<link href="css/components/feedback.css" rel="stylesheet">
 <link href="css/pages/home.css" rel="stylesheet">
 <link href="css/pages/goi-y.css" rel="stylesheet">
 <link href="css/pages/landing.css" rel="stylesheet">
@@ -75,7 +76,6 @@
     <div class="auth-form-panel">
       <div class="auth-card">
         <h1>Đăng nhập</h1>
-        <p class="auth-note"><i class="bi bi-shield-check"></i> <span>Một tài khoản dùng chung cho người dùng và quản trị viên. Đăng nhập xong, hệ thống tự nhận diện vai trò và đưa bạn thẳng vào đúng giao diện — Trang chủ hoặc Bảng quản trị.</span></p>
         <form id="loginForm" novalidate>
           <div class="mb-3">
             <label class="form-label" for="loginEmail">Email</label>
@@ -91,6 +91,16 @@
           </div>
           <button type="submit" class="btn btn-brand btn-lg w-100">Đăng nhập</button>
         </form>
+        <div class="auth-divider"><span>hoặc</span></div>
+        <a class="btn-google" id="googleAuthBtn" href="../../backend/api/auth/google.php">
+          <svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true">
+            <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/>
+            <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+            <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
+            <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/>
+          </svg>
+          <span>Tiếp tục với Google</span>
+        </a>
         <p class="auth-switch">Chưa có tài khoản? <a href="dang-ky.html">Đăng ký ngay</a></p>
         <p class="auth-switch"><a href="index.html"><i class="bi bi-arrow-left"></i> Về trang chủ</a></p>
       </div>
@@ -117,20 +127,20 @@
         <ul class="list-unstyled small d-flex flex-column gap-2">
           <li><a href="trang-chu.html">Trang chủ</a></li>
           <li><a href="goi-y.html">Vòng quay món ăn</a></li>
-          <li><a href="kham-pha.html">Thực đơn 31 món</a></li>
+          <li><a href="kham-pha.html">Thực đơn món ăn</a></li>
           <li><a href="kham-pha.html?tab=favorites">Món đã lưu</a></li>
           <li><a href="thuc-don-suc-khoe.html">Thực đơn sức khỏe</a></li>
           <li><a href="nhat-ky-suc-khoe.html">Nhật ký sức khỏe</a></li>
           <li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
-          <li><a href="index.html#lien-he">Liên hệ và góp ý</a></li>
+          <li><a href="#" role="button" data-open-feedback>Góp ý &amp; liên hệ</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-3">
-        <h4>Đội ngũ</h4>
+        <h4>Đội ngũ trong bếp</h4>
         <ul class="list-unstyled small d-flex flex-column gap-3">
-          <li><strong class="text-white d-block">Người A</strong><span class="footer-muted">Thiết kế sản phẩm</span></li>
-          <li><strong class="text-white d-block">Người B</strong><span class="footer-muted">Dữ liệu ẩm thực</span></li>
-          <li><strong class="text-white d-block">Người C</strong><span class="footer-muted">Nội dung &amp; đối tác quán ăn</span></li>
+          <li><strong class="text-white d-block">Phong <span class="footer-kitchen-role">· Bếp trưởng hậu trường</span></strong><span class="footer-muted">Backend &amp; cơ sở dữ liệu</span></li>
+          <li><strong class="text-white d-block">An <span class="footer-kitchen-role">· Người nếm thử</span></strong><span class="footer-muted">FoodBot &amp; kiểm thử</span></li>
+          <li><strong class="text-white d-block">Đạt <span class="footer-kitchen-role">· Người bày món</span></strong><span class="footer-muted">Giao diện &amp; trải nghiệm người dùng</span></li>
         </ul>
       </div>
       <div class="col-lg-3">
@@ -168,7 +178,7 @@
 <script src="js/core/health.js"></script>
 <script src="js/core/main.js"></script>
 <script src="js/core/auth.js"></script>
-<script src="js/widgets/bg-music.js"></script>
-<script src="js/pages/auth-bg.js"></script><script src="js/pages/dang-nhap.js"></script>
+<script src="js/widgets/feedback.js"></script>
+<script src="js/pages/auth-bg.js"></script><script src="js/pages/auth-google.js"></script><script src="js/pages/dang-nhap.js"></script>
 </body>
 </html>

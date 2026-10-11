@@ -43,6 +43,7 @@ final class StatsService
         return [
             'foods' => count($this->foods->all()), 'restaurants' => count($this->restaurants->all()),
             'pending' => $this->pendingReviews(), 'feedbackNew' => $this->newFeedback(),
+            'recipesToReview' => (new RecipeFeedbackService())->recipesToReview(),
         ];
     }
 
@@ -93,7 +94,8 @@ final class StatsService
             'topSpun' => array_map(static fn ($x) => ['id' => $x['id'], 'name' => $x['name'], 'reviewCount' => $x['reviewCount'], 'rating' => $x['rating']], array_slice($byReviews, 0, 5)),
             'topFav' => array_map(static fn ($x) => ['id' => $x['id'], 'name' => $x['name'], 'favorites' => $x['stats']['favorites']], array_slice($byFavs, 0, 5)),
             'recent' => (new AuditService())->recent(5),
-            'attention' => ['pendingReviews' => $this->pendingReviews(), 'unansweredFeedback' => $this->newFeedback()],
+            'attention' => ['pendingReviews' => $this->pendingReviews(), 'unansweredFeedback' => $this->newFeedback(),
+                'recipesToReview' => (new RecipeFeedbackService())->recipesToReview()],
         ];
     }
 

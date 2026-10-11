@@ -7,26 +7,14 @@ use App\Controllers\ChatController;
 use App\Core\HttpException;
 use App\Core\Session;
 
-const GUEST_CHAT_TURNS = 2;            // khách chưa đăng nhập được hỏi tối đa 2 lượt (đếm theo phiên PHP)
-const GUEST_GREETINGS = 5;             // lời chào tự động khi mở khung chat không tính lượt, nhưng giới hạn số lần
-const GREETING_TEXT = 'hôm nay ăn gì'; // đúng câu chatbot.js tự gửi khi mở khung
-
-/** Khách hết lượt → 403 (chatbot.js hiện lời mời đăng nhập). Người đã đăng nhập không giới hạn. */
-function checkGuestQuota(array $params): void
+/**
+ * FoodBot chỉ trả lời người ĐÃ ĐĂNG NHẬP (quyết định của nhóm 11/10/2026). Khách → 403; chatbot.js tự đáp bằng lời mời
+ * tạo tài khoản và không gọi API này. HNAG_CHAT_ALLOW_GUEST=1 chỉ dành cho test (backend/tests/chatbot-api.js), web thật không bật.
+ */
+function requireMember(): void
 {
-    if (Session::user() !== null) return;
-    $history = $params['history'] ?? null;
-    $isGreeting = is_array($history) && count($history) === 1
-        && (($history[0]['parts'][0]['text'] ?? null) === GREETING_TEXT);
-    $used = $_SESSION['guest_chat'] ?? ['turns' => 0, 'greetings' => 0];
-    if ($isGreeting && $used['greetings'] < GUEST_GREETINGS) {
-        $used['greetings']++;
-    } elseif ($used['turns'] >= GUEST_CHAT_TURNS) {
-        throw new HttpException(403, 'Bạn đã dùng hết ' . GUEST_CHAT_TURNS . ' lượt trò chuyện miễn phí. Hãy đăng nhập để tiếp tục trò chuyện cùng FoodBot.');
-    } else {
-        $used['turns']++;
-    }
-    $_SESSION['guest_chat'] = $used;
+    if (Session::user() !== null || getenv('HNAG_CHAT_ALLOW_GUEST') === '1') return;
+    throw new HttpException(403, 'Bạn cần đăng nhập để trò chuyện cùng FoodBot.');
 }
 
 header('Cache-Control: no-store');
@@ -46,7 +34,7 @@ try {
         throw new HttpException(400, 'Dữ liệu JSON không hợp lệ.');
     }
     if (!is_array($params)) throw new HttpException(400, 'Dữ liệu trò chuyện không hợp lệ.');
-    checkGuestQuota($params);
+    requireMember();
     session_write_close();   // ghi phiên xong thì nhả khoá, để trả lời dài không chặn các yêu cầu khác của cùng người dùng
     (new ChatController())->stream($params);
 } catch (\Throwable $e) {

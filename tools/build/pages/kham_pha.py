@@ -8,9 +8,6 @@ BODY = """
 <div class="container py-5">
   <!-- Page Header -->
   <div class="mb-4" data-aos="fade-up">
-    <span class="badge bg-brand-subtle-custom text-brand-emphasis-custom px-3 py-2 rounded-pill mb-2">
-      <i class="bi bi-egg-fried"></i> Thực Đơn Phong Phú
-    </span>
     <h1 class="fw-black display-6">Khám Phá Ẩm Thực 🧭</h1>
     <p class="text-muted mb-0">31+ món ăn đặc sắc từ Bắc vào Nam — tìm kiếm, lọc và lưu những món yêu thích của bạn.</p>
   </div>
@@ -131,7 +128,7 @@ if __name__ == "__main__":
     html = page(
         "Khám Phá Ẩm Thực | Hôm Nay Bạn Muốn Ăn Gì?",
         "Tìm kiếm, lọc theo bữa ăn, ngân sách, khẩu vị, vùng miền và lưu các món ăn yêu thích của bạn.",
-        BODY, EXTRA_SCRIPT, page_css='<link href="css/pages/explore.css" rel="stylesheet">', gated=True, chatbot=True
+        BODY, EXTRA_SCRIPT, page_css='<link href="css/pages/explore.css" rel="stylesheet">', gated=True, chatbot=True, banner=("kham-pha", "14%")
     )
     with open(os.path.join(OUT_DIR, "kham-pha.html"), "w", encoding="utf-8") as f:
         f.write(html)

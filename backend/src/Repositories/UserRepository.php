@@ -19,4 +19,16 @@ final class UserRepository extends Repository
         }
         return null;
     }
+
+    /** Tài khoản đã liên kết Google (cột google_id = "sub" của Google). @return array<string,mixed>|null */
+    public function findByGoogleId(string $googleId): ?array
+    {
+        if ($googleId === '') return null;
+        foreach ($this->all() as $u) {
+            if (($u['googleId'] ?? null) === $googleId) {
+                return $u;
+            }
+        }
+        return null;
+    }
 }

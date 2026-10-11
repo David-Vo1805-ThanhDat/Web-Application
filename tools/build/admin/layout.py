@@ -99,15 +99,23 @@ GUARD = """<script src="../../backend/api/auth/bootstrap.php"></script>
 </script>"""
 
 
+def _v(rel):
+    """Số phiên bản = thời điểm sửa file (?v=...) để trình duyệt tự tải CSS/JS mới sau mỗi lần sửa, không dùng bản cũ đã lưu."""
+    try:
+        return f"?v={int(os.path.getmtime(os.path.join(ADMIN_DIR, rel)))}"
+    except OSError:
+        return ""
+
+
 def admin_page(filename, title, active, body, page_css=None, page_js=None):
     """Sinh 1 trang admin vào frontend/admin/<filename>.
     active: tên file trong menu cần tô sáng. page_css/page_js: tên file trong css/pages/, js/pages/."""
-    css = "\n".join(f'<link href="css/{f}" rel="stylesheet">' for f in CSS_FILES)
+    css = "\n".join(f'<link href="css/{f}{_v("css/" + f)}" rel="stylesheet">' for f in CSS_FILES)
     if page_css:
-        css += f'\n<link href="css/pages/{page_css}" rel="stylesheet">'
-    js = "\n".join(f'<script src="{f}"></script>' for f in JS_FILES)
+        css += f'\n<link href="css/pages/{page_css}{_v("css/pages/" + page_css)}" rel="stylesheet">'
+    js = "\n".join(f'<script src="{f}{_v(f)}"></script>' for f in JS_FILES)
     if page_js:
-        js += f'\n<script src="js/pages/{page_js}"></script>'
+        js += f'\n<script src="js/pages/{page_js}{_v("js/pages/" + page_js)}"></script>'
     html = f"""<!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -128,7 +136,7 @@ def admin_page(filename, title, active, body, page_css=None, page_js=None):
   <aside class="sidebar" id="sidebar" aria-label="Điều hướng quản trị">
     <div class="sidebar-scroll">
       <a class="brand" href="dashboard.html">
-        <span class="brand-mark">{icon("bowl")}</span>
+        <span class="brand-mark brand-mark-logo" style="background:none"><img class="brand-logo" src="../image/admin/logo-128.png" alt="" width="40" height="40"></span>
         <span class="brand-text"><b>Hôm Nay Ăn Gì?</b><small>Bảng quản trị</small></span>
       </a>
       <nav class="nav">
@@ -162,7 +170,7 @@ def admin_page(filename, title, active, body, page_css=None, page_js=None):
     </header>
     <header class="mobile-topbar">
       <button class="icon-btn icon-btn-soft" type="button" data-open-drawer aria-label="Mở menu">{icon("menu")}</button>
-      <a class="mobile-brand" href="dashboard.html"><span class="brand-mark brand-mark-sm">{icon("bowl")}</span><b>Bảng quản trị</b></a>
+      <a class="mobile-brand" href="dashboard.html"><span class="brand-mark brand-mark-sm brand-mark-logo" style="background:none"><img class="brand-logo" src="../image/admin/logo-128.png" alt="" width="40" height="40"></span><b>Bảng quản trị</b></a>
       <button class="icon-btn icon-btn-soft has-dot" type="button" id="notifBtnMobile" aria-label="Thông báo">{icon("bell")}</button>
     </header>
     <main class="content" id="content">

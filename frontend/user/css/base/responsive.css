@@ -12,7 +12,7 @@
 
 /* menu co gọn theo bề rộng để không ngắt chữ */
 @media (min-width: 992px) and (max-width: 1399.98px) {
-  .site-navbar .nav-link i { display: none; }
+  .site-navbar .nav-link i, .site-navbar .nav-link .nav-page-icon { display: none; }
   .site-navbar .nav-link { padding: .55rem .75rem !important; }
 }
 @media (min-width: 992px) and (max-width: 1599.98px) {

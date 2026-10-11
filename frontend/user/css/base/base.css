@@ -4,7 +4,7 @@
 html { scroll-behavior: smooth; }
 /* Bù chiều cao thanh nav dính (.site-navbar, position: sticky) khi nhảy neo tới các mục đã
    gộp vào trang chủ (Giới thiệu ở footer, Liên hệ giữa trang) — không thì tiêu đề bị che mất. */
-#gioi-thieu, #lien-he { scroll-margin-top: 5.5rem; }
+#gioi-thieu { scroll-margin-top: 5.5rem; }
 
 body {
   background-color: var(--bg);

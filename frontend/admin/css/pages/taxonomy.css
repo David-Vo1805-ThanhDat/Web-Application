@@ -7,9 +7,18 @@
 .cat-row:first-child { border-top: 0; }
 .cat-row .tint { width: 40px; height: 40px; border-radius: 12px; flex: none; }
 .cat-row .tint .ic { width: 18px; height: 18px; }
+/* Hình danh mục giống web người dùng (frontend/image/kham-pha/*-192.png) */
+.cat-row .cat-thumb { width: 56px; height: 56px; border-radius: 14px; overflow: hidden; }
+.cat-row .cat-thumb img { width: 48px; height: 48px; object-fit: contain; display: block; }
 .cat-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
-.cat-info b { font-size: 15px; font-weight: 600; }
-.cat-info small { font-size: 12px; color: var(--ad-text-3); }
+.cat-info { gap: 3px; }
+.cat-info b { font-size: 16px; font-weight: 600; }
+.cat-info small { font-size: 13px; color: var(--ad-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 575.98px) {
+  .cat-row { gap: 12px; }
+  .cat-row .cat-thumb { width: 48px; height: 48px; border-radius: 12px; }
+  .cat-row .cat-thumb img { width: 40px; height: 40px; }
+}
 .count-pill { padding: 4px 10px; border-radius: 999px; background: var(--ad-orange-50); font-size: 12px; font-weight: 600; color: var(--ad-text-2); white-space: nowrap; }
 
 .region-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }

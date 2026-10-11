@@ -16,54 +16,43 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---- Form Liên Hệ (gộp từ trang lien-he.html cũ) ---- */
-  if (typeof getCurrentUser === 'function') {
-    var cfUser = getCurrentUser();
-    if (cfUser) {
-      document.getElementById('cfName').value = cfUser.name;
-      document.getElementById('cfEmail').value = cfUser.email;
-    }
-  }
-  var subjectSelect = document.getElementById('cfSubject');
-  var dishGroup = document.getElementById('dishNameGroup');
-  subjectSelect.addEventListener('change', function () {
-    dishGroup.classList.toggle('d-none', subjectSelect.value !== 'de-xuat-mon');
-  });
-  var contactForm = document.getElementById('contactForm');
-  var cfSubmitBtn = document.getElementById('cfSubmitBtn');
-  var cfSubmitLabel = document.getElementById('cfSubmitLabel');
-  var cfError = document.getElementById('cfError');
-  contactForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var message = document.getElementById('cfMessage').value.trim();
-    var dishName = document.getElementById('cfDishName').value.trim();
-    var email = document.getElementById('cfEmail').value.trim();
-    var isDishSubject = subjectSelect.value === 'de-xuat-mon';
-    if (!message || !email || (isDishSubject && !dishName)) {
-      cfError.classList.remove('d-none');
-      return;
-    }
-    cfError.classList.add('d-none');
-    cfSubmitBtn.disabled = true;
-    cfSubmitLabel.textContent = 'Đang gửi...';
-    function finish() { cfSubmitBtn.disabled = false; cfSubmitLabel.textContent = 'Gửi Lời Nhắn'; }
-    // Có backend PHP → góp ý được lưu để quản trị viên xem ở trang "Đánh giá & góp ý"; không kết nối được backend thì báo lỗi (không giả lập gửi thành công)
-    Backend.available().then(function (online) {
-      if (!online) throw new Error(Backend.OFFLINE_MESSAGE);
-      return Backend.sendFeedback({
-        name: document.getElementById('cfName').value.trim(), email: email, subject: subjectSelect.value,
-        message: (isDishSubject ? 'Món đề xuất: ' + dishName + '\n' : '') + message,
-      });
-    }).then(function () {
-      finish();
-      contactForm.reset();
-      dishGroup.classList.add('d-none');
-      showToast('success', '🎉 Cảm ơn bạn đã liên hệ! Đội ngũ sẽ xem xét và phản hồi sớm nhất.');
-    }).catch(function (err) {
-      finish();
-      showToast('error', err.message);
+  /* ---- VIDEO GIỚI THIỆU: bấm nút tròn mới tải + phát (preload="none" cho trang nhẹ). Khi video phát thì
+     tạm dừng nhạc nền (BgMusic.hold trong js/widgets/bg-music.js), dừng/hết video thì nhạc phát lại. ---- */
+  var demoVideo = document.getElementById('demoVideo');
+  if (demoVideo) {
+    var demoPlay = document.getElementById('demoPlay');
+    var demoWrap = demoVideo.closest('.demo-video');
+    var holdMusic = function (on) { if (window.BgMusic) window.BgMusic.hold(on); };
+    demoPlay.addEventListener('click', function () {
+      demoVideo.controls = true;
+      demoVideo.play();
     });
-  });
+    // Danh sách chương bên trái: bấm → tua tới đoạn đó và phát; chương đang xem được tô sáng
+    var chapters = Array.prototype.slice.call(document.querySelectorAll('#demoChapters button'));
+    chapters.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var at = parseFloat(btn.dataset.t);
+        demoVideo.controls = true;
+        if (demoVideo.readyState >= 1) demoVideo.currentTime = at;
+        else demoVideo.addEventListener('loadedmetadata', function () { demoVideo.currentTime = at; }, { once: true });
+        demoVideo.play();
+      });
+    });
+    demoVideo.addEventListener('timeupdate', function () {
+      var t = demoVideo.currentTime, cur = null;
+      chapters.forEach(function (btn) { if (t >= parseFloat(btn.dataset.t) - 0.1) cur = btn; });
+      chapters.forEach(function (btn) { btn.classList.toggle('is-current', btn === cur && !demoVideo.paused); });
+    });
+    demoVideo.addEventListener('play', function () { demoWrap.classList.add('is-playing'); holdMusic(true); });
+    demoVideo.addEventListener('pause', function () { holdMusic(false); });
+    demoVideo.addEventListener('ended', function () {
+      demoWrap.classList.remove('is-playing');
+      demoVideo.controls = false;
+      demoVideo.load(); // về lại ảnh bìa, bấm nút tròn để xem lại
+    });
+  }
+
+  /* Form Liên Hệ cũ đã chuyển thành hộp thoại "Góp ý & liên hệ" dùng chung (js/widgets/feedback.js). */
 
   /* ---- LƯỚT THẺ MÓN kiểu Tinder ở hero: vuốt (chuột/tay đều được) hoặc bấm nút
      ❤️/✕. Không cần đăng nhập để lướt, nhưng "gợi ý đầy đủ theo gu" thì khoá
@@ -84,6 +73,80 @@ document.addEventListener('DOMContentLoaded', function () {
     var cards = [];    // [{ food, el }], phần tử 0 là thẻ trên cùng hiện tại
     var current = 0;
     var liked = [];
+
+    /* ---- FoodBot bình luận theo từng lần lướt (câu viết sẵn, không gọi AI) ---- */
+    var botText = document.getElementById('swipeBotText');
+    var BOT_HELLO = 'Kéo thẻ sang phải nếu thích, sang trái nếu không nha. Lướt hết ' + DECK_SIZE + ' món là mình đoán ra gu bạn liền!';
+    var LIKE_BY_CATEGORY = {
+      'mon-nuoc': ['Ồ, team nước lèo hả? Húp một tô là hết buồn 😋', 'Món nước nè, chuẩn gu người Việt luôn 🍜'],
+      'com': ['Cơm là chân ái, ăn hoài không chán 🍚', 'Hội cơm tấm cơm niêu điểm danh! 🙋'],
+      'an-vat': ['Mê ăn vặt nè! Mình cũng ghiền mấy món này 🍢', 'Ăn vặt là phải có, buồn miệng xíu là thèm 😆'],
+      'cuon-tron': ['Cuốn cuốn chấm chấm, thanh mát ghê 🥢', 'Đồ cuốn đồ trộn, nhẹ bụng mà vẫn đã 😌'],
+      'lau-nuong': ['Lẩu nướng là phải rủ cả đám đi liền 🔥', 'Nghe mùi khói nướng là thấy vui rồi 🍖'],
+      'chay': ['Ăn xanh sống lành, bạn healthy quá trời 🥗', 'Món chay mà ngon thì ai cũng mê 🌱'],
+      'trang-mieng': ['Hệ ngọt ngào đây rồi 🧋', 'Ăn xong phải có chút ngọt mới trọn bữa 🍮'],
+    };
+    var LIKE_SPICY = ['Chịu cay giỏi ha! Mình phục 🌶️', 'Cay xè mà vẫn thích, đúng dân sành ăn 🔥'];
+    var NOPE_SPICY = ['Né cay hả, để mình ghi nhớ nha 🌶️❌', 'Sợ cay thì mình tránh món cay cho bạn 😉'];
+    var NOPE_PRICEY = ['Món này hơi chát ví ha, hiểu mà 💸'];
+    var NOPE_ANY = ['Không hợp gu à, qua món khác nè 👉', 'Ok bỏ qua, mình còn nhiều món lắm!', 'Hmm, khó tính ghê ta 😆', 'Chưa ưng à? Món sau chắc chắn hợp hơn 🤞'];
+    var LAST_CARD = ['Còn 1 món nữa thôi, mình sắp đoán ra gu bạn rồi 👀'];
+
+    function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
+    function isSpicy(food) { return (food.taste || []).some(function (t) { return t === 'cay' || t === 'chua-cay'; }); }
+    function botSay(text) {
+      if (!botText) return;
+      botText.classList.remove('is-new'); void botText.offsetWidth;   // chạy lại hiệu ứng "nảy" mỗi câu mới
+      botText.textContent = text;
+      botText.classList.add('is-new');
+    }
+    function reactTo(food, dir) {
+      if (dir === 'like') {
+        if (isSpicy(food) && Math.random() < 0.6) return pick(LIKE_SPICY);
+        return pick(LIKE_BY_CATEGORY[food.category] || ['Ngon đó nha, mình ghi nhận rồi 😋']);
+      }
+      if (isSpicy(food)) return pick(NOPE_SPICY);
+      if (food.price >= 120000 && Math.random() < 0.7) return pick(NOPE_PRICEY);
+      return pick(NOPE_ANY);
+    }
+
+    /* ---- "Gu ăn của bạn" sau khi lướt hết: danh mục được thả tim nhiều nhất → danh hiệu ---- */
+    var GU_BY_CATEGORY = {
+      'mon-nuoc': ['nuoc-leo', 'Team Nước Lèo Chính Hiệu', 'Sáng phở, trưa bún, tối hủ tiếu, miễn có nước lèo nóng hổi là bạn vui.'],
+      'com': ['com', 'Hội Cơm Là Chân Ái', 'Phải có hột cơm mới gọi là ăn. Bạn chuộng bữa chắc bụng, đậm đà.'],
+      'an-vat': ['an-vat', 'Thánh Ăn Vặt', 'Ăn chơi ăn thiệt, bạn là người mở đầu mọi cuộc "đi ăn gì đó đi".'],
+      'cuon-tron': ['do-cuon', 'Fan Cứng Đồ Cuốn', 'Thanh mát, nhiều rau, chấm chấm cuốn cuốn. Gu nhẹ nhàng mà tinh tế.'],
+      'lau-nuong': ['lau-nuong', 'Chiến Thần Lẩu Nướng', 'Đi ăn là phải đông vui, có nồi lẩu sôi hoặc bếp nướng xèo xèo.'],
+      'chay': ['an-xanh', 'Người Ăn Xanh Sống Lành', 'Bạn thích món nhẹ, nhiều rau, ăn ngon mà người vẫn khỏe re.'],
+      'trang-mieng': ['ngot-ngao', 'Hệ Ngọt Ngào', 'Trà sữa, chè, bánh ngọt, bữa nào cũng phải có "món tráng miệng" mới chịu.'],
+    };
+    var GU_NONE = ['ken-an', 'Người Kén Ăn Bí Ẩn', 'Chưa món nào lọt mắt xanh của bạn! Đăng ký để mình tìm đúng món bạn thèm.'];
+    var GU_MIXED = ['da-he', 'Người Ăn Đa Hệ', 'Món gì cũng thử, vùng nào cũng chơi. Bạn đúng là "ăn được hết".'];
+    // Ảnh thật từ Wikimedia Commons (frontend/image/icon-ngoai/, nguồn đầy đủ ở NGUON-ANH.md) — CC BY phải ghi tác giả
+    var GU_PHOTO_CREDIT = {
+      'nuoc-leo': 'Kham Tran · CC BY 3.0', 'com': 'Anna Frodesiak · CC0', 'an-vat': 'PattayaPatrol · CC BY-SA 4.0',
+      'do-cuon': 'T.Tseng · CC BY 2.0', 'lau-nuong': 'Akira CA · CC0', 'an-xanh': 'Suyash Dwivedi · CC BY-SA 4.0',
+      'ngot-ngao': 'Oqmilteashop · CC BY-SA 3.0', 'da-he': 'Hongkongfoodlover123 · CC BY-SA 4.0', 'ken-an': 'SWT666 · CC BY 4.0',
+    };
+
+    function guFor(foods) {
+      if (!foods.length) return GU_NONE;
+      var count = {};
+      foods.forEach(function (f) { count[f.category] = (count[f.category] || 0) + 1; });
+      var best = Object.keys(count).sort(function (a, b) { return count[b] - count[a]; });
+      // thả tim nhiều món mà không danh mục nào trội hẳn → "đa hệ"
+      if (foods.length >= 4 && count[best[0]] === 1) return GU_MIXED;
+      return GU_BY_CATEGORY[best[0]] || GU_MIXED;
+    }
+    // Huy hiệu: [ảnh icon, chữ] — ảnh trong frontend/image/ (icon-ngoai/hh-*.png lấy từ Wikimedia Commons)
+    function guBadges(foods) {
+      var out = [];
+      if (foods.filter(isSpicy).length >= 2) out.push(['icon-ngoai/hh-ot-64.png', 'Chịu cay giỏi']);
+      if (foods.filter(function (f) { return (f.dietary || []).indexOf('vegetarian') !== -1; }).length >= 2) out.push(['icon-ngoai/hh-mam-cay-64.png', 'Thích món chay']);
+      if (foods.length && foods.every(function (f) { return f.price <= 50000; })) out.push(['icon-ngoai/hh-dong-xu-64.png', 'Ăn ngon giá hạt dẻ']);
+      if (foods.length >= DECK_SIZE - 1) out.push(['trai-tim-96.png', 'Dễ tính, món nào cũng mê']);
+      return out;
+    }
 
     function layoutDeck() {
       cards.forEach(function (c, i) {
@@ -121,8 +184,16 @@ document.addEventListener('DOMContentLoaded', function () {
       swipeControls.classList.add('d-none');
       swipeLikeCount.textContent = liked.length;
       swipeResultChips.innerHTML = liked.length
-        ? liked.map(function (f) { return '<span class="swipe-chip">' + f.name + '</span>'; }).join('')
+        ? liked.map(function (f) { return '<span class="swipe-chip">' + escHtml(f.name) + '</span>'; }).join('')
         : '<span class="swipe-chip swipe-chip-muted">Chưa thích món nào cả, lướt lại xem sao!</span>';
+      var gu = guFor(liked);
+      document.getElementById('guEmoji').innerHTML = '<img src="../image/icon-ngoai/' + gu[0] + '.jpg" alt="" width="96" height="96">';
+      document.getElementById('guCredit').textContent = 'Ảnh: ' + GU_PHOTO_CREDIT[gu[0]] + ' (Wikimedia Commons)';
+      document.getElementById('guTitle').textContent = gu[1];
+      document.getElementById('guDesc').textContent = gu[2];
+      document.getElementById('guBadges').innerHTML = guBadges(liked)
+        .map(function (b) { return '<span class="gu-badge"><img src="../image/' + b[0] + '" alt="" width="18" height="18">' + escHtml(b[1]) + '</span>'; }).join('');
+      botSay(liked.length ? 'Tèn ten! Mình đoán ra gu của bạn rồi nè 🎉' : 'Khó tính quá nha 😆 Đăng ký đi, mình tìm món hợp gu cho!');
       swipeResult.classList.remove('d-none');
     }
 
@@ -134,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
       card.el.style.transform = 'translate(' + (dir === 'like' ? '160%' : '-160%') + ', -6%) rotate(' + (dir === 'like' ? 20 : -20) + 'deg)';
       card.el.style.opacity = '0';
       current++;
+      botSay(current === cards.length - 1 && Math.random() < 0.5 ? pick(LAST_CARD) : reactTo(card.food, dir));
       if (current >= cards.length) { setTimeout(showResult, 220); } else { layoutDeck(); }
     }
 
@@ -176,6 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
       swipeResult.classList.add('d-none');
       swipeStage.classList.remove('d-none');
       swipeControls.classList.remove('d-none');
+      botSay(BOT_HELLO);
       var foods = allFoods.slice().sort(function () { return 0.5 - Math.random(); }).slice(0, DECK_SIZE);
       foods.forEach(function (food) {
         var el = buildCardEl(food);
